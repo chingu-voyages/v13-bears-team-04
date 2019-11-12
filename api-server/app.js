@@ -1,7 +1,6 @@
 const express = require('express')
 const mongoose = require('mongoose')
 require('dotenv').config()
-const indexRouter = require('./routes/index')
 const postsRouter = require('./routes/posts')
 
 const DB_URI = process.env.MONGOLAB_URI
@@ -14,7 +13,6 @@ const app = express()
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 
-indexRouter(app)
 postsRouter(app)
 
 app.listen(APP_PORT, () => console.log('Listening on port ' + APP_PORT))

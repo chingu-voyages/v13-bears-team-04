@@ -1,10 +1,14 @@
 import React from "react"
 import Nav from "../components/nav"
 
-const Home = () => (
-  <div>
-    <Nav />
-  </div>
-)
+const Home = () => {
+  var hi = "dfdf"
+
+  return (
+    <div>
+      <Nav />
+    </div>
+  )
+}
 
 export default Home

@@ -18,6 +18,8 @@
 		"helmet": "^3.21.2",
 		"mocha": "^6.2.2",
 		"mongodb": "^3.3.3",
-		"mongoose": "^5.7.9"
+		"mongoose": "^5.7.9",
+		"morgan": "^1.9.1",
+		"morgan-body": "^2.4.8"
 	}
 }

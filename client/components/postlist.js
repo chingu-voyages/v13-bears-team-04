@@ -9,9 +9,7 @@ export default function PostList() {
 
   useEffect(() => {
     const getPosts = async () => {
-      // can switch when cors is called in the master branch of api-server
-      // const res = await fetch(`${process.env.API_URL}/posts/test`)
-      const res = await fetch(`http://localhost:3000/api/posts/test`);
+      const res = await fetch(`${process.env.API_URL}/posts/test`);
       const data = await res.json();
       setPosts(data);
       setLoader(false);

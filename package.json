@@ -1,10 +1,10 @@
 {
-	"name": "api-server",
-	"version": "0.0.0",
+	"name": "message-board",
+	"version": "0.0.1",
 	"private": true,
 	"scripts": {
-		"start": "node app.js",
-		"dev": "nodemon app.js"
+		"start": "node ./api-server/app.js",
+		"server": "node ./api-server/app.js"
 	},
 	"dependencies": {
 		"bcrypt": "^3.0.6",

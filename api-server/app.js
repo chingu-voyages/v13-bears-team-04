@@ -23,6 +23,9 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 
 postsRouter(app)
+app
+    .route('/')
+    .get((req, res) => res.json({status: "OK"}));
 
 app.listen(APP_PORT, () => console.log('Listening on port ' + APP_PORT))
 module.exports = app

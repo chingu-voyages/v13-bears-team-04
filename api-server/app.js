@@ -7,6 +7,7 @@ const morganBody = require('morgan-body')
 const DB_URI = process.env.MONGOLAB_URI
 const APP_PORT = process.env.PORT || 3000
 const rateLimit = require('express-rate-limit')
+const cors = require('cors');
 
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000,
@@ -21,6 +22,7 @@ morgan('combined')
 app.use(limiter)
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
+app.use(cors());
 
 postsRouter(app)
 app

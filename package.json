@@ -3,6 +3,6 @@
 	"version": "0.0.0",
 	"private": true,
 	"scripts": {
-		"server": "node ./api-server/app.js"
+		"start": "npm i ./api-server/ & node ./api-server/app.js"
 	}
 }

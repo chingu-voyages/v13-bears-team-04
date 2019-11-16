@@ -1,5 +1,5 @@
-import React from "react"
+import React from "react";
 
-const Nav = () => <nav>Hello Bears</nav>
+const Nav = () => <nav>Hello Bears</nav>;
 
-export default Nav
+export default Nav;

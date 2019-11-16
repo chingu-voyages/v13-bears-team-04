@@ -3,10 +3,11 @@
   "plugins": ["prettier"],
   "rules": {
     "prettier/prettier": "error",
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+    "react/jsx-props-no-spreading": "off",
+    "react/prop-types": [0],
     "no-unused-vars": "warn",
     "no-console": "off",
-    "func-names": "off",
-    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
-    "react/jsx-props-no-spreading": [{ "custom": "ignore" }]
+    "func-names": "off"
   }
 }

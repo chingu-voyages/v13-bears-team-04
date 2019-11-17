@@ -13,7 +13,11 @@ const APP_PORT = process.env.PORT || 3000;
 
 // MONGO CONNECTION
 mongoose
-  .connect(DB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+  .connect(DB_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useCreateIndex: true
+  })
   .catch(error => console.log("Database error: " + JSON.stringify(error)));
 
 // https://www.npmjs.com/package/express-rate-limit#usage

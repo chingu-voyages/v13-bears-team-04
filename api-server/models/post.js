@@ -34,32 +34,38 @@ const PostSchema = new Schema({
   ],
   voteScore: {
     type: Number,
-    default: 0
+    default: 0,
+    required: [true, "Vote Score Required"]
   },
-  deleted: {
+  isDeleted: {
     type: Boolean,
-    default: false
+    default: false,
+    required: [true, "isDeleted is Required"]
   },
-  reported: {
+  isReported: {
     type: Boolean,
-    default: false
+    default: false,
+    required: [true, "isReported is Required"]
   },
   createdOn: {
     type: Date,
-    default: Date.now
+    default: Date.now,
+    required: [true, "Creation Date Required"]
   },
   lastModified: {
     type: Date,
-    default: Date.now
+    default: Date.now,
+    required: [true, "Last Date Modified Required"]
   },
   lastUpvoted: {
     type: Date,
-    default: Date.now
+    default: Date.now,
+    required: [true, "Last Date Upvoted Required"]
   }
 });
 
-// returns the following error message, if the value isn't unique
-// ex) Error, title must be unique.
-PostSchema.plugin(uniqueValidator, { message: "That title isn't available." });
+PostSchema.plugin(uniqueValidator, {
+  message: "That post title is already taken"
+});
 
 module.exports = model("Post", PostSchema);

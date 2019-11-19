@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from "react";
-
-import "./trendingcommunity.scss";
+import React, { useEffect, useState } from "react";
 import fetch from "isomorphic-unfetch";
+import "./trendingcommunity.scss";
 
 export default function trendingcommunity() {
   const [subReddits, setTrendingSubReddit] = useState([

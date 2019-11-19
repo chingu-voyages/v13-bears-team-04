@@ -1,0 +1,40 @@
+.trending-community {
+  width: 30%;
+  font-size: 12px;
+  display: inline-block;
+  border: 1px solid rgba($grey, 0.2);
+  border-radius: 5px;
+  background-color: $white;
+
+  &__headline {
+    text-transform: uppercase;
+    margin-left: 10px;
+    font-weight: bold;
+  }
+
+  &__subreddit-info {
+    &__sub-info-1 {
+      margin-top: 6px;
+      font-weight: bold;
+    }
+
+    &__sub-info-2 {
+      margin-top: 6px;
+    }
+  }
+
+  &__join-btn {
+    vertical-align: middle;
+  }
+}
+
+.image-wrapper {
+  padding: 5px 6px;
+}
+
+.icon {
+  height: 45px;
+  width: 45px;
+  border-radius: 50%;
+  vertical-align: middle;
+}

@@ -12,11 +12,17 @@ export default function trendingcommunity() {
   ]);
   return subReddits.map((subReddit, index) => {
     return (
-      <div>
-        <p>{subReddit.name}</p>
-        <p>{subReddit.numOfMembers}</p>
-        {/* eslint-disable-next-line react/button-has-type */}
-        <button>Join</button>
+      <div className="trending-community">
+        <div className="row">
+          <div className="col-2-of-3">
+            <p>{subReddit.name}</p>
+            <p>{`${subReddit.numOfMembers} k members`}</p>
+          </div>
+          <div className="col-1-of-3">
+            {/* eslint-disable-next-line react/button-has-type */}
+            <button>Join</button>
+          </div>
+        </div>
       </div>
     );
   });

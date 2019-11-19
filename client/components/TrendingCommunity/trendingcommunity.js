@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import "./trendingcommunity.scss";
+import fetch from "isomorphic-unfetch";
 
 export default function trendingcommunity() {
   const [subReddits, setTrendingSubReddit] = useState([
@@ -10,6 +11,20 @@ export default function trendingcommunity() {
     { id: 4, name: "r/politics", numOfMembers: 50000 },
     { id: 5, name: "r/travel", numOfMembers: 20000 },
   ]);
+  // const [isLoading, setLoader] = useEffect(true);
+
+  useEffect(() => {
+    // const getTrendingCommunties = async () => {
+    //   const res = await fetch(`${process.env.API_URL}/trendingcommunities/test`);
+    //   const data = await res.json();
+    //   setTrendingSubReddit(data);
+    //   setLoader(false);
+    // };
+    //   getTrendingCommunties();
+  }, []);
+
+  // if (isLoading) return <div>Loading...</div>;
+
   return (
     <div className="trending-community">
       <p className="trending-community__headline">Trending communities</p>

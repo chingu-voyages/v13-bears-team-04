@@ -2,9 +2,9 @@
   width: 30%;
   font-size: 12px;
   display: inline-block;
-  border: 1px solid rgba(183, 183, 183, 0.8);
+  border: 1px solid rgba($grey, 0.2);
   border-radius: 5px;
-  background-color: #ffffff;
+  background-color: $white;
 
   &__headline {
     text-transform: uppercase;

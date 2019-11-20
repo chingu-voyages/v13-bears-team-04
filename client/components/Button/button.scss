@@ -9,20 +9,23 @@
     border-radius: 5px;
     display: inline-block;
 
-    transition: all 0.2s;
+    transition: all 0.3s;
   }
 
   &:hover {
-    transform: translateY(-3px);
+    transform: translate(-58px, 6px);
     box-shadow: 0 10px 20px rgba(#000, 0.2);
   }
 
   &:active {
-    tranform: translateY(-1px);
-    box-shadow: 0 0.5rem 2rem rgba(#000, 0.2);
+    tranform: translate(-58px, 8px);
+    box-shadow: 0 5px 20px rgba(#000, 0.2);
   }
 
   &--white {
+    color: $blue;
+    background-color: $white;
+    border: 1px solid $light-blue;
   }
 
   &--blue {

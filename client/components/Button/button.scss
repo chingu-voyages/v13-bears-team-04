@@ -5,7 +5,6 @@
     text-decoration: none;
     text-transform: uppercase;
     font-weight: bold;
-    padding: 10px 45px;
     border-radius: 5px;
     display: inline-block;
 
@@ -31,5 +30,22 @@
   &--blue {
     color: $white;
     background-color: $blue;
+  }
+
+  &--orange {
+    color: $white;
+    background-color: $orange;
+  }
+
+  &--short {
+    padding: 10px 30px;
+  }
+
+  &--medium {
+    padding: 10px 45px;
+  }
+
+  &--long {
+    padding: 10px 100px;
   }
 }

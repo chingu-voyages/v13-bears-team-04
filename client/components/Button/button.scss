@@ -1,51 +1,52 @@
 .btn {
-  transform: translate(-58px, 7px);
+  text-align: center;
+  transform: translate(-4rem, 1.2rem);
+  width: 100%;
+  padding: 1rem 0;
   &:link,
   &:visited {
     text-decoration: none;
     text-transform: uppercase;
     font-weight: bold;
-    border-radius: 5px;
+    border-radius: 0.5rem;
     display: inline-block;
 
     transition: all 0.3s;
   }
 
   &:hover {
-    transform: translate(-58px, 6px);
-    box-shadow: 0 10px 20px rgba(#000, 0.2);
+    transform: translate(-4rem, 1rem);
+    box-shadow: 0 1rem 2rem rgba(#000, 0.2);
   }
 
   &:active {
-    tranform: translate(-58px, 8px);
-    box-shadow: 0 5px 20px rgba(#000, 0.2);
-  }
-
-  &--white {
-    color: $blue;
-    background-color: $white;
-    border: 1px solid $light-blue;
+    tranform: translate(-4rem, 1.2rem);
+    box-shadow: 0 0.5rem 2rem rgba(#000, 0.2);
   }
 
   &--blue {
-    color: $white;
-    background-color: $blue;
+    &--inverse {
+      color: $white;
+      background-color: $blue;
+    }
+
+    &--reverse {
+      color: $blue;
+      background-color: $white;
+      border: 1px solid $light-blue;
+    }
   }
 
   &--orange {
-    color: $white;
-    background-color: $orange;
-  }
+    &--inverse {
+      color: $white;
+      background-color: $orange;
+    }
 
-  &--short {
-    padding: 10px 30px;
-  }
-
-  &--medium {
-    padding: 10px 45px;
-  }
-
-  &--long {
-    padding: 10px 100px;
+    &-reverse {
+      color: $orange;
+      background-color: $white;
+      border: 1px solid $orange;
+    }
   }
 }

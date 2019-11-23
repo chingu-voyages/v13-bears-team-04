@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import fetch from "isomorphic-unfetch";
 import "./trendingcommunity.scss";
+// eslint-disable-next-line import/no-named-as-default,import/no-named-as-default-member
 import Button from "../Button/button";
 
 export default function trendingcommunity() {
@@ -54,7 +55,9 @@ export default function trendingcommunity() {
               <div className="col-1-of-4">
                 <div className="trending-community__join-btn">
                   {/* eslint-disable-next-line react/button-has-type */}
-                  <Button message="Join" color="blue" length="medium" />
+                  <Button color="blue" inverted={false}>
+                    <span>Visited</span>
+                  </Button>
                 </div>
               </div>
             </div>

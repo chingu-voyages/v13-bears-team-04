@@ -1,22 +1,21 @@
 .btn {
-  text-align: center;
-  transform: translate(-4rem, 1.2rem);
   width: 100%;
   padding: 1rem 0;
-  &:link,
-  &:visited {
-    text-decoration: none;
-    text-transform: uppercase;
-    font-weight: bold;
-    border-radius: 0.5rem;
-    display: inline-block;
+  border-radius: 0.5rem;
+  text-decoration: none;
+  text-transform: uppercase;
 
-    transition: all 0.3s;
-  }
+  font-weight: bold;
+  display: inline-block;
+  cursor: pointer;
+
+  text-align: center;
+  transform: translate(-4rem, 1.2rem);
+  transition: all 0.3s;
 
   &:hover {
     transform: translate(-4rem, 1rem);
-    box-shadow: 0 1rem 2rem rgba(#000, 0.2);
+    box-shadow: 0 0.6rem 2rem rgba(#000, 0.2);
   }
 
   &:active {
@@ -28,12 +27,20 @@
     &--inverse {
       color: $white;
       background-color: $blue;
+
+      &:hover {
+        background-color: rgba($blue, 0.8);
+      }
     }
 
     &--reverse {
       color: $blue;
       background-color: $white;
       border: 1px solid $light-blue;
+
+      &:hover {
+        background-color: rgba($white, 0.8);
+      }
     }
   }
 
@@ -41,12 +48,20 @@
     &--inverse {
       color: $white;
       background-color: $orange;
+
+      &:hover {
+        background-color: rgba($orange, 0.8);
+      }
     }
 
     &-reverse {
       color: $orange;
       background-color: $white;
       border: 1px solid $orange;
+
+      &:hover {
+        background-color: rgba($white, 0.8);
+      }
     }
   }
 }

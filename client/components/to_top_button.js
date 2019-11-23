@@ -1,42 +1,47 @@
-import React from "react";
+import React, { useState } from "react";
 import "./to_top_button.scss";
 
 class ToTopButton extends React.Component {
-  state = {
-    intervalId: 0,
-    thePosition: false,
+  state = { hasScrolled: false };
+
+  componentMounted() {
+    this.scrollingWrapper.addEventListener("scroll", this.onScroll);
+  }
+
+  onScroll = () => {
+    if (this.scrollingWrapper.scrollTop > 200 && !this.state.hasScrolled) {
+      this.setState({ hasScrolled: true });
+    } else if (
+      this.scrollingWrapper.scrollTop < 200 &&
+      this.state.hasScrolled
+    ) {
+      this.setState({ hasScrolled: false });
+    }
   };
 
-  MountComponent() {
-    document.addEventListener("scroll", () => {
-      if (window.scrollY > 170) {
-        this.setState({ thePosition: true });
-      } else {
-        this.setState({ thePosition: false });
-      }
-    });
-    window.scrollTo(0, 0);
-  }
-  onScrollStep = () => {
-    if (window.pageYOffset === 0) {
-      clearInterval(this.state.intervalId);
-    }
-    window.scroll(0, window.pageYOffset - this.props.scollStepInPx);
-  };
   scrollToTop = () => {
-    let intervalId = setInterval(this.onScrollStep, this.props.delayInMs);
-    this.setState({ intervalId: intervalId });
+    this.scrollingWrapper.scrollTop = 0;
   };
-  renderToTopButton = () => {
-    if (this.state.thePosition) {
-      return (
-        <div className="to_top_button" onClick={this.scrollToTop}>
-          Back To Top
+
+  reference = id => ref => {
+    this[id] = ref;
+  };
+
+  render = () => {
+    return (
+      <React.Fragment>
+        {this.state.hasScrolled && (
+          <ScrollToTopIconContainer onClick={this.scrollToTop}>
+            <div>^</div>
+            <button>BACK TO TOP</button>
+          </ScrollToTopIconContainer>
+        )}
+        <div ref={this.reference("scrollingWrapper")}>
+          {this.props.children}
         </div>
-      );
-    }
+      </React.Fragment>
+    );
   };
-  render() {
-    return <React.Fragment>{this.renderToTopButton()}</React.Fragment>;
-  }
 }
+
+export default ToTopButton;

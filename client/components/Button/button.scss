@@ -1,0 +1,67 @@
+.btn {
+  width: 100%;
+  padding: 1rem 0;
+  border-radius: 0.5rem;
+  text-decoration: none;
+  text-transform: uppercase;
+
+  font-weight: bold;
+  display: inline-block;
+  cursor: pointer;
+
+  text-align: center;
+  transform: translate(-4rem, 1.2rem);
+  transition: all 0.3s;
+
+  &:hover {
+    transform: translate(-4rem, 1rem);
+    box-shadow: 0 0.6rem 2rem rgba(#000, 0.2);
+  }
+
+  &:active {
+    tranform: translate(-4rem, 1.2rem);
+    box-shadow: 0 0.5rem 2rem rgba(#000, 0.2);
+  }
+
+  &--blue {
+    &--inverse {
+      color: $white;
+      background-color: $blue;
+
+      &:hover {
+        background-color: rgba($blue, 0.8);
+      }
+    }
+
+    &--reverse {
+      color: $blue;
+      background-color: $white;
+      border: 1px solid $light-blue;
+
+      &:hover {
+        background-color: rgba($white, 0.8);
+      }
+    }
+  }
+
+  &--orange {
+    &--inverse {
+      color: $white;
+      background-color: $orange;
+
+      &:hover {
+        background-color: rgba($orange, 0.8);
+      }
+    }
+
+    &-reverse {
+      color: $orange;
+      background-color: $white;
+      border: 1px solid $orange;
+
+      &:hover {
+        background-color: rgba($white, 0.8);
+      }
+    }
+  }
+}

@@ -1,19 +1,4 @@
-// Reddit's Color Palette - https://www.color-hex.com/color-palette/44513
-$blue: #5296dd;
-$light-blue: #92bddf;
-$white: #ffffff;
-$grey: #d7d7d7;
-$orange: #ff6314;
-
-// Other Variables - you can place anything else here that you think should be made global
-// eg) font-size, font-family, padding, margin
-
-// Grid variables
-$grid-width: 1140px;
-$gutter-vertical: 30px;
-$gutter-horizontal: 6px;
-
-// Grid layout
+// Custom Grid layout
 .row {
   max-width: $grid-width;
   margin: 0 auto;
@@ -22,13 +7,7 @@ $gutter-horizontal: 6px;
     margin-bottom: $gutter-vertical;
   }
 
-  clearfix {
-    &::after {
-      content: "";
-      display: table;
-      clear: both;
-    }
-  }
+  @include clearfix;
 
   [class^="col-"] {
     float: left;
@@ -67,4 +46,8 @@ $gutter-horizontal: 6px;
       3 * ((100% - 3 * #{$gutter-horizontal}) / 4) + (2 * #{$gutter-horizontal})
     );
   }
+
+  /****
+   * I've only included 3 patterns of grid layout. If you need more, feel free to add them.
+   */
 }

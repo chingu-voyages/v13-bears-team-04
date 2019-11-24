@@ -1,0 +1,25 @@
+/*******
+ * Universal Settings
+ */
+
+*,
+*:after,
+*:before {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+/*****
+ * Default font size
+ */
+
+html {
+  // This defines what 1 rem is in this project.
+  font-size: 62.5%;
+}
+
+// TODO: We should declare default font-family and font-weight here.
+body {
+  box-sizing: border-box;
+}

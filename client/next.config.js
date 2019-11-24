@@ -1,7 +1,7 @@
 const withSass = require("@zeit/next-sass");
 require("dotenv").config();
 
-const globalSass = ["sass/_variables.scss"];
+const globalSass = ["sass/main.scss"];
 
 module.exports = withSass({
   env: {

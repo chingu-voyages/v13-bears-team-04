@@ -1,3 +1,29 @@
+/*******
+ * Universal Settings
+ */
+
+//*,
+//*:after,
+//*:before {
+//  margin: 0;
+//  padding: 0;
+//  box-sizing: inherit;
+//}
+
+/*****
+ * Default font size
+ */
+
+html {
+  // This defines what 1 rem is in this project.
+  font-size: 62.5%;
+}
+
+// TODO: We should declare default font-family and font-weight here.
+body {
+  box-sizing: border-box;
+}
+
 // Reddit's Color Palette - https://www.color-hex.com/color-palette/44513
 $blue: #5296dd;
 $light-blue: #92bddf;
@@ -9,9 +35,9 @@ $orange: #ff6314;
 // eg) font-size, font-family, padding, margin
 
 // Grid variables
-$grid-width: 1140px;
-$gutter-vertical: 30px;
-$gutter-horizontal: 6px;
+$grid-width: 114rem;
+$gutter-vertical: 3rem;
+$gutter-horizontal: 0.6rem;
 
 // Grid layout
 .row {

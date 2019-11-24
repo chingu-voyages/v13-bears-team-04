@@ -56,7 +56,7 @@ export default function trendingcommunity() {
                 <div className="trending-community__join-btn">
                   {/* eslint-disable-next-line react/button-has-type */}
                   <Button color="blue" inverted={false}>
-                    <span>Visited</span>
+                    <span>Join</span>
                   </Button>
                 </div>
               </div>

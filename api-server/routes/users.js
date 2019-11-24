@@ -1,8 +1,11 @@
 const express = require("express");
 const router = express.Router();
 const User = require("../models/user");
+const Session = require("../models/session");
 
 router.route("/users").get(getAllUsers);
+
+router.route("/verify").post(handleVerification);
 
 router.route("/login").post(handleLogin);
 
@@ -20,6 +23,18 @@ async function getAllUsers(req, res) {
   }
 }
 
+async function handleVerification(req, res) {
+  try {
+    const { sid } = req.body;
+    console.log(req.body);
+    const session = await Session.findOne({ _id: sid });
+    console.log(session);
+    res.status(200).json({ message: "Successful Verification" });
+  } catch (err) {
+    console.log(err);
+  }
+}
+
 async function handleLogin(req, res) {
   try {
     const { username, password } = req.body;
@@ -28,7 +43,35 @@ async function handleLogin(req, res) {
     user.comparePassword(password, (err, isMatch) => {
       if (err) return res.status(400).json({ message: "An error occured" });
       if (!isMatch) return res.status(401).json({ message: "Wrong password" });
-      res.status(200).json(user);
+      console.log("1");
+    });
+    console.log("2");
+    // destructure the user goodies
+    const {
+      _id,
+      email,
+      posts,
+      comments,
+      communitiesSubbed,
+      communitiesModded,
+      createdOn
+    } = user;
+
+    // create a user session
+    const session = await Session.create({ userId: _id });
+    const sid = session._id;
+    console.log(session);
+    // return user and sessionId
+    res.status(200).json({
+      sid,
+      _id,
+      username,
+      email,
+      posts,
+      comments,
+      communitiesSubbed,
+      communitiesModded,
+      createdOn
     });
   } catch (err) {
     console.log(err);
@@ -50,7 +93,11 @@ async function handleLogout(req, res) {
 async function handleRegistration(req, res) {
   try {
     const newUser = await User.create(req.body);
-    res.status(200).json(newUser);
+    const { _id, username } = newUser;
+    const sessUser = { _id, username };
+    req.session.user = sessUser;
+    console.log(req.session);
+    res.status(200).json(sessUser);
   } catch (err) {
     console.log(err);
     res.status(400).json(err);

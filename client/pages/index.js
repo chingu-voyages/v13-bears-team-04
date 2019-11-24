@@ -10,4 +10,5 @@ const Home = () => (
     <TrendingCommunity />
   </div>
 );
+
 export default Home;

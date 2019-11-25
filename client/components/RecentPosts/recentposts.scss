@@ -1,0 +1,25 @@
+.recent-posts {
+  width: 33rem;
+  display: inline-block;
+  border: 1px solid rgba($grey, 0.2);
+  border-radius: 0.5rem;
+  background-color: $white;
+
+  &__image-wrapper {
+    padding: 0.7rem;
+    &--icon {
+      transform: translateY(0.5rem);
+      height: 4.5rem;
+      width: 7rem;
+      border-radius: 10%;
+      vertical-align: middle;
+    }
+  }
+
+  &__headline {
+    font-size: 1.3rem;
+    text-transform: uppercase;
+    margin-left: 1rem;
+    font-weight: bold;
+  }
+}

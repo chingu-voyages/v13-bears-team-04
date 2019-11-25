@@ -4,14 +4,17 @@ import fetch from "isomorphic-unfetch";
 import "./recentposts.scss";
 
 export default function recentPosts() {
-  const [recentPost, setRecentPosts] = useState([
+  // eslint-disable-next-line no-shadow
+  const [recentPosts, setRecentPosts] = useState([
     {
       id: 1,
       title:
-        "In the early morning of election day, many elderly are carrying a same brand of new pillow. They claimed they bought them but most shops are not open at that time of the day. It's suspected that those are gifts from pro CCP politicians after voting.",
+        "TIL JSON.parse is faster than js object literalTIL JSON.parse is faster than js object literal",
       points: 27000,
       numOfComments: 66,
       time: 6,
+      recent_img:
+        "https://images.unsplash.com/photo-1569580427827-d732ee32ea79?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1510&q=80",
     },
     {
       id: 2,
@@ -20,6 +23,8 @@ export default function recentPosts() {
       points: 27000,
       numOfComments: 5000,
       time: 10,
+      recent_img:
+        "https://images.unsplash.com/photo-1569025591510-a69144e20084?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80",
     },
     {
       id: 3,
@@ -28,6 +33,8 @@ export default function recentPosts() {
       points: 27000,
       numOfComments: 666,
       time: 8,
+      recent_img:
+        "https://images.unsplash.com/photo-1490773996481-9ff25c7d9484?ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80",
     },
     {
       id: 4,
@@ -36,6 +43,8 @@ export default function recentPosts() {
       points: 27000,
       numOfComments: 300,
       time: 3,
+      recent_img:
+        "https://images.unsplash.com/photo-1574117482334-14b040604998?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=564&q=80",
     },
     {
       id: 5,
@@ -44,10 +53,37 @@ export default function recentPosts() {
       points: 27000,
       numOfComments: 5,
       time: 10,
+      recent_img:
+        "https://images.unsplash.com/photo-1574392022138-a7d369a6ada3?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2468&q=80",
     },
   ]);
 
-  // return (
-  //
-  // )
+  return (
+    <div className="recent-posts">
+      <p className="recent-posts__headline">Recent posts</p>
+      {recentPosts.map(recentPost => {
+        return (
+          <div>
+            <div className="row">
+              <div className="col-1-of-4">
+                <div className="recent-posts__image-wrapper">
+                  <img
+                    className="recent-posts__image-wrapper--icon"
+                    src={recentPost.recent_img}
+                    alt={recentPost.title}
+                  />
+                </div>
+              </div>
+              <div className="col-3-of-4">
+                <p>{recentPost.title}</p>
+                <div className="col-1-of-3">{recentPost.points}</div>
+                <div className="col-1-of-3">{recentPost.numOfComments}</div>
+                <div className="col-1-of-3">{recentPost.time}</div>
+              </div>
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  );
 }

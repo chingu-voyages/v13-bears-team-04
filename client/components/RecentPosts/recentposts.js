@@ -61,29 +61,38 @@ export default function recentPosts() {
   return (
     <div className="recent-posts">
       <p className="recent-posts__headline">Recent posts</p>
-      {recentPosts.map(recentPost => {
-        return (
-          <div>
-            <div className="row">
-              <div className="col-1-of-4">
-                <div className="recent-posts__image-wrapper">
-                  <img
-                    className="recent-posts__image-wrapper--icon"
-                    src={recentPost.recent_img}
-                    alt={recentPost.title}
-                  />
+      <div>
+        {recentPosts.map(recentPost => {
+          return (
+            <div className="recent-posts__element">
+              <div className="row recent-posts__element--border-length">
+                <div className="col-1-of-4">
+                  <div className="recent-posts__image-wrapper">
+                    <img
+                      className="recent-posts__image-wrapper--icon"
+                      src={recentPost.recent_img}
+                      alt={recentPost.title}
+                    />
+                  </div>
+                </div>
+                <div className="col-3-of-4">
+                  <p className="recent-posts__title">{recentPost.title}</p>
+                  <div className="col-1-of-3">
+                    <span className="recent-posts__info">{`${recentPost.points} points`}</span>
+                  </div>
+                  <div className="col-1-of-3">
+                    <span className="recent-posts__info">{`${recentPost.numOfComments} comments`}</span>
+                  </div>
+                  <div className="col-1-of-3">
+                    <span className="recent-posts__info">{`${recentPost.time} h`}</span>
+                  </div>
                 </div>
               </div>
-              <div className="col-3-of-4">
-                <p>{recentPost.title}</p>
-                <div className="col-1-of-3">{recentPost.points}</div>
-                <div className="col-1-of-3">{recentPost.numOfComments}</div>
-                <div className="col-1-of-3">{recentPost.time}</div>
-              </div>
             </div>
-          </div>
-        );
-      })}
+          );
+        })}
+      </div>
+      <div>Clear</div>
     </div>
   );
 }

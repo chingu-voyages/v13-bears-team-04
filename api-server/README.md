@@ -1,6 +1,7 @@
 # Message Board API Server
 
 API server for Reddit-like message board app
+
 ## Installation
 
 Use npm:
@@ -15,7 +16,7 @@ Server uses .env config file. Example below:
 
 ```bash
 MONGOLAB_URI=[connection_string]
-PORT=[port_number]
+URL=http://localhost:4000 // this needs to be the location your client is served on
 ```
 
 Running server:
@@ -23,10 +24,13 @@ Running server:
 ```bash
 npm start
 ```
+
 Or
+
 ```bash
 npm run dev
 ```
+
 ## API description
 
 ```bash
@@ -89,18 +93,23 @@ GET /api/posts/[category]/[post_id]
   "__v": 0
 }
 ```
+
 ```bash
 POST /api/posts/[category]
 ```
+
 Request body
+
 ```bash
 {
-  "author": "An Author", 
+  "author": "An Author",
   "title": "A title",
   "body" : "A body"
 }
 ```
+
 Response:
+
 ```bash
 {
   "createdOn": "2019-11-12T15:53:35.049Z",
@@ -119,6 +128,6 @@ Response:
 }
 ```
 
-
 ## License
+
 [MIT](https://choosealicense.com/licenses/mit/)

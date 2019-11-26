@@ -4,7 +4,7 @@ const User = require("../models/user");
 const Session = require("../models/session");
 const { getCookieOptions } = require("../utils");
 
-router.route("/users").get(getAllUsers);
+router.route("/").get(getAllUsers);
 
 router.route("/verify").post(handleVerification);
 
@@ -46,7 +46,6 @@ async function handleVerification(req, res) {
 async function handleLogin(req, res) {
   try {
     const { username, password } = req.body;
-    console.log(req.cookies);
     const user = await User.findOne({ username });
     if (!user) return res.status(404).json({ message: "User not found" });
     user.comparePassword(password, async (err, isMatch) => {

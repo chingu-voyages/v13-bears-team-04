@@ -15,7 +15,7 @@ class MyApp extends App {
       // check if there are any cookies
       const { sid } = cookies(appContext.ctx);
       if (!sid) throw "No cookies found on page load";
-      const resp = await fetch("http://localhost:3000/api/user/verify", {
+      const resp = await fetch(process.env.API_URL + "/user/verify", {
         method: "POST",
         body: JSON.stringify({ sid }),
         headers: { "Content-Type": "application/json" },

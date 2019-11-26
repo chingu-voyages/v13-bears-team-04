@@ -1,7 +1,11 @@
 const withSass = require("@zeit/next-sass");
 require("dotenv").config();
 
-const globalSass = ["sass/_variables.scss"];
+const globalSass = [
+  "sass/abstracts/_variables.scss",
+  "sass/abstracts/_mixins.scss",
+  "sass/abstracts/_functions.scss",
+];
 
 module.exports = withSass({
   env: {
@@ -15,6 +19,7 @@ module.exports = withSass({
       test: /\.scss$/,
       loader: "sass-resources-loader",
       options: {
+        // eslint-disable-next-line no-undef
         resources: globalSass,
       },
     });

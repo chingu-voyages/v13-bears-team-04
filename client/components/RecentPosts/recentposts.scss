@@ -11,13 +11,15 @@
       padding-bottom: 2rem;
       border-bottom: 1px solid rgba($grey, 0.9);
     }
-    &--border-length {
-    }
   }
 
   &__title {
     font-size: 1.3rem;
     font-weight: bold;
+
+    &:hover {
+      text-decoration: underline;
+    }
   }
 
   &__info {
@@ -42,4 +44,14 @@
     margin-left: 1rem;
     font-weight: bold;
   }
+}
+
+.clear {
+  text-align: right;
+  display: inline-block;
+  padding: 1rem;
+  margin-left: 28rem;
+  font-size: 1.3rem;
+  color: $grey;
+  cursor: pointer;
 }

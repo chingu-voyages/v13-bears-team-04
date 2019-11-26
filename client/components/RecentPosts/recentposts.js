@@ -92,7 +92,7 @@ export default function recentPosts() {
           );
         })}
       </div>
-      <div>Clear</div>
+      <div className="clear">Clear</div>
     </div>
   );
 }

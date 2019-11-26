@@ -10,7 +10,7 @@ const Home = () => {
   const { user, setUser } = useAuth();
   console.log(user);
 
-  async function handleLogin(e) {
+  async function handleLogin() {
     try {
       const resp = await fetch("http://localhost:3000/api/user/login", {
         method: "POST",

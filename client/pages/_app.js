@@ -6,6 +6,7 @@ import fetch from "isomorphic-unfetch";
 import cookies from "next-cookies";
 import { AuthProvider } from "../components/Auth/auth";
 import "../utils/icons";
+import "../sass/main.scss";
 
 class MyApp extends App {
   static async getInitialProps(appContext) {

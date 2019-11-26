@@ -1,25 +1,25 @@
 .trending-community {
-  width: 30%;
-  font-size: 12px;
+  width: 33rem;
+  font-size: 1.2rem;
   display: inline-block;
   border: 1px solid rgba($grey, 0.2);
-  border-radius: 5px;
+  border-radius: 0.5rem;
   background-color: $white;
 
   &__headline {
     text-transform: uppercase;
-    margin-left: 10px;
+    margin-left: 1rem;
     font-weight: bold;
   }
 
   &__subreddit-info {
     &__sub-info-1 {
-      margin-top: 6px;
+      margin-top: 1rem;
       font-weight: bold;
     }
 
     &__sub-info-2 {
-      margin-top: 6px;
+      margin-top: 0.6rem;
     }
   }
 
@@ -29,12 +29,13 @@
 }
 
 .image-wrapper {
-  padding: 5px 6px;
+  padding: 0.5rem 0.6rem;
 }
 
 .icon {
-  height: 45px;
-  width: 45px;
+  transform: translateY(0.2rem);
+  height: 4.5rem;
+  width: 4.5rem;
   border-radius: 50%;
   vertical-align: middle;
 }

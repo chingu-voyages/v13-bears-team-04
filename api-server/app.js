@@ -6,12 +6,13 @@ const rateLimit = require("express-rate-limit");
 const morgan = require("morgan");
 const morganBody = require("morgan-body");
 const mongoose = require("mongoose");
+const cookieParser = require("cookie-parser");
 
 const app = express();
 
 const DB_URI = process.env.MONGOLAB_URI;
-// const NODE_ENV = process.env.NODE_ENV;
 const APP_PORT = process.env.PORT || 3000;
+const URL = process.env.URL;
 
 // https://www.npmjs.com/package/express-rate-limit#usage
 app.set("trust proxy", 1);
@@ -29,8 +30,11 @@ mongoose
   })
   .catch(error => console.log("Database error: " + JSON.stringify(error)));
 
+const corsOpts = { origin: URL, credentials: true };
+
 // MIDDLEWARE
-app.use(cors());
+app.use(cookieParser());
+app.use(cors(corsOpts));
 app.use(limiter);
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));

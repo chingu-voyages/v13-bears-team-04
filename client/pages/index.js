@@ -1,7 +1,7 @@
 import React from "react";
 import Nav from "../components/nav";
-import PostList from "../components/postlist";
-import ToTopButton from "../components/totopbutton";
+import PostList from "../components/PostList";
+import ToTopButton from "../components/ToTopButton";
 import TrendingCommunity from "../components/TrendingCommunity";
 import { useAuth } from "../components/Auth/auth";
 // import { handleLogin, handleSignup, handleLogout } from "../utils/auth";

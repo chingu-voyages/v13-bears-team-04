@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import fetch from "isomorphic-unfetch";
-import PostListCard from "./PostListCard";
+import PostListCard from "../PostListCard";
 import "./postlist.scss";
 
 export default function PostList() {

@@ -8,7 +8,7 @@ const Home = () => (
   <div>
     <Nav />
     <PostList />
-    <TrendingCommunity />
+    {/* <TrendingCommunity /> */}
     <RecentPosts />
   </div>
 );

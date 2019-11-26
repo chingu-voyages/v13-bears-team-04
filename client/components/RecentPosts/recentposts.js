@@ -82,7 +82,7 @@ export default function recentPosts() {
     <div className="recent-posts">
       <p className="recent-posts__headline">Recent posts</p>
       <div>
-        {recentPosts.map(recentPost => {
+        {recentPosts.slice(0, 5).map(recentPost => {
           return (
             <div className="recent-posts__element">
               <div className="row recent-posts__element--border-length">

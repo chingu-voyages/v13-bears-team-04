@@ -21,7 +21,7 @@ const Home = () => {
       const user = await resp.json();
       setUser(user);
     } catch (err) {
-      console.log(e);
+      console.log(err);
     }
   }
 

@@ -3,6 +3,26 @@ import fetch from "isomorphic-unfetch";
 
 import "./recentposts.scss";
 
+function limitRecentPostTitle(title, recipe, limit = 10) {
+  const newTitle = [];
+  const numOfTitleElements = title.split(" ").length;
+  let cnt = 0;
+  console.log(numOfTitleElements);
+  // console.log(title.split(" "));
+  if (numOfTitleElements > limit) {
+    title.split(" ").reduce((acc, cur) => {
+      cnt += 1;
+      if (cnt <= limit) {
+        newTitle.push(cur);
+      }
+      return acc;
+    }, 0);
+    return `${newTitle.join(" ")}...`;
+  }
+  console.log(title);
+  return title;
+}
+
 export default function recentPosts() {
   // eslint-disable-next-line no-shadow
   const [recentPosts, setRecentPosts] = useState([
@@ -76,7 +96,9 @@ export default function recentPosts() {
                   </div>
                 </div>
                 <div className="col-3-of-4">
-                  <p className="recent-posts__title">{recentPost.title}</p>
+                  <p className="recent-posts__title">
+                    {limitRecentPostTitle(recentPost.title)}
+                  </p>
                   <div className="col-1-of-3">
                     <span className="recent-posts__info">{`${recentPost.points} points`}</span>
                   </div>

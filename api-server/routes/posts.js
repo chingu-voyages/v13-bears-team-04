@@ -1,32 +1,49 @@
-const Post = require('../models/post')
+const express = require("express");
+const router = express.Router();
+const Post = require("../models/post");
 
-module.exports = function (app) {
-  app
-    .route('/api/posts/:category')
-    .get((req, res, next) => {
-      const { category } = req.params
-      Post.find({ category })
-        .then(data => {
-          // app.log.trace(data)
-          return res.json(data)
-        })
-        .catch(next)
-    })
-    .post((req, res, next) => {
-      const { category } = req.params
-      new Post({ ...req.body, category })
-        .save()
-        .then(data => res.json(data))
-        .catch(next)
-    })
-  app.route('/api/posts/:category/:post_id').get((req, res, next) => {
-    const { category, post_id } = req.params
-    Post.findById(post_id).then(data => res.json(data)).catch(next)
-  })
+router
+  .route("/")
+    .get(getAllPosts);
 
-  app.use(function (err, req, res, next) {
-    if (err) {
-      res.status(400).json(err)
-    }
-  })
+router
+  .route("/:community")
+    .get(getCommunityPosts)
+    .post(createPost);
+
+async function getAllPosts(_, res) {
+  try {
+    const posts = await Post.find();
+    res.status(200).json({ posts });
+  } catch (err) {
+    console.log(err);
+    res.status(401).json(err);
+  }
 }
+
+async function getCommunityPosts(req, res) {
+  try {
+    const { community } = req.params;
+    // SWITCH after new models are pushed
+    // const posts = await Post.find({ community });
+    const posts = await Post.find({ category: community });
+    console.log(posts);
+    res.status(200).json({ posts });
+  } catch (err) {
+    console.log(err);
+    res.status(401).json(err);
+  }
+}
+
+async function createPost(req, res) {
+  try {
+    const newPost = await Post.create(req.body);
+    console.log(newPost);
+    res.status(200).json(newPost);
+  } catch (err) {
+    console.log(err);
+    res.status(400).json(err);
+  }
+}
+
+module.exports = router;

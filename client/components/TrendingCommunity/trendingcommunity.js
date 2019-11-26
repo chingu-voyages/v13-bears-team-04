@@ -31,7 +31,8 @@ export default function trendingcommunity() {
       <p className="trending-community__headline">Trending communities</p>
       {subReddits.map((subReddit, index) => {
         return (
-          <div>
+          // CHANGE THIS KEY TO SOMETHING OTHER THAN INDEX IN THE FUTURE
+          <div key={index}>
             <div className="row">
               <div className="col-1-of-4">
                 <div className="image-wrapper">
@@ -56,7 +57,7 @@ export default function trendingcommunity() {
                 <div className="trending-community__join-btn">
                   {/* eslint-disable-next-line react/button-has-type */}
                   <Button color="blue" inverted={false}>
-                    <span>Visited</span>
+                    <span>Join</span>
                   </Button>
                 </div>
               </div>

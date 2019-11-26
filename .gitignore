@@ -1,8 +1,30 @@
-api-server/node_modules/
-api-server/.vscode/
-api-server/package-lock.json
-api-server/.env
-node_modules/
 .vscode/
-package-lock.json
-.env
+
+# SERVER FOLDER
+api-server/node_modules/
+api-server/.env
+
+# CLIENT FOLDER
+# dependencies
+client/node_modules
+client/.pnp
+client/.pnp.js
+
+# testing
+client/coverage
+
+# next.js
+client/.next/
+client/out/
+
+# production
+client/build
+
+# misc
+client/.DS_Store
+client/.env
+
+# debug
+client/npm-debug.log*
+client/yarn-debug.log*
+client/yarn-error.log*

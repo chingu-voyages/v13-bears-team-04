@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const User = require("../models/user");
 const Session = require("../models/session");
+const { getCookieOptions } = require("../utils");
 
 router.route("/users").get(getAllUsers);
 
@@ -11,8 +12,9 @@ router.route("/login").post(handleLogin);
 
 router.route("/logout").post(handleLogout);
 
-router.route("/register").post(handleRegistration);
+router.route("/signup").post(handleSignup);
 
+// SECURE ME LATER
 async function getAllUsers(req, res) {
   try {
     const users = await User.find();
@@ -26,52 +28,40 @@ async function getAllUsers(req, res) {
 async function handleVerification(req, res) {
   try {
     const { sid } = req.body;
-    console.log(req.body);
+    // find the session
     const session = await Session.findOne({ _id: sid });
-    console.log(session);
-    res.status(200).json({ message: "Successful Verification" });
+    if (!session || !session._id) throw "User verification failed";
+    // get that session's user details
+    const user = await User.findOne({ _id: session.userId });
+    if (!user) throw "User not found";
+    // don't want to send the user's password to the client
+    const { password, ...goodUser } = user._doc;
+    res.status(200).json(goodUser);
   } catch (err) {
     console.log(err);
+    res.status(401).json({ message: "Please log in first" });
   }
 }
 
 async function handleLogin(req, res) {
   try {
     const { username, password } = req.body;
+    console.log(req.cookies);
     const user = await User.findOne({ username });
     if (!user) return res.status(404).json({ message: "User not found" });
-    user.comparePassword(password, (err, isMatch) => {
+    user.comparePassword(password, async (err, isMatch) => {
       if (err) return res.status(400).json({ message: "An error occured" });
       if (!isMatch) return res.status(401).json({ message: "Wrong password" });
-      console.log("1");
-    });
-    console.log("2");
-    // destructure the user goodies
-    const {
-      _id,
-      email,
-      posts,
-      comments,
-      communitiesSubbed,
-      communitiesModded,
-      createdOn
-    } = user;
-
-    // create a user session
-    const session = await Session.create({ userId: _id });
-    const sid = session._id;
-    console.log(session);
-    // return user and sessionId
-    res.status(200).json({
-      sid,
-      _id,
-      username,
-      email,
-      posts,
-      comments,
-      communitiesSubbed,
-      communitiesModded,
-      createdOn
+      // successful; create a user session
+      const session = await Session.create({ userId: user._id });
+      if (!session || !session._id) throw new Error("Session error");
+      // don't want to send the user's password to the client
+      const { password, ...goodUser } = user._doc;
+      const cookieOptions = getCookieOptions();
+      res
+        .status(200)
+        .cookie("sid", session._id, cookieOptions)
+        .json(goodUser);
     });
   } catch (err) {
     console.log(err);
@@ -81,23 +71,30 @@ async function handleLogin(req, res) {
 
 async function handleLogout(req, res) {
   try {
-    const body = req.body;
-    console.log(body);
-    res.status(200).json({ message: "Tried logging out" });
+    const { userId } = req.body;
+    // clear cookie
+    res.clearCookie("sid");
+    // delete all this user's sessions
+    await Session.deleteMany({ userId });
+    res.status(200).json({ message: "Successful logout" });
   } catch (err) {
     console.log(err);
     res.status(400).json(err);
   }
 }
 
-async function handleRegistration(req, res) {
+async function handleSignup(req, res) {
   try {
     const newUser = await User.create(req.body);
-    const { _id, username } = newUser;
-    const sessUser = { _id, username };
-    req.session.user = sessUser;
-    console.log(req.session);
-    res.status(200).json(sessUser);
+    const session = await Session.create({ userId: newUser._id });
+    if (!session || !session._id) throw new Error("Session error");
+    // don't want to send the user's password to the client
+    const { password, ...goodUser } = newUser._doc;
+    const cookieOptions = getCookieOptions();
+    res
+      .status(200)
+      .cookie("sid", session._id, cookieOptions)
+      .json(goodUser);
   } catch (err) {
     console.log(err);
     res.status(400).json(err);

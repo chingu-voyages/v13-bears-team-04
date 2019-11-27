@@ -1,133 +1,231 @@
-# Message Board API Server
-
-API server for Reddit-like message board app
+# Reddit Clone - Back End
 
 ## Installation
 
-Use npm:
+- `git clone` the project
+- `cd` into `/api-server`
+- Create a `.env` file like below
+- `npm i` dependencies
+- `npm run dev`
+- Open your browser to [http://localhost:3000/](http://localhost:3000/)
 
-```bash
-npm install
+## `.env` file
+
 ```
-
-## Usage
-
-Server uses .env config file. Example below:
-
-```bash
 MONGOLAB_URI=[connection_string]
 URL=http://localhost:4000 // this needs to be the location your client is served on
 ```
 
-Running server:
+## API Endpoints
 
-```bash
-npm start
+<!-- AUTH/USER ENDPOINTS -->
+
+### Auth/User
+
+<!-- NEW DROPDOWN -->
+<details>
+<summary><strong>GET api/user/</strong></summary>
+
+#### Required:
+
+```
+Currently nothing
 ```
 
-Or
+#### Response:
 
-```bash
-npm run dev
-```
-
-## API description
-
-```bash
-GET /api/posts/[category]
-```
-
-```bash
+```javascript
+Status Code: 200
 [
-  {
-    "createdOn": "2019-11-11T16:51:54.524Z",
-    "lastModified": "2019-11-11T16:51:54.524Z",
-    "lastUpvoted": "2019-11-11T16:51:54.524Z",
-    "voteScore": 0,
-    "deleted": false,
-    "reported": false,
-    "comments": [],
-    "_id": "5dc991ac18847042405c90d4",
-    "title": "Loi Krathong 2019",
-    "body": "Loi Krathong",
-    "author": "Damian",
-    "category": "test",
-    "__v": 0
-  },
-  {
-    "createdOn": "2019-11-11T16:51:54.524Z",
-    "lastModified": "2019-11-11T16:51:54.524Z",
-    "lastUpvoted": "2019-11-11T16:51:54.524Z",
-    "voteScore": 0,
-    "deleted": false,
-    "reported": false,
-    "comments": [],
-    "_id": "5dc991dd18847042405c90d5",
-    "title": "Songkran 2019",
-    "body": "Songkran",
-    "author": "Damian",
-    "category": "test",
-    "__v": 0
-  }
+  { allUserObjects }
 ]
+
+Status Code: 400
+{ message: 'errorMessage' }
 ```
 
-```bash
-GET /api/posts/[category]/[post_id]
+</details>
+
+<!-- NEW DROPDOWN -->
+<details>
+<summary><strong>POST api/user/verify</strong></summary>
+
+#### Required:
+
+```
+Still figuring out how to best implement this with NextJS
 ```
 
-```bash
-{
-  "createdOn": "2019-11-11T16:51:54.524Z",
-  "lastModified": "2019-11-11T16:51:54.524Z",
-  "lastUpvoted": "2019-11-11T16:51:54.524Z",
-  "voteScore": 0,
-  "deleted": false,
-  "reported": false,
-  "comments": [],
-  "_id": "5dc991dd18847042405c90d5",
-  "title": "Songkran 2019",
-  "body": "Songkran",
-  "author": "Damian",
-  "category": "test",
-  "__v": 0
+#### Response:
+
+```javascript
+Status Code: 200
+{ user }
+
+Status Code: 401
+{ message: 'errorMessage' }
+```
+
+</details>
+ 
+<!-- NEW DROPDOWN -->
+<details>
+<summary><strong>POST api/user/login</strong></summary>
+
+#### Required:
+
+```jsx
+const fetchOptions = {
+  body: {
+    username,
+    password
+  }
+};
+```
+
+#### Response:
+
+```javascript
+Status Code: 200
+{ user }
+
+Status Code: 400, 401, 404
+{ message: 'customErrorMessage' }
+```
+
+</details>
+  
+<!-- NEW DROPDOWN -->
+<details>
+<summary><strong>POST api/user/logout</strong></summary>
+
+#### Required:
+
+```jsx
+const fetchOptions = {
+  body: {
+    userId
+  }
+};
+```
+
+#### Response:
+
+```javascript
+Status Code: 200
+{ message: 'Successful logout' }
+
+Status Code: 400
+{ message: 'errorMessage' }
+```
+
+</details>
+ 
+<!-- NEW DROPDOWN -->
+<details>
+<summary><strong>POST api/user/signup</strong></summary>
+
+#### Required:
+
+```jsx
+const fetchOptions = {
+  body: {
+    email, // unique
+    password, // minLength:8 _ maxLength:30
+    username // unique _ minLength:3 _ maxLength:20
+  }
+};
+```
+
+#### Response:
+
+```javascript
+Status Code: 200
+{ user }
+
+Status Code: 400
+{ message: 'errorMessage' }
+```
+
+</details>
+
+<!-- POSTS ENDPOINTS -->
+
+### Posts
+
+<!-- NEW DROPDOWN -->
+<details>
+<summary><strong>GET api/posts/</strong></summary>
+
+#### Required:
+
+```
+Nothing
+```
+
+#### Response:
+
+```javascript
+Status Code: 200
+[
+  { allPostObjects }
+]
+
+Status Code: 400
+{ message: 'errorMessage' }
+```
+
+</details>
+
+<!-- NEW DROPDOWN -->
+<details>
+<summary><strong>GET api/posts/:communityId</strong></summary>
+
+#### Required:
+
+```
+Nothing
+```
+
+#### Response:
+
+```javascript
+Status Code: 200
+[
+  { allCommunityPostObjects }
+]
+
+Status Code: 400
+{ message: 'errorMessage' }
+```
+
+</details>
+
+<!-- NEW DROPDOWN -->
+<details>
+<summary><strong>POST api/posts/:communityId</strong></summary>
+
+#### Required:
+
+```
+const fetchOptions = {
+  body: {
+    title, // unique _ minLength:4 _ maxLength:300
+    body,
+    author,
+    community,
+  }
 }
 ```
 
-```bash
-POST /api/posts/[category]
+#### Response:
+
+```javascript
+Status Code: 200
+{ post }
+
+Status Code: 400
+{ message: 'errorMessage' }
 ```
 
-Request body
-
-```bash
-{
-  "author": "An Author",
-  "title": "A title",
-  "body" : "A body"
-}
-```
-
-Response:
-
-```bash
-{
-  "createdOn": "2019-11-12T15:53:35.049Z",
-  "lastModified": "2019-11-12T15:53:35.049Z",
-  "lastUpvoted": "2019-11-12T15:53:35.049Z",
-  "voteScore": 0,
-  "deleted": false,
-  "reported": false,
-  "comments": [],
-  "_id": "5dcad8257de3f51754a7045c",
-  "author": "Damian",
-  "title": "A title",
-  "body": "A body",
-  "category": "test",
-  "__v": 0
-}
-```
-
-## License
-
-[MIT](https://choosealicense.com/licenses/mit/)
+</details>

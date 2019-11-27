@@ -6,6 +6,7 @@ import ToTopButton from "../components/ToTopButton";
 import TrendingCommunity from "../components/TrendingCommunity";
 import HomeBox from "../components/HomeBox";
 import Input from "../components/Form/Input";
+import Signin from "../components/Form";
 import { useAuth } from "../components/Auth/auth";
 // import { handleLogin, handleSignup, handleLogout } from "../utils/auth";
 
@@ -80,6 +81,7 @@ const Home = () => {
       <RecentPosts />
       <HomeBox />
       <Input>Email</Input>
+      <Signin />
     </div>
   );
 };

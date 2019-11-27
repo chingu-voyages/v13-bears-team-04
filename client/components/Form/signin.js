@@ -1,0 +1,37 @@
+import React from "react";
+
+import Button from "../Button";
+import Input from "./Input";
+
+import "./signin.scss";
+
+export default function signin() {
+  return (
+    <div className="form__popup">
+      <div className="form__content">
+        <form action="#" className="form__main">
+          <div className="form__main__left">
+            <img
+              src="form_image.png"
+              alt="reddit_sub_icon"
+              className="form__main__left__image"
+            />
+          </div>
+          <div className="form__main__right">
+            <div className="form__wrapper">
+              <div className="form__wrapper__icon">
+                <img src="reddit_icon.png" alt="reddit_sub_icon" />
+              </div>
+              <div className="form__wrapper__title">Sign in</div>
+              <Input>Username</Input>
+              <Input>Password</Input>
+              <Button color="blue" inverted={false}>
+                Sign In
+              </Button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  );
+}

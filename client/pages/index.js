@@ -1,6 +1,7 @@
 import React from "react";
 import Nav from "../components/nav";
 import PostList from "../components/PostList";
+import RecentPosts from "../components/RecentPosts";
 import ToTopButton from "../components/ToTopButton";
 import TrendingCommunity from "../components/TrendingCommunity";
 import HomeBox from "../components/HomeBox";
@@ -13,7 +14,7 @@ const Home = () => {
 
   async function handleLogin() {
     try {
-      const resp = await fetch(process.env.API_URL + "/user/login", {
+      const resp = await fetch(`${process.env.API_URL}/user/login`, {
         method: "POST",
         body: JSON.stringify({ username: "Tester2", password: "password" }),
         headers: { "Content-Type": "application/json" },
@@ -29,7 +30,7 @@ const Home = () => {
   async function handleLogout() {
     const userId = user._id;
     try {
-      const resp = await fetch(process.env.API_URL + "/user/logout", {
+      const resp = await fetch(`${process.env.API_URL}/user/logout`, {
         method: "POST",
         body: JSON.stringify({ userId }),
         headers: { "Content-Type": "application/json" },
@@ -44,7 +45,7 @@ const Home = () => {
 
   async function handleSignup() {
     try {
-      const resp = await fetch(process.env.API_URL + "/user/signup", {
+      const resp = await fetch(`${process.env.API_URL}/user/signup`, {
         method: "POST",
         body: JSON.stringify({
           email: "test9@test.com",
@@ -64,14 +65,18 @@ const Home = () => {
 
   return (
     <div>
+      {/* eslint-disable-next-line react/button-has-type */}
       {!user && <button onClick={handleSignup}>Signup</button>}
+      {/* eslint-disable-next-line react/button-has-type */}
       {!user && <button onClick={handleLogin}>Login</button>}
+      {/* eslint-disable-next-line react/button-has-type */}
       {user && <button onClick={handleLogout}>Logout</button>}
 
       <Nav />
       <PostList />
       <ToTopButton />
       <TrendingCommunity />
+      <RecentPosts />
       <HomeBox />
     </div>
   );

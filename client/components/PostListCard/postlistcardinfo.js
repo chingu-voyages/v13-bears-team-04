@@ -7,17 +7,17 @@ export default function PostListCardInfo(props) {
   const { category, author, createdOn } = props;
 
   return (
-    <div className="postlistcard-info">
-      <div className="postlistcard-info-sub">
+    <div className="postlist-card__details__info">
+      <div className="postlist-card__details__info__sub">
         {/* this might hold icons in the future, so we'd want need this parent to style it */}
-        <div className="postlistcard-info-sub-img">
+        <div className="postlist-card__details__info__sub__img">
           <img src={redditImg} alt="subreddit" />
         </div>
         {/* will need to change this to Next Link later */}
-        <div className="postlistcard-info-sub-text">{`r/ ${category}`}</div>
+        <div className="postlist-card__details__info__sub__text">{`r/ ${category}`}</div>
       </div>
-      <div className="postlistcard-info-user">{`Posted by u/${author}`}</div>
-      <div className="postlistcard-info-date">
+      <div className="postlist-card__details__info__user">{`Posted by u/${author}`}</div>
+      <div className="postlist-card__details__info__date">
         {new Date(createdOn).toDateString()}
       </div>
     </div>

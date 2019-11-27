@@ -3,17 +3,17 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export default function PostListCardVote({ voteScore }) {
   return (
-    <div className="postlistcard-vote-container">
-      <div className="postlistcard-vote">
+    <div className="postlist-card__vote-container">
+      <div className="postlist-card__vote">
         <FontAwesomeIcon
           icon="arrow-up"
-          className="postlistcard-vote-up"
+          className="postlist-card__vote__up"
           onClick={() => console.log("upVote")}
         />
-        <span className="postlistcard-vote-text">{voteScore}</span>
+        <span className="postlist-card__vote__text">{voteScore}</span>
         <FontAwesomeIcon
           icon="arrow-down"
-          className="postlistcard-vote-down"
+          className="postlist-card__vote__down"
           onClick={() => console.log("downVote")}
         />
       </div>

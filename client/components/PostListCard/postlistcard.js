@@ -18,16 +18,16 @@ export default function PostListCard(props) {
   } = props;
 
   return (
-    <div className="postlistcard-container">
+    <div className="postlist-card">
       <PostListCardVote voteScore={voteScore} />
-      <div className="postlistcard-details">
+      <div className="postlist-card__details">
         <PostListCardInfo
           category={category}
           author={author}
           createdOn={createdOn}
         />
-        <h3 className="postlistcard-title">{title}</h3>
-        <div className="postlistcard-body">{body}</div>
+        <h3 className="postlist-card__details__title">{title}</h3>
+        <div className="postlist-card__details__body">{body}</div>
       </div>
       <PostListCardActions numOfComments={comments.length} />
     </div>

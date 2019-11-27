@@ -3,6 +3,7 @@ import Nav from "../components/nav";
 import PostList from "../components/PostList";
 import ToTopButton from "../components/ToTopButton";
 import TrendingCommunity from "../components/TrendingCommunity";
+import HomeBox from "../components/HomeBox";
 import { useAuth } from "../components/Auth/auth";
 // import { handleLogin, handleSignup, handleLogout } from "../utils/auth";
 
@@ -71,6 +72,7 @@ const Home = () => {
       <PostList />
       <ToTopButton />
       <TrendingCommunity />
+      <HomeBox />
     </div>
   );
 };

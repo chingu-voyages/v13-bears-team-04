@@ -74,10 +74,10 @@ const Home = () => {
 
       <Nav />
       <PostList />
-      <ToTopButton />
       <TrendingCommunity />
       <RecentPosts />
       <HomeBox />
+      <ToTopButton />
     </div>
   );
 };

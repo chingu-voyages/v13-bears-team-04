@@ -1,46 +1,24 @@
 import React, { useState } from "react";
+import Button from "../Button/button";
 import "./totopbutton.scss";
 
-class ToTopButton extends React.Component {
-  state = { hasScrolled: false };
+export default function ToTopButton() {
+  const [top, resetYPosition] = useState(0);
 
-  componentDidMount() {
-    this.scrollingWrapper.addEventListener("scroll", this.onScroll);
+  function scrollToTop() {
+    if (window.scrollY > 0) {
+      window.scrollTo({
+        top,
+        behavior: "smooth",
+      });
+    }
   }
 
-  onScroll = () => {
-    if (this.scrollingWrapper.scrollTop > 200 && !this.state.hasScrolled) {
-      this.setState({ hasScrolled: true });
-    } else if (
-      this.scrollingWrapper.scrollTop < 200 &&
-      this.state.hasScrolled
-    ) {
-      this.setState({ hasScrolled: false });
-    }
-  };
-
-  scrollToTop = () => {
-    this.scrollingWrapper.scrollTop = 0;
-  };
-
-  reference = id => ref => {
-    this[id] = ref;
-  };
-
-  render = () => {
-    return (
-      <>
-        {this.state.hasScrolled && (
-          <ScrollToTopIconContainer onClick={this.scrollToTop}>
-            <button>BACK TO TOP</button>
-          </ScrollToTopIconContainer>
-        )}
-        <div ref={this.reference("scrollingWrapper")}>
-          {this.props.children}
-        </div>
-      </>
-    );
-  };
+  return (
+    <div>
+      <Button>
+        <button onClick={scrollToTop}>Scroll To Top</button>
+      </Button>
+    </div>
+  );
 }
-
-export default ToTopButton;

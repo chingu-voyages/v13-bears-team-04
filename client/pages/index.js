@@ -1,5 +1,5 @@
 import React from "react";
-import Nav from "../components/nav";
+import Nav from "../components/Navigation";
 import PostList from "../components/PostList";
 import RecentPosts from "../components/RecentPosts";
 import ToTopButton from "../components/ToTopButton";

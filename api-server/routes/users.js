@@ -27,15 +27,22 @@ async function getAllUsers(req, res) {
 
 async function handleVerification(req, res) {
   try {
-    const { sid } = req.headers.authorization;
+    if (!("authorization" in req.headers)) {
+      throw new Error("Authorization header missing");
+    }
+    const { sid } = JSON.parse(req.headers.authorization);
     console.log(req.headers);
     console.log(req.headers.authorization);
     // find the session
     const session = await Session.findOne({ _id: sid });
-    if (!session || !session._id) throw "User verification failed";
+    if (!session || !session._id) {
+      throw new Error("User verification failed");
+    }
     // get that session's user details
     const user = await User.findOne({ _id: session.userId });
-    if (!user) throw "User not found";
+    if (!user) {
+      throw new Error("User not found");
+    }
     // don't want to send the user's password to the client
     const { password, ...goodUser } = user._doc;
     res.status(200).json(goodUser);

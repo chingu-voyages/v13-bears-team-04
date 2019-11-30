@@ -1,12 +1,14 @@
 import React from "react";
+import { setCookie, destroyCookie } from "nookies";
+
+import HomeBox from "../components/HomeBox";
 import Nav from "../components/nav";
 import PostList from "../components/PostList";
 import RecentPosts from "../components/RecentPosts";
 import ToTopButton from "../components/ToTopButton";
 import TrendingCommunity from "../components/TrendingCommunity";
-import HomeBox from "../components/HomeBox";
+
 import { useAuth } from "../components/Auth/auth";
-import { setCookie, destroyCookie } from "nookies";
 import { getCookieOptions } from "../utils/cookies";
 // import { handleLogin, handleSignup, handleLogout } from "../utils/auth";
 

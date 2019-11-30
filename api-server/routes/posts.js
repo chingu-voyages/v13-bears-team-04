@@ -25,7 +25,6 @@ async function getCommunityPosts(req, res) {
     // SWITCH after new models are pushed
     // const posts = await Post.find({ community });
     const posts = await Post.find({ category: community });
-    console.log(posts);
     res.status(200).json(posts);
   } catch (err) {
     console.log(err);
@@ -36,7 +35,6 @@ async function getCommunityPosts(req, res) {
 async function createPost(req, res) {
   try {
     const newPost = await Post.create(req.body);
-    console.log(newPost);
     res.status(200).json(newPost);
   } catch (err) {
     console.log(err);

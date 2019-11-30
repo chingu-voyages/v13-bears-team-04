@@ -96,7 +96,7 @@ async function handleSignup(req, res) {
     }
     // don't want to send the user's password to the client
     const { password, ...goodUser } = newUser._doc;
-    res.status(200).json({ sid: session_id, ...goodUser });
+    res.status(200).json({ sid: session._id, ...goodUser });
   } catch (err) {
     console.log(err);
     res.status(400).json(err);

@@ -6,7 +6,6 @@ const rateLimit = require("express-rate-limit");
 const morgan = require("morgan");
 const morganBody = require("morgan-body");
 const mongoose = require("mongoose");
-const cookieParser = require("cookie-parser");
 
 const app = express();
 
@@ -33,7 +32,6 @@ mongoose
 const corsOpts = { origin: URL, credentials: true };
 
 // MIDDLEWARE
-app.use(cookieParser());
 app.use(cors(corsOpts));
 app.use(limiter);
 app.use(express.json());

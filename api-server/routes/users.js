@@ -2,11 +2,10 @@ const express = require("express");
 const router = express.Router();
 const User = require("../models/user");
 const Session = require("../models/session");
-const { getCookieOptions } = require("../utils");
 
 router.route("/").get(getAllUsers);
 
-router.route("/verify").post(handleVerification);
+router.route("/verify").get(handleVerification);
 
 router.route("/login").post(handleLogin);
 
@@ -27,14 +26,20 @@ async function getAllUsers(req, res) {
 
 async function handleVerification(req, res) {
   try {
-    const { sid } = req.body;
-    console.log(req.cookies);
+    if (!("authorization" in req.headers)) {
+      throw new Error("Authorization header missing");
+    }
+    const { sid } = JSON.parse(req.headers.authorization);
     // find the session
     const session = await Session.findOne({ _id: sid });
-    if (!session || !session._id) throw "User verification failed";
+    if (!session || !session._id) {
+      throw new Error("User verification failed");
+    }
     // get that session's user details
     const user = await User.findOne({ _id: session.userId });
-    if (!user) throw "User not found";
+    if (!user) {
+      throw new Error("User not found");
+    }
     // don't want to send the user's password to the client
     const { password, ...goodUser } = user._doc;
     res.status(200).json(goodUser);
@@ -54,14 +59,12 @@ async function handleLogin(req, res) {
       if (!isMatch) return res.status(401).json({ message: "Wrong password" });
       // successful; create a user session
       const session = await Session.create({ userId: user._id });
-      if (!session || !session._id) throw new Error("Session error");
+      if (!session || !session._id) {
+        throw new Error("Session error");
+      }
       // don't want to send the user's password to the client
       const { password, ...goodUser } = user._doc;
-      const cookieOptions = getCookieOptions();
-      res
-        .status(200)
-        .cookie("sid", session._id, cookieOptions)
-        .json(goodUser);
+      res.status(200).json({ sid: session._id, ...goodUser });
     });
   } catch (err) {
     console.log(err);
@@ -72,8 +75,6 @@ async function handleLogin(req, res) {
 async function handleLogout(req, res) {
   try {
     const { userId } = req.body;
-    // clear cookie
-    res.clearCookie("sid");
     // delete all this user's sessions
     await Session.deleteMany({ userId });
     res.status(200).json({ message: "Successful logout" });
@@ -86,15 +87,16 @@ async function handleLogout(req, res) {
 async function handleSignup(req, res) {
   try {
     const newUser = await User.create(req.body);
+    if (!newUser) {
+      throw new Error("Error creating user");
+    }
     const session = await Session.create({ userId: newUser._id });
-    if (!session || !session._id) throw new Error("Session error");
+    if (!session || !session._id) {
+      throw new Error("Session error");
+    }
     // don't want to send the user's password to the client
     const { password, ...goodUser } = newUser._doc;
-    const cookieOptions = getCookieOptions();
-    res
-      .status(200)
-      .cookie("sid", session._id, cookieOptions)
-      .json(goodUser);
+    res.status(200).json({ sid: session._id, ...goodUser });
   } catch (err) {
     console.log(err);
     res.status(400).json(err);

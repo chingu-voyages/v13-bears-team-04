@@ -3,7 +3,7 @@
 import React from "react";
 import App from "next/app";
 import fetch from "isomorphic-unfetch";
-import cookies from "next-cookies";
+import { parseCookies } from "nookies";
 import { AuthProvider } from "../components/Auth/auth";
 import "../utils/icons";
 import "../sass/main.scss";
@@ -13,12 +13,11 @@ class MyApp extends App {
     const appProps = await App.getInitialProps(appContext);
     try {
       // check if there are any cookies
-      const { sid } = cookies(appContext.ctx);
+      const { sid } = parseCookies(appContext.ctx);
       if (!sid) throw "No cookies found on page load";
       const resp = await fetch(process.env.API_URL + "/user/verify", {
-        method: "POST",
-        body: JSON.stringify({ sid }),
-        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+        headers: { Authorization: JSON.stringify({ sid }) },
       });
       const user = await resp.json();
       if (!resp.ok) throw "Cookie found; failed verification";

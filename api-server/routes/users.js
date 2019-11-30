@@ -31,8 +31,6 @@ async function handleVerification(req, res) {
       throw new Error("Authorization header missing");
     }
     const { sid } = JSON.parse(req.headers.authorization);
-    console.log(req.headers);
-    console.log(req.headers.authorization);
     // find the session
     const session = await Session.findOne({ _id: sid });
     if (!session || !session._id) {

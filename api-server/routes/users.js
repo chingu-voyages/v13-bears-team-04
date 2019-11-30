@@ -2,7 +2,6 @@ const express = require("express");
 const router = express.Router();
 const User = require("../models/user");
 const Session = require("../models/session");
-const { getCookieOptions } = require("../utils");
 
 router.route("/").get(getAllUsers);
 
@@ -60,14 +59,12 @@ async function handleLogin(req, res) {
       if (!isMatch) return res.status(401).json({ message: "Wrong password" });
       // successful; create a user session
       const session = await Session.create({ userId: user._id });
-      if (!session || !session._id) throw new Error("Session error");
+      if (!session || !session._id) {
+        throw new Error("Session error");
+      }
       // don't want to send the user's password to the client
       const { password, ...goodUser } = user._doc;
-      // const cookieOptions = getCookieOptions();
-      res
-        .status(200)
-        // .cookie("sid", session._id, cookieOptions)
-        .json({ sid: session._id, ...goodUser });
+      res.status(200).json({ sid: session._id, ...goodUser });
     });
   } catch (err) {
     console.log(err);
@@ -78,8 +75,6 @@ async function handleLogin(req, res) {
 async function handleLogout(req, res) {
   try {
     const { userId } = req.body;
-    // clear cookie
-    res.clearCookie("sid");
     // delete all this user's sessions
     await Session.deleteMany({ userId });
     res.status(200).json({ message: "Successful logout" });
@@ -92,15 +87,16 @@ async function handleLogout(req, res) {
 async function handleSignup(req, res) {
   try {
     const newUser = await User.create(req.body);
+    if (!newUser) {
+      throw new Error("Error creating user");
+    }
     const session = await Session.create({ userId: newUser._id });
-    if (!session || !session._id) throw new Error("Session error");
+    if (!session || !session._id) {
+      throw new Error("Session error");
+    }
     // don't want to send the user's password to the client
     const { password, ...goodUser } = newUser._doc;
-    const cookieOptions = getCookieOptions();
-    res
-      .status(200)
-      .cookie("sid", session._id, cookieOptions)
-      .json(goodUser);
+    res.status(200).json({ sid: session_id, ...goodUser });
   } catch (err) {
     console.log(err);
     res.status(400).json(err);

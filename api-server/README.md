@@ -51,12 +51,16 @@ Status Code: 400
 
 <!-- NEW DROPDOWN -->
 <details>
-<summary><strong>POST api/user/verify</strong></summary>
+<summary><strong>GET api/user/verify</strong></summary>
 
 #### Required:
 
-```
-Still figuring out how to best implement this with NextJS
+```javascript
+{
+  headers: {
+    Authorization: "validSessionID";
+  }
+}
 ```
 
 #### Response:
@@ -210,15 +214,15 @@ Status Code: 400
 
 #### Required:
 
-```
+```javascript
 const fetchOptions = {
   body: {
     title, // unique _ minLength:4 _ maxLength:300
     body,
     author,
-    community,
+    community
   }
-}
+};
 ```
 
 #### Response:

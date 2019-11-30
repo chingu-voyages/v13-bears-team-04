@@ -8,6 +8,7 @@ import HomeBox from "../components/HomeBox";
 import { useAuth } from "../components/Auth/auth";
 import { setCookie, destroyCookie } from "nookies";
 // import { handleLogin, handleSignup, handleLogout } from "../utils/auth";
+import getCookieOptions from "../utils/cookies";
 
 const Home = () => {
   const { user, setUser } = useAuth();
@@ -21,7 +22,8 @@ const Home = () => {
         headers: { "Content-Type": "application/json" },
       });
       const { sid, ...user } = await resp.json();
-      setCookie({}, "sid", sid);
+
+      setCookie({}, "sid", sid, getCookieOptions());
       setUser(user);
     } catch (err) {
       console.log(err);
@@ -58,7 +60,7 @@ const Home = () => {
         headers: { "Content-Type": "application/json" },
       });
       const { sid, ...user } = await resp.json();
-      setCookie({}, "sid", sid);
+      setCookie({}, "sid", sid, getCookieOptions());
       console.log(user);
       setUser(user);
     } catch (err) {

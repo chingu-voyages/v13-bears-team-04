@@ -35,9 +35,10 @@ const Home = () => {
         method: "POST",
         body: JSON.stringify({ userId }),
         headers: { "Content-Type": "application/json" },
-        credentials: "include",
       });
-      // const user = await resp.json();
+      destroyCookie({}, "sid");
+      // const {message} = await resp.json();
+      // if(!message === 'Successful logout')
       setUser(null);
     } catch (err) {
       console.log(err);
@@ -46,17 +47,18 @@ const Home = () => {
 
   async function handleSignup() {
     try {
+      const randomNum = Math.floor(Math.random() * 90 + 10);
       const resp = await fetch(`${process.env.API_URL}/user/signup`, {
         method: "POST",
         body: JSON.stringify({
-          email: "test9@test.com",
-          username: "Tester9",
+          email: `test${randomNum}@test.com`,
+          username: `Tester${randomNum}`,
           password: "password",
         }),
         headers: { "Content-Type": "application/json" },
-        credentials: "include",
       });
-      const user = await resp.json();
+      const { sid, ...user } = await resp.json();
+      setCookie({}, "sid", sid);
       console.log(user);
       setUser(user);
     } catch (err) {

@@ -12,8 +12,11 @@
 ## `.env` file
 
 ```
+
 MONGOLAB_URI=[connection_string]
-URL=http://localhost:4000 // this needs to be the location your client is served on
+CLIENT_URL_DEV=http://localhost:4000 // this needs to be the location your client is served on
+CLIENT_URL_PROD='productionUrlHere'
+TEST_PROD=boolean // false -> other devs can run the client on localhost and still API calls
 ```
 
 ## API Endpoints

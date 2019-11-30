@@ -38,7 +38,7 @@ const Home = () => {
         body: JSON.stringify({ userId }),
         headers: { "Content-Type": "application/json" },
       });
-      destroyCookie({}, "sid", getCookieOptions());
+      destroyCookie({}, "sid");
       // const {message} = await resp.json();
       // if(!message === 'Successful logout')
       setUser(null);

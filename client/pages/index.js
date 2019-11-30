@@ -7,8 +7,8 @@ import TrendingCommunity from "../components/TrendingCommunity";
 import HomeBox from "../components/HomeBox";
 import { useAuth } from "../components/Auth/auth";
 import { setCookie, destroyCookie } from "nookies";
-// import { handleLogin, handleSignup, handleLogout } from "../utils/auth";
 import { getCookieOptions } from "../utils/cookies";
+// import { handleLogin, handleSignup, handleLogout } from "../utils/auth";
 
 const Home = () => {
   const { user, setUser } = useAuth();
@@ -22,8 +22,6 @@ const Home = () => {
         headers: { "Content-Type": "application/json" },
       });
       const { sid, ...user } = await resp.json();
-      console.log(sid);
-      console.log(getCookieOptions());
       setCookie({}, "sid", sid, getCookieOptions());
       setUser(user);
     } catch (err) {
@@ -39,10 +37,11 @@ const Home = () => {
         body: JSON.stringify({ userId }),
         headers: { "Content-Type": "application/json" },
       });
-      destroyCookie({}, "sid");
-      // const {message} = await resp.json();
-      // if(!message === 'Successful logout')
-      setUser(null);
+      const { message } = await resp.json();
+      if (message === "Successful logout") {
+        destroyCookie({}, "sid", {});
+        setUser(null);
+      }
     } catch (err) {
       console.log(err);
     }
@@ -62,9 +61,7 @@ const Home = () => {
       });
       const { sid, ...user } = await resp.json();
       setCookie({}, "sid", sid, getCookieOptions());
-      console.log(user);
       setUser(user);
-      fixed;
     } catch (err) {
       console.log(err);
     }

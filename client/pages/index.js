@@ -6,6 +6,7 @@ import ToTopButton from "../components/ToTopButton";
 import TrendingCommunity from "../components/TrendingCommunity";
 import HomeBox from "../components/HomeBox";
 import { useAuth } from "../components/Auth/auth";
+import { setCookie, destroyCookie } from "nookies";
 // import { handleLogin, handleSignup, handleLogout } from "../utils/auth";
 
 const Home = () => {
@@ -18,9 +19,9 @@ const Home = () => {
         method: "POST",
         body: JSON.stringify({ username: "Tester2", password: "password" }),
         headers: { "Content-Type": "application/json" },
-        credentials: "include",
       });
-      const user = await resp.json();
+      const { sid, ...user } = await resp.json();
+      setCookie({}, "sid", sid);
       setUser(user);
     } catch (err) {
       console.log(err);

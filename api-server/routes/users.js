@@ -6,7 +6,7 @@ const { getCookieOptions } = require("../utils");
 
 router.route("/").get(getAllUsers);
 
-router.route("/verify").post(handleVerification);
+router.route("/verify").get(handleVerification);
 
 router.route("/login").post(handleLogin);
 
@@ -27,8 +27,9 @@ async function getAllUsers(req, res) {
 
 async function handleVerification(req, res) {
   try {
-    const { sid } = req.body;
-    console.log(req.cookies);
+    const { sid } = req.headers.authorization;
+    console.log(req.headers);
+    console.log(req.headers.authorization);
     // find the session
     const session = await Session.findOne({ _id: sid });
     if (!session || !session._id) throw "User verification failed";
@@ -57,11 +58,11 @@ async function handleLogin(req, res) {
       if (!session || !session._id) throw new Error("Session error");
       // don't want to send the user's password to the client
       const { password, ...goodUser } = user._doc;
-      const cookieOptions = getCookieOptions();
+      // const cookieOptions = getCookieOptions();
       res
         .status(200)
-        .cookie("sid", session._id, cookieOptions)
-        .json(goodUser);
+        // .cookie("sid", session._id, cookieOptions)
+        .json({ sid: session._id, ...goodUser });
     });
   } catch (err) {
     console.log(err);

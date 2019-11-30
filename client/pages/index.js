@@ -22,7 +22,8 @@ const Home = () => {
         headers: { "Content-Type": "application/json" },
       });
       const { sid, ...user } = await resp.json();
-
+      console.log(sid);
+      console.log(getCookieOptions());
       setCookie({}, "sid", sid, getCookieOptions());
       setUser(user);
     } catch (err) {

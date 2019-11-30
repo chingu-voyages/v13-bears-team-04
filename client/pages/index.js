@@ -8,7 +8,7 @@ import HomeBox from "../components/HomeBox";
 import { useAuth } from "../components/Auth/auth";
 import { setCookie, destroyCookie } from "nookies";
 // import { handleLogin, handleSignup, handleLogout } from "../utils/auth";
-import getCookieOptions from "../utils/cookies";
+import { getCookieOptions } from "../utils/cookies";
 
 const Home = () => {
   const { user, setUser } = useAuth();

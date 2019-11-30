@@ -2,19 +2,17 @@ const express = require("express");
 const router = express.Router();
 const Post = require("../models/post");
 
-router
-  .route("/")
-    .get(getAllPosts);
+router.route("/").get(getAllPosts);
 
 router
   .route("/:community")
-    .get(getCommunityPosts)
-    .post(createPost);
+  .get(getCommunityPosts)
+  .post(createPost);
 
 async function getAllPosts(_, res) {
   try {
     const posts = await Post.find();
-    res.status(200).json({ posts });
+    res.status(200).json(posts);
   } catch (err) {
     console.log(err);
     res.status(401).json(err);
@@ -28,7 +26,7 @@ async function getCommunityPosts(req, res) {
     // const posts = await Post.find({ community });
     const posts = await Post.find({ category: community });
     console.log(posts);
-    res.status(200).json({ posts });
+    res.status(200).json(posts);
   } catch (err) {
     console.log(err);
     res.status(401).json(err);

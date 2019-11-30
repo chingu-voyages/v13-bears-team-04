@@ -34,7 +34,9 @@ mongoose
 
 const corsOpts = {
   origin:
-    NODE_ENV === "production" && TEST_PROD ? CLIENT_URL_PROD : CLIENT_URL_DEV,
+    NODE_ENV === "production" && TEST_PROD === "true"
+      ? CLIENT_URL_PROD
+      : CLIENT_URL_DEV,
   credentials: true
 };
 

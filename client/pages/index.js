@@ -7,7 +7,6 @@ import PostList from "../components/PostList";
 import RecentPosts from "../components/RecentPosts";
 import ToTopButton from "../components/ToTopButton";
 import TrendingCommunity from "../components/TrendingCommunity";
-import HomeBox from "../components/HomeBox";
 import Input from "../components/Form/Input";
 import Signin from "../components/Form";
 import { useAuth } from "../components/Auth/auth";

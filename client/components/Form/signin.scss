@@ -43,7 +43,7 @@
 
   &__wrapper {
     display: inline-block;
-    transform: translate(10%, 40%);
+    transform: translate(10%, 35%);
 
     &__icon {
       background-color: $dark-orange;
@@ -67,6 +67,32 @@
       width: 45%;
       transform: translateX(23%);
     }
+
+    &__link {
+      display: inline-block;
+      margin-top: 2rem;
+      font-size: 1.4rem;
+      &--username {
+        text-decoration: none;
+        color: $blue;
+        &::after {
+          content: "・";
+        }
+      }
+      &--password {
+        text-decoration: none;
+        color: $blue;
+      }
+    }
+
+    &__info {
+      font-size: 1.4rem;
+
+      p > span {
+        color: $blue;
+        font-weight: bold;
+      }
+    }
   }
 
   &__close {
@@ -76,8 +102,8 @@
       top: 0.5rem;
       right: 1.5rem;
       text-decoration: none;
-      color: $grey;
-      font-size: 4rem;
+      color: $dark-grey;
+      font-size: 3.5rem;
     }
   }
 

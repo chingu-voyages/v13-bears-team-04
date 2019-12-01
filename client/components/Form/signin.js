@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import Button from "../Button";
 import Input from "./Input";
@@ -6,6 +6,18 @@ import Input from "./Input";
 import "./signin.scss";
 
 export default function signin() {
+  const [btnState, setBtnState] = useState([{ isOpen: false }], []);
+
+  function ctrlBtn() {
+    if (btnState.isOpen === true) {
+      setBtnState({ isOpen: false });
+      document.querySelector(".form__popup").style["visibility"] = "visible";
+    } else {
+      setBtnState({ isOpen: true });
+      document.querySelector(".form__popup").style["visibility"] = "hidden";
+    }
+  }
+
   return (
     <div className="form__popup">
       <div className="form__content">
@@ -33,10 +45,23 @@ export default function signin() {
                   Sign In
                 </Button>
               </div>
+              <div className="form__wrapper__link">
+                <a href="#" className="form__wrapper__link--username">
+                  Forgot username
+                </a>
+                <a href="#" className="form__wrapper__link--password">
+                  Forgot password
+                </a>
+              </div>
+              <div className="form__wrapper__info">
+                <p>
+                  New to Reddit? <span>SIGNUP</span>
+                </p>
+              </div>
             </div>
           </div>
         </form>
-        <a href="#" className="form__close">
+        <a href="#" className="form__close" onClick={() => ctrlBtn()}>
           &times;
         </a>
       </div>

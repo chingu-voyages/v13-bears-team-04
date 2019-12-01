@@ -3,7 +3,7 @@ const uniqueValidator = require("mongoose-unique-validator");
 
 const { Schema, model } = mongoose;
 const ObjectId = Schema.Types.ObjectId;
-const checkAdminCount = (arr = arr.length > 0);
+const checkAdminCount = arr => arr.length > 0;
 
 var CommunitySchema = new Schema({
   name: {

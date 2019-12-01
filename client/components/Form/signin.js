@@ -10,18 +10,12 @@ export default function signin() {
     <div className="form__popup">
       <div className="form__content">
         <form action="#" className="form__main">
-          <div className="form__left">
-            <img
-              src="form_image.png"
-              alt="reddit_sub_icon"
-              className="form__left__image"
-            />
-          </div>
+          <div className="form__left" />
           <div className="form__right">
             <div className="form__wrapper">
               <div className="form__wrapper__icon">
                 <img
-                  src="reddit_icon.png"
+                  src="/static/reddit_icon.png"
                   alt="reddit_sub_icon"
                   className="reddit-icon"
                 />

@@ -23,28 +23,26 @@
 
   &__main {
     display: table;
-    height: 100%;
   }
 
   &__left {
     display: table-cell;
-    width: 35%;
-    background-image: url("../../public/form_image.png");
-    &__image {
-      display: inline-block;
-      width: auto;
-      height: 100%;
-      transform: translate(-27.5%, -23%) scale(0.6);
-    }
+    width: 30%;
+
+    background-image: url("/static/form_image.png");
+    background-size: cover;
+    height: 55rem;
   }
 
   &__right {
     display: table-cell;
-    width: 65%;
+    width: 70%;
   }
 
   &__wrapper {
-    // display: inline-block;
+    display: inline-block;
+    transform: translate(10%, 40%);
+
     &__icon {
       background-color: $dark-orange;
       border-radius: 10rem;
@@ -64,8 +62,8 @@
     }
 
     &__button {
-      transform: translate(38%, 15%);
-      width: 10rem;
+      width: 30%;
+      transform: translateX(34%);
     }
   }
 

@@ -19,6 +19,8 @@
     box-shadow: 0 2rem 4rem rgba($black, 0.2);
     border-radius: 0.3rem;
     overflow: hidden;
+
+    position: relative;
   }
 
   &__main {
@@ -62,8 +64,20 @@
     }
 
     &__button {
-      width: 30%;
-      transform: translateX(34%);
+      width: 45%;
+      transform: translateX(23%);
+    }
+  }
+
+  &__close {
+    &:link,
+    &:visited {
+      position: absolute;
+      top: 0.5rem;
+      right: 1.5rem;
+      text-decoration: none;
+      color: $grey;
+      font-size: 4rem;
     }
   }
 

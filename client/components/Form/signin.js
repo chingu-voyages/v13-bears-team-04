@@ -36,6 +36,9 @@ export default function signin() {
             </div>
           </div>
         </form>
+        <a href="#" className="form__close">
+          &times;
+        </a>
       </div>
     </div>
   );

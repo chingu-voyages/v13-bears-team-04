@@ -15,7 +15,7 @@ async function getAllPosts(_, res) {
     res.status(200).json(posts);
   } catch (err) {
     console.log(err);
-    res.status(401).json(err);
+    res.status(400).json(err);
   }
 }
 
@@ -28,7 +28,7 @@ async function getCommunityPosts(req, res) {
     res.status(200).json(posts);
   } catch (err) {
     console.log(err);
-    res.status(401).json(err);
+    res.status(400).json(err);
   }
 }
 

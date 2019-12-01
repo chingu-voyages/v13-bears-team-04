@@ -25,18 +25,26 @@ const UserSchema = new Schema({
     minlength: [3, "Username must be at least 3 characters"],
     maxlength: [20, "Username must be 20 characters or less"]
   },
-  communitiesSubbed: [
-    {
-      type: ObjectId,
-      ref: "Community"
-    }
-  ],
-  communitiesModded: [
-    {
-      type: ObjectId,
-      ref: "Community"
-    }
-  ],
+  communities: {
+    member: [
+      {
+        type: ObjectId,
+        ref: "Community"
+      }
+    ],
+    moderator: [
+      {
+        type: ObjectId,
+        ref: "Community"
+      }
+    ],
+    administrator: [
+      {
+        type: ObjectId,
+        ref: "Community"
+      }
+    ]
+  },
   posts: [
     {
       type: ObjectId,

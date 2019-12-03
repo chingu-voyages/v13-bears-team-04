@@ -84,7 +84,6 @@ const Home = () => {
       <TrendingCommunity />
       <RecentPosts />
       <HomeBox />
-      {/* <Input>Email</Input> */}
       <Signin />
       <ToTopButton />
     </div>

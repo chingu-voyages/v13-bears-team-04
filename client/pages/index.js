@@ -1,13 +1,16 @@
 import React from "react";
+import { setCookie, destroyCookie } from "nookies";
+
+import HomeBox from "../components/HomeBox";
 import Nav from "../components/nav";
 import PostList from "../components/PostList";
 import RecentPosts from "../components/RecentPosts";
 import ToTopButton from "../components/ToTopButton";
 import TrendingCommunity from "../components/TrendingCommunity";
-import HomeBox from "../components/HomeBox";
 import Input from "../components/Form/Input";
 import Signin from "../components/Form";
 import { useAuth } from "../components/Auth/auth";
+import { getCookieOptions } from "../utils/cookies";
 // import { handleLogin, handleSignup, handleLogout } from "../utils/auth";
 
 const Home = () => {
@@ -20,9 +23,9 @@ const Home = () => {
         method: "POST",
         body: JSON.stringify({ username: "Tester2", password: "password" }),
         headers: { "Content-Type": "application/json" },
-        credentials: "include",
       });
-      const user = await resp.json();
+      const { sid, ...user } = await resp.json();
+      setCookie({}, "sid", sid, getCookieOptions());
       setUser(user);
     } catch (err) {
       console.log(err);
@@ -36,10 +39,12 @@ const Home = () => {
         method: "POST",
         body: JSON.stringify({ userId }),
         headers: { "Content-Type": "application/json" },
-        credentials: "include",
       });
-      // const user = await resp.json();
-      setUser(null);
+      const { message } = await resp.json();
+      if (message === "Successful logout") {
+        destroyCookie({}, "sid", {});
+        setUser(null);
+      }
     } catch (err) {
       console.log(err);
     }
@@ -47,18 +52,18 @@ const Home = () => {
 
   async function handleSignup() {
     try {
+      const randomNum = Math.floor(Math.random() * 90 + 10);
       const resp = await fetch(`${process.env.API_URL}/user/signup`, {
         method: "POST",
         body: JSON.stringify({
-          email: "test9@test.com",
-          username: "Tester9",
+          email: `test${randomNum}@test.com`,
+          username: `Tester${randomNum}`,
           password: "password",
         }),
         headers: { "Content-Type": "application/json" },
-        credentials: "include",
       });
-      const user = await resp.json();
-      console.log(user);
+      const { sid, ...user } = await resp.json();
+      setCookie({}, "sid", sid, getCookieOptions());
       setUser(user);
     } catch (err) {
       console.log(err);
@@ -76,12 +81,12 @@ const Home = () => {
 
       <Nav />
       <PostList />
-      <ToTopButton />
       <TrendingCommunity />
       <RecentPosts />
       <HomeBox />
-      <Input>Email</Input>
+      {/* <Input>Email</Input> */}
       <Signin />
+      <ToTopButton />
     </div>
   );
 };

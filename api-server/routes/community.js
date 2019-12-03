@@ -13,11 +13,13 @@ router
   .get(getCommunity)
   .delete(deleteCommunity);
 
-router.route("/:communityId/edit/:key").put(editCommunityDetails);
+router.route("/:communityId/edit/:key").put(updateCommunityDetails);
 
-router.route("/:communityId/users/:key").post(addCommunityUser);
-// .put(updateCommunityUser)
-// .delete(deleteCommunityUser);
+router
+  .route("/:communityId/users/:key")
+  .get(getCommunityUsers)
+  .post(addCommunityUser)
+  .delete(deleteCommunityUser);
 
 async function getAllCommunities(req, res) {
   try {
@@ -72,7 +74,7 @@ async function deleteCommunity(req, res) {
 }
 
 // ADMIN - SECURE NEEDED
-async function editCommunityDetails(req, res) {
+async function updateCommunityDetails(req, res) {
   try {
     const { communityId, key } = req.params;
     const acceptableKeys = ["name", "description", "rules"];
@@ -85,6 +87,26 @@ async function editCommunityDetails(req, res) {
       { new: true }
     );
     res.status(200).json(updatedCommunity);
+  } catch (err) {
+    console.log(err);
+    res.status(400).json(err);
+  }
+}
+
+// VERIFICATION - SECURE NEEDED
+async function getCommunityUsers(req, res) {
+  try {
+    const { communityId, key } = req.params;
+    const acceptableKeys = ["members", "moderators", "administrators"];
+    if (!acceptableKeys.includes(key)) {
+      throw new Error("Unapproved key");
+    }
+    const { users } = await Community.findById(communityId).populate({
+      path: `users.${key}`,
+      select: "username -_id"
+    });
+    const targetedUsers = users[key];
+    res.status(200).json(targetedUsers);
   } catch (err) {
     console.log(err);
     res.status(400).json(err);
@@ -109,6 +131,41 @@ async function addCommunityUser(req, res) {
     // community's users are plural, user's are singular
     const singularKey = key.substring(0, key.length - 1);
     user.communities[singularKey].push(communityId);
+    await user.save();
+    res.status(200).json(updatedCommunity);
+  } catch (err) {
+    console.log(err);
+    res.status(400).json(err);
+  }
+}
+
+// VERIFICATION - SECURE NEEDED
+async function deleteCommunityUser(req, res) {
+  try {
+    const { communityId, key } = req.params;
+    const { userId } = req.body;
+    const acceptableKeys = ["members", "moderators", "administrators"];
+    if (!acceptableKeys.includes(key)) {
+      throw new Error("Unapproved key");
+    }
+    // update community document
+    const community = await Community.findByIdAndUpdate(
+      communityId,
+      {
+        users: { $pull: { [key]: userId } }
+      },
+      { new: true }
+    );
+    const updatedCommunity = await community.save();
+    // update user document
+    const singularKey = key.substring(0, key.length - 1);
+    const user = await User.findByIdAndUpdate(
+      userId,
+      {
+        communities: { $pull: { [singularKey]: userId } }
+      },
+      { new: true }
+    );
     await user.save();
     res.status(200).json(updatedCommunity);
   } catch (err) {

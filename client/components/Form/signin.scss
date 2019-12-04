@@ -50,6 +50,7 @@
     & > p {
       font-size: 2rem;
       font-weight: bold;
+      // display: inline-block;
     }
 
     &__icon {
@@ -71,8 +72,8 @@
     }
 
     &__button {
-      width: 45%;
-      transform: translateX(23%);
+      width: 15rem;
+      transform: translateX(27%);
     }
 
     &__link {

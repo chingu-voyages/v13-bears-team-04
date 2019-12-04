@@ -31,7 +31,7 @@ export default function signup() {
                   Sign up
                 </Button>
               </div>
-              <div className="form__wrapper__info u-margin-top-medium">
+              <div className="form__wrapper__info u-margin-top-small">
                 <p>
                   Already a Redditor?{" "}
                   <span className="form__wrapper__info--capitalized">

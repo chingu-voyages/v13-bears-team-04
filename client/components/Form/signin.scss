@@ -29,7 +29,7 @@
 
   &__left {
     display: table-cell;
-    width: 30%;
+    width: 20%;
 
     background-image: url("/static/form_image.png");
     background-size: cover;
@@ -38,19 +38,18 @@
 
   &__right {
     display: table-cell;
-    width: 70%;
+    width: 80%;
   }
 
   &__wrapper {
     display: inline-block;
-    transform: translate(10%, 35%);
+    transform: translate(10%, 13%);
 
     width: 70%;
 
     & > p {
       font-size: 2rem;
       font-weight: bold;
-      // display: inline-block;
     }
 
     &__icon {
@@ -151,6 +150,11 @@
       }
     }
   }
+}
+
+.sub-description {
+  font-size: 1.8rem !important;
+  font-weight: lighter !important;
 }
 
 .reddit-icon {

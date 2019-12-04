@@ -10,6 +10,8 @@ import TrendingCommunity from "../components/TrendingCommunity";
 import Input from "../components/Form/Input";
 import Signin from "../components/Form";
 import Signup from "../components/Form/signup";
+import ForgotPassword from "../components/Form/forgotpassword";
+import ForgotUsername from "../components/Form/forgotusername";
 
 import GrowingCommunities from "../components/GrowingCommunities";
 import { useAuth } from "../components/Auth/auth";
@@ -89,7 +91,9 @@ const Home = () => {
       <RecentPosts />
       <HomeBox />
       {/* <Signin /> */}
-      <Signup />
+      {/* <Signup /> */}
+      {/* <ForgotPassword /> */}
+      <ForgotUsername />
       <ToTopButton />
     </div>
   );

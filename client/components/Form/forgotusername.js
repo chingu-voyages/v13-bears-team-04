@@ -6,7 +6,7 @@ import Input from "./Input";
 
 import "./signin.scss";
 
-export default function signup() {
+export default function forgotusername() {
   const [isBtnOpen, setIsBtnOpen] = useState(true);
   return (
     <div
@@ -18,30 +18,40 @@ export default function signup() {
         <form action="#" className="form__main">
           <div className="form__left" />
           <div className="form__right">
-            <div className="form__wrapper u-margin-top-large">
-              <p>
-                By having a Reddit account, you can join, vote, and comment on
-                all your favorite Reddit content.
+            <div className="form__wrapper u-margin-top-medium">
+              <div className="form__wrapper__icon">
+                <img
+                  src="/static/reddit_icon.png"
+                  alt="reddit_sub_icon"
+                  className="reddit-icon"
+                />
+              </div>
+              <p>Recover your username</p>
+              <p className="sub-description">
+                Don't worry! You may have forgotten your username, but we can
+                help you out. Enter your email address below and we'll email you
+                your username.
               </p>
               <div className="form__wrapper__input">
                 <Input>Email</Input>
               </div>
               <div className="form__wrapper__button">
                 <Button color="blue" inverted={false}>
-                  Sign up
+                  Email me
                 </Button>
               </div>
-              <div className="form__wrapper__info u-margin-top-small">
+              <div className="form__wrapper__info u-margin-top-medium">
                 <p>
-                  Already a Redditor?{" "}
-                  <span className="form__wrapper__info--capitalized">
-                    Log in
-                  </span>
+                  If you are having trouble accessing your account, follow this{" "}
+                  <span>link</span>.
                 </p>
                 <p>
-                  By clicking next, you agree to our <span>Terms</span> and that
-                  you have read our <span>Privacy Policy</span> and
-                  <span>Content Policy</span>.
+                  <span className="form__wrapper__info--capitalized">
+                    Log in &nbsp;&middot;&nbsp;
+                  </span>
+                  <span className="form__wrapper__info--capitalized">
+                    Sign up
+                  </span>
                 </p>
               </div>
             </div>

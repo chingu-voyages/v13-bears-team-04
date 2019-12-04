@@ -45,6 +45,13 @@
     display: inline-block;
     transform: translate(10%, 35%);
 
+    width: 70%;
+
+    & > p {
+      font-size: 2rem;
+      font-weight: bold;
+    }
+
     &__icon {
       background-color: $dark-orange;
       border-radius: 10rem;
@@ -88,9 +95,14 @@
     &__info {
       font-size: 1.4rem;
 
+      &--capitalized {
+        font-weight: bold;
+        text-transform: uppercase;
+      }
+
       p > span {
         color: $blue;
-        font-weight: bold;
+        cursor: pointer;
       }
     }
   }

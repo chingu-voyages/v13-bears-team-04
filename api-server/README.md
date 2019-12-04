@@ -12,11 +12,12 @@
 ## `.env` file
 
 ```
-
-MONGOLAB_URI=[connection_string]
-CLIENT_URL_DEV=http://localhost:4000 // this needs to be the location your client is served on
-CLIENT_URL_PROD='productionUrlHere'
-TEST_PROD=boolean // false -> other devs can run the client on localhost and still API calls
+MONGOLAB_URI=dbUrlHere
+//> this needs to be the location your client is served on
+CLIENT_URL_DEV=http://localhost:4000
+CLIENT_URL_PROD=productionUrlHere
+//> false means you can run the client locally, but still make API calls
+TEST_PROD=boolean
 ```
 
 ## API Endpoints
@@ -346,6 +347,85 @@ Status Code: 400
 ```javascript
 // key param must be one of the following
 const acceptableKeys = ["name", "description", "rules"];
+```
+
+#### Response:
+
+```javascript
+Status Code: 200
+{ updatedCommunity }
+
+Status Code: 400
+{ message: 'errorMessage' }
+```
+
+</details>
+
+<!-- NEW DROPDOWN -->
+<details>
+<summary><strong>GET api/community/:communityId/users/:key</strong></summary>
+
+#### Required:
+
+```javascript
+// key param must be one of the following
+const acceptableKeys = ["members", "moderators", "administrators"];
+```
+
+#### Response:
+
+```javascript
+Status Code: 200
+[{ username: 'userId' }]
+
+Status Code: 400
+{ message: 'errorMessage' }
+```
+
+</details>
+
+<!-- NEW DROPDOWN -->
+<details>
+<summary><strong>POST api/community/:communityId/users/:key</strong></summary>
+
+#### Required:
+
+```jsx
+// key param must be one of the following
+const acceptableKeys = ["members", "moderators", "administrators"];
+const fetchOptions = {
+  body: {
+    userId
+  }
+};
+```
+
+#### Response:
+
+```javascript
+Status Code: 200
+{ updatedCommunity }
+
+Status Code: 400
+{ message: 'errorMessage' }
+```
+
+</details>
+
+<!-- NEW DROPDOWN -->
+<details>
+<summary><strong>DELETE api/community/:communityId/users/:key</strong></summary>
+
+#### Required:
+
+```jsx
+// key param must be one of the following
+const acceptableKeys = ["members", "moderators", "administrators"];
+const fetchOptions = {
+  body: {
+    userId
+  }
+};
 ```
 
 #### Response:

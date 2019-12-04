@@ -2,24 +2,18 @@ import React, { useState } from "react";
 
 import Button from "../Button";
 import Input from "./Input";
+// import formatTemplate from "./FormTemplate";
 
 import "./signin.scss";
 
 export default function signin() {
-  const [btnState, setBtnState] = useState([{ isOpen: false }], []);
-
-  function ctrlBtn() {
-    if (btnState.isOpen === true) {
-      setBtnState({ isOpen: false });
-      document.querySelector(".form__popup").style["visibility"] = "visible";
-    } else {
-      setBtnState({ isOpen: true });
-      document.querySelector(".form__popup").style["visibility"] = "hidden";
-    }
-  }
-
+  const [isBtnOpen, setIsBtnOpen] = useState(true);
   return (
-    <div className="form__popup">
+    <div
+      className="form__popup"
+      // style={`visibility: ${isBtnOpen ? "visible" : "hidden"}`}
+      style={{ visibility: isBtnOpen ? "visible" : "hidden" }}
+    >
       <div className="form__content">
         <form action="#" className="form__main">
           <div className="form__left" />
@@ -61,7 +55,11 @@ export default function signin() {
             </div>
           </div>
         </form>
-        <a href="#" className="form__close" onClick={() => ctrlBtn()}>
+        <a
+          href="#"
+          className="form__close"
+          onClick={() => setIsBtnOpen(state => !state)}
+        >
           &times;
         </a>
       </div>

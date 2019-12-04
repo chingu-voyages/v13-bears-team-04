@@ -2,13 +2,14 @@ import React from "react";
 import { setCookie, destroyCookie } from "nookies";
 
 import HomeBox from "../components/HomeBox";
-import Nav from "../components/nav";
+import Nav from "../components/Navigation";
 import PostList from "../components/PostList";
 import RecentPosts from "../components/RecentPosts";
 import ToTopButton from "../components/ToTopButton";
 import TrendingCommunity from "../components/TrendingCommunity";
 import Input from "../components/Form/Input";
 import Signin from "../components/Form";
+import GrowingCommunities from "../components/GrowingCommunities";
 import { useAuth } from "../components/Auth/auth";
 import { getCookieOptions } from "../utils/cookies";
 // import { handleLogin, handleSignup, handleLogout } from "../utils/auth";
@@ -82,6 +83,7 @@ const Home = () => {
       <Nav />
       <PostList />
       <TrendingCommunity />
+      <GrowingCommunities />
       <RecentPosts />
       <HomeBox />
       <Signin />

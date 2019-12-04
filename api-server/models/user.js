@@ -16,7 +16,7 @@ const UserSchema = new Schema({
     type: String,
     required: [true, "Password Required"],
     minlength: [8, "Password must be at least 8 characters"],
-    maxlength: [30, "Password must be 30 characters or less"]
+    maxlength: [60, "Password must be 60 characters or less"]
   },
   username: {
     type: String,
@@ -25,18 +25,26 @@ const UserSchema = new Schema({
     minlength: [3, "Username must be at least 3 characters"],
     maxlength: [20, "Username must be 20 characters or less"]
   },
-  communitiesSubbed: [
-    {
-      type: ObjectId,
-      ref: "Community"
-    }
-  ],
-  communitiesModded: [
-    {
-      type: ObjectId,
-      ref: "Community"
-    }
-  ],
+  communities: {
+    member: [
+      {
+        type: ObjectId,
+        ref: "Community"
+      }
+    ],
+    moderator: [
+      {
+        type: ObjectId,
+        ref: "Community"
+      }
+    ],
+    administrator: [
+      {
+        type: ObjectId,
+        ref: "Community"
+      }
+    ]
+  },
   posts: [
     {
       type: ObjectId,

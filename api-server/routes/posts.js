@@ -5,7 +5,7 @@ const Post = require("../models/post");
 router.route("/").get(getAllPosts);
 
 router
-  .route("/:community")
+  .route("/:communityId")
   .get(getCommunityPosts)
   .post(createPost);
 
@@ -21,10 +21,8 @@ async function getAllPosts(_, res) {
 
 async function getCommunityPosts(req, res) {
   try {
-    const { community } = req.params;
-    // SWITCH after new models are pushed
-    // const posts = await Post.find({ community });
-    const posts = await Post.find({ category: community });
+    const { communityId } = req.params;
+    const posts = await Post.find({ community: communityId });
     res.status(200).json(posts);
   } catch (err) {
     console.log(err);

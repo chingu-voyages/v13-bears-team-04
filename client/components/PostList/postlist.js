@@ -9,7 +9,7 @@ export default function PostList() {
 
   useEffect(() => {
     const getPosts = async () => {
-      const res = await fetch(`${process.env.API_URL}/posts/test`);
+      const res = await fetch(`${process.env.API_URL}/posts`);
       const posts = await res.json();
       setPosts(posts);
       setLoader(false);

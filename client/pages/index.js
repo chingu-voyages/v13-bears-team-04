@@ -10,21 +10,22 @@ import TrendingCommunity from "../components/TrendingCommunity";
 import GrowingCommunities from "../components/GrowingCommunities";
 
 import { useAuth } from "../components/Auth/auth";
+import fetchIt from "../utils/api";
 import { getCookieOptions } from "../utils/cookies";
 // import { handleLogin, handleSignup, handleLogout } from "../utils/auth";
 
 const Home = () => {
   const { user, setUser } = useAuth();
-  console.log(user);
 
   async function handleLogin() {
     try {
-      const resp = await fetch(`${process.env.API_URL}/user/login`, {
+      const { sid, ...user } = await fetchIt("/user/login", {
         method: "POST",
-        body: JSON.stringify({ username: "Tester2", password: "password" }),
-        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          username: "Tester2",
+          password: "password",
+        }),
       });
-      const { sid, ...user } = await resp.json();
       setCookie({}, "sid", sid, getCookieOptions());
       setUser(user);
     } catch (err) {
@@ -35,12 +36,10 @@ const Home = () => {
   async function handleLogout() {
     const userId = user._id;
     try {
-      const resp = await fetch(`${process.env.API_URL}/user/logout`, {
+      const { message } = await fetchIt("/user/logout", {
         method: "POST",
         body: JSON.stringify({ userId }),
-        headers: { "Content-Type": "application/json" },
       });
-      const { message } = await resp.json();
       if (message === "Successful logout") {
         destroyCookie({}, "sid", {});
         setUser(null);
@@ -53,18 +52,33 @@ const Home = () => {
   async function handleSignup() {
     try {
       const randomNum = Math.floor(Math.random() * 90 + 10);
-      const resp = await fetch(`${process.env.API_URL}/user/signup`, {
+      const { sid, ...user } = await fetchIt("/user/signup", {
         method: "POST",
         body: JSON.stringify({
           email: `test${randomNum}@test.com`,
           username: `Tester${randomNum}`,
           password: "password",
         }),
-        headers: { "Content-Type": "application/json" },
       });
-      const { sid, ...user } = await resp.json();
       setCookie({}, "sid", sid, getCookieOptions());
       setUser(user);
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  async function createPost() {
+    try {
+      const newPost = await fetchIt("/posts/5de36fb689277400f03f364d", {
+        method: "POST",
+        body: JSON.stringify({
+          title: "Suppppp",
+          body: "Howwwwwwdy",
+          author: user._id,
+          community: "5de36fb689277400f03f364d",
+        }),
+      });
+      console.log(newPost);
     } catch (err) {
       console.log(err);
     }
@@ -78,6 +92,8 @@ const Home = () => {
       {!user && <button onClick={handleLogin}>Login</button>}
       {/* eslint-disable-next-line react/button-has-type */}
       {user && <button onClick={handleLogout}>Logout</button>}
+      {/* eslint-disable-next-line react/button-has-type */}
+      {user && <button onClick={createPost}>Create Post</button>}
 
       <Nav />
       <PostList />

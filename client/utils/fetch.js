@@ -2,12 +2,8 @@ import fetch from "isomorphic-unfetch";
 import { parseCookies } from "nookies";
 
 // custom fetch wrapper
-export default async function fetchIt(
-  url,
-  givenOptions = {},
-  isAuthNeeded = false
-) {
-  const options = makeOptions(givenOptions, isAuthNeeded);
+export default async function fetchIt(url, givenOptions = {}) {
+  const options = makeOptions(givenOptions);
   // typical fetch
   const resp = await fetch(`${process.env.API_URL}${url}`, options);
   // parse the response
@@ -19,8 +15,8 @@ export default async function fetchIt(
 }
 
 // used to expand our fetch options object with additional details
-function makeOptions({ method = "GET", body }, isAuthNeeded) {
-  const auth = isAuthNeeded ? getSessionId() : {};
+function makeOptions({ method = "GET", body, ctx }) {
+  const auth = ctx ? getSessionId(ctx) : {};
   return {
     method,
     body,
@@ -28,9 +24,10 @@ function makeOptions({ method = "GET", body }, isAuthNeeded) {
   };
 }
 
-// if isAuthNeeded is true, we'll need to send our cookie along too
-function getSessionId() {
-  const { sid } = parseCookies();
+// when needed, we send our session cookie along with requests
+// if no cookies are found, we will NOT fetch
+function getSessionId(ctx) {
+  const { sid } = parseCookies(ctx);
   if (!sid) throw new Error("Sorry, no session cookie found");
   return { Authorization: JSON.stringify({ sid }) };
 }

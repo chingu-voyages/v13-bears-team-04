@@ -9,62 +9,43 @@ import ToTopButton from "../components/ToTopButton";
 import TrendingCommunity from "../components/TrendingCommunity";
 import GrowingCommunities from "../components/GrowingCommunities";
 
-import { useAuth } from "../components/Auth/auth";
-import fetchIt from "../utils/api";
+import { useAuth } from "../components/Auth";
+import fetchIt from "../utils/fetch";
 import { getCookieOptions } from "../utils/cookies";
-// import { handleLogin, handleSignup, handleLogout } from "../utils/auth";
 
 const Home = () => {
-  const { user, setUser } = useAuth();
+  const { user, setUser, login, logout, signup } = useAuth();
 
   async function handleLogin() {
-    try {
-      const { sid, ...user } = await fetchIt("/user/login", {
-        method: "POST",
-        body: JSON.stringify({
-          username: "Tester2",
-          password: "password",
-        }),
-      });
-      setCookie({}, "sid", sid, getCookieOptions());
-      setUser(user);
-    } catch (err) {
-      console.log(err);
-    }
+    const username = "Tester2";
+    const password = "password";
+    const resp = await login({ username, password });
+    console.log(resp);
   }
 
   async function handleLogout() {
-    const userId = user._id;
-    try {
-      const { message } = await fetchIt("/user/logout", {
-        method: "POST",
-        body: JSON.stringify({ userId }),
-      });
-      if (message === "Successful logout") {
-        destroyCookie({}, "sid", {});
-        setUser(null);
-      }
-    } catch (err) {
-      console.log(err);
-    }
+    // const userId = user._id;
+    // try {
+    //   const { message } = await fetchIt("/user/logout", {
+    //     method: "POST",
+    //     body: JSON.stringify({ userId }),
+    //   });
+    //   if (message === "Successful logout") {
+    //     destroyCookie({}, "sid", {});
+    //     setUser(null);
+    //   }
+    // } catch (err) {
+    //   console.log(err);
+    // }
   }
 
   async function handleSignup() {
-    try {
-      const randomNum = Math.floor(Math.random() * 90 + 10);
-      const { sid, ...user } = await fetchIt("/user/signup", {
-        method: "POST",
-        body: JSON.stringify({
-          email: `test${randomNum}@test.com`,
-          username: `Tester${randomNum}`,
-          password: "password",
-        }),
-      });
-      setCookie({}, "sid", sid, getCookieOptions());
-      setUser(user);
-    } catch (err) {
-      console.log(err);
-    }
+    const randomNum = Math.floor(Math.random() * 90 + 10);
+    const email = `test${randomNum}@test.com`;
+    const username = `Tester${randomNum}`;
+    const password = "password";
+    const resp = signup({ email, username, password });
+    console.log(resp);
   }
 
   async function createPost() {

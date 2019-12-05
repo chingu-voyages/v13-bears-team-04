@@ -1,6 +1,7 @@
 import fetch from "isomorphic-unfetch";
 import { parseCookies } from "nookies";
 
+// custom fetch wrapper
 export default async function fetchIt(
   url,
   givenOptions = {},
@@ -17,6 +18,7 @@ export default async function fetchIt(
   return data;
 }
 
+// used to expand our fetch options object with additional details
 function makeOptions({ method = "GET", body }, isAuthNeeded) {
   const auth = isAuthNeeded ? getSessionId() : {};
   return {
@@ -26,6 +28,7 @@ function makeOptions({ method = "GET", body }, isAuthNeeded) {
   };
 }
 
+// if isAuthNeeded is true, we'll need to send our cookie along too
 function getSessionId() {
   const { sid } = parseCookies();
   if (!sid) throw new Error("Sorry, no session cookie found");

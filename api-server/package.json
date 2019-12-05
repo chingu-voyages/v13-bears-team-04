@@ -15,7 +15,6 @@
     "express-rate-limit": "^5.0.0",
     "mongoose": "^5.7.9",
     "mongoose-unique-validator": "^2.0.3",
-    "morgan": "^1.9.1",
     "morgan-body": "^2.4.8"
   },
   "devDependencies": {

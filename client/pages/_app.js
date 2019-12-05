@@ -2,8 +2,10 @@
 
 import React from "react";
 import App from "next/app";
-import { AuthProvider } from "../components/Auth";
+
+import { AuthProvider } from "../utils/authcontext";
 import fetchIt from "../utils/fetch";
+
 import "../utils/icons";
 import "../sass/main.scss";
 
@@ -14,7 +16,6 @@ class MyApp extends App {
       const user = await fetchIt("/user/verify", { ctx: appContext.ctx });
       return { user, ...appProps };
     } catch (err) {
-      console.log(err);
       return { user: null, ...appProps };
     }
   }

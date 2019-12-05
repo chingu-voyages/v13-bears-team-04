@@ -1,7 +1,7 @@
 import React, { createContext, useState, useContext } from "react";
 import { setCookie, destroyCookie } from "nookies";
-import fetchIt from "../../utils/api";
-import { getCookieOptions } from "../../utils/cookies";
+import fetchIt from "./fetch";
+import { getCookieOptions } from "./cookies";
 
 const AuthContext = createContext();
 
@@ -33,17 +33,17 @@ function useAuthSetter(initUser) {
       // if successful, set cookie and user
       setCookie({}, "sid", sid, getCookieOptions());
       setUser(foundUser);
-      return `Success! Welcome back ${user.username}`;
+      return `Success! Welcome back ${foundUser.username}`;
     } catch (err) {
       return err.message;
     }
   }
 
-  // logs user in, if successful
+  // logs a user out and deletes session cookie, if successful
   // returns a success or error message string
   async function logout({ userId }) {
     try {
-      await fetchIt("/user/login", {
+      await fetchIt("/user/logout", {
         method: "POST",
         body: JSON.stringify({ userId }),
         ctx: {},
@@ -57,7 +57,7 @@ function useAuthSetter(initUser) {
     }
   }
 
-  // logs user in, if successful
+  // creates a new user account, if successful
   // returns a success or error message string
   async function signup({ username, password, email }) {
     try {
@@ -68,7 +68,7 @@ function useAuthSetter(initUser) {
       // if successful, set cookie and user
       setCookie({}, "sid", sid, getCookieOptions());
       setUser(newUser);
-      return "Success! Welcome to our Reddit (clone)";
+      return "Success! Welcome to our Reddit... clone";
     } catch (err) {
       return err.message;
     }

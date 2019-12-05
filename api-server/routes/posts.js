@@ -1,3 +1,4 @@
+const createError = require("http-errors");
 const express = require("express");
 const router = express.Router();
 const Post = require("../models/post");
@@ -9,34 +10,31 @@ router
   .get(getCommunityPosts)
   .post(createPost);
 
-async function getAllPosts(_, res) {
+async function getAllPosts(_, res, next) {
   try {
     const posts = await Post.find();
     res.status(200).json(posts);
   } catch (err) {
-    console.log(err);
-    res.status(400).json(err);
+    next(err);
   }
 }
 
-async function getCommunityPosts(req, res) {
+async function getCommunityPosts(req, res, next) {
   try {
     const { communityId } = req.params;
     const posts = await Post.find({ community: communityId });
     res.status(200).json(posts);
   } catch (err) {
-    console.log(err);
-    res.status(400).json(err);
+    next(err);
   }
 }
 
-async function createPost(req, res) {
+async function createPost(req, res, next) {
   try {
     const newPost = await Post.create(req.body);
     res.status(201).json(newPost);
   } catch (err) {
-    console.log(err);
-    res.status(400).json(err);
+    next(err);
   }
 }
 

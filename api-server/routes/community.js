@@ -1,3 +1,4 @@
+const createError = require("http-errors");
 const express = require("express");
 const router = express.Router();
 const Community = require("../models/community");
@@ -21,18 +22,17 @@ router
   .post(addCommunityUser)
   .delete(deleteCommunityUser);
 
-async function getAllCommunities(req, res) {
+async function getAllCommunities(req, res, next) {
   try {
     const communities = await Community.find();
     res.status(200).json(communities);
   } catch (err) {
-    console.log(err);
-    res.status(400).json(err);
+    next(err);
   }
 }
 
 // USER VERIFICATION NEEDED
-async function createCommunity(req, res) {
+async function createCommunity(req, res, next) {
   try {
     const { name, description, rules, communitiesRelated, userId } = req.body;
     const newCommunity = await new Community({
@@ -45,41 +45,38 @@ async function createCommunity(req, res) {
     const finishedCommunity = await newCommunity.save();
     res.status(201).json(finishedCommunity);
   } catch (err) {
-    console.log(err);
-    res.status(400).json(err);
+    next(err);
   }
 }
 
-async function getCommunity(req, res) {
+async function getCommunity(req, res, next) {
   try {
     const { communityId } = req.params;
     const community = await Community.findById(communityId);
     res.status(200).json(community);
   } catch (err) {
-    console.log(err);
-    res.status(400).json(err);
+    next(err);
   }
 }
 
 // SITE ADMIN - SECURE NEEDED
-async function deleteCommunity(req, res) {
+async function deleteCommunity(req, res, next) {
   try {
     const { communityId } = req.params;
     const deletedCommunity = await Community.findByIdAndDelete(communityId);
     res.status(200).json(deletedCommunity);
   } catch (err) {
-    console.log(err);
-    res.status(400).json(err);
+    next(err);
   }
 }
 
 // ADMIN - SECURE NEEDED
-async function updateCommunityDetails(req, res) {
+async function updateCommunityDetails(req, res, next) {
   try {
     const { communityId, key } = req.params;
     const acceptableKeys = ["name", "description", "rules"];
     if (!acceptableKeys.includes(key)) {
-      throw new Error("Unapproved key");
+      throw createError(400, "Invalid key param");
     }
     const updatedCommunity = await Community.findByIdAndUpdate(
       communityId,
@@ -88,18 +85,17 @@ async function updateCommunityDetails(req, res) {
     );
     res.status(200).json(updatedCommunity);
   } catch (err) {
-    console.log(err);
-    res.status(400).json(err);
+    next(err);
   }
 }
 
 // VERIFICATION - SECURE NEEDED
-async function getCommunityUsers(req, res) {
+async function getCommunityUsers(req, res, next) {
   try {
     const { communityId, key } = req.params;
     const acceptableKeys = ["members", "moderators", "administrators"];
     if (!acceptableKeys.includes(key)) {
-      throw new Error("Unapproved key");
+      throw createError(400, "Invalid key param");
     }
     const { users } = await Community.findById(communityId).populate({
       path: `users.${key}`,
@@ -108,19 +104,18 @@ async function getCommunityUsers(req, res) {
     const targetedUsers = users[key];
     res.status(200).json(targetedUsers);
   } catch (err) {
-    console.log(err);
-    res.status(400).json(err);
+    next(err);
   }
 }
 
 // ADMIN - SECURE NEEDED
-async function addCommunityUser(req, res) {
+async function addCommunityUser(req, res, next) {
   try {
     const { communityId, key } = req.params;
     const { userId } = req.body;
     const acceptableKeys = ["members", "moderators", "administrators"];
     if (!acceptableKeys.includes(key)) {
-      throw new Error("Unapproved key");
+      throw createError(400, "Invalid key param");
     }
     // update community document
     const community = await Community.findById(communityId);
@@ -134,19 +129,18 @@ async function addCommunityUser(req, res) {
     await user.save();
     res.status(200).json(updatedCommunity);
   } catch (err) {
-    console.log(err);
-    res.status(400).json(err);
+    next(err);
   }
 }
 
 // VERIFICATION - SECURE NEEDED
-async function deleteCommunityUser(req, res) {
+async function deleteCommunityUser(req, res, next) {
   try {
     const { communityId, key } = req.params;
     const { userId } = req.body;
     const acceptableKeys = ["members", "moderators", "administrators"];
     if (!acceptableKeys.includes(key)) {
-      throw new Error("Unapproved key");
+      throw createError(400, "Invalid key param");
     }
     // update community document
     const community = await Community.findByIdAndUpdate(
@@ -169,8 +163,7 @@ async function deleteCommunityUser(req, res) {
     await user.save();
     res.status(200).json(updatedCommunity);
   } catch (err) {
-    console.log(err);
-    res.status(400).json(err);
+    next(err);
   }
 }
 

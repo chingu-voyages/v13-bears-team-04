@@ -3,7 +3,6 @@ require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 const rateLimit = require("express-rate-limit");
-const morgan = require("morgan");
 const morganBody = require("morgan-body");
 const mongoose = require("mongoose");
 
@@ -47,8 +46,11 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 // https://www.npmjs.com/package/morgan-body
-morganBody(app);
-morgan("combined");
+morganBody(app, {
+  prettify: NODE_ENV !== "production",
+  theme: "darkened",
+  dateTimeFormat: "utc"
+});
 
 // API ROUTES
 const routes = require("./routes");

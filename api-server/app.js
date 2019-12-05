@@ -56,7 +56,11 @@ morganBody(app, {
 const routes = require("./routes");
 app.use("/api", routes);
 
-app.get("/", (_, res) => res.status(200).json({ status: "OK" }));
+// ERROR HANDLER
+app.use((error, _, res) => {
+  const { status, message } = error;
+  res.status(status).json({ message });
+});
 
 app.listen(APP_PORT, () => console.log("Listening on port " + APP_PORT));
 

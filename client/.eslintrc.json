@@ -10,6 +10,6 @@
     "no-console": "off",
     "func-names": "off",
     "no-use-before-define": ["error", { "functions": false }],
-    "no-underscore-dangle": ["error", { "allow": true }]
+    "no-underscore-dangle": ["error", { "allow": ["_id"] }]
   }
 }

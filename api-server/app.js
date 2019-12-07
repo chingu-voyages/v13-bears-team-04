@@ -3,7 +3,6 @@ require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 const rateLimit = require("express-rate-limit");
-const morgan = require("morgan");
 const morganBody = require("morgan-body");
 const mongoose = require("mongoose");
 
@@ -47,14 +46,21 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 // https://www.npmjs.com/package/morgan-body
-morganBody(app);
-morgan("combined");
+morganBody(app, {
+  prettify: NODE_ENV !== "production",
+  theme: "darkened",
+  dateTimeFormat: "utc"
+});
 
 // API ROUTES
 const routes = require("./routes");
 app.use("/api", routes);
 
-app.get("/", (_, res) => res.status(200).json({ status: "OK" }));
+// ERROR HANDLER
+app.use((error, req, res, next) => {
+  const { status = 400, message } = error;
+  res.status(status).json({ message });
+});
 
 app.listen(APP_PORT, () => console.log("Listening on port " + APP_PORT));
 

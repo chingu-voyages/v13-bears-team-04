@@ -84,26 +84,24 @@ const Home = () => {
           Create Post
         </button>
       )}
-
       <Nav />
       <PostList />
       <TrendingCommunity />
       <GrowingCommunities />
       <RecentPosts />
       <HomeBox />
-      <ReusableStyleComponent>
+      {/* <ReusableStyleComponent>
         <ForgotPassword />
-      </ReusableStyleComponent>
+      </ReusableStyleComponent> */}
       {/* <ReusableStyleComponent>
         <Signin />
       </ReusableStyleComponent> */}
-      {/* {/* <ReusableStyleComponent>
+      {/* <ReusableStyleComponent>
         <Signup />
       </ReusableStyleComponent> */}
-      {/* <ReusableStyleComponent>
+      <ReusableStyleComponent>
         <ForgotUsername />
       </ReusableStyleComponent>{" "}
-      */}
       {/* <ForgotUsername /> */}
       <ToTopButton />
     </div>

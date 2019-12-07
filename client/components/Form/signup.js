@@ -29,7 +29,7 @@ export default function signup() {
           </p>
           <p>
             By clicking next, you agree to our <span>Terms</span> and that you
-            have read our <span>Privacy Policy</span> and
+            have read our <span>Privacy Policy</span> and &nbsp;
             <span>Content Policy</span>.
           </p>
         </div>

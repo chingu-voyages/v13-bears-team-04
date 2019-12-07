@@ -82,6 +82,10 @@
       &--username {
         text-decoration: none;
         color: $blue;
+
+        &:hover {
+          color: rgba($blue, 0.6);
+        }
         &::after {
           content: "・";
         }
@@ -89,6 +93,10 @@
       &--password {
         text-decoration: none;
         color: $blue;
+
+        &:hover {
+          color: rgba($blue, 0.6);
+        }
       }
     }
 
@@ -98,11 +106,19 @@
       &--capitalized {
         font-weight: bold;
         text-transform: uppercase;
+
+        &:hover {
+          color: rgba($blue, 0.6);
+        }
       }
 
       p > span {
         color: $blue;
         cursor: pointer;
+
+        &:hover {
+          color: rgba($blue, 0.6);
+        }
       }
     }
   }

@@ -286,7 +286,7 @@ const fetchOptions = {
 
 ```javascript
 Status Code: 201
-{ newCommunity }
+{ newCommunity, updatedUser }
 
 Status Code: 400
 { message: 'errorMessage' }

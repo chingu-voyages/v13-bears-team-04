@@ -11,75 +11,76 @@ import ToTopButton from "../components/ToTopButton";
 import TrendingCommunity from "../components/TrendingCommunity";
 import GrowingCommunities from "../components/GrowingCommunities";
 
-import { useAuth } from "../components/Auth/auth";
-import { getCookieOptions } from "../utils/cookies";
-// import { handleLogin, handleSignup, handleLogout } from "../utils/auth";
+import { useAuth } from "../utils/authcontext";
+import fetchIt from "../utils/fetch";
 
 const Home = () => {
-  const { user, setUser } = useAuth();
-  console.log(user);
+  const { user, login, logout, signup } = useAuth();
 
   async function handleLogin() {
-    try {
-      const resp = await fetch(`${process.env.API_URL}/user/login`, {
-        method: "POST",
-        body: JSON.stringify({ username: "Tester2", password: "password" }),
-        headers: { "Content-Type": "application/json" },
-      });
-      const { sid, ...user } = await resp.json();
-      setCookie({}, "sid", sid, getCookieOptions());
-      setUser(user);
-    } catch (err) {
-      console.log(err);
-    }
+    const username = "Tester2";
+    const password = "password";
+    const message = await login({ username, password });
+    console.log(message);
   }
 
   async function handleLogout() {
     const userId = user._id;
-    try {
-      const resp = await fetch(`${process.env.API_URL}/user/logout`, {
-        method: "POST",
-        body: JSON.stringify({ userId }),
-        headers: { "Content-Type": "application/json" },
-      });
-      const { message } = await resp.json();
-      if (message === "Successful logout") {
-        destroyCookie({}, "sid", {});
-        setUser(null);
-      }
-    } catch (err) {
-      console.log(err);
-    }
+    const message = await logout({ userId });
+    console.log(message);
   }
 
   async function handleSignup() {
+    const randomNum = Math.floor(Math.random() * 90 + 10);
+    const email = `test${randomNum}@test.com`;
+    const username = `Tester${randomNum}`;
+    const password = "password";
+    const message = await signup({ email, username, password });
+    console.log(message);
+  }
+
+  async function createPost() {
     try {
-      const randomNum = Math.floor(Math.random() * 90 + 10);
-      const resp = await fetch(`${process.env.API_URL}/user/signup`, {
+      const randomNum = Math.floor(Math.random() * 1000);
+      const communityId = "5de36fb689277400f03f364d";
+      const newPost = await fetchIt(`/posts/${communityId}`, {
         method: "POST",
         body: JSON.stringify({
-          email: `test${randomNum}@test.com`,
-          username: `Tester${randomNum}`,
-          password: "password",
+          title: `Suppppp${randomNum}`,
+          body: "Howwwwwwdy",
+          author: user._id,
+          community: communityId,
         }),
-        headers: { "Content-Type": "application/json" },
+        ctx: {},
       });
-      const { sid, ...user } = await resp.json();
-      setCookie({}, "sid", sid, getCookieOptions());
-      setUser(user);
+      console.log(newPost);
     } catch (err) {
-      console.log(err);
+      console.log(err.message);
     }
   }
 
   return (
     <div>
-      {/* eslint-disable-next-line react/button-has-type */}
-      {!user && <button onClick={handleSignup}>Signup</button>}
-      {/* eslint-disable-next-line react/button-has-type */}
-      {!user && <button onClick={handleLogin}>Login</button>}
-      {/* eslint-disable-next-line react/button-has-type */}
-      {user && <button onClick={handleLogout}>Logout</button>}
+      {!user && (
+        <button type="button" onClick={handleSignup}>
+          Signup
+        </button>
+      )}
+      {!user && (
+        <button type="button" onClick={handleLogin}>
+          Login
+        </button>
+      )}
+      {user && (
+        <button type="button" onClick={handleLogout}>
+          Logout
+        </button>
+      )}
+      {user && (
+        <button type="button" onClick={createPost}>
+          Create Post
+        </button>
+      )}
 
       <Nav />
       <PostList />

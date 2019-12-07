@@ -1,44 +1,46 @@
+const createError = require("http-errors");
 const express = require("express");
 const router = express.Router();
+
 const Post = require("../models/post");
+const { checkSession } = require("../middleware");
+
+// ===== ROUTES ===== //
 
 router.route("/").get(getAllPosts);
 
 router
-  .route("/:community")
+  .route("/:communityId")
   .get(getCommunityPosts)
-  .post(createPost);
+  .post(checkSession, createPost);
 
-async function getAllPosts(_, res) {
+// ===== FUNCTIONS ===== //
+
+async function getAllPosts(_, res, next) {
   try {
     const posts = await Post.find();
     res.status(200).json(posts);
   } catch (err) {
-    console.log(err);
-    res.status(401).json(err);
+    next(err);
   }
 }
 
-async function getCommunityPosts(req, res) {
+async function getCommunityPosts(req, res, next) {
   try {
-    const { community } = req.params;
-    // SWITCH after new models are pushed
-    // const posts = await Post.find({ community });
-    const posts = await Post.find({ category: community });
+    const { communityId } = req.params;
+    const posts = await Post.find({ community: communityId });
     res.status(200).json(posts);
   } catch (err) {
-    console.log(err);
-    res.status(401).json(err);
+    next(err);
   }
 }
 
-async function createPost(req, res) {
+async function createPost(req, res, next) {
   try {
     const newPost = await Post.create(req.body);
-    res.status(200).json(newPost);
+    res.status(201).json(newPost);
   } catch (err) {
-    console.log(err);
-    res.status(400).json(err);
+    next(err);
   }
 }
 

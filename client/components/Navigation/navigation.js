@@ -1,62 +1,69 @@
 import React from "react";
 import "./navigation.scss";
 import Button from "../Button/button";
+import "@fortawesome/react-fontawesome";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const Nav = () => (
-  <nav className="row">
-    <div>
-      <ul className="mainnav">
-        <div className="col-1-of-4">
+  <div>
+    <nav>
+      <ul className="navcontainer">
+        <div>
           <li className="navitem">
             <a>
-              <img></img>
+              <img className="logo" src={`/nav-images/mobile-logo.png`} />
             </a>
           </li>
         </div>
-        <div class="col-2-of-4">
+        <div className="searchfilter searchFilter">
           <li className="navitem">
-            <select>
+            <select class="filterbox">
               <option value="filter">
                 <input value="Filter" type="text" />
               </option>
-              <option value="popular"></option>
-              <option value="all"></option>
-              <option value="topCommmunities"></option>
-              <option value="coins"></option>
-              <option value="premium"></option>
+              <option value="popular">Popular</option>
+              <option value="all">All</option>
+              <option value="topCommmunities">Top Communities</option>
+              <option value="coins">Coins</option>
+              <option value="premium">Premium</option>
             </select>
           </li>
         </div>
-        <div class="col-3-of-4">
+        <div className="searchbarcontainer">
           <li className="navitem">
-            <input type="text" value="Search Reddit" name="searchReddit" />
+            <input
+              className="searchbar"
+              type="text"
+              value="Search Reddit"
+              name="searchReddit"
+            />
           </li>
         </div>
-        <div class="col-4-of-4">
+        <div className="popularbtn">
           <li className="navitem">
             <button>Popular</button>
           </li>
         </div>
-        <div className="col-4-of-4">
+        <div className="allbtn">
           <li className="navitem">
             <button>All</button>
           </li>
         </div>
-        <div className="col-4-of-4">
+        <div class="navbtn">
           <li className="navitem">
             <Button color="blue">Login</Button>
           </li>
         </div>
-        <div className="col-4-of-4">
+        <div className="navbtn">
           <li className="navitem">
             <Button color="blue" inverted={false}>
               Sign Up
             </Button>
           </li>
         </div>
-        <div className="col-4-of-4">
+        <div>
           <li className="navitem">
-            <select>
+            <select className="dropdownmenu">
               <option>Icon</option>
               <option>Night Mode</option>
               <option>Reddit Coins</option>
@@ -67,8 +74,8 @@ const Nav = () => (
           </li>
         </div>
       </ul>
-    </div>
-  </nav>
+    </nav>
+  </div>
 );
 
 export default Nav;

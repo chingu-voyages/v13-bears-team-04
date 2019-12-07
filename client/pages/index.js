@@ -1,5 +1,7 @@
 import React from "react";
 import { setCookie, destroyCookie } from "nookies";
+import "@fortawesome/react-fontawesome";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import HomeBox from "../components/HomeBox";
 import Nav from "../components/Navigation";

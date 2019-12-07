@@ -52,7 +52,7 @@ const Home = () => {
       });
       console.log(newPost);
     } catch (err) {
-      console.log(err);
+      console.log(err.message);
     }
   }
 

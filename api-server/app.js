@@ -57,8 +57,8 @@ const routes = require("./routes");
 app.use("/api", routes);
 
 // ERROR HANDLER
-app.use((error, _, res) => {
-  const { status, message } = error;
+app.use((error, req, res, next) => {
+  const { status = 400, message } = error;
   res.status(status).json({ message });
 });
 

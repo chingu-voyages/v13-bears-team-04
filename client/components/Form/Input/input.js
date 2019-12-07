@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import "../signin.scss";
+import "../form.scss";
 
 export default function input(props) {
   const [placeholder, setPlaceholder] = useState(

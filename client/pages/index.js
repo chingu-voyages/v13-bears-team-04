@@ -10,6 +10,7 @@ import TrendingCommunity from "../components/TrendingCommunity";
 import Input from "../components/Form/Input";
 import Signin from "../components/Form";
 import Signup from "../components/Form/signup";
+import ReusableStyleComponent from "../components/Form/ReusableFontStyle";
 import ForgotPassword from "../components/Form/forgotpassword";
 import ForgotUsername from "../components/Form/forgotusername";
 
@@ -83,17 +84,26 @@ const Home = () => {
       {!user && <button onClick={handleLogin}>Login</button>}
       {/* eslint-disable-next-line react/button-has-type */}
       {user && <button onClick={handleLogout}>Logout</button>}
-
       <Nav />
       <PostList />
       <TrendingCommunity />
       <GrowingCommunities />
       <RecentPosts />
       <HomeBox />
-      {/* <Signin /> */}
-      {/* <Signup /> */}
-      {/* <ForgotPassword /> */}
-      <ForgotUsername />
+      <ReusableStyleComponent>
+        <ForgotPassword />
+      </ReusableStyleComponent>
+      {/* <ReusableStyleComponent>
+        <Signin />
+      </ReusableStyleComponent> */}
+      {/* {/* <ReusableStyleComponent>
+        <Signup />
+      </ReusableStyleComponent> */}
+      {/* <ReusableStyleComponent>
+        <ForgotUsername />
+      </ReusableStyleComponent>{" "}
+      */}
+      {/* <ForgotUsername /> */}
       <ToTopButton />
     </div>
   );

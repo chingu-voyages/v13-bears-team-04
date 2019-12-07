@@ -16,7 +16,7 @@ class MyApp extends App {
       const user = await fetchIt("/user/verify", { ctx: appContext.ctx });
       return { user, ...appProps };
     } catch (err) {
-      return { user: {}, ...appProps };
+      return { user: null, ...appProps };
     }
   }
 

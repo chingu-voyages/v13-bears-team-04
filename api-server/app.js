@@ -5,6 +5,7 @@ const cors = require("cors");
 const rateLimit = require("express-rate-limit");
 const morganBody = require("morgan-body");
 const mongoose = require("mongoose");
+const createError = require("http-errors");
 
 const app = express();
 
@@ -55,6 +56,11 @@ morganBody(app, {
 // API ROUTES
 const routes = require("./routes");
 app.use("/api", routes);
+
+// HANDLES ROUTES NOT FOUND
+app.use((req, res, next) => {
+  next(createError(404, `Invalid route: ${req.url}`));
+});
 
 // ERROR HANDLER
 app.use((error, req, res, next) => {

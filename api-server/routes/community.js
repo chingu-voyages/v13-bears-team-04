@@ -1,26 +1,34 @@
 const createError = require("http-errors");
 const express = require("express");
 const router = express.Router();
+
 const Community = require("../models/community");
 const User = require("../models/user");
+const { checkSession } = require("../middleware");
+
+// ===== ROUTES ===== //
 
 router
   .route("/")
   .get(getAllCommunities)
-  .post(createCommunity);
+  .post(checkSession, createCommunity);
 
 router
   .route("/:communityId")
   .get(getCommunity)
-  .delete(deleteCommunity);
+  .delete(checkSession, deleteCommunity);
 
-router.route("/:communityId/edit/:key").put(updateCommunityDetails);
+router
+  .route("/:communityId/edit/:key")
+  .put(checkSession, updateCommunityDetails);
 
 router
   .route("/:communityId/users/:key")
-  .get(getCommunityUsers)
-  .post(addCommunityUser)
-  .delete(deleteCommunityUser);
+  .get(checkSession, getCommunityUsers)
+  .post(checkSession, addCommunityUser)
+  .delete(checkSession, deleteCommunityUser);
+
+// ===== FUNCTIONS ===== //
 
 async function getAllCommunities(req, res, next) {
   try {
@@ -31,19 +39,24 @@ async function getAllCommunities(req, res, next) {
   }
 }
 
-// USER VERIFICATION NEEDED
 async function createCommunity(req, res, next) {
   try {
     const { name, description, rules, communitiesRelated, userId } = req.body;
-    const newCommunity = await new Community({
+    // create new community
+    const partialCommunity = await new Community({
       name,
       description,
       rules,
       communitiesRelated
     });
-    newCommunity.users.administrators.push(userId);
-    const finishedCommunity = await newCommunity.save();
-    res.status(201).json(finishedCommunity);
+    partialCommunity.users.administrators.push(userId);
+    const newCommunity = await partialCommunity.save();
+    // add community to user document
+    const user = res.locals.user;
+    user.communities.administrators.push(userId);
+    await user.save();
+    const { password, ...goodUser } = user._doc;
+    res.status(201).json({ newCommunity, updatedUser: goodUser });
   } catch (err) {
     next(err);
   }

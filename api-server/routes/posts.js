@@ -1,14 +1,20 @@
 const createError = require("http-errors");
 const express = require("express");
 const router = express.Router();
+
 const Post = require("../models/post");
+const { checkSession } = require("../middleware");
+
+// ===== ROUTES ===== //
 
 router.route("/").get(getAllPosts);
 
 router
   .route("/:communityId")
   .get(getCommunityPosts)
-  .post(createPost);
+  .post(checkSession, createPost);
+
+// ===== FUNCTIONS ===== //
 
 async function getAllPosts(_, res, next) {
   try {

@@ -1,5 +1,10 @@
+.to_top_container {
+  float: right;
+}
+
 .to_top_button {
-  width: 128px;
+  display: inline-block;
+  float: right;
   border: 1px solid transparent;
   box-sizing: border-box;
   text-align: center;
@@ -10,4 +15,8 @@
   line-height: 24px;
   text-transform: uppercase;
   padding: 3px 16px;
+  border-radius: 0.5rem;
+
+  background-color: $blue;
+  color: $white;
 }

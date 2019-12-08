@@ -15,10 +15,15 @@ export default function ToTopButton() {
   }
 
   return (
-    <div>
-      <Button>
-        <button onClick={scrollToTop}>Scroll To Top</button>
-      </Button>
+    <div className="row">
+      <div className="to_top_container">
+        {/* eslint-disable-next-line react/button-has-type */}
+        <Button>
+          <button className="to_top_button" onClick={scrollToTop}>
+            Scroll To Top
+          </button>
+        </Button>
+      </div>
     </div>
   );
 }

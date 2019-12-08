@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import fetch from "isomorphic-unfetch";
+// import fetch from "isomorphic-unfetch";
 
 import "./recentposts.scss";
 
@@ -21,8 +21,9 @@ function limitrecentposttitle(title, recipe, limit = 10) {
   return title;
 }
 
-export default function recentposts() {
+export default function RecentPosts() {
   // eslint-disable-next-line no-shadow
+  // eslint-disable-next-line no-unused-vars
   const [recentPosts, setRecentPosts] = useState([
     {
       id: 1,
@@ -82,7 +83,7 @@ export default function recentposts() {
       <div>
         {recentPosts.slice(0, 5).map(recentPost => {
           return (
-            <div className="recent-posts__element">
+            <div key={recentPost.title} className="recent-posts__element">
               <div className="row recent-posts__element--border-length">
                 <div className="col-1-of-4">
                   <div className="recent-posts__image-wrapper">

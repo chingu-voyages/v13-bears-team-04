@@ -1,17 +1,11 @@
 import React from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import NavQuickLinksLink from "./navquicklinkslink";
 
-const NavQuickLinks = () => {
-  return (
-    <div className="nav__item__quicklinks">
-      <button type="button">
-        <FontAwesomeIcon icon="chart-line" />
-      </button>
-      <button type="button">
-        <FontAwesomeIcon icon="poll" />
-      </button>
-    </div>
-  );
-};
+const NavQuickLinks = () => (
+  <div className="nav__item__quicklinks">
+    <NavQuickLinksLink href="/" title="Popular" icon="chart-line" />
+    <NavQuickLinksLink href="/all" title="All" icon="poll" />
+  </div>
+);
 
 export default NavQuickLinks;

@@ -5,7 +5,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { sortOptions } from "./data/data";
 import { countryOptions } from "./data/data";
 
+import SortViewFilterOption from "./sortviewoptions";
+
 import "./sortview.scss";
+
+// used to edit the option boxes of these two components
+const { Option, ValueContainer } = components;
 
 const customStyles = {
   option: (provided, state) => ({
@@ -14,15 +19,29 @@ const customStyles = {
     color: state.isSelected ? "#5296dd" : "#d7d7d7",
     width: state.selectProps.width,
     backgroundColor: state.isSelected ? "#ffffff" : "#ffffff",
-    padding: 10,
-    fontSize: 17,
   }),
   menu: (provided, state) => ({
     ...provided,
     width: state.selectProps.width,
-    //   borderBottom: "1px dotted pink",
-    //   padding: 20,
   }),
+};
+
+const CustomOption = ({ data, ...props }) => {
+  const { icon, label } = data;
+  return (
+    <Option className="sortview__option" {...props}>
+      <SortViewFilterOption icon={icon} label={label} />
+    </Option>
+  );
+};
+
+const CustomValue = ({ getValue, ...props }) => {
+  const [{ icon, label }] = getValue();
+  return (
+    <ValueContainer className="sortview__option" {...props}>
+      <SortViewFilterOption icon={icon} label={label} />
+    </ValueContainer>
+  );
 };
 
 const DropdownIndicator = props => {
@@ -41,10 +60,14 @@ export default function sortview() {
   return (
     <div className="sortview">
       <Select
+        // className="sortview__option__icon"
         defaultValue={sortOptions[0]}
         options={sortOptions}
-        label="Single Select"
-        components={{ DropdownIndicator }}
+        components={{
+          DropdownIndicator,
+          Option: CustomOption,
+          ValueContainer: CustomValue,
+        }}
         styles={customStyles}
         width="100%"
       />

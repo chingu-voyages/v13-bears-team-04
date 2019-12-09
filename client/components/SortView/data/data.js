@@ -34,9 +34,9 @@ export const countryOptions = [
 ];
 
 export const sortOptions = [
-  { value: "hot", label: "Hot" },
-  { value: "new", label: "New" },
-  { value: "cont", label: "Controversial" },
-  { value: "top", label: "Top" },
-  { value: "rise", label: "Rising" },
+  { value: "hot", label: "Hot", icon: "fire" },
+  { value: "new", label: "New", icon: "dice-d6" },
+  { value: "cont", label: "Controversial", icon: "bolt" },
+  { value: "top", label: "Top", icon: "chart-line" },
+  { value: "rise", label: "Rising", icon: "chart-bar" },
 ];

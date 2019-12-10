@@ -27,6 +27,7 @@ import {
   faCommentDots,
   faGlobe,
   faSearch,
+  faPlus,
 } from "@fortawesome/free-solid-svg-icons";
 
 library.add(
@@ -52,5 +53,6 @@ library.add(
   faEnvelope,
   faCommentDots,
   faGlobe,
-  faSearch
+  faSearch,
+  faPlus
 );

@@ -5,7 +5,7 @@ import Input from "./Input";
 
 import "./form.scss";
 
-export default function forgotpassword() {
+export default function forgotPassword() {
   return (
     <div className="form__right">
       <div className="form__wrapper">

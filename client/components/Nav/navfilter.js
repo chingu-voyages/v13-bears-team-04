@@ -34,7 +34,6 @@ const CustomValue = ({ getValue, ...props }) => {
 
 const customStyles = {
   control: (provided, { menuIsOpen }) => {
-    console.log(menuIsOpen);
     const openStyles = menuIsOpen
       ? {
           borderColor: "#EDEFF1",

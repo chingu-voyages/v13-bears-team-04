@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import Select, { components } from "react-select";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useAuth } from "../../utils/authcontext";
 
 import { sortOptions } from "./data/data";
 import { countryOptions } from "./data/data";
@@ -12,19 +13,19 @@ import "./sortview.scss";
 // used to edit the option boxes of these two components
 const { Option, ValueContainer } = components;
 
-const customStyles = {
-  option: (provided, state) => ({
-    ...provided,
-    borderBottom: "1px dotted #d7d7d7",
-    color: state.isSelected ? "#5296dd" : "#d7d7d7",
-    width: state.selectProps.width,
-    backgroundColor: state.isSelected ? "#ffffff" : "#ffffff",
-  }),
-  menu: (provided, state) => ({
-    ...provided,
-    width: state.selectProps.width,
-  }),
-};
+// const customStyles = {
+//   option: (provided, state) => ({
+//     ...provided,
+//     borderBottom: "1px dotted #d7d7d7",
+//     color: state.isSelected ? "#5296dd" : "#d7d7d7",
+//     width: state.selectProps.width,
+//     backgroundColor: state.isSelected ? "#ffffff" : "#ffffff",
+//   }),
+//   menu: (provided, state) => ({
+//     ...provided,
+//     width: state.selectProps.width,
+//   }),
+// };
 
 const CustomOption = ({ data, ...props }) => {
   const { icon, label } = data;
@@ -57,19 +58,34 @@ const DropdownIndicator = props => {
 };
 
 export default function sortview() {
+  const { user } = useAuth();
+
+  const defaultSelection = user ? null : sortOptions[0];
+  const [selection, setSelection] = useState(defaultSelection);
+
+  function handleChange(selected) {
+    const { value } = selected;
+    setSelection(selected);
+  }
+
+  function handleClick(props) {
+    console.log(props.selectProps.menuIsOpen);
+  }
+
   return (
     <div className="sortview">
+      <h2 onClick={handleClick}>Sort</h2>
       <Select
-        // className="sortview__option__icon"
-        defaultValue={sortOptions[0]}
+        className="sortview__filter"
+        defaultValue={selection}
+        value={selection}
         options={sortOptions}
+        // onChange={handleChange}
         components={{
           DropdownIndicator,
           Option: CustomOption,
           ValueContainer: CustomValue,
         }}
-        styles={customStyles}
-        width="100%"
       />
     </div>
   );

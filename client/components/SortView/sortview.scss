@@ -1,18 +1,44 @@
 .sortview {
-  width: 27rem;
+  display: flex;
 
-  &__option {
-    display: flex;
-    &__icon {
-      height: 2.2rem;
-      width: 2.2rem;
-      margin-right: 1rem;
-      color: #5296dd;
+  h2 {
+    transform: translateY(0);
+    text-transform: uppercase;
+    font-weight: normal;
+    color: $dark-grey;
+    margin-right: 1rem;
+  }
+
+  &__filter {
+    width: 20rem;
+    height: 2rem;
+    cursor: pointer;
+    background-color: transparent;
+
+    &__option {
+      &__icon {
+        height: 2rem;
+        width: 2rem !important;
+        margin-right: 1rem;
+        color: #5296dd;
+      }
+
+      &__label {
+        display: inline-block;
+        text-transform: uppercase;
+        vertical-align: middle;
+        font-size: 1.3rem;
+        font-weight: normal;
+        color: #d7d7d7;
+        margin: 0;
+      }
+
+      &:hover {
+        background-color: #f6f7f8;
+      }
     }
-
-    &__label {
-      text-transform: uppercase;
-      color: #d7d7d7;
+    .options {
+      height: 2rem;
     }
   }
 }

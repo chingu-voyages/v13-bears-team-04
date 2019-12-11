@@ -69,7 +69,7 @@ export default function sortview() {
   }
 
   function handleClick(props) {
-    console.log(props.selectProps.menuIsOpen);
+    console.log(props.menuIsOpen);
   }
 
   return (

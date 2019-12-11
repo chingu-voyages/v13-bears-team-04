@@ -1,5 +1,6 @@
 .sortview {
   display: flex;
+  // align-items: center;
 
   h2 {
     transform: translateY(0);
@@ -41,4 +42,37 @@
       height: 2rem;
     }
   }
+}
+
+.countryoption {
+  display: flex;
+  color: $dark-grey;
+
+  &__filter {
+    width: 20rem;
+    text-transform: uppercase;
+    vertical-align: middle;
+    font-size: 1.3rem;
+    font-weight: normal;
+  }
+}
+
+.view {
+  h2 {
+    text-transform: uppercase;
+    font-weight: normal;
+    color: $dark-grey;
+    margin-right: 1rem;
+  }
+
+  &__img {
+    cursor: pointer;
+
+    &:last-of-type {
+      height: 80%;
+    }
+  }
+
+  display: flex;
+  align-items: center;
 }

@@ -5,3 +5,25 @@
     clear: both;
   }
 }
+
+@mixin btnColors($primColor, $secColor) {
+  color: $secColor;
+  background-color: $primColor;
+  border: 1px solid $primColor;
+
+  &:hover {
+    background-color: rgba($primColor, 0.8);
+    border: 1px solid rgba($primColor, 0.8);
+  }
+
+  &--inverted {
+    color: $primColor;
+    background-color: $secColor;
+    border: 1px solid $primColor;
+
+    &:hover {
+      color: rgba($primColor, 0.8);
+      border: 1px solid rgba($primColor, 0.8);
+    }
+  }
+}

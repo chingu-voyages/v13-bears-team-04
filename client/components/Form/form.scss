@@ -135,6 +135,36 @@
     }
   }
 
+  &__container {
+    position: relative;
+  }
+
+  &__placeholder {
+    display: inline-block;
+    position: absolute;
+    top: 1.4rem;
+    left: 1.5rem;
+    font-size: 1.5rem;
+
+    color: rgba($dark-grey, 0.8);
+    text-transform: uppercase;
+
+    color: rgba($dark-grey, 0.8);
+    text-transform: uppercase;
+    -webkit-transform: translate(0);
+    transition-property: -webkit-transform, font-size;
+    transition-duration: 0.3s, 0.3s;
+    transition-timing-function: ease;
+
+    // &:hover {
+    //   transition-property: -webkit-transform, font-size;
+    //   transition-duration: 0.3s, 0.3s;
+    //   transition-timing-function: ease;
+    //   font-size: 1.1rem;
+    //   transform: translate(-0.3rem, -1.1rem);
+    // }
+  }
+
   &__input {
     font-size: 1.3rem;
     padding: 1.4rem 25rem 1.4rem 1rem;
@@ -145,28 +175,41 @@
     display: inline-block;
     position: relative;
 
-    &::-webkit-input-placeholder {
-      color: rgba($dark-grey, 0.8);
-      text-transform: uppercase;
-      -webkit-transform: translate(0);
-      transition-property: -webkit-transform, font-size;
-      transition-duration: 0.3s, 0.3s;
-      transition-timing-function: ease;
-    }
+    // &::-webkit-input-placeholder {
+    //   color: rgba($dark-grey, 0.8);
+    //   text-transform: uppercase;
+    //   -webkit-transform: translate(0);
+    //   transition-property: -webkit-transform, font-size;
+    //   transition-duration: 0.3s, 0.3s;
+    //   transition-timing-function: ease;
+    // }
 
-    &:focus {
+    &:focus,
+    &:active {
       outline: none;
-    }
 
-    &:hover {
+      // &:hover {
       border: 1px solid rgba($dark-grey, 0.6);
 
-      &::-webkit-input-placeholder {
+      & + label {
         transition-property: -webkit-transform, font-size;
         transition-duration: 0.3s, 0.3s;
         transition-timing-function: ease;
         font-size: 1.1rem;
-        -webkit-transform: translate(-0.3rem, -1.1rem);
+        transform: translate(-0.3rem, -1.1rem);
+      }
+    }
+    // }
+
+    &:hover {
+      border: 1px solid rgba($dark-grey, 0.6);
+
+      & + label {
+        transition-property: -webkit-transform, font-size;
+        transition-duration: 0.3s, 0.3s;
+        transition-timing-function: ease;
+        font-size: 1.1rem;
+        transform: translate(-0.3rem, -1.1rem);
       }
     }
   }

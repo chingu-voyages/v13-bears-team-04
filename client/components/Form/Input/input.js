@@ -9,13 +9,18 @@ export default function input(props) {
   );
 
   return (
-    <div>
+    <div className="form__container">
       <input
         className="form__input"
         type="text"
-        placeholder={`${props.children}`}
-        id="username"
+        placeholder=""
+        id="form__placeholder"
+        required
+        pattern="\S+.*"
       />
+      <label className="form__placeholder" htmlFor="form__placeholder">
+        {props.children}
+      </label>
     </div>
   );
 }

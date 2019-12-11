@@ -7,7 +7,7 @@ import RecentPosts from "../components/RecentPosts";
 import ToTopButton from "../components/ToTopButton";
 import TrendingCommunity from "../components/TrendingCommunity";
 import GrowingCommunities from "../components/GrowingCommunities";
-import SelectItem from "../components/SortView";
+import SortView from "../components/SortView";
 
 import { useAuth } from "../utils/authcontext";
 import fetchIt from "../utils/fetch";
@@ -86,7 +86,7 @@ const Home = () => {
       <GrowingCommunities />
       <RecentPosts />
       <HomeBox />
-      <SelectItem />
+      <SortView />
       <ToTopButton />
     </div>
   );

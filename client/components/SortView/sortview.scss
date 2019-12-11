@@ -1,20 +1,24 @@
 .sortview {
   display: flex;
-  // align-items: center;
+  align-items: center;
+  width: 27rem;
 
   h2 {
-    transform: translateY(0);
+    // transform: translateY(0);
     text-transform: uppercase;
     font-weight: normal;
+    font-size: 1.3rem;
     color: $dark-grey;
-    margin-right: 1rem;
+    margin-right: 2rem;
   }
 
   &__filter {
-    width: 20rem;
+    display: flex;
+    align-items: center;
+    width: 100%;
     height: 2rem;
-    cursor: pointer;
     background-color: transparent;
+    cursor: pointer;
 
     &__option {
       &__icon {
@@ -58,11 +62,17 @@
 }
 
 .view {
+  display: flex;
+  align-items: center;
+  margin-left: 17rem;
+  // padding-right: 2rem;
+
   h2 {
     text-transform: uppercase;
     font-weight: normal;
     color: $dark-grey;
     margin-right: 1rem;
+    font-size: 1.3rem;
   }
 
   &__img {
@@ -73,6 +83,18 @@
     }
   }
 
+  &--border-right {
+    border-right: 1px solid rgba($dark-grey, 0.5);
+    height: 2.5rem;
+    padding-right: 2rem;
+    margin-right: 2rem;
+  }
+}
+
+.sortview__container {
   display: flex;
   align-items: center;
+  padding-bottom: 1rem;
+
+  border-bottom: 1px solid rgba($grey, 0.2);
 }

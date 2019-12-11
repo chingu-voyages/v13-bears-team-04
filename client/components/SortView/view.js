@@ -7,6 +7,7 @@ export default function view() {
       <img className="view__img" src="grid-images/small-grid.png" />
       <img className="view__img" src="grid-images/medium-grid.png" />
       <img className="view__img" src="grid-images/large-grid.png" />
+      <div className="view--border-right">&nbsp;</div>
     </div>
   );
 }

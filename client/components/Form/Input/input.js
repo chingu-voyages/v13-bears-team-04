@@ -3,10 +3,14 @@ import React, { useState } from "react";
 import "../form.scss";
 
 export default function input(props) {
-  const [placeholder, setPlaceholder] = useState(
-    [{ userName: "username" }, { email: "email" }, { password: "password" }],
-    []
-  );
+  // const [placeholder, setPlaceholder] = useState(
+  //   [{ userName: "username" }, { email: "email" }, { password: "password" }],
+  //   []
+  // );
+
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   return (
     <div className="form__container">

@@ -17,7 +17,7 @@ export default function forgotusername() {
             className="reddit-icon"
           />
         </div>
-        <p>Recover your username</p>
+        <h2>Recover your username</h2>
         <p className="sub-description">
           Don't worry! You may have forgotten your username, but we can help you
           out. Enter your email address below and we'll email you your username.

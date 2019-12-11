@@ -16,7 +16,7 @@ export default function forgotPassword() {
             className="reddit-icon"
           />
         </div>
-        <p>Reset your password</p>
+        <h2>Reset your password</h2>
         <p className="sub-description">
           Don't worry! You may have forgotten your password, but we can help you
           out. Enter your username below and we'll email you a link to reset

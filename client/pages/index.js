@@ -90,19 +90,18 @@ const Home = () => {
       <GrowingCommunities />
       <RecentPosts />
       <HomeBox />
-      {/* <ReusableStyleComponent>
+      <ReusableStyleComponent>
         <ForgotPassword />
-      </ReusableStyleComponent> */}
-      {/* <ReusableStyleComponent>
+      </ReusableStyleComponent>
+      <ReusableStyleComponent>
         <Signin />
-      </ReusableStyleComponent> */}
-      {/* <ReusableStyleComponent>
+      </ReusableStyleComponent>
+      <ReusableStyleComponent>
         <Signup />
-      </ReusableStyleComponent> */}
+      </ReusableStyleComponent>
       <ReusableStyleComponent>
         <ForgotUsername />
-      </ReusableStyleComponent>{" "}
-      {/* <ForgotUsername /> */}
+      </ReusableStyleComponent>
       <ToTopButton />
     </div>
   );

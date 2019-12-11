@@ -14,9 +14,7 @@ export default function signup() {
           By having a Reddit account, you can join, vote, and comment on all
           your favorite Reddit content.
         </p>
-        <div className="form__wrapper__input">
-          <Input>Email</Input>
-        </div>
+        <Input>Email</Input>
         <div className="form__wrapper__button">
           <Button color="blue" inverted={false}>
             Sign up

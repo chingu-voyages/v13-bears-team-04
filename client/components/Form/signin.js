@@ -17,12 +17,8 @@ export default function signin() {
           />
         </div>
         <div className="form__wrapper__title">Sign in</div>
-        <div className="form__wrapper__input">
-          <Input>Username</Input>
-        </div>
-        <div className="form__wrapper__input">
-          <Input>Password</Input>
-        </div>
+        <Input>Username</Input>
+        <Input>Password</Input>
 
         <div className="form__wrapper__button">
           <Button color="blue" inverted={false}>

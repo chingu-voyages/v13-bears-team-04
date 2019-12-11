@@ -22,9 +22,7 @@ export default function forgotusername() {
           Don't worry! You may have forgotten your username, but we can help you
           out. Enter your email address below and we'll email you your username.
         </p>
-        <div className="form__wrapper__input">
-          <Input>Email</Input>
-        </div>
+        <Input>Email</Input>
         <div className="form__wrapper__button">
           <Button color="blue" inverted={false}>
             Email me

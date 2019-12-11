@@ -5,6 +5,7 @@ import NavFilter from "./navfilter";
 import NavSearch from "./navsearch";
 import NavQuickLinks from "./navquicklinks";
 import NavAuth from "./navauth";
+import NavDrop from "./navdrop";
 // import { useAuth } from "../../utils/authcontext";
 import "./nav.scss";
 
@@ -18,6 +19,7 @@ export default function Nav() {
       <NavSearch />
       <NavQuickLinks />
       <NavAuth />
+      <NavDrop />
       {/* <div className="popularbtn">
         <li className="navitem">
           <button>Popular</button>

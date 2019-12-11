@@ -1,7 +1,7 @@
 import React from "react";
 import clsx from "clsx";
-import LinkButton from "./linkbutton";
-import ButtonIcon from "./buttonicon";
+import ButtonWithIcon from "./buttonwithicon";
+import ButtonWithLink from "./buttonwithlink";
 import "./button.scss";
 
 export default function Button({
@@ -24,16 +24,16 @@ export default function Button({
   // RETURNS A NEXT LINK
   if (href) {
     return (
-      <LinkButton href={href} className={className}>
-        {icon ? <ButtonIcon icon={icon} text={text} /> : text}
-      </LinkButton>
+      <ButtonWithLink href={href} className={className}>
+        {icon ? <ButtonWithIcon icon={icon} text={text} /> : text}
+      </ButtonWithLink>
     );
   }
 
   // RETURNS AN ACTUAL BUTTON
   return (
     <button type="button" className={className} onClick={handleClick}>
-      {icon ? <ButtonIcon icon={icon} text={text} /> : text}
+      {icon ? <ButtonWithIcon icon={icon} text={text} /> : text}
     </button>
   );
 }

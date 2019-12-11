@@ -22,12 +22,12 @@ export default function forgotPassword() {
           out. Enter your username below and we'll email you a link to reset
           your password.
         </p>
-        <div className="form__wrapper__input">
-          <Input>Username</Input>
-        </div>
-        <div className="form__wrapper__input">
-          <Input>Email</Input>
-        </div>
+        {/* <div className="form__wrapper__input"> */}
+        <Input>Username</Input>
+        {/* </div> */}
+        {/* <div className="form__wrapper__input"> */}
+        <Input>Email</Input>
+        {/* </div> */}
 
         <div className="form__wrapper__button">
           <Button color="blue" inverted={false}>

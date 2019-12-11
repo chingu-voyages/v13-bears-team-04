@@ -13,7 +13,7 @@ export default function input(props) {
   const [password, setPassword] = useState("");
 
   return (
-    <div className="form__container">
+    <div className="form__container form__wrapper__input">
       <input
         className="form__input"
         type="text"

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 
 export default function reusableformstyle(props) {
-  const [isBtnOpen, setIsBtnOpen] = useState(true);
+  const [isBtnOpen, toggleIsBtnOpen] = useState(true);
 
   //   useEffect(() => {
   //     if (user === true) {
@@ -23,7 +23,7 @@ export default function reusableformstyle(props) {
         <a
           href="#"
           className="form__close"
-          onClick={() => setIsBtnOpen(state => !state)}
+          onClick={() => toggleIsBtnOpen(state => !state)}
         >
           &times;
         </a>

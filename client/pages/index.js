@@ -1,78 +1,93 @@
 import React from "react";
-import Nav from "../components/nav";
+
+import HomeBox from "../components/HomeBox";
+import Nav from "../components/Navigation";
 import PostList from "../components/PostList";
+import RecentPosts from "../components/RecentPosts";
 import ToTopButton from "../components/ToTopButton";
 import TrendingCommunity from "../components/TrendingCommunity";
+import GrowingCommunities from "../components/GrowingCommunities";
 import FooterBox from "../components/FooterBox";
-import { useAuth } from "../components/Auth/auth";
-// import { handleLogin, handleSignup, handleLogout } from "../utils/auth";
+
+import { useAuth } from "../utils/authcontext";
+import fetchIt from "../utils/fetch";
 
 const Home = () => {
-  const { user, setUser } = useAuth();
-  console.log(user);
+  const { user, login, logout, signup } = useAuth();
 
   async function handleLogin() {
-    try {
-      const resp = await fetch(process.env.API_URL + "/user/login", {
-        method: "POST",
-        body: JSON.stringify({ username: "Tester2", password: "password" }),
-        headers: { "Content-Type": "application/json" },
-        credentials: "include",
-      });
-      const user = await resp.json();
-      setUser(user);
-    } catch (err) {
-      console.log(err);
-    }
+    const username = "Tester2";
+    const password = "password";
+    const message = await login({ username, password });
+    console.log(message);
   }
 
   async function handleLogout() {
     const userId = user._id;
-    try {
-      const resp = await fetch(process.env.API_URL + "/user/logout", {
-        method: "POST",
-        body: JSON.stringify({ userId }),
-        headers: { "Content-Type": "application/json" },
-        credentials: "include",
-      });
-      // const user = await resp.json();
-      setUser(null);
-    } catch (err) {
-      console.log(err);
-    }
+    const message = await logout({ userId });
+    console.log(message);
   }
 
   async function handleSignup() {
+    const randomNum = Math.floor(Math.random() * 90 + 10);
+    const email = `test${randomNum}@test.com`;
+    const username = `Tester${randomNum}`;
+    const password = "password";
+    const message = await signup({ email, username, password });
+    console.log(message);
+  }
+
+  async function createPost() {
     try {
-      const resp = await fetch(process.env.API_URL + "/user/signup", {
+      const randomNum = Math.floor(Math.random() * 1000);
+      const communityId = "5de36fb689277400f03f364d";
+      const newPost = await fetchIt(`/posts/${communityId}`, {
         method: "POST",
         body: JSON.stringify({
-          email: "test9@test.com",
-          username: "Tester9",
-          password: "password",
+          title: `Suppppp${randomNum}`,
+          body: "Howwwwwwdy",
+          author: user._id,
+          community: communityId,
         }),
-        headers: { "Content-Type": "application/json" },
-        credentials: "include",
+        ctx: {},
       });
-      const user = await resp.json();
-      console.log(user);
-      setUser(user);
+      console.log(newPost);
     } catch (err) {
-      console.log(err);
+      console.log(err.message);
     }
   }
 
   return (
     <div>
-      {!user && <button onClick={handleSignup}>Signup</button>}
-      {!user && <button onClick={handleLogin}>Login</button>}
-      {user && <button onClick={handleLogout}>Logout</button>}
+      {!user && (
+        <button type="button" onClick={handleSignup}>
+          Signup
+        </button>
+      )}
+      {!user && (
+        <button type="button" onClick={handleLogin}>
+          Login
+        </button>
+      )}
+      {user && (
+        <button type="button" onClick={handleLogout}>
+          Logout
+        </button>
+      )}
+      {user && (
+        <button type="button" onClick={createPost}>
+          Create Post
+        </button>
+      )}
 
       <Nav />
       <PostList />
-      <ToTopButton />
       <TrendingCommunity />
+      <GrowingCommunities />
+      <RecentPosts />
+      <HomeBox />
       <FooterBox />
+      <ToTopButton />
     </div>
   );
 };

@@ -1,0 +1,21 @@
+.footerboxcontainer {
+  display: flex;
+  flex-flow: row wrap;
+  height: auto;
+  width: 30rem;
+  justify-content: center;
+}
+
+.footerboxlist {
+  list-style: none;
+  padding: 0;
+}
+
+.footerboxlink {
+  color: inherit;
+  text-decoration: none;
+}
+
+.redditlist {
+  padding-right: 8rem;
+}

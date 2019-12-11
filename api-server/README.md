@@ -1,133 +1,441 @@
-# Message Board API Server
-
-API server for Reddit-like message board app
+# Reddit Clone - Back End
 
 ## Installation
 
-Use npm:
+- `git clone` the project
+- `cd` into `/api-server`
+- Create a `.env` file like below
+- `npm i` dependencies
+- `npm run dev`
+- Open your browser to [http://localhost:3000/](http://localhost:3000/)
 
-```bash
-npm install
+## `.env` file
+
+```
+MONGOLAB_URI=dbUrlHere
+//> this needs to be the location your client is served on
+CLIENT_URL_DEV=http://localhost:4000
+CLIENT_URL_PROD=productionUrlHere
+//> false means you can run the client locally, but still make API calls
+TEST_PROD=boolean
 ```
 
-## Usage
+## API Endpoints
 
-Server uses .env config file. Example below:
+<!-- AUTH/USER ENDPOINTS -->
 
-```bash
-MONGOLAB_URI=[connection_string]
-URL=http://localhost:4000 // this needs to be the location your client is served on
+### Auth/User
+
+<!-- NEW DROPDOWN -->
+<details>
+<summary><strong>GET api/user/</strong></summary>
+
+#### Required:
+
+```
+Currently nothing
 ```
 
-Running server:
+#### Response:
 
-```bash
-npm start
-```
-
-Or
-
-```bash
-npm run dev
-```
-
-## API description
-
-```bash
-GET /api/posts/[category]
-```
-
-```bash
+```javascript
+Status Code: 200
 [
-  {
-    "createdOn": "2019-11-11T16:51:54.524Z",
-    "lastModified": "2019-11-11T16:51:54.524Z",
-    "lastUpvoted": "2019-11-11T16:51:54.524Z",
-    "voteScore": 0,
-    "deleted": false,
-    "reported": false,
-    "comments": [],
-    "_id": "5dc991ac18847042405c90d4",
-    "title": "Loi Krathong 2019",
-    "body": "Loi Krathong",
-    "author": "Damian",
-    "category": "test",
-    "__v": 0
-  },
-  {
-    "createdOn": "2019-11-11T16:51:54.524Z",
-    "lastModified": "2019-11-11T16:51:54.524Z",
-    "lastUpvoted": "2019-11-11T16:51:54.524Z",
-    "voteScore": 0,
-    "deleted": false,
-    "reported": false,
-    "comments": [],
-    "_id": "5dc991dd18847042405c90d5",
-    "title": "Songkran 2019",
-    "body": "Songkran",
-    "author": "Damian",
-    "category": "test",
-    "__v": 0
-  }
+  { allUserObjects }
 ]
+
+Status Code: 400
+{ message: 'errorMessage' }
 ```
 
-```bash
-GET /api/posts/[category]/[post_id]
-```
+</details>
 
-```bash
+<!-- NEW DROPDOWN -->
+<details>
+<summary><strong>GET api/user/verify</strong></summary>
+
+#### Required:
+
+```javascript
 {
-  "createdOn": "2019-11-11T16:51:54.524Z",
-  "lastModified": "2019-11-11T16:51:54.524Z",
-  "lastUpvoted": "2019-11-11T16:51:54.524Z",
-  "voteScore": 0,
-  "deleted": false,
-  "reported": false,
-  "comments": [],
-  "_id": "5dc991dd18847042405c90d5",
-  "title": "Songkran 2019",
-  "body": "Songkran",
-  "author": "Damian",
-  "category": "test",
-  "__v": 0
+  headers: {
+    Authorization: "validSessionID";
+  }
 }
 ```
 
-```bash
-POST /api/posts/[category]
+#### Response:
+
+```javascript
+Status Code: 200
+{ user }
+
+Status Code: 401
+{ message: 'errorMessage' }
 ```
 
-Request body
+</details>
+ 
+<!-- NEW DROPDOWN -->
+<details>
+<summary><strong>POST api/user/login</strong></summary>
 
-```bash
-{
-  "author": "An Author",
-  "title": "A title",
-  "body" : "A body"
-}
+#### Required:
+
+```jsx
+const fetchOptions = {
+  body: {
+    username,
+    password
+  }
+};
 ```
 
-Response:
+#### Response:
 
-```bash
-{
-  "createdOn": "2019-11-12T15:53:35.049Z",
-  "lastModified": "2019-11-12T15:53:35.049Z",
-  "lastUpvoted": "2019-11-12T15:53:35.049Z",
-  "voteScore": 0,
-  "deleted": false,
-  "reported": false,
-  "comments": [],
-  "_id": "5dcad8257de3f51754a7045c",
-  "author": "Damian",
-  "title": "A title",
-  "body": "A body",
-  "category": "test",
-  "__v": 0
-}
+```javascript
+Status Code: 200
+{ user }
+
+Status Code: 400, 401, 404
+{ message: 'customErrorMessage' }
 ```
 
-## License
+</details>
+  
+<!-- NEW DROPDOWN -->
+<details>
+<summary><strong>POST api/user/logout</strong></summary>
 
-[MIT](https://choosealicense.com/licenses/mit/)
+#### Required:
+
+```jsx
+const fetchOptions = {
+  body: {
+    userId
+  }
+};
+```
+
+#### Response:
+
+```javascript
+Status Code: 200
+{ message: 'Successful logout' }
+
+Status Code: 400
+{ message: 'errorMessage' }
+```
+
+</details>
+ 
+<!-- NEW DROPDOWN -->
+<details>
+<summary><strong>POST api/user/signup</strong></summary>
+
+#### Required:
+
+```jsx
+const fetchOptions = {
+  body: {
+    email, // unique
+    password, // minLength:8 _ maxLength:60
+    username // unique _ minLength:3 _ maxLength:20
+  }
+};
+```
+
+#### Response:
+
+```javascript
+Status Code: 200
+{ user }
+
+Status Code: 400
+{ message: 'errorMessage' }
+```
+
+</details>
+
+<!-- POSTS ENDPOINTS -->
+
+### Posts
+
+<!-- NEW DROPDOWN -->
+<details>
+<summary><strong>GET api/posts/</strong></summary>
+
+#### Required:
+
+```
+Nothing
+```
+
+#### Response:
+
+```javascript
+Status Code: 200
+[
+  { allPostObjects }
+]
+
+Status Code: 400
+{ message: 'errorMessage' }
+```
+
+</details>
+
+<!-- NEW DROPDOWN -->
+<details>
+<summary><strong>GET api/posts/:communityId</strong></summary>
+
+#### Required:
+
+```
+Nothing
+```
+
+#### Response:
+
+```javascript
+Status Code: 200
+[
+  { allCommunityPostObjects }
+]
+
+Status Code: 400
+{ message: 'errorMessage' }
+```
+
+</details>
+
+<!-- NEW DROPDOWN -->
+<details>
+<summary><strong>POST api/posts/:communityId</strong></summary>
+
+#### Required:
+
+```javascript
+const fetchOptions = {
+  body: {
+    title, // unique _ minLength:4 _ maxLength:300
+    body,
+    author,
+    community
+  }
+};
+```
+
+#### Response:
+
+```javascript
+Status Code: 200
+{ post }
+
+Status Code: 400
+{ message: 'errorMessage' }
+```
+
+</details>
+
+<!-- POSTS ENDPOINTS -->
+
+### Communities
+
+<!-- NEW DROPDOWN -->
+<details>
+<summary><strong>GET api/community</strong></summary>
+
+#### Required:
+
+```
+Nothing
+```
+
+#### Response:
+
+```javascript
+Status Code: 200
+[ { allCommunityObjects } ]
+
+Status Code: 400
+{ message: 'errorMessage' }
+```
+
+</details>
+
+<!-- NEW DROPDOWN -->
+<details>
+<summary><strong>POST api/community</strong></summary>
+
+#### Required:
+
+```javascript
+const fetchOptions = {
+  body: {
+    name,
+    description,
+    rules, // array of strings
+    communitiesRelated, // array of community IDs
+    userId // user's _id
+  }
+};
+```
+
+#### Response:
+
+```javascript
+Status Code: 201
+{ newCommunity, updatedUser }
+
+Status Code: 400
+{ message: 'errorMessage' }
+```
+
+</details>
+
+<!-- NEW DROPDOWN -->
+<details>
+<summary><strong>GET api/community/:communityId</strong></summary>
+
+#### Required:
+
+```
+Nothing
+```
+
+#### Response:
+
+```javascript
+Status Code: 200
+{ community }
+
+Status Code: 400
+{ message: 'errorMessage' }
+```
+
+</details>
+
+<!-- NEW DROPDOWN -->
+<details>
+<summary><strong>DELETE api/community/:communityId</strong></summary>
+
+#### Required:
+
+```
+Nothing
+```
+
+#### Response:
+
+```javascript
+Status Code: 200
+{ deletedCommunity }
+
+Status Code: 400
+{ message: 'errorMessage' }
+```
+
+</details>
+
+<!-- NEW DROPDOWN -->
+<details>
+<summary><strong>PUT api/community/:communityId/edit/:key</strong></summary>
+
+#### Required:
+
+```javascript
+// key param must be one of the following
+const acceptableKeys = ["name", "description", "rules"];
+```
+
+#### Response:
+
+```javascript
+Status Code: 200
+{ updatedCommunity }
+
+Status Code: 400
+{ message: 'errorMessage' }
+```
+
+</details>
+
+<!-- NEW DROPDOWN -->
+<details>
+<summary><strong>GET api/community/:communityId/users/:key</strong></summary>
+
+#### Required:
+
+```javascript
+// key param must be one of the following
+const acceptableKeys = ["members", "moderators", "administrators"];
+```
+
+#### Response:
+
+```javascript
+Status Code: 200
+[{ username: 'userId' }]
+
+Status Code: 400
+{ message: 'errorMessage' }
+```
+
+</details>
+
+<!-- NEW DROPDOWN -->
+<details>
+<summary><strong>POST api/community/:communityId/users/:key</strong></summary>
+
+#### Required:
+
+```jsx
+// key param must be one of the following
+const acceptableKeys = ["members", "moderators", "administrators"];
+const fetchOptions = {
+  body: {
+    userId
+  }
+};
+```
+
+#### Response:
+
+```javascript
+Status Code: 200
+{ updatedCommunity }
+
+Status Code: 400
+{ message: 'errorMessage' }
+```
+
+</details>
+
+<!-- NEW DROPDOWN -->
+<details>
+<summary><strong>DELETE api/community/:communityId/users/:key</strong></summary>
+
+#### Required:
+
+```jsx
+// key param must be one of the following
+const acceptableKeys = ["members", "moderators", "administrators"];
+const fetchOptions = {
+  body: {
+    userId
+  }
+};
+```
+
+#### Response:
+
+```javascript
+Status Code: 200
+{ updatedCommunity }
+
+Status Code: 400
+{ message: 'errorMessage' }
+```
+
+</details>

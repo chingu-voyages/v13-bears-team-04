@@ -1,4 +1,4 @@
-.postlistcard-container {
+.postlist-card {
   width: 100%;
   border-radius: 4px;
   background-color: $white;
@@ -7,14 +7,14 @@
   position: relative;
   cursor: pointer;
 
-  .postlistcard-vote-container {
+  &__vote-container {
     background-color: #f7f7f7;
     height: 100%;
     width: 40px;
     position: absolute;
     top: 0;
 
-    .postlistcard-vote {
+    .postlist-card__vote {
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -29,27 +29,27 @@
         &:hover {
           background-color: $grey;
         }
-        &.postlistcard-vote-up:hover {
+        &.postlist-card__vote__up:hover {
           color: $orange;
         }
-        &.postlistcard-vote-down:hover {
+        &.postlist-card__vote__down:hover {
           color: $blue;
         }
       }
 
-      .postlistcard-vote-text {
+      &__text {
         font-weight: bold;
         padding: 2px 0;
       }
     }
   }
 
-  .postlistcard-details {
+  &__details {
     padding-left: 45px;
     margin: 5px 5px 5px 0;
     height: 100%;
 
-    .postlistcard-info {
+    &__info {
       height: 30px;
       margin: 5px 0;
       display: flex;
@@ -59,12 +59,12 @@
         margin: 0 6px;
       }
 
-      .postlistcard-info-sub {
+      &__sub {
         display: flex;
         align-items: center;
         justify-content: center;
 
-        .postlistcard-info-sub-img {
+        &__img {
           height: 20px;
           width: 20px;
           img {
@@ -72,32 +72,33 @@
             width: inherit;
           }
         }
-        .postlistcard-info-sub-text {
+
+        &__text {
           font-weight: bold;
           margin-left: 5px;
         }
       }
 
-      .postlistcard-info-user,
-      .postlistcard-info-date {
+      &__user,
+      &__date {
         color: #787c7e;
         font-size: 0.9em;
         line-height: 0.9em;
       }
     }
 
-    .postlistcard-title {
+    &__title {
       font-size: 1.4em;
       margin: 10px;
     }
 
-    .postlistcard-body {
+    &__body {
       letter-spacing: 0.3px;
       padding: 5px 7px;
     }
   }
 
-  .postlistcard-actions {
+  &__actions {
     margin: 15px 0 5px;
     height: 30px;
     padding-left: 50px;
@@ -107,7 +108,7 @@
     display: flex;
     align-items: center;
 
-    .postlistcard-actions-comments {
+    &__comments {
       padding: 5px;
       border-radius: 2px;
       transition: 0.2s all;

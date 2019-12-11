@@ -1,0 +1,57 @@
+.recent-posts {
+  width: 33rem;
+  display: inline-block;
+  border: 1px solid rgba($grey, 0.2);
+  border-radius: 0.5rem;
+  background-color: $white;
+
+  &__element {
+    &:not(:last-child) {
+      display: inline-block;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid rgba($grey, 0.9);
+    }
+  }
+
+  &__title {
+    font-size: 1.3rem;
+    font-weight: bold;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  &__info {
+    font-size: 1.2rem;
+    color: $dark-grey;
+  }
+
+  &__image-wrapper {
+    //padding: 0.5rem;
+    &--icon {
+      transform: translate(11%, 25%);
+      height: 5.5rem;
+      width: 7rem;
+      border-radius: 10%;
+      vertical-align: middle;
+    }
+  }
+
+  &__headline {
+    font-size: 1.3rem;
+    text-transform: uppercase;
+    margin-left: 1rem;
+    font-weight: bold;
+  }
+}
+
+.clear {
+  text-align: right;
+  display: inline-block;
+  padding: 1rem;
+  margin-left: 28rem;
+  font-size: 1.3rem;
+  color: $grey;
+  cursor: pointer;
+}

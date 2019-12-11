@@ -32,6 +32,46 @@ const CustomValue = ({ getValue, ...props }) => {
   );
 };
 
+const customStyles = {
+  control: (provided, { menuIsOpen }) => {
+    console.log(menuIsOpen);
+    const openStyles = menuIsOpen
+      ? {
+          borderColor: "#EDEFF1",
+          borderRadius: "4px 4px 0 0",
+          borderBottomColor: "transparent",
+        }
+      : {};
+    return {
+      ...provided,
+      borderColor: "transparent",
+      ...openStyles,
+      "&:hover": {
+        borderColor: "#EDEFF1",
+      },
+    };
+  },
+  menu: provided => ({
+    ...provided,
+    marginTop: "-2px",
+    borderWidth: 1,
+    borderColor: "#EDEFF1",
+    borderStyle: "solid",
+    borderTopColor: "transparent",
+    borderRadius: "4px 4px 0 0",
+    boxShadow: "none",
+  }),
+  menuList: provided => ({
+    ...provided,
+    padding: "16px 0",
+  }),
+  dropdownIndicator: provided => ({
+    ...provided,
+    cursor: "pointer",
+  }),
+  indicatorSeparator: () => ({}),
+};
+
 export default function NavFilter() {
   const { user } = useAuth();
   // we'll use this to see which page we're on
@@ -60,6 +100,7 @@ export default function NavFilter() {
         components={{ Option: CustomOption, ValueContainer: CustomValue }}
         instanceId="NavFilter"
         isSearchable={false}
+        styles={customStyles}
       />
     </div>
   );

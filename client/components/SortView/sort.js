@@ -20,9 +20,13 @@ const customStyles = {
   //   width: state.selectProps.width,
   //   backgroundColor: state.isSelected ? "#ffffff" : "#ffffff",
   // }),
-  menu: (provided, state) => ({
-    ...provided,
-    width: state.selectProps.width,
+  // menu: (provided, state) => ({
+  //   ...provided,
+  //   width: state.selectProps.width,
+  // }),
+  control: (reactSelectStyles, selectState) => ({
+    ...reactSelectStyles, // omit if you don't want any of the React-Select style for this component
+    width: 200,
   }),
 };
 

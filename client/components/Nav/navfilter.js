@@ -1,38 +1,42 @@
-import React, { useState } from "react";
-// import { useRouter } from "next/router";
+import React from "react";
+import { useRouter } from "next/router";
 import Select, { components } from "react-select";
-import { useAuth } from "../../utils/authcontext";
-import NavFilterOption from "./navfilteroption";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import NavSelectOption from "./navselectoption";
+// import { useAuth } from "../../utils/authcontext";
 
-// used to edit the option boxes of these two components
-const { Option, ValueContainer } = components;
+const { ValueContainer } = components;
 
 // options used when user isn't logged in
-const plainOptions = [
-  { value: "popular", label: "Popular", icon: "chart-line" },
-  { value: "all", label: "All", icon: "poll" },
-  { value: "topcommunities", label: "Top Communities", icon: "list-ol" },
+const options = [
+  {
+    label: "Reddit Feeds",
+    options: [
+      { value: "/", label: "Popular", icon: "chart-line" },
+      { value: "/all", label: "All", icon: "poll" },
+      { value: "/topcommunities", label: "Top Communities", icon: "list-ol" },
+    ],
+  },
+  {
+    label: "Other",
+    options: [
+      { value: "/coins", label: "Coins", icon: "donate" },
+      { value: "/premium", label: "Premium", icon: "shield-alt" },
+    ],
+  },
 ];
-
-const CustomOption = ({ data, ...props }) => {
-  const { icon, label } = data;
-  return (
-    <Option className="nav__item__filter__option options" {...props}>
-      <NavFilterOption icon={icon} label={label} />
-    </Option>
-  );
-};
 
 const CustomValue = ({ getValue, ...props }) => {
   const [{ icon, label }] = getValue();
   return (
-    <ValueContainer className="nav__item__filter__option value" {...props}>
-      <NavFilterOption icon={icon} label={label} />
+    <ValueContainer className="nav__item__filter__value" {...props}>
+      <FontAwesomeIcon className="nav__item__filter__value__icon" icon={icon} />
+      <h2 className="nav__item__filter__value__label">{label}</h2>
     </ValueContainer>
   );
 };
 
-const customStyles = {
+const styles = {
   control: (provided, { menuIsOpen }) => {
     const openStyles = menuIsOpen
       ? {
@@ -50,6 +54,14 @@ const customStyles = {
       },
     };
   },
+  option: () => ({}),
+  groupHeading: provided => ({
+    ...provided,
+    // SWITCH ME AFTER YOU ADD A FILTER SEARCH BAR ABOVE
+    padding: "8px 24px 8px",
+    // padding: "16px 24px 8px",
+    fontSize: "1rem",
+  }),
   menu: provided => ({
     ...provided,
     marginTop: "-2px",
@@ -59,10 +71,7 @@ const customStyles = {
     borderTopColor: "transparent",
     borderRadius: "4px 4px 0 0",
     boxShadow: "none",
-  }),
-  menuList: provided => ({
-    ...provided,
-    padding: "16px 0",
+    width: 270,
   }),
   dropdownIndicator: provided => ({
     ...provided,
@@ -72,35 +81,28 @@ const customStyles = {
 };
 
 export default function NavFilter() {
-  const { user } = useAuth();
+  // const { user } = useAuth();
   // we'll use this to see which page we're on
-  // const router = useRouter();
+  const { pathname } = useRouter();
+  // get the option for the current page
+  const [currentPageOption] = options
+    .reduce((acc, cVal) => [...acc, ...cVal.options], [])
+    .filter(({ value }) => value === pathname);
+  // or set it to the most popular page
+  const opt = currentPageOption || options[0].options[0];
+  console.log(opt);
   // we'll show different options depending on if we are logged in or not
-  const defaultSelection = user ? null : plainOptions[0];
-  const [selection, setSelection] = useState(defaultSelection);
 
-  function handleChange(selected) {
-    // need to make an API based on what value was chosen
-    const { value } = selected;
-    console.log(selected, value);
-    setSelection(selected);
-  }
-
-  console.log(selection);
   return (
-    <div className="nav__item">
-      <Select
-        className="nav__item__filter"
-        // defaultMenuIsOpen
-        defaultValue={selection}
-        value={selection}
-        onChange={handleChange}
-        options={plainOptions}
-        components={{ Option: CustomOption, ValueContainer: CustomValue }}
-        instanceId="NavFilter"
-        isSearchable={false}
-        styles={customStyles}
-      />
-    </div>
+    <Select
+      className="nav__item__filter"
+      value={opt}
+      options={options}
+      components={{ Option: NavSelectOption, ValueContainer: CustomValue }}
+      instanceId="NavFilter"
+      isSearchable={false}
+      styles={styles}
+      classNamePrefix="filter"
+    />
   );
 }

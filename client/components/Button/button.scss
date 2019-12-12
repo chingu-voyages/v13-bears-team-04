@@ -1,67 +1,43 @@
 .btn {
-  width: 100%;
-  padding: 1rem 0;
-  border-radius: 0.5rem;
-  text-decoration: none;
-  text-transform: uppercase;
-
-  font-weight: bold;
   display: inline-block;
-  cursor: pointer;
-
+  border: 1px solid transparent;
+  border-radius: 4px;
+  box-sizing: border-box;
   text-align: center;
-  transform: translate(-4rem, 1.2rem);
-  transition: all 0.3s;
+  text-decoration: none;
+  font-size: 1.2rem;
+  line-height: 2.4rem;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.2s;
 
-  &:hover {
-    transform: translate(-4rem, 1rem);
-    box-shadow: 0 0.6rem 2rem rgba(#000, 0.2);
+  // ICON
+  &--icon {
+    height: 1.4rem;
+    width: 1.4rem !important;
+    margin-right: 0.3rem;
   }
 
-  &:active {
-    tranform: translate(-4rem, 1.2rem);
-    box-shadow: 0 0.5rem 2rem rgba(#000, 0.2);
-  }
-
+  // COLORS
   &--blue {
-    &--inverse {
-      color: $white;
-      background-color: $blue;
-
-      &:hover {
-        background-color: rgba($blue, 0.8);
-      }
-    }
-
-    &--reverse {
-      color: $blue;
-      background-color: $white;
-      border: 1px solid $light-blue;
-
-      &:hover {
-        background-color: rgba($white, 0.8);
-      }
-    }
+    @include btnColors($blue, $white);
   }
 
   &--orange {
-    &--inverse {
-      color: $white;
-      background-color: $orange;
+    @include btnColors($orange, $white);
+  }
 
-      &:hover {
-        background-color: rgba($orange, 0.8);
-      }
-    }
+  // SIZES
+  &--tight {
+    padding: 1px 5px;
+    height: 24px;
+    line-height: 22px;
+  }
 
-    &-reverse {
-      color: $orange;
-      background-color: $white;
-      border: 1px solid $orange;
-
-      &:hover {
-        background-color: rgba($white, 0.8);
-      }
-    }
+  &--normal {
+    padding: 3px 16px;
   }
 }

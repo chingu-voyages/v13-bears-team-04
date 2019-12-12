@@ -3,7 +3,7 @@ import Button from "../Button/button";
 import "./totopbutton.scss";
 
 export default function ToTopButton() {
-  const [top, resetYPosition] = useState(0);
+  const [top] = useState(0);
 
   function scrollToTop() {
     if (window.scrollY > 0) {
@@ -15,10 +15,14 @@ export default function ToTopButton() {
   }
 
   return (
-    <div>
-      <Button>
-        <button onClick={scrollToTop}>Scroll To Top</button>
-      </Button>
+    <div className="row">
+      <div className="totop--container">
+        <Button
+          text="Scroll To Top"
+          color="blue"
+          handleClick={scrollToTop}
+        ></Button>
+      </div>
     </div>
   );
 }

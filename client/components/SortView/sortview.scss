@@ -4,11 +4,9 @@
   width: 27rem;
 
   h2 {
-    // transform: translateY(0);
     text-transform: uppercase;
     font-weight: normal;
     font-size: 1.3rem;
-    // color: $dark-grey;
     margin-right: 2rem;
   }
 
@@ -16,7 +14,7 @@
     display: flex;
     align-items: center;
     width: 100%;
-    height: 2rem;
+    height: 3rem;
     background-color: transparent;
     cursor: pointer;
 
@@ -51,6 +49,7 @@
 .countryoption {
   display: flex;
   // color: $dark-grey;
+  margin-left: 2.7rem;
 
   &__filter {
     width: 20rem;
@@ -64,13 +63,13 @@
 .view {
   display: flex;
   align-items: center;
-  margin-left: 17rem;
+  margin-left: 14.5rem;
   // padding-right: 2rem;
 
   h2 {
     text-transform: uppercase;
     font-weight: normal;
-    color: $dark-grey;
+    // color: $dark-grey;
     margin-right: 1rem;
     font-size: 1.3rem;
   }
@@ -94,7 +93,8 @@
 .sortview__container {
   display: flex;
   align-items: center;
-  padding-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  margin-top: 5.5rem;
 
   border-bottom: 1px solid rgba($grey, 0.2);
 }

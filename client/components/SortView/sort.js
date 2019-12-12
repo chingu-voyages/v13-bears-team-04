@@ -13,20 +13,20 @@ import "./sortview.scss";
 const { Option, ValueContainer } = components;
 
 const customStyles = {
-  // option: (provided, state) => ({
-  //   ...provided,
-  //   borderBottom: "1px dotted #d7d7d7",
-  //   color: state.isSelected ? "#5296dd" : "#d7d7d7",
-  //   width: state.selectProps.width,
-  //   backgroundColor: state.isSelected ? "#ffffff" : "#ffffff",
-  // }),
-  // menu: (provided, state) => ({
-  //   ...provided,
-  //   width: state.selectProps.width,
-  // }),
+  menu: provided => ({
+    ...provided,
+    marginTop: "-2px",
+    borderWidth: 1,
+    borderColor: "#EDEFF1",
+    borderStyle: "solid",
+    borderTopColor: "transparent",
+    borderRadius: "4px 4px 0 0",
+    boxShadow: "none",
+  }),
   control: (reactSelectStyles, selectState) => ({
     ...reactSelectStyles, // omit if you don't want any of the React-Select style for this component
-    width: 200,
+    width: 220,
+    borderColor: "transparent",
   }),
 };
 

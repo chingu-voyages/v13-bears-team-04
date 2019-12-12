@@ -7,6 +7,24 @@ import { useAuth } from "../../utils/authcontext";
 
 import "./sortview.scss";
 
+const customStyles = {
+  menu: provided => ({
+    ...provided,
+    marginTop: "-2px",
+    borderWidth: 1,
+    borderColor: "#EDEFF1",
+    borderStyle: "solid",
+    borderTopColor: "transparent",
+    borderRadius: "4px 4px 0 0",
+    boxShadow: "none",
+  }),
+  control: (reactSelectStyles, selectState) => ({
+    ...reactSelectStyles, // omit if you don't want any of the React-Select style for this component
+    width: 220,
+    borderColor: "transparent",
+  }),
+};
+
 export default function countryoptions() {
   const { user } = useAuth();
 
@@ -41,6 +59,7 @@ export default function countryoptions() {
         components={{
           DropdownIndicator,
         }}
+        styles={customStyles}
       />
     </div>
   );

@@ -5,10 +5,57 @@
     clear: both;
   }
 }
-
 @mixin absCenter {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+
+@mixin btnColors($primColor, $secColor) {
+  color: $secColor;
+  background-color: $primColor;
+  border: 1px solid $primColor;
+
+  &:hover {
+    background-color: rgba($primColor, 0.8);
+    border: 1px solid rgba($primColor, 0.8);
+  }
+
+  &--inverted {
+    color: $primColor;
+    background-color: $secColor;
+    border: 1px solid $primColor;
+
+    &:hover {
+      color: rgba($primColor, 0.8);
+      border: 1px solid rgba($primColor, 0.8);
+    }
+  }
+}
+
+@mixin navOptionContainer($padding) {
+  display: flex;
+  align-items: center;
+  height: 36px;
+  background-color: transparent;
+  text-decoration: none;
+  cursor: pointer;
+  box-sizing: border-box;
+  color: #1c1c1c;
+  padding: #{$padding};
+}
+
+@mixin navOptionIcons() {
+  height: 20px;
+  width: 20px;
+  color: $blue;
+  margin-right: 10px;
+}
+
+@mixin navOptionLabels() {
+  color: black;
+  font-size: inherit;
+  font-weight: normal;
+  margin: 0;
 }

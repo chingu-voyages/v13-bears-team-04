@@ -1,10 +1,10 @@
 import React from "react";
 import Select, { components } from "react-select";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import Link from "next/link";
+import NavSelectOption from "./navselectoption";
+import { useAuth } from "../../utils/authcontext";
 
-// used to edit the option boxes of these two components
-const { Option, ValueContainer } = components;
+const { ValueContainer } = components;
 
 const options = {
   loggedIn: [
@@ -52,9 +52,25 @@ const options = {
 };
 
 const styles = {
-  control: provided => ({
+  container: provided => ({ ...provided, marginLeft: 8 }),
+  control: (provided, { menuIsOpen }) => {
+    const openStyles = menuIsOpen ? { border: "1px solid #EDEFF1" } : {};
+    return {
+      ...provided,
+      width: 75,
+      minHeight: 32,
+      height: 32,
+      borderColor: "transparent",
+      ...openStyles,
+      "&:hover": {
+        border: "1px solid #EDEFF1",
+      },
+    };
+  },
+  dropdownIndicator: provided => ({
     ...provided,
-    width: "100px",
+    padding: 5,
+    cursor: "pointer",
   }),
   indicatorSeparator: () => ({}),
   option: () => ({}),
@@ -68,45 +84,36 @@ const styles = {
     color: "#878A8C",
     margin: "8px 0 4px 12px",
   }),
-};
-
-const CustomOption = ({ data, ...props }) => {
-  const { icon, label, value } = data;
-  return (
-    <Option {...props}>
-      <Link href={value}>
-        <a className="nav__item__drop__option">
-          <FontAwesomeIcon
-            className="nav__item__drop__option__icon"
-            icon={icon}
-          />
-          <h2 className="nav__item__drop__option__label">{label}</h2>
-        </a>
-      </Link>
-    </Option>
-  );
+  menu: provided => ({
+    ...provided,
+    right: 0,
+    width: 175,
+    border: "1px solid #EDEFF1",
+    boxShadow: "none",
+  }),
 };
 
 const CustomValue = props => {
   return (
     <ValueContainer className="nav__item__drop__value" {...props}>
-      <FontAwesomeIcon icon="user" />
+      <FontAwesomeIcon className="nav__item__drop__value__icon" icon="user" />
     </ValueContainer>
   );
 };
 
 export default function NavDrop() {
+  const { user } = useAuth();
+  const { loggedIn, notLoggedIn } = options;
+  const opts = user ? loggedIn : notLoggedIn;
   return (
     <Select
       className="nav__item__drop"
-      defaultMenuIsOpen
-      // defaultValue={options}
-      options={options.notLoggedIn}
-      components={{ Option: CustomOption, ValueContainer: CustomValue }}
-      // components={{ Option: CustomOption }}
+      options={opts}
+      components={{ Option: NavSelectOption, ValueContainer: CustomValue }}
       instanceId="NavDrop"
       isSearchable={false}
       styles={styles}
+      classNamePrefix="drop"
     />
   );
 }

@@ -184,6 +184,16 @@
           font-size: 1.4rem;
         }
       }
+
+      &__value {
+        margin-left: 5px;
+
+        &__icon {
+          height: 16px;
+          width: 16px;
+          color: #878a8c;
+        }
+      }
     }
   }
 }

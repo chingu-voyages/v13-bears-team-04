@@ -13,7 +13,9 @@ export default function input(props) {
   const [password, setPassword] = useState("");
 
   let inputType = props.children;
-  let type, inputValue;
+  let type, inputValue, randNo;
+
+  randNo = Math.round(Math.random() * 1000);
 
   if (inputType.toLowerCase() === "email") {
     type = "email";
@@ -32,12 +34,16 @@ export default function input(props) {
         className="form__input"
         type={type}
         placeholder=""
-        id="form__placeholder"
+        id={`form__placeholder-${randNo}`}
         required
         pattern="\S+.*"
-        value={inputValue}
+        // value={inputValue}
+        autocomplete="on"
       />
-      <label className="form__placeholder" htmlFor="form__placeholder">
+      <label
+        className="form__placeholder"
+        htmlFor={`form__placeholder-${randNo}`}
+      >
         {props.children}
       </label>
     </div>

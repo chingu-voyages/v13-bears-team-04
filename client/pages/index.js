@@ -71,6 +71,18 @@ const Home = () => {
       <RecentPosts />
       <HomeBox />
       <ToTopButton />
+      <ReusableStyleComponent>
+        <Signin />
+      </ReusableStyleComponent>
+      <ReusableStyleComponent>
+        <Signup />
+      </ReusableStyleComponent>
+      <ReusableStyleComponent>
+        <ForgotPassword />
+      </ReusableStyleComponent>
+      <ReusableStyleComponent>
+        <ForgotUsername />
+      </ReusableStyleComponent>
       {!user && (
         <button type="button" onClick={handleSignup}>
           Signup

@@ -160,14 +160,6 @@
     transition-property: -webkit-transform, font-size;
     transition-duration: 0.3s, 0.3s;
     transition-timing-function: ease;
-
-    // &:hover {
-    //   transition-property: -webkit-transform, font-size;
-    //   transition-duration: 0.3s, 0.3s;
-    //   transition-timing-function: ease;
-    //   font-size: 1.1rem;
-    //   transform: translate(-0.3rem, -1.1rem);
-    // }
   }
 
   &__input {
@@ -180,33 +172,10 @@
     display: inline-block;
     position: relative;
 
-    // &::-webkit-input-placeholder {
-    //   color: rgba($dark-grey, 0.8);
-    //   text-transform: uppercase;
-    //   -webkit-transform: translate(0);
-    //   transition-property: -webkit-transform, font-size;
-    //   transition-duration: 0.3s, 0.3s;
-    //   transition-timing-function: ease;
-    // }
-
     &:focus,
-    &:active {
-      outline: none;
-
-      // &:hover {
-      border: 1px solid rgba($dark-grey, 0.6);
-
-      & + label {
-        transition-property: -webkit-transform, font-size;
-        transition-duration: 0.3s, 0.3s;
-        transition-timing-function: ease;
-        font-size: 1.1rem;
-        transform: translate(-0.3rem, -1.1rem);
-      }
-    }
-    // }
-
+    &:valid,
     &:hover {
+      outline: none;
       border: 1px solid rgba($dark-grey, 0.6);
 
       & + label {
@@ -214,7 +183,7 @@
         transition-duration: 0.3s, 0.3s;
         transition-timing-function: ease;
         font-size: 1.1rem;
-        transform: translate(-0.3rem, -1.1rem);
+        transform: translate(-0.5rem, -1.1rem);
       }
     }
   }

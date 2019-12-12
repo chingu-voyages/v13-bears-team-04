@@ -45,8 +45,8 @@
         cursor: pointer;
 
         &__icon {
-          height: 22px;
-          width: 22px;
+          height: 20px;
+          width: 20px;
           color: $blue;
           margin-right: 10px;
         }
@@ -149,6 +149,41 @@
     }
 
     &__drop {
+      &__option {
+        display: flex;
+        align-items: center;
+        height: 36px;
+        padding-left: 16px;
+        background-color: transparent;
+        cursor: pointer;
+        text-decoration: none;
+        color: rgb(28, 28, 28);
+
+        &:hover,
+        &:active {
+          background-color: $blue;
+          color: $white;
+          outline: 0;
+        }
+
+        &:hover > svg {
+          color: inherit;
+        }
+
+        &__icon {
+          height: 20px;
+          width: 20px;
+          color: #878a8c;
+          margin-right: 10px;
+        }
+
+        &__label {
+          color: inherit;
+          font-weight: normal;
+          margin: 0;
+          font-size: 1.4rem;
+        }
+      }
     }
   }
 }

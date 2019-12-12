@@ -146,6 +146,10 @@
 
     &__auth {
       display: none;
+
+      &__btn {
+        min-width: 90px;
+      }
     }
 
     &__drop {

@@ -34,42 +34,33 @@
     }
 
     &__filter {
-      width: 270px;
+      width: 100px;
+      font-size: 1.4rem;
 
-      &__option {
-        display: flex;
-        align-items: center;
-        height: 36px;
-        padding-left: 10px;
-        background-color: transparent;
-        cursor: pointer;
-
+      &__value {
         &__icon {
-          height: 20px;
-          width: 20px;
-          color: $blue;
-          margin-right: 10px;
+          @include navOptionIcons();
         }
 
         &__label {
-          color: black;
-          font-size: inherit;
-          font-weight: normal;
-          margin: 0;
+          display: none;
+          @include navOptionLabels();
+        }
+      }
+
+      &__option {
+        @include navOptionContainer("8px 16px");
+
+        &:hover {
+          background-color: #f6f7f8;
         }
 
-        &.options {
-          padding: 8px 16px;
-          font-size: 1.3rem;
-
-          &:hover {
-            background-color: #f6f7f8;
-          }
+        &__icon {
+          @include navOptionIcons();
         }
 
-        &.value {
-          font-size: 1.4rem;
-          font-weight: bold;
+        &__label {
+          @include navOptionLabels();
         }
       }
     }
@@ -154,14 +145,7 @@
 
     &__drop {
       &__option {
-        display: flex;
-        align-items: center;
-        height: 36px;
-        padding-left: 16px;
-        background-color: transparent;
-        cursor: pointer;
-        text-decoration: none;
-        color: rgb(28, 28, 28);
+        @include navOptionContainer("0 0 0 16px");
 
         &:hover,
         &:active {
@@ -223,6 +207,22 @@
     .nav__item {
       &__quicklinks {
         display: flex;
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 995px) {
+  .nav-container {
+    .nav__item {
+      &__filter {
+        width: 270px;
+
+        &__value {
+          &__label {
+            display: flex;
+          }
+        }
       }
     }
   }

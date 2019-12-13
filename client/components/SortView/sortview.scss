@@ -10,6 +10,14 @@
     margin-right: 2rem;
   }
 
+  &__container {
+    display: flex;
+    align-items: center;
+    padding-bottom: 0.5rem;
+    margin-top: 5.5rem;
+    border-bottom: 1px solid rgba($grey, 0.2);
+  }
+
   &__filter {
     display: flex;
     align-items: center;
@@ -76,6 +84,8 @@
 
   &__img {
     cursor: pointer;
+    height: 20px;
+    width: 20px;
 
     &:last-of-type {
       height: 80%;
@@ -88,13 +98,4 @@
     padding-right: 2rem;
     margin-right: 2rem;
   }
-}
-
-.sortview__container {
-  display: flex;
-  align-items: center;
-  padding-bottom: 0.5rem;
-  margin-top: 5.5rem;
-
-  border-bottom: 1px solid rgba($grey, 0.2);
 }

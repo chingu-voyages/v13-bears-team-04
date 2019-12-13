@@ -6,7 +6,7 @@ import View from "./view";
 
 import "./sortview.scss";
 
-export default function sortviewcontainer() {
+export default function SortView() {
   return (
     <div className="sortview__container">
       <View />

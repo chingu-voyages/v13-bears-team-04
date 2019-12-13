@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Select, { components } from "react-select";
 
-import { countryOptions } from "./data/data";
+import { countryOptions } from "./optionsdata";
 import { useAuth } from "../../utils/authcontext";
 
 import "./sortview.scss";

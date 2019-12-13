@@ -3,7 +3,7 @@ import Select, { components } from "react-select";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useAuth } from "../../utils/authcontext";
 
-import { sortOptions } from "./data/data";
+import { sortOptions } from "./optionsdata";
 
 import SortFilterOption from "./sortfilteroptions";
 

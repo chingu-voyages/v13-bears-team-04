@@ -18,30 +18,26 @@ const customStyles = {
     borderRadius: "4px 4px 0 0",
     boxShadow: "none",
   }),
-  control: (reactSelectStyles, selectState) => ({
+  control: reactSelectStyles => ({
     ...reactSelectStyles, // omit if you don't want any of the React-Select style for this component
     width: 220,
     borderColor: "transparent",
   }),
 };
 
-export default function countryoptions() {
-  const { user } = useAuth();
+const DropdownIndicator = props =>
+  components.DropdownIndicator && (
+    <components.DropdownIndicator {...props}>
+      <FontAwesomeIcon
+        icon={props.selectProps.menuIsOpen ? "caret-up" : "caret-down"}
+      />
+    </components.DropdownIndicator>
+  );
 
+export default function CountryOptions() {
+  const { user } = useAuth();
   const defaultSelection = user ? null : countryOptions[0];
   const [selection, setSelection] = useState(defaultSelection);
-
-  const DropdownIndicator = props => {
-    return (
-      components.DropdownIndicator && (
-        <components.DropdownIndicator {...props}>
-          <FontAwesomeIcon
-            icon={props.selectProps.menuIsOpen ? "caret-up" : "caret-down"}
-          />
-        </components.DropdownIndicator>
-      )
-    );
-  };
 
   function handleChange(selected) {
     const { value } = selected;

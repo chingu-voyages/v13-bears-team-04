@@ -1,0 +1,24 @@
+.subredditinfo {
+  &--container {
+    margin: 15rem 0 0 85rem;
+  }
+
+  &--header {
+    display: inline;
+  }
+
+  &--description {
+    font-size: 16px;
+  }
+
+  &--icon {
+    height: 4.5rem;
+    width: 4.5rem;
+    border-radius: 50%;
+    float: left;
+  }
+
+  &--headertext {
+    left: 3rem;
+  }
+}

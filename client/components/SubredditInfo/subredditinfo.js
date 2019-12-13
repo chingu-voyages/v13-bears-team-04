@@ -1,0 +1,41 @@
+import React, { useEffect, useState } from "react";
+
+import "./subredditinfo.scss";
+import Button from "../Button/button";
+
+export default function SubredditInfo() {
+  const [info] = useState({
+    name: "todayilearned",
+    numOnline: 2000,
+    numOfMembers: 40000,
+    cakeDay: "Dec 28, 2008",
+    description: `You learn something new every day; what did
+        you learn today? Submit interesting and specific facts that
+        you just found out here.`,
+  });
+
+  return (
+    <div className="row">
+      <div className="col-1-of-4 subredditinfo--container">
+        <div className="subredditinfo--header">
+          <img
+            className="subredditinfo--icon"
+            src="https://b.thumbs.redditmedia.com/B7IpR8P1mEsQIjdizK5x79s5aGfJUtKk3u2ksGZ9n2Q.png"
+          ></img>
+          <h1 className="subredditinfo--headertext">{info.name}</h1>
+        </div>
+        <div>
+          <h2>
+            {info.numOnline} | {info.numOfMembers} | {info.cakeDay}
+          </h2>
+        </div>
+        <div>
+          <p className="subredditinfo--description">{info.description}</p>
+        </div>
+        <div>
+          <Button text="Join"></Button>
+        </div>
+      </div>
+    </div>
+  );
+}

@@ -5,7 +5,7 @@ import { useAuth } from "../../utils/authcontext";
 
 import { sortOptions } from "./optionsdata";
 
-import SortFilterOption from "./sortfilteroptions";
+import SortViewOption from "./sortviewoption";
 
 import "./sortview.scss";
 
@@ -25,16 +25,20 @@ const customStyles = {
   }),
   control: (reactSelectStyles, selectState) => ({
     ...reactSelectStyles, // omit if you don't want any of the React-Select style for this component
-    width: 220,
     borderColor: "transparent",
+    height: 24,
+  }),
+  menuList: provided => ({
+    ...provided,
+    width: 160,
   }),
 };
 
 const CustomOption = ({ data, ...props }) => {
   const { icon, label } = data;
   return (
-    <Option className="sortview__option" {...props}>
-      <SortFilterOption icon={icon} label={label} />
+    <Option className="sortview__sort__select__option" {...props}>
+      <SortViewOption icon={icon} label={label} />
     </Option>
   );
 };
@@ -42,8 +46,8 @@ const CustomOption = ({ data, ...props }) => {
 const CustomValue = ({ getValue, ...props }) => {
   const [{ icon, label }] = getValue();
   return (
-    <ValueContainer className="sortview__option" {...props}>
-      <SortFilterOption icon={icon} label={label} />
+    <ValueContainer className="sortview__sort__select__value" {...props}>
+      <SortViewOption icon={icon} label={label} />
     </ValueContainer>
   );
 };
@@ -60,7 +64,7 @@ const DropdownIndicator = props => {
   );
 };
 
-export default function sort() {
+export default function Sort() {
   const { user } = useAuth();
 
   const defaultSelection = user ? null : sortOptions[0];
@@ -76,10 +80,10 @@ export default function sort() {
   }
 
   return (
-    <div className="sortview">
-      <h2>Sort</h2>
+    <div className="sortview__sort">
+      <h2 className="sortview__header">Sort</h2>
       <Select
-        className="sortview__filter"
+        className="sortview__sort__select"
         defaultValue={selection}
         value={selection}
         options={sortOptions}
@@ -90,7 +94,6 @@ export default function sort() {
           Option: CustomOption,
           ValueContainer: CustomValue,
         }}
-        width="27rem"
       />
     </div>
   );

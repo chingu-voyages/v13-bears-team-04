@@ -1,0 +1,36 @@
+// styles created with the react-select styles API
+export default {
+  container: provided => ({ ...provided }),
+  control: provided => ({
+    ...provided,
+    borderColor: "transparent",
+    margin: "2px 0 2px 6px",
+    padding: "2px 0",
+    minHeight: 0,
+  }),
+  indicatorsContainer: () => ({ cursor: "pointer" }),
+  menu: provided => ({
+    ...provided,
+    left: 6,
+    marginTop: -2,
+    marginBottom: 2,
+    borderWidth: 1,
+    borderColor: "#EDEFF1",
+    borderStyle: "solid",
+    borderTopColor: "transparent",
+    borderRadius: 4,
+    boxShadow: "0 2px 4px 0 rgba(28,28,28,0.2)",
+    width: "auto",
+  }),
+  menuList: provided => ({ ...provided, padding: 0 }),
+  option: () => ({
+    display: "flex",
+    alignItems: "center",
+    backgroundColor: "white",
+    fontSize: "1.4rem",
+    lineHeight: "1.8rem",
+    fontWeight: 500,
+    padding: 8,
+    textTransform: "capitalize",
+  }),
+};

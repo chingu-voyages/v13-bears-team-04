@@ -1,6 +1,6 @@
 export const countryOptions = [
   { value: "ALL", label: "Everywhere" },
-  { value: "USA", label: "United States of America" },
+  { value: "USA", label: "United States" },
   { value: "ARG", label: "Argentina" },
   { value: "AUS", label: "Australia" },
   { value: "BGR", label: "Bulgaria" },
@@ -36,7 +36,16 @@ export const countryOptions = [
 export const sortOptions = [
   { value: "hot", label: "Hot", icon: "fire" },
   { value: "new", label: "New", icon: "dice-d6" },
-  { value: "cont", label: "Controversial", icon: "bolt" },
+  { value: "controversial", label: "Controversial", icon: "bolt" },
   { value: "top", label: "Top", icon: "chart-line" },
-  { value: "rise", label: "Rising", icon: "chart-bar" },
+  { value: "rising", label: "Rising", icon: "chart-bar" },
+];
+
+export const dateOptions = [
+  { value: "now", label: "Now" },
+  { value: "new", label: "Today" },
+  { value: "thisweek", label: "This Week" },
+  { value: "thismonth", label: "This Month" },
+  { value: "thisyear", label: "This Year" },
+  { value: "alltime", label: "All Time" },
 ];

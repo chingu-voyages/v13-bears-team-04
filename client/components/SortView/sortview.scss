@@ -4,6 +4,7 @@
   width: 100%;
   height: 4rem;
   margin-top: 4.9rem;
+  background-color: white;
 
   .sortview {
     &__header {
@@ -29,11 +30,20 @@
 
       &__icons {
         margin-left: 1.2rem;
+        display: flex;
 
-        &__icon {
+        &__btn {
+          background: transparent;
+          border: none;
           cursor: pointer;
+          padding: 0;
+          outline: none;
           height: 20px;
           width: 20px;
+
+          &:nth-of-type(2) {
+            margin: 0 2px;
+          }
         }
       }
     }
@@ -43,56 +53,63 @@
       align-items: center;
 
       &__select {
-        display: flex;
-        align-items: center;
-        width: 100%;
-        height: 2.4rem;
         background-color: transparent;
         cursor: pointer;
 
         &__value {
-        }
+          display: flex;
+          align-items: center;
+          color: #878a8c;
+          font-size: 1.2rem;
+          letter-spacing: 0.5px;
+          text-transform: uppercase;
+          padding: 2px;
 
-        &__option {
           &__icon {
-            height: 2rem;
-            width: 2rem !important;
-            margin-right: 1rem;
+            height: 1.6rem;
+            width: 1.6rem !important;
+            margin-left: 0.2rem;
             color: #5296dd;
           }
 
           &__label {
-            display: inline-block;
-            text-transform: uppercase;
-            vertical-align: middle;
-            font-size: 1.2rem;
+            font-size: inherit;
+            font-weight: 700;
+            color: inherit;
+            margin: 0 0 0 0.5rem;
+            white-space: nowrap;
+          }
+        }
+
+        &__option {
+          display: flex;
+          align-items: center;
+          color: #878a8c;
+
+          &:hover {
+            color: #1c1c1c;
+          }
+
+          &__icon {
+            height: 1.6rem;
+            width: 1.6rem !important;
+            margin: 0 0.3rem 0 0.1rem;
+            color: #5296dd;
+          }
+
+          &__label {
+            font-size: inherit;
             font-weight: normal;
-            // color: #d7d7d7;
+            color: inherit;
             margin: 0;
+            white-space: nowrap;
           }
 
           &:hover {
-            background-color: #f6f7f8;
+            background-color: #e9f5fd;
           }
-        }
-        .options {
-          height: 2rem;
         }
       }
     }
-  }
-}
-
-.countryoption {
-  display: flex;
-  // color: $dark-grey;
-  margin-left: 2.7rem;
-
-  &__filter {
-    width: 20rem;
-    text-transform: uppercase;
-    vertical-align: middle;
-    font-size: 1.3rem;
-    font-weight: normal;
   }
 }

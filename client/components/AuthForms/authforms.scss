@@ -3,8 +3,9 @@
     height: 100vh;
     width: 100%;
     position: fixed;
-    top: 0;
-    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     z-index: 9999;
     background-color: rgba($black, 0.6);
     opacity: 1;
@@ -12,33 +13,44 @@
   }
 
   &__content {
-    @include absCenter;
-    width: 58%;
-    height: 55rem;
+    width: 95%;
+    min-width: 300px;
+    max-width: 750px;
+    height: 100%;
+    max-height: 550px;
     background-color: $white;
     box-shadow: 0 2rem 4rem rgba($black, 0.2);
     border-radius: 0.3rem;
     overflow: hidden;
-
     position: relative;
+    display: flex;
   }
 
-  &__main {
-    display: table;
+  &__close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 10px;
+    font-size: 4rem;
+    line-height: 3rem;
+    height: 3rem;
+    width: 3rem;
+    text-align: center;
+    cursor: pointer;
+    text-decoration: none;
+    color: $dark-grey;
   }
 
   &__left {
-    display: table-cell;
     width: 20%;
-
+    height: 100%;
     background-image: url("/static/form_image.png");
     background-size: cover;
-    height: 55rem;
   }
 
   &__right {
-    display: table-cell;
     width: 80%;
+    height: 100%;
   }
 
   &__wrapper {
@@ -128,18 +140,6 @@
     }
   }
 
-  &__close {
-    &:link,
-    &:visited {
-      position: absolute;
-      top: 0.5rem;
-      right: 1.5rem;
-      text-decoration: none;
-      color: $dark-grey;
-      font-size: 3.5rem;
-    }
-  }
-
   &__container {
     position: relative;
   }
@@ -200,4 +200,16 @@
   width: 4rem;
   height: 4rem;
   transform: translate(11%, 11%);
+}
+
+@media screen and (max-width: 500px) {
+  .form {
+    &__left {
+      width: 0;
+      display: none;
+    }
+    &__right {
+      width: 100%;
+    }
+  }
 }

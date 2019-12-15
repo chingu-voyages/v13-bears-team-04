@@ -5,12 +5,12 @@
     clear: both;
   }
 }
-@mixin absCenter {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
+// @mixin absCenter {
+//   position: absolute;
+//   top: 50%;
+//   left: 50%;
+//   transform: translate(-50%, -50%);
+// }
 
 @mixin btnColors($primColor, $secColor) {
   color: $secColor;

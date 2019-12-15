@@ -3,8 +3,6 @@ import React, { useState } from "react";
 import Button from "../Button";
 import Input from "./Input";
 
-import "./form.scss";
-
 export default function signup() {
   const [isBtnOpen, setIsBtnOpen] = useState(true);
   return (

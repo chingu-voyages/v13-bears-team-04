@@ -4,8 +4,6 @@ import Button from "../Button";
 import Input from "./Input";
 // import formatTemplate from "./FormTemplate";
 
-import "./form.scss";
-
 export default function forgotusername() {
   return (
     <div className="form__right">

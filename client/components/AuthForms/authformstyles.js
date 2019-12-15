@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "./authforms.scss";
 
 export default function AuthFormStyles({ children }) {
   const [isBtnOpen, toggleIsBtnOpen] = useState(true);

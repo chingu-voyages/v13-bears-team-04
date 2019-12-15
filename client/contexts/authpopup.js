@@ -4,19 +4,12 @@ import AuthFormPopup from "../components/AuthForms";
 const AuthPopupContext = createContext();
 
 export const AuthPopupProvider = ({ children }) => {
-  // const [[showAuthPopup, authPopupName], setAuthPopup] = useState([false, ""]);
-  const [[showAuthPopup, authPopupName], setAuthPopup] = useState([
-    true,
-    "signin",
-  ]);
+  const [[showAuthPopup, authPopupName], setAuthPopup] = useState([false, ""]);
+  const state = { setAuthPopup, showAuthPopup, authPopupName };
 
   return (
-    <AuthPopupContext.Provider value={setAuthPopup}>
-      <AuthFormPopup
-        showAuthPopup={showAuthPopup}
-        authPopupName={authPopupName}
-        setAuthPopup={setAuthPopup}
-      />
+    <AuthPopupContext.Provider value={state}>
+      <AuthFormPopup />
       {children}
     </AuthPopupContext.Provider>
   );

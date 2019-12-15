@@ -3,7 +3,7 @@ import Button from "../Button";
 import { useAuthPopup } from "../../contexts/authpopup";
 
 export default function NavAuth() {
-  const setAuthPopup = useAuthPopup();
+  const { setAuthPopup } = useAuthPopup();
 
   return (
     <div className="nav__item__auth">

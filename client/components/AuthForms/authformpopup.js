@@ -1,13 +1,16 @@
 import React from "react";
+
 import SignIn from "./signin";
 import SignUp from "./signup";
 import ForgotPassword from "./forgotpassword";
 import ForgotUsername from "./forgotusername";
-import AuthFormCloseIcon from "./authformcloseicon";
+import AuthFormLink from "./authformlink";
+
+import { useAuthPopup } from "../../contexts/authpopup";
 import "./authforms.scss";
 
-export default function AuthFormPopup(props) {
-  const { showAuthPopup, authPopupName, setAuthPopup } = props;
+export default function AuthFormPopup() {
+  const { showAuthPopup, authPopupName, setAuthPopup } = useAuthPopup();
 
   const closePopup = () => setAuthPopup([false, ""]);
 
@@ -23,7 +26,11 @@ export default function AuthFormPopup(props) {
           {authPopupName === "forgotpassword" && <ForgotPassword />}
           {authPopupName === "forgotusername" && <ForgotUsername />}
         </div>
-        <AuthFormCloseIcon closePopup={closePopup} />
+        <AuthFormLink
+          handleClick={closePopup}
+          text="&times;"
+          cx="form__close"
+        />
       </div>
     </div>
   );

@@ -1,14 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
-export default function reusableformstyle(props) {
+export default function AuthFormStyles({ children }) {
   const [isBtnOpen, toggleIsBtnOpen] = useState(true);
-
-  //   useEffect(() => {
-  //     if (user === true) {
-  //       setIsBtnOpen;
-  //       false;
-  //     }
-  //   }, [user]);
 
   return (
     <div
@@ -18,7 +11,7 @@ export default function reusableformstyle(props) {
       <div className="form__content">
         <form action="#" className="form__main">
           <div className="form__left" />
-          {props.children}
+          {children}
         </form>
         <a
           href="#"

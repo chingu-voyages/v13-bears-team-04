@@ -1,51 +1,32 @@
-import React, { useState } from "react";
+import React from "react";
 
-import "../form.scss";
-
-export default function input(props) {
-  // const [placeholder, setPlaceholder] = useState(
-  //   [{ userName: "username" }, { email: "email" }, { password: "password" }],
-  //   []
-  // );
-
-  const [username, setUsername] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-
-  let inputType = props.children;
-  let type, inputValue, randNo;
-
-  randNo = Math.round(Math.random() * 1000);
-
-  if (inputType.toLowerCase() === "email") {
-    type = "email";
-    inputValue = email;
-  } else if (inputType.toLowerCase() === "username") {
-    type = "text";
-    inputValue = username;
-  } else {
-    type = "password";
-    inputValue = password;
-  }
+const Input = props => {
+  const { value, handleChange, type, label, minLength, maxLength } = props;
+  const randNum = Math.round(Math.random() * 1000);
 
   return (
     <div className="form__container form__wrapper__input">
-      <input
-        className="form__input"
-        type={type}
-        placeholder=""
-        id={`form__placeholder-${randNo}`}
-        required
-        pattern="\S+.*"
-        // value={inputValue}
-        autocomplete="on"
-      />
       <label
         className="form__placeholder"
-        htmlFor={`form__placeholder-${randNo}`}
+        htmlFor={`form__placeholder-${randNum}`}
       >
-        {props.children}
+        {label}
       </label>
+      <input
+        id={`form__placeholder-${randNum}`}
+        className="form__input"
+        type={type}
+        value={value}
+        onChange={handleChange}
+        minLength={minLength}
+        maxLength={maxLength}
+        placeholder=""
+        pattern="\S+.*"
+        autoComplete="on"
+        required
+      />
     </div>
   );
-}
+};
+
+export default Input;

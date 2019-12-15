@@ -7,6 +7,7 @@ import RecentPosts from "../components/RecentPosts";
 import ToTopButton from "../components/ToTopButton";
 import TrendingCommunity from "../components/TrendingCommunity";
 import GrowingCommunities from "../components/GrowingCommunities";
+import SortView from "../components/SortView";
 
 import { useAuth } from "../utils/authcontext";
 import fetchIt from "../utils/fetch";
@@ -59,6 +60,7 @@ const Home = () => {
   return (
     <div>
       <Nav />
+      <SortView />
       <PostList />
       <TrendingCommunity />
       <GrowingCommunities />
@@ -85,6 +87,18 @@ const Home = () => {
           Create Post
         </button>
       )}
+      {/* <<<<<<< HEAD
+
+      <Nav />
+      <PostList />
+      <TrendingCommunity />
+      <GrowingCommunities />
+      <RecentPosts />
+      <HomeBox />
+
+      <ToTopButton />
+=======
+>>>>>>> 338282da6ed5467d5e1b1ef5d22058c1b3249126 */}
     </div>
   );
 };

@@ -10,12 +10,11 @@ export default function SignIn() {
       <div className="form__wrapper__title">Sign in</div>
       <Input>Username</Input>
       <Input>Password</Input>
-
-      <div className="form__wrapper__button">
-        <Button color="blue" inverted={false}>
-          Sign In
-        </Button>
-      </div>
+      <Button
+        text="Sign In"
+        handleClick={() => console.log("submitted")}
+        cx="form__wrapper__button"
+      />
       <div className="form__wrapper__link">
         <a href="#" className="form__wrapper__link--username">
           Forgot username

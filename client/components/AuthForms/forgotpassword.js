@@ -16,11 +16,11 @@ export default function ForgotPassword() {
       <Input>Username</Input>
       <Input>Email</Input>
 
-      <div className="form__wrapper__button">
-        <Button color="blue" inverted={false}>
-          Email me
-        </Button>
-      </div>
+      <Button
+        text="Email Me"
+        handleClick={() => console.log("emailed you")}
+        cx="form__wrapper__button"
+      />
       <div className="form__wrapper__link">
         <a href="#" className="form__wrapper__link--password">
           Forgot username

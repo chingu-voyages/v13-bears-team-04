@@ -13,11 +13,11 @@ export default function ForgotUsername() {
         out. Enter your email address below and we'll email you your username.
       </p>
       <Input>Email</Input>
-      <div className="form__wrapper__button">
-        <Button color="blue" inverted={false}>
-          Email me
-        </Button>
-      </div>
+      <Button
+        text="Email Me"
+        handleClick={() => console.log("emailed you")}
+        cx="form__wrapper__button"
+      />
       <div className="form__wrapper__info u-margin-top-medium">
         <p>
           If you are having trouble accessing your account, follow this{" "}

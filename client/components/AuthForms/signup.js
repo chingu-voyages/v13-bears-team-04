@@ -11,11 +11,11 @@ export default function SignUp() {
         favorite Reddit content.
       </p>
       <Input>Email</Input>
-      <div className="form__wrapper__button">
-        <Button color="blue" inverted={false}>
-          Sign up
-        </Button>
-      </div>
+      <Button
+        text="Sign Up"
+        handleClick={() => console.log("submitted")}
+        cx="form__wrapper__button"
+      />
       <div className="form__wrapper__info u-margin-top-small">
         <p>
           Already a Redditor?{" "}

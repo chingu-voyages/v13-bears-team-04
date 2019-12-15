@@ -6,14 +6,8 @@ import PostList from "../components/PostList";
 import RecentPosts from "../components/RecentPosts";
 import ToTopButton from "../components/ToTopButton";
 import TrendingCommunity from "../components/TrendingCommunity";
-import Input from "../components/Form/Input";
-import Signin from "../components/Form";
-import Signup from "../components/Form/signup";
-import ReusableStyleComponent from "../components/Form/ReusableFontStyle";
-import ForgotPassword from "../components/Form/forgotpassword";
-import ForgotUsername from "../components/Form/forgotusername";
-
 import GrowingCommunities from "../components/GrowingCommunities";
+
 import { useAuth } from "../utils/authcontext";
 import fetchIt from "../utils/fetch";
 
@@ -71,18 +65,6 @@ const Home = () => {
       <RecentPosts />
       <HomeBox />
       <ToTopButton />
-      <ReusableStyleComponent>
-        <Signin />
-      </ReusableStyleComponent>
-      <ReusableStyleComponent>
-        <Signup />
-      </ReusableStyleComponent>
-      <ReusableStyleComponent>
-        <ForgotPassword />
-      </ReusableStyleComponent>
-      <ReusableStyleComponent>
-        <ForgotUsername />
-      </ReusableStyleComponent>
       {!user && (
         <button type="button" onClick={handleSignup}>
           Signup

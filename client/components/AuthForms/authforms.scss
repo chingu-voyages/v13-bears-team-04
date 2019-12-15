@@ -71,10 +71,9 @@
     }
 
     &__icon {
-      background-color: $dark-orange;
-      border-radius: 10rem;
-      width: 5rem;
-      height: 5rem;
+      width: 4rem;
+      height: 4rem;
+      margin-bottom: 8px;
     }
 
     &__title {
@@ -193,14 +192,6 @@
 .sub-description {
   font-size: 1.8rem !important;
   font-weight: lighter !important;
-}
-
-.reddit-icon {
-  display: inline-block;
-  border-radius: 10rem;
-  width: 4rem;
-  height: 4rem;
-  transform: translate(11%, 11%);
 }
 
 @media screen and (max-width: 500px) {

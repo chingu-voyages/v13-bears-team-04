@@ -1,17 +1,12 @@
 import React, { useState } from "react";
 import Button from "../Button";
 import Input from "./input";
+import AuthFormRedditIcon from "./authformredditicon";
 
 export default function ForgotUsername() {
   return (
     <div className="form__wrapper">
-      <div className="form__wrapper__icon">
-        <img
-          src="/static/reddit_icon.png"
-          alt="reddit_sub_icon"
-          className="reddit-icon"
-        />
-      </div>
+      <AuthFormRedditIcon cx="form__wrapper__icon" />
       <h2>Recover your username</h2>
       <p className="sub-description">
         Don't worry! You may have forgotten your username, but we can help you

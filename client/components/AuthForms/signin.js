@@ -1,17 +1,12 @@
 import React, { useState } from "react";
 import Button from "../Button";
 import Input from "./input";
+import AuthFormRedditIcon from "./authformredditicon";
 
 export default function SignIn() {
   return (
     <div className="form__wrapper">
-      <div className="form__wrapper__icon">
-        <img
-          src="/static/reddit_icon.png"
-          alt="reddit_sub_icon"
-          className="reddit-icon"
-        />
-      </div>
+      <AuthFormRedditIcon cx="form__wrapper__icon" />
       <div className="form__wrapper__title">Sign in</div>
       <Input>Username</Input>
       <Input>Password</Input>

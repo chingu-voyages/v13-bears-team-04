@@ -4,6 +4,7 @@ import React from "react";
 import App from "next/app";
 
 import { AuthProvider } from "../utils/authcontext";
+import { AuthPopupProvider } from "../contexts/authpopup";
 import fetchIt from "../utils/fetch";
 
 import "../utils/icons";
@@ -24,7 +25,9 @@ class MyApp extends App {
     const { Component, pageProps, user } = this.props;
     return (
       <AuthProvider user={user}>
-        <Component {...pageProps} />
+        <AuthPopupProvider>
+          <Component {...pageProps} />
+        </AuthPopupProvider>
       </AuthProvider>
     );
   }

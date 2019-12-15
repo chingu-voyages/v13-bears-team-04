@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import Button from "../Button";
-import Input from "./Input";
+import Input from "./input";
 
-export default function forgotPassword() {
+export default function ForgotPassword() {
   return (
     <div className="form__right">
       <div className="form__wrapper">

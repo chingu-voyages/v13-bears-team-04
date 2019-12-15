@@ -1,10 +1,8 @@
 import React, { useState } from "react";
-
 import Button from "../Button";
-import Input from "./Input";
-// import formatTemplate from "./FormTemplate";
+import Input from "./input";
 
-export default function forgotusername() {
+export default function ForgotUsername() {
   return (
     <div className="form__right">
       <div className="form__wrapper u-margin-top-medium">

@@ -1,9 +1,8 @@
 import React, { useState } from "react";
-
 import Button from "../Button";
-import Input from "./Input";
+import Input from "./input";
 
-export default function signup() {
+export default function SignUp() {
   const [isBtnOpen, setIsBtnOpen] = useState(true);
   return (
     <div className="form__right">

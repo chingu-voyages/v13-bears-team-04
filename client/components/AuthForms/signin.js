@@ -1,9 +1,8 @@
 import React, { useState } from "react";
-
 import Button from "../Button";
-import Input from "./Input";
+import Input from "./input";
 
-export default function signin() {
+export default function SignIn() {
   return (
     <div className="form__right">
       <div className="form__wrapper u-margin-top-medium">

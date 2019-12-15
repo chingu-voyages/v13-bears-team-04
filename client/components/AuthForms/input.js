@@ -6,12 +6,6 @@ const Input = props => {
 
   return (
     <div className="form__container form__wrapper__input">
-      <label
-        className="form__placeholder"
-        htmlFor={`form__placeholder-${randNum}`}
-      >
-        {label}
-      </label>
       <input
         id={`form__placeholder-${randNum}`}
         className="form__input"
@@ -25,6 +19,12 @@ const Input = props => {
         autoComplete="on"
         required
       />
+      <label
+        className="form__placeholder"
+        htmlFor={`form__placeholder-${randNum}`}
+      >
+        {label}
+      </label>
     </div>
   );
 };

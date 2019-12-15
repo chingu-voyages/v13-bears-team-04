@@ -4,21 +4,49 @@ import Input from "./input";
 import AuthFormRedditIcon from "./authformredditicon";
 import AuthFormLink from "./authformlink";
 import { useAuthPopup } from "../../contexts/authpopup";
+import { useAuth } from "../../utils/authcontext";
 
 export default function SignIn() {
   const { setAuthPopup } = useAuthPopup();
+  const { login } = useAuth();
+
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+    const message = await login({ username, password });
+    console.log(message);
+    setAuthPopup([false, ""]);
+  }
 
   return (
     <div className="form__wrapper">
       <AuthFormRedditIcon cx="form__wrapper__icon" />
+
       <div className="form__wrapper__title">Sign in</div>
-      <Input>Username</Input>
-      <Input>Password</Input>
-      <Button
-        text="Sign In"
-        handleClick={() => console.log("submitted")}
-        cx="form__wrapper__button"
-      />
+
+      <form action="#" onSubmit={handleSubmit}>
+        <Input
+          label="Username"
+          value={username}
+          handleChange={e => setUsername(e.target.value)}
+          type="text"
+        />
+        <Input
+          label="Password"
+          value={password}
+          handleChange={e => setPassword(e.target.value)}
+          type="password"
+        />
+        <Button
+          type="submit"
+          text="Sign In"
+          handleClick={() => console.log("submitted")}
+          cx="form__wrapper__button"
+        />
+      </form>
+
       <div className="form__wrapper__links">
         <AuthFormLink
           handleClick={() => setAuthPopup([true, "forgotusername"])}
@@ -32,6 +60,7 @@ export default function SignIn() {
           cx="form__wrapper__link"
         />
       </div>
+
       <div className="form__wrapper__info">
         <p>
           New to Reddit?{" "}

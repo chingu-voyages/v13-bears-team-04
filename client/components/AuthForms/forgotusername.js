@@ -4,7 +4,7 @@ import Input from "./input";
 
 export default function ForgotUsername() {
   return (
-    <div className="form__wrapper u-margin-top-medium">
+    <div className="form__wrapper">
       <div className="form__wrapper__icon">
         <img
           src="/static/reddit_icon.png"

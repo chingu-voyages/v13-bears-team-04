@@ -51,13 +51,14 @@
   &__right {
     width: 80%;
     height: 100%;
+    display: flex;
+    align-items: center;
   }
 
   &__wrapper {
-    display: inline-block;
-    transform: translate(10%, 13%);
-
-    width: 70%;
+    padding: 24px;
+    min-width: 260px;
+    max-width: 440px;
 
     & > h2 {
       font-size: 2rem;

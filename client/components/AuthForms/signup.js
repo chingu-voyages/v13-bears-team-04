@@ -5,7 +5,7 @@ import Input from "./input";
 export default function SignUp() {
   const [isBtnOpen, setIsBtnOpen] = useState(true);
   return (
-    <div className="form__wrapper u-margin-top-large">
+    <div className="form__wrapper">
       <p>
         By having a Reddit account, you can join, vote, and comment on all your
         favorite Reddit content.

@@ -14,9 +14,9 @@ export default function ForgotPassword() {
       </div>
       <h2>Reset your password</h2>
       <p className="sub-description">
-        Don't worry! You may have forgotten your password, but we can help you
+        {`Don't worry! You may have forgotten your password, but we can help you
         out. Enter your username below and we'll email you a link to reset your
-        password.
+        password.`}
       </p>
       <Input>Username</Input>
       <Input>Email</Input>

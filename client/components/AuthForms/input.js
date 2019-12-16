@@ -2,13 +2,12 @@ import React from "react";
 
 const Input = props => {
   const { value, handleChange, type, label, minLength, maxLength } = props;
-  const randNum = Math.round(Math.random() * 1000);
 
   return (
-    <div className="form__container form__wrapper__input">
+    <div className="form__field">
       <input
-        id={`form__placeholder-${randNum}`}
-        className="form__input"
+        id={`form__field__input--${label}`}
+        className="form__field__input"
         type={type}
         value={value}
         onChange={handleChange}
@@ -20,8 +19,8 @@ const Input = props => {
         required
       />
       <label
-        className="form__placeholder"
-        htmlFor={`form__placeholder-${randNum}`}
+        htmlFor={`form__field__input--${label}`}
+        className="form__field__label"
       >
         {label}
       </label>

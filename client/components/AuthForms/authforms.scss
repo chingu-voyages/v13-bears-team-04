@@ -3,6 +3,8 @@
     height: 100vh;
     width: 100%;
     position: fixed;
+    top: 0;
+    left: 0;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -145,52 +147,69 @@
     }
   }
 
-  &__container {
+  &__field {
     position: relative;
-  }
+    height: 48px;
+    width: 300px;
+    margin: 24px 0;
 
-  &__placeholder {
-    display: inline-block;
-    position: absolute;
-    top: 1.4rem;
-    left: 1.5rem;
-    font-size: 1.5rem;
+    &__input {
+      height: 100%;
+      width: 100%;
+      font-size: 1.2rem;
+      outline: 0;
+      -webkit-appearance: none;
+      padding: 22px 12px 10px;
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      border-radius: 4px;
+      background-color: #fcfcfb;
+      box-sizing: border-box;
 
-    color: rgba($dark-grey, 0.8);
-    text-transform: uppercase;
-
-    color: rgba($dark-grey, 0.8);
-    text-transform: uppercase;
-    -webkit-transform: translate(0);
-    transition-property: -webkit-transform, font-size;
-    transition-duration: 0.3s, 0.3s;
-    transition-timing-function: ease;
-  }
-
-  &__input {
-    font-size: 1.3rem;
-    padding: 1.4rem 25rem 1.4rem 1rem;
-
-    border: none;
-    border-radius: 0.5rem;
-    border: 1px solid $grey;
-    display: inline-block;
-    position: relative;
-
-    &:focus,
-    &:valid,
-    &:hover {
-      outline: none;
-      border: 1px solid rgba($dark-grey, 0.6);
-
-      & + label {
-        transition-property: -webkit-transform, font-size;
-        transition-duration: 0.3s, 0.3s;
-        transition-timing-function: ease;
-        font-size: 1.1rem;
-        transform: translate(-0.5rem, -1.1rem);
+      &:hover,
+      &:focus,
+      &:active,
+      &:valid {
+        & + label {
+          transform: translate(7px, 0px) scale(0.8);
+          &:after {
+            opacity: 0;
+          }
+        }
       }
     }
+
+    &__label {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      position: absolute;
+      top: 0;
+      left: 0;
+      display: inline-block;
+      vertical-align: middle;
+      color: #a5a4a4;
+      text-transform: uppercase;
+      pointer-events: none;
+      line-height: 23px;
+      transform: translate(12px, 12px) scale(1);
+      transition: 0.25s transform, 0.2s opacity;
+    }
+
+    label:after {
+      font-size: 20px;
+      font-weight: 500;
+      line-height: 24px;
+      display: inline-block;
+      vertical-align: top;
+      margin-left: 7px;
+      content: "\2022";
+      color: #24a0ed;
+      opacity: 1;
+    }
+  }
+
+  &__container {
+    position: relative;
   }
 }
 

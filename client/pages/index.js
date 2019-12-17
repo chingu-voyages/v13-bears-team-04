@@ -11,13 +11,7 @@ import { useUser } from "../contexts/user";
 import fetchIt from "../utils/fetch";
 
 const Home = () => {
-  const { user, logout } = useUser();
-
-  async function handleLogout() {
-    const userId = user._id;
-    const message = await logout({ userId });
-    console.log(message);
-  }
+  const { user } = useUser();
 
   async function createPost() {
     try {
@@ -42,16 +36,12 @@ const Home = () => {
   return (
     <div style={{ marginTop: "4.9rem" }}>
       <SortView />
+      {user ? `Hello, ${user.username}` : "Not logged in"}
       <PostList />
       <TrendingCommunity />
       <GrowingCommunities />
       <RecentPosts />
       <HomeBox />
-      {user && (
-        <button type="button" onClick={handleLogout}>
-          Logout
-        </button>
-      )}
       {user && (
         <button type="button" onClick={createPost}>
           Create Post

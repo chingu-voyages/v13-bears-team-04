@@ -1,10 +1,8 @@
 import React from "react";
 
 import HomeBox from "../components/HomeBox";
-import Nav from "../components/Nav";
 import PostList from "../components/PostList";
 import RecentPosts from "../components/RecentPosts";
-import ToTopButton from "../components/ToTopButton";
 import TrendingCommunity from "../components/TrendingCommunity";
 import GrowingCommunities from "../components/GrowingCommunities";
 import SortView from "../components/SortView";
@@ -59,14 +57,12 @@ const Home = () => {
 
   return (
     <div>
-      <Nav />
       <SortView />
       <PostList />
       <TrendingCommunity />
       <GrowingCommunities />
       <RecentPosts />
       <HomeBox />
-      <ToTopButton />
       {!user && (
         <button type="button" onClick={handleSignup}>
           Signup

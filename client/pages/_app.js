@@ -3,6 +3,8 @@
 import React from "react";
 import App from "next/app";
 
+import Nav from "../components/Nav";
+import ToTopButton from "../components/ToTopButton";
 import { AuthProvider } from "../utils/authcontext";
 import { AuthPopupProvider } from "../contexts/authpopup";
 import fetchIt from "../utils/fetch";
@@ -26,7 +28,9 @@ class MyApp extends App {
     return (
       <AuthProvider user={user}>
         <AuthPopupProvider>
+          <Nav />
           <Component {...pageProps} />
+          <ToTopButton />
         </AuthPopupProvider>
       </AuthProvider>
     );

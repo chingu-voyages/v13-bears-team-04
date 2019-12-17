@@ -15,7 +15,7 @@ export default function ForgotPassword() {
     e.preventDefault();
     const message = "Check your email";
     console.log(message);
-    setAuthPopup([false, ""]);
+    setAuthPopup("");
   }
 
   return (
@@ -53,7 +53,7 @@ export default function ForgotPassword() {
 
       <div className="form__wrapper__info">
         <AuthFormLink
-          handleClick={() => setAuthPopup([true, "forgotusername"])}
+          handleClick={() => setAuthPopup("forgotusername")}
           text="Forgot Username"
           cx="form__wrapper__link"
         />
@@ -65,13 +65,13 @@ export default function ForgotPassword() {
 
       <div className="form__wrapper__links">
         <AuthFormLink
-          handleClick={() => setAuthPopup([true, "signin"])}
+          handleClick={() => setAuthPopup("signin")}
           text="Log in"
           cx="form__wrapper__link"
         />
         <span className="form__wrapper__middot">&middot;</span>
         <AuthFormLink
-          handleClick={() => setAuthPopup([true, "signup"])}
+          handleClick={() => setAuthPopup("signup")}
           text="Sign up"
           cx="form__wrapper__link"
         />

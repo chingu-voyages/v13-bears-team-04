@@ -17,7 +17,7 @@ export default function SignIn() {
     e.preventDefault();
     const message = await login({ username, password });
     console.log(message);
-    setAuthPopup([false, ""]);
+    setAuthPopup("");
   }
 
   return (
@@ -49,13 +49,13 @@ export default function SignIn() {
 
       <div className="form__wrapper__links">
         <AuthFormLink
-          handleClick={() => setAuthPopup([true, "forgotusername"])}
+          handleClick={() => setAuthPopup("forgotusername")}
           text="Forgot Username"
           cx="form__wrapper__link"
         />
         <span className="form__wrapper__middot">&middot;</span>
         <AuthFormLink
-          handleClick={() => setAuthPopup([true, "forgotpassword"])}
+          handleClick={() => setAuthPopup("forgotpassword")}
           text="Forgot Password"
           cx="form__wrapper__link"
         />
@@ -65,7 +65,7 @@ export default function SignIn() {
         <p>
           New to Reddit?{" "}
           <AuthFormLink
-            handleClick={() => setAuthPopup([true, "signup"])}
+            handleClick={() => setAuthPopup("signup")}
             text="Signup"
             cx="form__wrapper__link"
           />

@@ -4,11 +4,10 @@ import AuthFormPopup from "../components/AuthForms";
 const AuthPopupContext = createContext();
 
 export const AuthPopupProvider = ({ children }) => {
-  const [[showAuthPopup, authPopupName], setAuthPopup] = useState([false, ""]);
-  const state = { setAuthPopup, showAuthPopup, authPopupName };
+  const [authPopupName, setAuthPopup] = useState("");
 
   return (
-    <AuthPopupContext.Provider value={state}>
+    <AuthPopupContext.Provider value={{ setAuthPopup, authPopupName }}>
       <AuthFormPopup />
       {children}
     </AuthPopupContext.Provider>

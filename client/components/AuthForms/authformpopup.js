@@ -10,11 +10,11 @@ import { useAuthPopup } from "../../contexts/authpopup";
 import "./authforms.scss";
 
 export default function AuthFormPopup() {
-  const { showAuthPopup, authPopupName, setAuthPopup } = useAuthPopup();
+  const { authPopupName, setAuthPopup } = useAuthPopup();
 
-  const closePopup = () => setAuthPopup([false, ""]);
+  const closePopup = () => setAuthPopup("");
 
-  const visibility = showAuthPopup ? "visible" : "hidden";
+  const visibility = authPopupName ? "visible" : "hidden";
 
   return (
     <div className="form__popup" style={{ visibility }}>

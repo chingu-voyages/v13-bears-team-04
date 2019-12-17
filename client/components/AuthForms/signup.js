@@ -17,7 +17,7 @@ export default function SignUp() {
     e.preventDefault();
     const message = await signup({ email, username, password });
     console.log(message);
-    setAuthPopup([false, ""]);
+    setAuthPopup("");
   }
 
   return (
@@ -58,7 +58,7 @@ export default function SignUp() {
         <p>
           Already a Redditor?{" "}
           <AuthFormLink
-            handleClick={() => setAuthPopup([true, "signin"])}
+            handleClick={() => setAuthPopup("signin")}
             text=" Log in"
             cx="form__wrapper__link"
           />

@@ -9,13 +9,13 @@ export default function NavAuth() {
     <div className="nav__item__auth">
       <Button
         cx="nav__item__auth__btn"
-        handleClick={() => setAuthPopup([true, "signin"])}
+        handleClick={() => setAuthPopup("signin")}
         inverted
         text="log in"
       />
       <Button
         cx="nav__item__auth__btn"
-        handleClick={() => setAuthPopup([true, "signup"])}
+        handleClick={() => setAuthPopup("signup")}
         text="sign up"
       />
     </div>

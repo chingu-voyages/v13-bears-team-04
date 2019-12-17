@@ -14,7 +14,7 @@ export default function ForgotUsername() {
     e.preventDefault();
     const message = "Check your email";
     console.log(message);
-    setAuthPopup([false, ""]);
+    setAuthPopup("");
   }
 
   return (
@@ -50,13 +50,13 @@ export default function ForgotUsername() {
 
       <div className="form__wrapper__links">
         <AuthFormLink
-          handleClick={() => setAuthPopup([true, "signin"])}
+          handleClick={() => setAuthPopup("signin")}
           text="Log in"
           cx="form__wrapper__link --capitalize"
         />
         <span className="form__wrapper__middot">&middot;</span>
         <AuthFormLink
-          handleClick={() => setAuthPopup([true, "signup"])}
+          handleClick={() => setAuthPopup("signup")}
           text="Sign up"
           cx="form__wrapper__link --capitalize"
         />

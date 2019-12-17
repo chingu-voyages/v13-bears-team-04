@@ -87,18 +87,6 @@ const Home = () => {
           Create Post
         </button>
       )}
-      {/* <<<<<<< HEAD
-
-      <Nav />
-      <PostList />
-      <TrendingCommunity />
-      <GrowingCommunities />
-      <RecentPosts />
-      <HomeBox />
-
-      <ToTopButton />
-=======
->>>>>>> 338282da6ed5467d5e1b1ef5d22058c1b3249126 */}
     </div>
   );
 };

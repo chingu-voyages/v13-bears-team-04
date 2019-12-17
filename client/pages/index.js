@@ -11,27 +11,11 @@ import { useAuth } from "../utils/authcontext";
 import fetchIt from "../utils/fetch";
 
 const Home = () => {
-  const { user, login, logout, signup } = useAuth();
-
-  async function handleLogin() {
-    const username = "Tester2";
-    const password = "password";
-    const message = await login({ username, password });
-    console.log(message);
-  }
+  const { user, logout } = useAuth();
 
   async function handleLogout() {
     const userId = user._id;
     const message = await logout({ userId });
-    console.log(message);
-  }
-
-  async function handleSignup() {
-    const randomNum = Math.floor(Math.random() * 90 + 10);
-    const email = `test${randomNum}@test.com`;
-    const username = `Tester${randomNum}`;
-    const password = "password";
-    const message = await signup({ email, username, password });
     console.log(message);
   }
 
@@ -56,23 +40,13 @@ const Home = () => {
   }
 
   return (
-    <div>
+    <div style={{ marginTop: "4.9rem" }}>
       <SortView />
       <PostList />
       <TrendingCommunity />
       <GrowingCommunities />
       <RecentPosts />
       <HomeBox />
-      {!user && (
-        <button type="button" onClick={handleSignup}>
-          Signup
-        </button>
-      )}
-      {!user && (
-        <button type="button" onClick={handleLogin}>
-          Login
-        </button>
-      )}
       {user && (
         <button type="button" onClick={handleLogout}>
           Logout

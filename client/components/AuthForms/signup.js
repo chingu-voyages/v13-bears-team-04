@@ -3,11 +3,11 @@ import Button from "../Button";
 import Input from "./input";
 import AuthFormLink from "./authformlink";
 import { useAuthPopup } from "../../contexts/authpopup";
-import { useAuth } from "../../utils/authcontext";
+import { useUser } from "../../contexts/user";
 
 export default function SignUp() {
   const { setAuthPopup } = useAuthPopup();
-  const { signup } = useAuth();
+  const { signup } = useUser();
 
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");

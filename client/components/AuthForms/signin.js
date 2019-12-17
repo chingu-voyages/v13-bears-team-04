@@ -4,11 +4,11 @@ import Input from "./input";
 import AuthFormRedditIcon from "./authformredditicon";
 import AuthFormLink from "./authformlink";
 import { useAuthPopup } from "../../contexts/authpopup";
-import { useAuth } from "../../utils/authcontext";
+import { useUser } from "../../contexts/user";
 
 export default function SignIn() {
   const { setAuthPopup } = useAuthPopup();
-  const { login } = useAuth();
+  const { login } = useUser();
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");

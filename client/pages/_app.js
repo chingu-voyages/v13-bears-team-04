@@ -5,7 +5,7 @@ import App from "next/app";
 
 import Nav from "../components/Nav";
 import ToTopButton from "../components/ToTopButton";
-import { AuthProvider } from "../utils/authcontext";
+import { UserProvider } from "../contexts/user";
 import { AuthPopupProvider } from "../contexts/authpopup";
 import fetchIt from "../utils/fetch";
 
@@ -26,13 +26,13 @@ class MyApp extends App {
   render() {
     const { Component, pageProps, user } = this.props;
     return (
-      <AuthProvider user={user}>
+      <UserProvider user={user}>
         <AuthPopupProvider>
           <Nav />
           <Component {...pageProps} />
           <ToTopButton />
         </AuthPopupProvider>
-      </AuthProvider>
+      </UserProvider>
     );
   }
 }

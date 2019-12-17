@@ -2,7 +2,7 @@ import React from "react";
 import Select, { components } from "react-select";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import NavSelectOption from "./navselectoption";
-import { useAuth } from "../../utils/authcontext";
+import { useUser } from "../../contexts/user";
 
 const { ValueContainer } = components;
 
@@ -102,7 +102,8 @@ const CustomValue = props => {
 };
 
 export default function NavDrop() {
-  const { user } = useAuth();
+  const { user } = useUser();
+
   const { loggedIn, notLoggedIn } = options;
   const opts = user ? loggedIn : notLoggedIn;
   return (

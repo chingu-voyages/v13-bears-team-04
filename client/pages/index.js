@@ -7,11 +7,11 @@ import TrendingCommunity from "../components/TrendingCommunity";
 import GrowingCommunities from "../components/GrowingCommunities";
 import SortView from "../components/SortView";
 
-import { useAuth } from "../utils/authcontext";
+import { useUser } from "../contexts/user";
 import fetchIt from "../utils/fetch";
 
 const Home = () => {
-  const { user, logout } = useAuth();
+  const { user, logout } = useUser();
 
   async function handleLogout() {
     const userId = user._id;

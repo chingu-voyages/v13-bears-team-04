@@ -42,7 +42,7 @@ export default function SignIn() {
         <Button
           type="submit"
           text="Sign In"
-          handleClick={() => console.log("submitted")}
+          handleClick={() => console.log("processing...")}
           cx="form__wrapper__button"
         />
       </form>

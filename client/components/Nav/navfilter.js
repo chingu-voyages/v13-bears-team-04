@@ -90,7 +90,6 @@ export default function NavFilter() {
     .filter(({ value }) => value === pathname);
   // or set it to the most popular page
   const opt = currentPageOption || options[0].options[0];
-  console.log(opt);
   // we'll show different options depending on if we are logged in or not
 
   return (

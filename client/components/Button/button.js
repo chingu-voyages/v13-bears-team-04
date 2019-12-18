@@ -5,6 +5,7 @@ import ButtonWithLink from "./buttonwithlink";
 import "./button.scss";
 
 export default function Button({
+  type,
   text,
   icon,
   color,
@@ -32,7 +33,7 @@ export default function Button({
 
   // RETURNS AN ACTUAL BUTTON
   return (
-    <button type="button" className={className} onClick={handleClick}>
+    <button type={type} className={className} onClick={handleClick}>
       {icon ? <ButtonWithIcon icon={icon} text={text} /> : text}
     </button>
   );
@@ -40,6 +41,8 @@ export default function Button({
 
 // DEFAULT PROPS
 Button.defaultProps = {
+  // String - (button, submit)
+  type: "button",
   // String - (blue, orange)
   color: "blue",
   // Boolean

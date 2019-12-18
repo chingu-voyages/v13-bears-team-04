@@ -1,5 +1,7 @@
 .btn {
-  display: inline-block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   border: 1px solid transparent;
   border-radius: 4px;
   box-sizing: border-box;

@@ -1,25 +1,25 @@
 import React, { createContext, useState, useContext } from "react";
 import { setCookie, destroyCookie } from "nookies";
-import fetchIt from "./fetch";
-import { getCookieOptions } from "./cookies";
+import fetchIt from "../utils/fetch";
+import { getCookieOptions } from "../utils/cookies";
 
-const AuthContext = createContext();
+const UserContext = createContext();
 
 // used to wrap all components in _app.js
-export const AuthProvider = ({ children, user }) => {
-  const authObj = useAuthSetter(user);
+export const UserProvider = ({ children, user }) => {
+  const userObj = useUserSetter(user);
 
   return (
-    <AuthContext.Provider value={authObj}>{children}</AuthContext.Provider>
+    <UserContext.Provider value={userObj}>{children}</UserContext.Provider>
   );
 };
 
 // can use this hook in any file to get our user and auth functions
-// eg) const { user, setUser, login, logout, signup } = useAuth()
-export const useAuth = () => useContext(AuthContext);
+// eg) const { user, setUser, login, logout, signup } = useUser()
+export const useUser = () => useContext(UserContext);
 
 // custom auth hook
-function useAuthSetter(initUser) {
+function useUserSetter(initUser) {
   const [user, setUser] = useState(initUser);
 
   // logs user in, if successful

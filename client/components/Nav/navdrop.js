@@ -2,7 +2,8 @@ import React from "react";
 import Select, { components } from "react-select";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import NavSelectOption from "./navselectoption";
-import { useAuth } from "../../utils/authcontext";
+import { useUser } from "../../contexts/user";
+import { useAuthPopup } from "../../contexts/authpopup";
 
 const { ValueContainer } = components;
 
@@ -26,7 +27,12 @@ const options = {
         { value: "/premium", label: "Reddit Premium", icon: "shield-alt" },
         { value: "/helpcenter", label: "Help Center", icon: "question-circle" },
         { value: "/reddit", label: "Visit Real Reddit", icon: "sign-out-alt" },
-        { value: "/signup", label: "Log In / Sign Up", icon: "sign-out-alt" },
+        {
+          value: "logout",
+          label: "Log Out",
+          icon: "sign-out-alt",
+          actionable: true,
+        },
       ],
     },
   ],
@@ -42,9 +48,10 @@ const options = {
         { value: "/premium", label: "Reddit Premium", icon: "shield-alt" },
         { value: "/helpcenter", label: "Help Center", icon: "question-circle" },
         {
-          value: "/signup",
+          value: "signup",
           label: "Log In / Sign Up",
           icon: "sign-out-alt",
+          actionable: true,
         },
       ],
     },
@@ -102,7 +109,15 @@ const CustomValue = props => {
 };
 
 export default function NavDrop() {
-  const { user } = useAuth();
+  const { user, logout } = useUser();
+  const { setAuthPopup } = useAuthPopup();
+
+  async function handleLogout() {
+    const userId = user._id;
+    const message = await logout({ userId });
+    console.log(message);
+  }
+
   const { loggedIn, notLoggedIn } = options;
   const opts = user ? loggedIn : notLoggedIn;
   return (
@@ -114,6 +129,8 @@ export default function NavDrop() {
       isSearchable={false}
       styles={styles}
       classNamePrefix="drop"
+      setAuthPopup={setAuthPopup}
+      handleLogout={handleLogout}
     />
   );
 }

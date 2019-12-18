@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import Select, { components } from "react-select";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import NavSelectOption from "./navselectoption";
-// import { useAuth } from "../../utils/authcontext";
+// import { useUser } from "../../contexts/user";
 
 const { ValueContainer } = components;
 
@@ -90,7 +90,6 @@ export default function NavFilter() {
     .filter(({ value }) => value === pathname);
   // or set it to the most popular page
   const opt = currentPageOption || options[0].options[0];
-  console.log(opt);
   // we'll show different options depending on if we are logged in or not
 
   return (

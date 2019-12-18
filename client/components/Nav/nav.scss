@@ -132,6 +132,14 @@
         &__icon {
           color: #1a1a1b;
         }
+
+        &__icon[color="blue"] {
+          color: $blue;
+        }
+
+        &__icon[color="orange"] {
+          color: $orange;
+        }
       }
     }
 

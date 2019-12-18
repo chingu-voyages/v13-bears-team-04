@@ -5,11 +5,11 @@ import NavSearch from "./navsearch";
 import NavQuickLinks from "./navquicklinks";
 import NavAuth from "./navauth";
 import NavDrop from "./navdrop";
-// import { useAuth } from "../../utils/authcontext";
+// import { useUser } from "../../contexts/user";
 import "./nav.scss";
 
 export default function Nav() {
-  // const { user, login, logout, signup } = useAuth();
+  // const { user, login, logout, signup } = useUser();
 
   return (
     <nav className="nav-container">

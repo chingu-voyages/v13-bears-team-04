@@ -28,6 +28,7 @@ import {
   faGlobe,
   faSearch,
   faPlus,
+  faCaretDown,
 } from "@fortawesome/free-solid-svg-icons";
 
 library.add(
@@ -54,5 +55,6 @@ library.add(
   faCommentDots,
   faGlobe,
   faSearch,
-  faPlus
+  faPlus,
+  faCaretDown
 );

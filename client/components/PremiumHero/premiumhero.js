@@ -1,5 +1,6 @@
 import React from "react";
 import Button from "../Button/button";
+import StaticFooter from "../StaticFooter/staticfooter";
 import "./premiumhero.scss";
 
 export default function PremiumHero() {
@@ -7,6 +8,11 @@ export default function PremiumHero() {
     <div>
       <div className="hero">
         <div className="hero--info">
+          <img
+            className="hero--image"
+            alt="premiumhero"
+            src="/premium/premium.svg"
+          ></img>
           <p>
             Reddit Premium gives you an ad-free experience, special benefits,
             and directly supports Reddit. The more Reddit is user-supported, the
@@ -23,11 +29,14 @@ export default function PremiumHero() {
               <li className="benefits--point">Ads-free experience</li>
               <li className="benefits--point">700 Coins every month</li>
             </ul>
+            <img
+              className="benefits--image"
+              src="https://www.redditstatic.com/desktop2x/img/gold/crest-with-background.jpg"
+            ></img>
             <Button text="$5.99/Month" color="orange"></Button>
             <div className="benefits--gift">
               <p>1,000 Coins Sign Up Gift</p>
             </div>
-            <div className="benefits--image"></div>
           </div>
           <div>
             <h3>Subscription automatically renews monthly</h3>
@@ -64,6 +73,7 @@ export default function PremiumHero() {
           </div>
         </div>
       </div>
+      <StaticFooter />
     </div>
   );
 }

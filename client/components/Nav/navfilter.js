@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import Select, { components } from "react-select";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import NavSelectOption from "./navselectoption";
-// import { useAuth } from "../../utils/authcontext";
+// import { useUser } from "../../contexts/user";
 
 const { ValueContainer } = components;
 

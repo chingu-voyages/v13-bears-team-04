@@ -1,21 +1,6 @@
-.totop {
-  &--container {
-    float: right;
-  }
-
-  &--button {
-    display: inline-block;
-    float: right;
-    border: 1px solid transparent;
-    box-sizing: border-box;
-    text-align: center;
-    letter-spacing: 0.5px;
-    text-decoration: none;
-    font-size: 12px;
-    font-weight: 700;
-    line-height: 24px;
-    text-transform: uppercase;
-    padding: 3px 16px;
-    border-radius: 0.5rem;
-  }
+.totopbutton {
+  position: fixed;
+  right: 10px;
+  bottom: 10px;
+  z-index: 111;
 }

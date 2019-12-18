@@ -12,29 +12,29 @@ import fetchIt from "../utils/fetch";
 import "../utils/icons";
 import "../sass/main.scss";
 
-class MyApp extends App {
-  static async getInitialProps(appContext) {
-    const appProps = await App.getInitialProps(appContext);
-    try {
-      const user = await fetchIt("/user/verify", { ctx: appContext.ctx });
-      return { user, ...appProps };
-    } catch (err) {
-      return { user: null, ...appProps };
-    }
-  }
+const MyApp = ({ Component, pageProps, user }) => (
+  <UserProvider user={user}>
+    <AuthPopupProvider>
+      <Nav />
+      <Component {...pageProps} />
+      <ToTopButton />
+    </AuthPopupProvider>
+  </UserProvider>
+);
 
-  render() {
-    const { Component, pageProps, user } = this.props;
-    return (
-      <UserProvider user={user}>
-        <AuthPopupProvider>
-          <Nav />
-          <Component {...pageProps} />
-          <ToTopButton />
-        </AuthPopupProvider>
-      </UserProvider>
-    );
+MyApp.getInitialProps = async appContext => {
+  // this calls the getInitialProps on individual pages components
+  const appProps = await App.getInitialProps(appContext);
+  try {
+    // we only want to verify the user on the first page load..
+    // .. so, we'll skip subsequent client side page loads here
+    if (!appContext.ctx) throw new Error("Client side; skip fetch");
+    // verify user through their sessionId stored in a cookie
+    const user = await fetchIt("/user/verify", { ctx: appContext.ctx });
+    return { user, ...appProps };
+  } catch (err) {
+    return { user: null, ...appProps };
   }
-}
+};
 
 export default MyApp;

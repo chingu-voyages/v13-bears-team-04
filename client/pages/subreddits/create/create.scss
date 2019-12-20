@@ -1,0 +1,170 @@
+.subredditscreate-container {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  min-height: calc(100vh - 49px);
+  max-width: 568px;
+  background: white;
+
+  .subcreate {
+    &__left {
+      background-image: url("https://www.redditstatic.com/desktop2x/img/partner-connection.png");
+      flex: 0 0 15vw;
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: 50%;
+      max-width: 140px;
+    }
+
+    &__right {
+      display: flex;
+      flex-direction: column;
+      box-sizing: border-box;
+      max-width: 100vw;
+      padding: 16px;
+      position: relative;
+      margin: 0;
+      flex: 1 1 100%;
+    }
+
+    &__header {
+      font-weight: 500;
+      font-size: 1.6rem;
+      line-height: 2rem;
+      color: #1c1c1c;
+
+      &:not(h3) {
+        padding: 0 0 1.6rem;
+        margin: 0 0 1.6rem;
+        border-bottom: 1px solid #edeff1;
+      }
+
+      &:not(h1) {
+        margin: 0 0 4px;
+      }
+    }
+
+    &__field {
+      color: #1c1c1c;
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 2.4rem;
+
+      &__text {
+        &__note {
+          font-size: 1.2rem;
+          line-height: 1.6rem;
+          font-weight: 400;
+          color: #7c7c7c;
+          margin: 0;
+        }
+      }
+
+      &__content {
+        margin: 1.2rem 0 0;
+
+        &__input {
+          background-color: white;
+          border: 1px solid #edeff1;
+          color: #1c1c1c;
+          box-sizing: border-box;
+          height: 4.8rem;
+          margin-bottom: 0.8rem;
+          border-radius: 0.4rem;
+          padding: 12px 24px 12px 12px;
+          width: 100%;
+          font-weight: 400;
+          font-size: 1.4rem;
+          line-height: 2.1rem;
+        }
+
+        &__textarea {
+          resize: vertical;
+          background-color: white;
+          border: 1px solid #edeff1;
+          border-radius: 4px;
+          box-sizing: border-box;
+          color: #1c1c1c;
+          padding: 0.8rem;
+          width: 100%;
+          font-weight: 400;
+          font-size: 1.4rem;
+          line-height: 2.1rem;
+        }
+      }
+    }
+
+    &__type {
+      //
+
+      &__radiogroup {
+        margin-top: 12px;
+      }
+
+      &__item {
+        display: flex;
+        align-items: center;
+        margin-bottom: 16px;
+        cursor: pointer;
+
+        &__radio {
+          height: 16px;
+          width: 16px;
+          margin-right: 6px;
+          fill: #878a8c;
+
+          &:active {
+            fill: #0079d3;
+          }
+        }
+
+        &__icon {
+          height: 16px;
+          width: 16px;
+          margin: 0 4px;
+        }
+
+        &__text {
+          &__header {
+            display: inline-block;
+            font-size: 1.4rem;
+            line-height: 1.8rem;
+            color: #1c1c1c;
+            padding-left: 4px;
+          }
+
+          &__note {
+            font-size: 1rem;
+            line-height: 1.2rem;
+            color: #7c7c7c;
+            margin-left: 4px;
+          }
+        }
+      }
+    }
+
+    &__adult {
+      &__checkbox {
+        height: 16px;
+        width: 16px;
+        margin-right: 6px;
+        fill: #878a8c;
+      }
+    }
+
+    &__button {
+      align-self: flex-end;
+      margin-top: 16px;
+    }
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .subredditscreate-container {
+    .subcreate {
+      &__left {
+        display: none;
+      }
+    }
+  }
+}

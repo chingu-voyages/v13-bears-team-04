@@ -3,9 +3,10 @@
 @import "base/typography";
 @import "base/utilities";
 
-@import "layout/grid";
-@import "layout/header";
-@import "layout/footer";
+@import "components/grid";
+@import "components/header";
+@import "components/footer";
+@import "components/requireddot";
 
 @import "pages/home";
 

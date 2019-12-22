@@ -91,7 +91,7 @@ export default function Create() {
               </div>
             </div>
             <div className="subcreate__type__item">
-              <Radio cx="subcreate__type__item__radio" isEmpty />
+              <Radio cx="subcreate__type__item__radio" isChecked />
               <FontAwesomeIcon
                 className="subcreate__type__item__icon"
                 icon="eye"
@@ -108,7 +108,7 @@ export default function Create() {
               </div>
             </div>
             <div className="subcreate__type__item">
-              <Radio cx="subcreate__type__item__radio" isEmpty />
+              <Radio cx="subcreate__type__item__radio" isChecked />
               <FontAwesomeIcon
                 className="subcreate__type__item__icon"
                 icon="lock"
@@ -128,7 +128,7 @@ export default function Create() {
         <div className="subcreate__adult">
           <h3 className="subcreate__header">Adult content</h3>
           <Checkbox cx="subcreate__adult__checkbox" />
-          <Checkbox cx="subcreate__adult__checkbox" isEmpty />
+          <Checkbox cx="subcreate__adult__checkbox" isChecked />
           {/* checkbox */}
           {/* label */}
           {/* text */}

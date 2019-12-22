@@ -2,14 +2,14 @@ import React from "react";
 import clsx from "clsx";
 import "./radio.scss";
 
-const Radio = ({ cx, isEmpty }) => {
+const Radio = ({ cx, isChecked }) => {
   // create className
-  const className = clsx(cx, "radio", { "radio--checked": !isEmpty });
+  const className = clsx(cx, "radio", { "radio--checked": isChecked });
 
   // create inside of SVG
   const emptyPath = `M10,1.66666667 C5.39762708,1.66666667 1.66666667,5.39762708 1.66666667,10 C1.66666667,14.6023729 5.39762708,18.3333333 10,18.3333333 C14.6023729,18.3333333 18.3333333,14.6023729 18.3333333,10 C18.3333333,5.39762708 14.6023729,1.66666667 10,1.66666667`;
   const fullPath = `M10,6.66666667 C8.15905083,6.66666667 6.66666667,8.15905083 6.66666667,10 C6.66666667,11.8409492 8.15905083,13.3333333 10,13.3333333 C11.8409492,13.3333333 13.3333333,11.8409492 13.3333333,10 C13.3333333,8.15905083 11.8409492,6.66666667 10,6.66666667`;
-  const path = isEmpty ? emptyPath : fullPath;
+  const path = isChecked ? fullPath : emptyPath;
 
   return (
     <svg

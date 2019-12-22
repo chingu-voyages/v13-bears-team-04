@@ -28,12 +28,14 @@ export default function SignIn() {
 
       <form action="#" onSubmit={handleSubmit}>
         <Input
+          required
           label="Username"
           value={username}
           handleChange={e => setUsername(e.target.value)}
           type="text"
         />
         <Input
+          required
           label="Password"
           value={password}
           handleChange={e => setPassword(e.target.value)}

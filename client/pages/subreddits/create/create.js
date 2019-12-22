@@ -5,6 +5,7 @@ import Button from "../../../components/Button";
 import Checkbox from "../../../components/Checkbox";
 import Radio from "../../../components/Radio";
 import "./create.scss";
+import Label from "../../../components/Label/label";
 
 export default function Create() {
   const [name, setName] = useState("");
@@ -21,13 +22,10 @@ export default function Create() {
       <div className="subcreate__right">
         <h1 className="subcreate__header">Create a community</h1>
         <div className="subcreate__field">
-          <div className="subcreate__field__info">
-            <h3 className="subcreate__header required-dot">Name</h3>
-            <p className="subcreate__field__info__note">
-              Community names includes capitalization cannot be changed.
-              {/* <span className="subcreate__field__info__note__span"></span> */}
-            </p>
-          </div>
+          <h3 className="subcreate__header required-dot">Name</h3>
+          <p className="subcreate__field__note">
+            Community names includes capitalization cannot be changed.
+          </p>
           <div className="subcreate__field__content">
             <input
               type="text"
@@ -37,25 +35,19 @@ export default function Create() {
           </div>
         </div>
         <div className="subcreate__field">
-          <div className="subcreate__field__info">
-            <h3 className="subcreate__header required-dot">Topics</h3>
-            <p className="subcreate__field__info__note">
-              This will help relevant users find your community. 0/25
-              {/* <span className="subcreate__field__info__note__span"></span> */}
-            </p>
-          </div>
+          <h3 className="subcreate__header required-dot">Topics</h3>
+          <p className="subcreate__field__note">
+            This will help relevant users find your community. 0/25
+          </p>
           <div className="subcreate__field__content">
             <Select />
           </div>
         </div>
         <div className="subcreate__field">
-          <div className="subcreate__field__info">
-            <h3 className="subcreate__header required-dot">Description</h3>
-            <p className="subcreate__field__info__note">
-              This is how new members come to understand your community.
-              {/* <span className="subcreate__field__info__note__span"></span> */}
-            </p>
-          </div>
+          <h3 className="subcreate__header required-dot">Description</h3>
+          <p className="subcreate__field__note">
+            This is how new members come to understand your community.
+          </p>
           <div className="subcreate__field__content">
             <textarea
               type="text"
@@ -125,13 +117,11 @@ export default function Create() {
             </div>
           </div>
         </div>
+        <h3 className="subcreate__header">Adult content</h3>
         <div className="subcreate__adult">
-          <h3 className="subcreate__header">Adult content</h3>
           <Checkbox />
-          <Checkbox isChecked />
-          {/* checkbox */}
-          {/* label */}
-          {/* text */}
+          <Label text="NSFW" backgroundColor="#ff585b" color="white" />
+          <div className="subcreate__header">18+ year old community</div>
         </div>
         <Button
           cx="subcreate__button"

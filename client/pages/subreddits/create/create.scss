@@ -33,14 +33,19 @@
       line-height: 2rem;
       color: #1c1c1c;
 
-      &:not(h3) {
+      &:not(h3):not(div) {
         padding: 0 0 1.6rem;
         margin: 0 0 1.6rem;
         border-bottom: 1px solid #edeff1;
       }
 
-      &:not(h1) {
+      &:not(h1):not(div) {
         margin: 0 0 4px;
+      }
+
+      &:not(h1):not(h3) {
+        font-size: 1.4rem;
+        line-height: 1.8rem;
       }
     }
 
@@ -50,14 +55,12 @@
       flex-direction: column;
       margin-bottom: 2.4rem;
 
-      &__text {
-        &__note {
-          font-size: 1.2rem;
-          line-height: 1.6rem;
-          font-weight: 400;
-          color: #7c7c7c;
-          margin: 0;
-        }
+      &__note {
+        font-size: 1.2rem;
+        line-height: 1.6rem;
+        font-weight: 400;
+        color: #7c7c7c;
+        margin: 0;
       }
 
       &__content {
@@ -95,8 +98,6 @@
     }
 
     &__type {
-      //
-
       &__radiogroup {
         margin-top: 12px;
       }
@@ -133,12 +134,14 @@
     }
 
     &__adult {
-      //
+      display: flex;
+      align-items: center;
+      padding-top: 8px;
     }
 
     &__button {
       align-self: flex-end;
-      margin-top: 16px;
+      margin-top: 32px;
     }
   }
 }

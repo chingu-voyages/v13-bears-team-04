@@ -1,11 +1,10 @@
 .required-dot:after {
   line-height: inherit;
   font-size: inherit;
-  font-weight: 700;
-  // display: inline-block;
-  vertical-align: top;
+  font-weight: bold;
   margin-left: 4px;
   content: "\2022";
   color: $blue;
   opacity: 1;
+  transition: inherit;
 }

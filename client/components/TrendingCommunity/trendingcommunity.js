@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from "react";
 import fetch from "isomorphic-unfetch";
 import "./trendingcommunity.scss";
-// eslint-disable-next-line import/no-named-as-default,import/no-named-as-default-member
+import { useAuthProp, useAuthPopup } from "../../contexts/authpopup";
+import { useUser } from "../../contexts/user";
 import Button from "../Button/button";
 
 export default function trendingcommunity() {
+  const { setAuthProps } = useAuthPopup();
+
   const [subReddits, setTrendingSubReddit] = useState([
     { id: 1, name: "r/climate-change", numOfMembers: 27000 },
     { id: 2, name: "r/fashion", numOfMembers: 56000 },
@@ -54,12 +57,13 @@ export default function trendingcommunity() {
                 </div>
               </div>
               <div className="col-1-of-4">
-                <div className="trending-community__join-btn">
-                  {/* eslint-disable-next-line react/button-has-type */}
-                  <Button color="blue" inverted={false}>
-                    <span>Join</span>
-                  </Button>
-                </div>
+                {/* <div className="trending-community__join-btn"> */}
+                <Button
+                  cx="trending-community__join-btn"
+                  text="Join"
+                  size="normal"
+                ></Button>
+                {/* </div> */}
               </div>
             </div>
           </div>

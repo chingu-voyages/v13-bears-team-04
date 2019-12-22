@@ -20,7 +20,7 @@ export default function Create() {
         <h1 className="subcreate__header">Create a community</h1>
         <div className="subcreate__field">
           <div className="subcreate__field__info">
-            <h3 className="subcreate__header">Name</h3>
+            <h3 className="subcreate__header required-dot">Name</h3>
             <p className="subcreate__field__info__note">
               Community names includes capitalization cannot be changed.
               {/* <span className="subcreate__field__info__note__span"></span> */}
@@ -36,7 +36,7 @@ export default function Create() {
         </div>
         <div className="subcreate__field">
           <div className="subcreate__field__info">
-            <h3 className="subcreate__header">Topics</h3>
+            <h3 className="subcreate__header required-dot">Topics</h3>
             <p className="subcreate__field__info__note">
               This will help relevant users find your community. 0/25
               {/* <span className="subcreate__field__info__note__span"></span> */}
@@ -48,7 +48,7 @@ export default function Create() {
         </div>
         <div className="subcreate__field">
           <div className="subcreate__field__info">
-            <h3 className="subcreate__header">Description</h3>
+            <h3 className="subcreate__header required-dot">Description</h3>
             <p className="subcreate__field__info__note">
               This is how new members come to understand your community.
               {/* <span className="subcreate__field__info__note__span"></span> */}

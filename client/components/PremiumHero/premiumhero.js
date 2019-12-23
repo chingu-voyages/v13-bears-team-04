@@ -48,28 +48,15 @@ export default function PremiumHero() {
             <h2>Reddit Premium FAQ</h2>
           </div>
           <div>
-            <div>
-              <h3>What is a Reddit Premium Membership?</h3>
-            </div>
-            <div>
-              <h3>
-                Why change the name to Premium? What happened to calling it
-                Gold?
-              </h3>
-            </div>
-            <div>
-              <h3>
-                What if I was subscribed to the old Gold Membership Program?
-              </h3>
-            </div>
-            <div>
-              <h3>
-                The Premium membership gives me Coins, what are those for?
-              </h3>
-            </div>
-            <div>
-              <h3>Do I have to subscribe to Reddit Premium to get Coins?</h3>
-            </div>
+            <h3>What is a Reddit Premium Membership?</h3>
+            <h3>
+              Why change the name to Premium? What happened to calling it Gold?
+            </h3>
+            <h3>
+              What if I was subscribed to the old Gold Membership Program?
+            </h3>
+            <h3>The Premium membership gives me Coins, what are those for?</h3>
+            <h3>Do I have to subscribe to Reddit Premium to get Coins?</h3>
           </div>
         </div>
       </div>

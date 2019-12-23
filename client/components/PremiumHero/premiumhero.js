@@ -5,14 +5,14 @@ import "./premiumhero.scss";
 
 export default function PremiumHero() {
   return (
-    <div>
-      <div className="hero">
-        <div className="hero--info">
+    <div className="premium">
+      <div className="premium__hero">
+        <div className="premium__info">
           <img
             className="hero--image"
             alt="premiumhero"
             src="/premium/premium.svg"
-          ></img>
+          />
           <p>
             Reddit Premium gives you an ad-free experience, special benefits,
             and directly supports Reddit. The more Reddit is user-supported, the

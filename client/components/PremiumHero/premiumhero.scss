@@ -1,16 +1,18 @@
-.hero {
-  background-image: url(https://www.redditstatic.com/desktop2x/img/gold/premium-hero-g.jpg);
-  box-sizing: border-box;
-  padding-top: 11rem;
-  padding-left: 5rem;
-  margin-top: 5rem;
-  min-height: 544px;
-  background-repeat: no-repeat;
-  background-size: auto 100%;
-  background-color: black;
-  color: white;
+.premium {
+  &__hero {
+    background-image: url(https://www.redditstatic.com/desktop2x/img/gold/premium-hero-g.jpg);
+    box-sizing: border-box;
+    padding-top: 11rem;
+    padding-left: 5rem;
+    margin-top: 5rem;
+    min-height: 544px;
+    background-repeat: no-repeat;
+    background-size: auto 100%;
+    background-color: black;
+    color: white;
+  }
 
-  &--info {
+  &__info {
     display: block;
     margin-block-start: 1em;
     margin-block-end: 1em;

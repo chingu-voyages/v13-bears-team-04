@@ -11,14 +11,10 @@ export default function HomeBox() {
         <p>Your personal Reddit frontpage. Come here</p>
         <p>to check in with your favorite communities.</p>
         <div className="homebox-btn">
-          <Button color="blue" inverted={false}>
-            Create Post
-          </Button>
+          <Button color="blue" text="Create Post" inverted={false}></Button>
         </div>
         <div className="homebox-btn">
-          <Button color="blue" inverted={false}>
-            Create Community
-          </Button>
+          <Button color="blue" text="Create Community" inverted={true}></Button>
         </div>
       </div>
     </div>

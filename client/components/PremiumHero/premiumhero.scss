@@ -26,7 +26,7 @@
 .subsection {
   padding: 5rem 0;
 
-  &--header {
+  &__header {
     text-align: center;
   }
 }
@@ -34,7 +34,7 @@
 .benefits {
   text-align: center;
 
-  &--info {
+  &__info {
     display: flex;
     flex: 1;
     flex-direction: column;
@@ -42,7 +42,7 @@
     height: 100%;
   }
 
-  &--list {
+  &__list {
     font-size: 22px;
     font-weight: 500;
     line-height: 26px;
@@ -50,11 +50,11 @@
     list-style: none;
   }
 
-  &--point {
+  &__point {
     margin-top: 2rem;
   }
 
-  &--gift {
+  &__gift {
     position: absolute;
     top: 70rem;
     left: 35rem;
@@ -67,7 +67,7 @@
     font-weight: 700;
   }
 
-  &--image {
+  &__image {
     background-image: url(https://www.redditstatic.com/desktop2x/img/gold/crest-with-background.jpg);
     width: 331px;
     height: 100%;

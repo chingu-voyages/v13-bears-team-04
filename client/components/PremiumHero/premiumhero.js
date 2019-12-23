@@ -9,7 +9,7 @@ export default function PremiumHero() {
       <div className="premium__hero">
         <div className="premium__info">
           <img
-            className="hero--image"
+            className="premium__image"
             alt="premiumhero"
             src="/premium/premium.svg"
           />
@@ -22,19 +22,19 @@ export default function PremiumHero() {
         </div>
       </div>
       <div className="subsection">
-        <h1 className="subsection--header">Join Reddit Premium Today</h1>
+        <h1 className="subsection__header">Join Reddit Premium Today</h1>
         <div className="benefits">
-          <div className="benefits--info">
-            <ul className="benefits--list">
-              <li className="benefits--point">Ads-free experience</li>
-              <li className="benefits--point">700 Coins every month</li>
+          <div className="benefits__info">
+            <ul className="benefits__list">
+              <li className="benefits__point">Ads-free experience</li>
+              <li className="benefits__point">700 Coins every month</li>
             </ul>
             <img
-              className="benefits--image"
+              className="benefits__image"
               src="https://www.redditstatic.com/desktop2x/img/gold/crest-with-background.jpg"
             ></img>
             <Button text="$5.99/Month" color="orange"></Button>
-            <div className="benefits--gift">
+            <div className="benefits__gift">
               <p>1,000 Coins Sign Up Gift</p>
             </div>
           </div>

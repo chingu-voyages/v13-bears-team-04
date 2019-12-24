@@ -1,7 +1,7 @@
 import React from "react";
 import CreateTypeItem from "./createtypeitem";
 
-const CreateType = ({ checkedValue }) => (
+const CreateType = ({ setComType, checkedValue }) => (
   <div className="subcreate__type">
     <h3 className="subcreate__header">Community type</h3>
     {/* RadioGroup */}
@@ -13,6 +13,7 @@ const CreateType = ({ checkedValue }) => (
     >
       <CreateTypeItem
         isChecked={checkedValue === "public"}
+        handleClick={() => setComType("public")}
         iconName="user"
         iconColor="#24a0ed"
         header="Public"
@@ -20,6 +21,7 @@ const CreateType = ({ checkedValue }) => (
       />
       <CreateTypeItem
         isChecked={checkedValue === "restricted"}
+        handleClick={() => setComType("restricted")}
         iconName="eye"
         iconColor="#0dd3bb"
         header="Restricted"
@@ -27,6 +29,7 @@ const CreateType = ({ checkedValue }) => (
       />
       <CreateTypeItem
         isChecked={checkedValue === "private"}
+        handleClick={() => setComType("private")}
         iconName="lock"
         iconColor="#ffd635"
         header="Private"

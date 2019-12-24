@@ -2,24 +2,17 @@ import React from "react";
 import Checkbox from "../../../components/Checkbox";
 import Label from "../../../components/Label";
 
-const CreateAdult = ({
-  handleClick = () => console.log("checked"),
-  isChecked,
-}) => (
+const CreateAdult = ({ setIsOver18, isChecked }) => (
   <>
     <h3 className="subcreate__header">Adult content</h3>
-    <div
-      role="checkbox"
-      aria-checked={isChecked}
+    <Checkbox
       className="subcreate__adult"
-      onClick={handleClick}
-      onKeyPress={handleClick}
-      tabIndex={0}
+      handleClick={() => setIsOver18(state => !state)}
+      isChecked={isChecked}
     >
-      <Checkbox isChecked={isChecked} />
       <Label text="NSFW" backgroundColor="#ff585b" color="white" />
       <div className="subcreate__header">18+ year old community</div>
-    </div>
+    </Checkbox>
   </>
 );
 

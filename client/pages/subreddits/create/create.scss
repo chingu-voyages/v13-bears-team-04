@@ -108,6 +108,10 @@
         margin-bottom: 16px;
         cursor: pointer;
 
+        &:focus {
+          outline: none;
+        }
+
         &__icon {
           height: 16px;
           width: 16px;

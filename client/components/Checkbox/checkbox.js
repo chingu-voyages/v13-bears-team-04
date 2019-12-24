@@ -2,7 +2,7 @@ import React from "react";
 import CheckboxIcon from "./checkboxicon";
 import "./checkbox.scss";
 
-const Checkbox = ({ children, className, isChecked, handleClick }) => (
+const Checkbox = ({ children, className, isChecked, handleClick, svgCx }) => (
   <div
     role="checkbox"
     className={className}
@@ -12,7 +12,7 @@ const Checkbox = ({ children, className, isChecked, handleClick }) => (
     aria-checked={isChecked}
   >
     <input type="hidden" value={isChecked} />
-    <CheckboxIcon isChecked={isChecked} />
+    <CheckboxIcon isChecked={isChecked} svgCx={svgCx} />
     {children}
   </div>
 );

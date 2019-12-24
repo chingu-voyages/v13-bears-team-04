@@ -1,6 +1,7 @@
 import React from "react";
 import Select from "react-select";
 import CreateFieldsItem from "./createfieldsitem";
+import { styles, options } from "./createfieldsselect";
 
 const CreateFields = ({
   setName,
@@ -27,7 +28,16 @@ const CreateFields = ({
       name="Topics"
       note="This will help relevant users find your community. 0/25"
     >
-      <Select topics={topics} />
+      <Select
+        instanceId="create-fields-select"
+        isMulti
+        placeholder=""
+        options={options}
+        onChange={topic => setTopics(topic)}
+        value={topics}
+        styles={styles}
+        components={{ IndicatorsContainer: () => null }}
+      />
     </CreateFieldsItem>
     <CreateFieldsItem
       name="Description"

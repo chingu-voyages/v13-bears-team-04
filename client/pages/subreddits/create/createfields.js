@@ -2,7 +2,14 @@ import React from "react";
 import Select from "react-select";
 import CreateFieldsItem from "./createfieldsitem";
 
-const CreateFields = ({ handleChange = () => console.log("changed") }) => (
+const CreateFields = ({
+  setName,
+  setTopics,
+  setDescription,
+  name,
+  topics,
+  description,
+}) => (
   <>
     <CreateFieldsItem
       name="Name"
@@ -12,14 +19,15 @@ const CreateFields = ({ handleChange = () => console.log("changed") }) => (
         type="text"
         maxLength="21"
         className="subcreate__field__content__input"
-        onChange={handleChange}
+        onChange={e => setName(e.target.value)}
+        value={name}
       />
     </CreateFieldsItem>
     <CreateFieldsItem
       name="Topics"
       note="This will help relevant users find your community. 0/25"
     >
-      <Select />
+      <Select topics={topics} />
     </CreateFieldsItem>
     <CreateFieldsItem
       name="Description"
@@ -30,7 +38,8 @@ const CreateFields = ({ handleChange = () => console.log("changed") }) => (
         rows="2"
         maxLength="500"
         className="subcreate__field__content__textarea"
-        onChange={handleChange}
+        onChange={e => setDescription(e.target.value)}
+        value={description}
       />
     </CreateFieldsItem>
   </>

@@ -14,8 +14,18 @@ const TopicSchema = new Schema({
     type: Boolean,
     default: false
   },
-  communities: [{ type: ObjectId, ref: "Community" }],
-  posts: [{ type: ObjectId, ref: "Post" }]
+  communities: [
+    {
+      type: ObjectId,
+      ref: "Community"
+    }
+  ],
+  posts: [
+    {
+      type: ObjectId,
+      ref: "Post"
+    }
+  ]
 });
 
 module.exports = model("Topic", TopicSchema);

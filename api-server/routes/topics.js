@@ -25,7 +25,7 @@ async function createTopics(req, res, next) {
   try {
     const { topics } = req.body;
     const newTopics = await Topic.insertMany(topics);
-    res.status(200).json(newTopics);
+    res.status(201).json(newTopics);
   } catch (err) {
     next(err);
   }

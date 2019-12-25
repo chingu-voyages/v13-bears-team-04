@@ -1,7 +1,6 @@
 import React from "react";
-import Select from "react-select";
 import CreateFieldsItem from "./createfieldsitem";
-import { styles, options } from "./createfieldsselect";
+import CreateFieldsSelect from "./createfieldsselect";
 
 const CreateFields = ({
   setName,
@@ -18,7 +17,8 @@ const CreateFields = ({
     >
       <input
         type="text"
-        maxLength="21"
+        minLength="4"
+        maxLength="40"
         className="subcreate__field__content__input"
         onChange={e => setName(e.target.value)}
         value={name}
@@ -26,18 +26,9 @@ const CreateFields = ({
     </CreateFieldsItem>
     <CreateFieldsItem
       name="Topics"
-      note="This will help relevant users find your community. 0/25"
+      note={`This will help relevant users find your community. ${topics.length}/25`}
     >
-      <Select
-        instanceId="create-fields-select"
-        isMulti
-        placeholder=""
-        options={options}
-        onChange={topic => setTopics(topic)}
-        value={topics}
-        styles={styles}
-        components={{ IndicatorsContainer: () => null }}
-      />
+      <CreateFieldsSelect setTopics={setTopics} topics={topics} />
     </CreateFieldsItem>
     <CreateFieldsItem
       name="Description"
@@ -46,6 +37,7 @@ const CreateFields = ({
       <textarea
         type="text"
         rows="2"
+        minLength="4"
         maxLength="500"
         className="subcreate__field__content__textarea"
         onChange={e => setDescription(e.target.value)}

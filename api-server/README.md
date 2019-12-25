@@ -274,9 +274,10 @@ Status Code: 400
 const fetchOptions = {
   body: {
     name,
+    topics, // array of topic _id's
     description,
-    rules, // array of strings
-    communitiesRelated, // array of community IDs
+    communityType, // string === public | restricted | private
+    isOver18, // boolean - true, if NSFW
     userId // user's _id
   }
 };

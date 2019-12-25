@@ -14,7 +14,6 @@ import "./create.scss";
 export default function Create() {
   const { authPopupName, setAuthPopup } = useAuthPopup();
   const { user } = useUser();
-  console.log(user);
 
   // used to redirect user if they have donkey brains
   const [timesClosed, setTimesClosed] = useState(0);

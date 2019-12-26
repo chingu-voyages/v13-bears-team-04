@@ -21,20 +21,24 @@ export default function PremiumHero() {
           <Button text="Get Reddit Premium" color="orange"></Button>
         </div>
       </div>
-      <div className="subsection">
-        <h1 className="subsection__header">Join Reddit Premium Today</h1>
-        <div className="benefits">
-          <div className="benefits__info">
-            <ul className="benefits__list">
-              <li className="benefits__point">Ads-free experience</li>
-              <li className="benefits__point">700 Coins every month</li>
+      <div className="premium__subsection">
+        <h1 className="premium__subsection__header">
+          Join Reddit Premium Today
+        </h1>
+        <div className="premium__benefits">
+          <div className="premium__benefits__info">
+            <ul className="premium__benefits__list">
+              <li className="premium__benefits__point">Ads-free experience</li>
+              <li className="premium__benefits__point">
+                700 Coins every month
+              </li>
             </ul>
             <img
-              className="benefits__image"
+              className="premium__benefits__image"
               src="https://www.redditstatic.com/desktop2x/img/gold/crest-with-background.jpg"
             ></img>
             <Button text="$5.99/Month" color="orange"></Button>
-            <div className="benefits__gift">
+            <div className="premium__benefits__gift">
               <p>1,000 Coins Sign Up Gift</p>
             </div>
           </div>

@@ -21,58 +21,64 @@
     font-size: 18px;
     line-height: 28px;
   }
-}
 
-.subsection {
-  padding: 5rem 0;
+  &__subsection {
+    padding: 5rem 0;
 
-  &__header {
+    &__header {
+      text-align: center;
+    }
+  }
+
+  &__benefits {
+    &__text-align {
+      text-align: center;
+    }
+  }
+
+  &__benefits {
     text-align: center;
-  }
-}
 
-.benefits {
-  text-align: center;
+    &__info {
+      display: flex;
+      flex: 1;
+      flex-direction: column;
+      align-items: center;
+      height: 100%;
+    }
 
-  &__info {
-    display: flex;
-    flex: 1;
-    flex-direction: column;
-    align-items: center;
-    height: 100%;
-  }
+    &__list {
+      font-size: 22px;
+      font-weight: 500;
+      line-height: 26px;
+      text-align: left;
+      list-style: none;
+    }
 
-  &__list {
-    font-size: 22px;
-    font-weight: 500;
-    line-height: 26px;
-    text-align: left;
-    list-style: none;
-  }
+    &__point {
+      margin-top: 2rem;
+    }
 
-  &__point {
-    margin-top: 2rem;
-  }
+    &__gift {
+      position: absolute;
+      top: 70rem;
+      left: 35rem;
+      padding: 0.5rem;
+      border: solid 2px white;
+      border-radius: 0.2rem;
+      background-color: #ffd635;
+      vertical-align: baseline;
+      font-size: 16px;
+      font-weight: 700;
+    }
 
-  &__gift {
-    position: absolute;
-    top: 70rem;
-    left: 35rem;
-    padding: 0.5rem;
-    border: solid 2px white;
-    border-radius: 0.2rem;
-    background-color: #ffd635;
-    vertical-align: baseline;
-    font-size: 16px;
-    font-weight: 700;
-  }
-
-  &__image {
-    background-image: url(https://www.redditstatic.com/desktop2x/img/gold/crest-with-background.jpg);
-    width: 331px;
-    height: 100%;
-    background-size: cover;
-    background-repeat: no-repeat;
-    border-radius: 0 4px 4px 0;
+    &__image {
+      background-image: url(https://www.redditstatic.com/desktop2x/img/gold/crest-with-background.jpg);
+      width: 331px;
+      height: 100%;
+      background-size: cover;
+      background-repeat: no-repeat;
+      border-radius: 0 4px 4px 0;
+    }
   }
 }

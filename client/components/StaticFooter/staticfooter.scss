@@ -1,5 +1,5 @@
 .footer {
-  &--container {
+  &__container {
     padding: 3rem 1.25rem 2rem;
     background: #142736;
     color: white;
@@ -7,25 +7,32 @@
     line-height: 21px;
   }
 
-  &--links {
+  &__links {
     box-sizing: border-box;
     max-width: 770px;
     margin: 0 auto;
   }
 
-  &--pages {
+  &__pages {
     display: flex;
     flex-direction: row;
     align-items: stretch;
     margin-left: 3rem;
     margin-bottom: 44px;
+
+    &__column {
+      margin-right: 8rem;
+      flex: 1 1 auto;
+      text-align: left;
+      list-style: none;
+    }
   }
 
-  &--policy {
+  &__policy {
     list-style: none;
     text-align: center;
 
-    &--item {
+    &__item {
       display: inline-block;
       vertical-align: top;
       margin: 0 8px;

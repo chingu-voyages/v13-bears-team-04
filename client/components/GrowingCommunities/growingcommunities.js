@@ -57,12 +57,7 @@ export default function growingcommunities() {
       })}
       <div className="row">
         <div className="col-2-of-4">
-          <Button
-            cx="growing-communities__viewall-btn"
-            color="blue"
-            text="View All"
-            inverted={false}
-          />
+          <Button cx="growing-communities__viewall-btn" text="View All" />
         </div>
       </div>
     </div>

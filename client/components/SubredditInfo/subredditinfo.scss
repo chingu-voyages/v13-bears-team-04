@@ -1,24 +1,24 @@
 .subredditinfo {
-  &--container {
+  &__container {
     margin: 15rem 0 0 85rem;
   }
 
-  &--header {
+  &__header {
     display: inline;
   }
 
-  &--description {
+  &__description {
     font-size: 16px;
   }
 
-  &--icon {
+  &__icon {
     height: 4.5rem;
     width: 4.5rem;
     border-radius: 50%;
     float: left;
   }
 
-  &--headertext {
+  &__headertext {
     left: 3rem;
   }
 }

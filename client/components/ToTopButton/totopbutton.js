@@ -14,9 +14,9 @@ export default function ToTopButton() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  if (!showButton) return null;
+
   return (
-    showButton && (
-      <Button cx="totopbutton" text="Scroll To Top" handleClick={scrollToTop} />
-    )
+    <Button cx="totopbutton" text="Scroll To Top" handleClick={scrollToTop} />
   );
 }

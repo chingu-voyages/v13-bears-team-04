@@ -30,6 +30,7 @@ export default function ForgotUsername() {
 
       <form action="#" onSubmit={handleSubmit}>
         <Input
+          required
           label="Email"
           value={email}
           handleChange={e => setEmail(e.target.value)}

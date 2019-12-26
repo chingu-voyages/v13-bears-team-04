@@ -1,0 +1,10 @@
+.checkbox {
+  height: 20px;
+  width: 20px;
+  margin-right: 6px;
+  fill: #878a8c;
+
+  &--checked {
+    fill: $blue;
+  }
+}

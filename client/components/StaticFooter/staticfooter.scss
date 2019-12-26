@@ -1,0 +1,43 @@
+.footer {
+  &--container {
+    padding: 3rem 1.25rem 2rem;
+    background: #142736;
+    color: white;
+    font-size: 14px;
+    line-height: 21px;
+  }
+
+  &--links {
+    box-sizing: border-box;
+    max-width: 770px;
+    margin: 0 auto;
+  }
+
+  &--pages {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    margin-left: 3rem;
+    margin-bottom: 44px;
+  }
+
+  &--policy {
+    list-style: none;
+    text-align: center;
+
+    &--item {
+      display: inline-block;
+      vertical-align: top;
+      margin: 0 8px;
+    }
+  }
+}
+
+.pages {
+  &--column {
+    margin-right: 8rem;
+    flex: 1 1 auto;
+    text-align: left;
+    list-style: none;
+  }
+}

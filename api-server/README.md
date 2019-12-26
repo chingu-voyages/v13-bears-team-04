@@ -238,7 +238,7 @@ Status Code: 400
 
 </details>
 
-<!-- POSTS ENDPOINTS -->
+<!-- COMMUNITY ENDPOINTS -->
 
 ### Communities
 
@@ -274,9 +274,10 @@ Status Code: 400
 const fetchOptions = {
   body: {
     name,
+    topics, // array of topic _id's
     description,
-    rules, // array of strings
-    communitiesRelated, // array of community IDs
+    communityType, // string === public | restricted | private
+    isOver18, // boolean - true, if NSFW
     userId // user's _id
   }
 };
@@ -433,6 +434,61 @@ const fetchOptions = {
 ```javascript
 Status Code: 200
 { updatedCommunity }
+
+Status Code: 400
+{ message: 'errorMessage' }
+```
+
+</details>
+
+<!-- TOPICS ENDPOINTS -->
+
+### Topics
+
+<!-- NEW DROPDOWN -->
+<details>
+<summary><strong>GET api/topics</strong></summary>
+
+#### Required:
+
+```
+Nothing
+```
+
+#### Response:
+
+```javascript
+Status Code: 200
+[ { allTopicObjects } ]
+
+Status Code: 400
+{ message: 'errorMessage' }
+```
+
+</details>
+
+<!-- NEW DROPDOWN -->
+<details>
+<summary><strong>POST api/topics</strong></summary>
+
+#### Required:
+
+```jsx
+const fetchOptions = {
+  body: {
+    topics: [
+      text, // unique
+      isRecommended // boolean
+    ]
+  }
+};
+```
+
+#### Response:
+
+```javascript
+Status Code: 201
+[ newTopics ]
 
 Status Code: 400
 { message: 'errorMessage' }

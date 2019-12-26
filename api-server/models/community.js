@@ -3,7 +3,7 @@ const uniqueValidator = require("mongoose-unique-validator");
 
 const { Schema, model } = mongoose;
 const ObjectId = Schema.Types.ObjectId;
-const checkAdminCount = arr => arr.length > 0;
+const checkCount = arr => arr.length > 0;
 
 var CommunitySchema = new Schema({
   name: {
@@ -56,8 +56,26 @@ var CommunitySchema = new Schema({
           ref: "User"
         }
       ],
-      validate: [checkAdminCount, "Minimum 1 Admin Required"]
+      validate: [checkCount, "Minimum 1 Admin Required"]
     }
+  },
+  topics: {
+    type: [
+      {
+        type: ObjectId,
+        ref: "Topic"
+      }
+    ],
+    validate: [checkCount, "Minimum 1 Topic Required"]
+  },
+  communityType: {
+    type: String,
+    enum: ["public", "restricted", "private"],
+    required: [true, "Community Type Required"]
+  },
+  isOver18: {
+    type: Boolean,
+    required: [true, "isOver18 Required"]
   },
   createdOn: {
     type: Date,

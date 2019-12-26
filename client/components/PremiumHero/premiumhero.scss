@@ -1,0 +1,75 @@
+.hero {
+  background-image: url(https://www.redditstatic.com/desktop2x/img/gold/premium-hero-g.jpg);
+  box-sizing: border-box;
+  padding-top: 11rem;
+  padding-left: 5rem;
+  min-height: 544px;
+  background-repeat: no-repeat;
+  background-size: auto 100%;
+  background-color: black;
+  color: white;
+
+  &--info {
+    display: block;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin: 0 0 0 8rem;
+    max-width: 50rem;
+    font-size: 18px;
+    line-height: 28px;
+  }
+}
+
+.subsection {
+  padding: 5rem 0;
+
+  &--header {
+    text-align: center;
+  }
+}
+
+.benefits {
+  text-align: center;
+
+  &--info {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+  }
+
+  &--list {
+    font-size: 22px;
+    font-weight: 500;
+    line-height: 26px;
+    text-align: left;
+    list-style: none;
+  }
+
+  &--point {
+    margin-top: 2rem;
+  }
+
+  &--gift {
+    position: absolute;
+    top: 70rem;
+    left: 35rem;
+    padding: 0.5rem;
+    border: solid 2px white;
+    border-radius: 0.2rem;
+    background-color: #ffd635;
+    vertical-align: baseline;
+    font-size: 16px;
+    font-weight: 700;
+  }
+
+  &--image {
+    background-image: url(https://www.redditstatic.com/desktop2x/img/gold/crest-with-background.jpg);
+    width: 331px;
+    height: 100%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    border-radius: 0 4px 4px 0;
+  }
+}

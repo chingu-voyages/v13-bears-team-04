@@ -4,6 +4,7 @@ const router = express.Router();
 
 const Community = require("../models/community");
 const User = require("../models/user");
+const Topic = require("../models/topic");
 const { checkSession } = require("../middleware");
 
 // ===== ROUTES ===== //
@@ -41,21 +42,41 @@ async function getAllCommunities(req, res, next) {
 
 async function createCommunity(req, res, next) {
   try {
-    const { name, description, rules, communitiesRelated, userId } = req.body;
+    const {
+      name,
+      topics,
+      description,
+      communityType,
+      isOver18,
+      userId
+    } = req.body;
+
     // create new community
     const partialCommunity = await new Community({
       name,
+      topics,
       description,
-      rules,
-      communitiesRelated
+      communityType,
+      isOver18
     });
     partialCommunity.users.administrators.push(userId);
     const newCommunity = await partialCommunity.save();
+
+    // add community id to topics
+    const topicUpdater = topics.map(topicId => ({
+      updateOne: {
+        filter: { _id: topicId },
+        update: { $push: { communities: newCommunity._id } }
+      }
+    }));
+    await Topic.bulkWrite(topicUpdater);
+
     // add community to user document
     const user = res.locals.user;
-    user.communities.administrators.push(userId);
+    user.communities.administrator.push(userId);
     await user.save();
     const { password, ...goodUser } = user._doc;
+
     res.status(201).json({ newCommunity, updatedUser: goodUser });
   } catch (err) {
     next(err);

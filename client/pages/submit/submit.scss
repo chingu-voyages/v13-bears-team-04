@@ -1,0 +1,67 @@
+.submit-container {
+  .submit {
+    // &__left {
+    //   //
+    // }
+
+    // &__right {
+    //   //
+    // }
+
+    &__rules {
+      background-color: white;
+      border-radius: 4px;
+      margin-top: 15px;
+      padding: 12px;
+      width: 312px;
+      box-sizing: border-box;
+
+      &__header {
+        line-height: 2rem;
+        font-size: 1.6rem;
+        font-weight: bold;
+        border-bottom: 1px solid rgb(237, 239, 241);
+        color: rgb(28, 28, 28);
+        display: flex;
+        align-items: center;
+
+        &__icon {
+          height: 40px;
+          margin-right: 8px;
+          padding-bottom: 5px;
+          width: 40px;
+        }
+      }
+
+      &__list {
+        line-height: 1.8rem;
+        font-size: 1.4rem;
+        font-weight: 500;
+        list-style: decimal;
+        list-style-position: inside;
+        padding: 0;
+        margin: 0;
+
+        &__item {
+          border-bottom: 1px solid rgb(237, 239, 241);
+          color: #1c1c1c;
+          padding: 10px 5px;
+        }
+      }
+    }
+
+    &__text {
+      line-height: 1.6rem;
+      font-size: 1.2rem;
+      font-weight: 500;
+      color: rgb(124, 124, 124);
+      margin: 16px auto 16px 0;
+      max-width: 312px;
+
+      &__span {
+        color: $blue;
+        cursor: default;
+      }
+    }
+  }
+}

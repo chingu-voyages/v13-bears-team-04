@@ -5,8 +5,10 @@
   border: 1px solid rgba($grey, 0.2);
   border-radius: 0.5rem;
   background-color: $white;
-}
+  text-align: center;
 
-.homebox-btn {
-  margin-bottom: 1rem;
+  &__btn {
+    width: 80%;
+    margin-left: 3.5rem;
+  }
 }

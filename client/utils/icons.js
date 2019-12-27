@@ -29,6 +29,9 @@ import {
   faSearch,
   faPlus,
   faCaretDown,
+  faKeyboard,
+  faImage,
+  faLink,
 } from "@fortawesome/free-solid-svg-icons";
 
 library.add(
@@ -56,5 +59,8 @@ library.add(
   faGlobe,
   faSearch,
   faPlus,
-  faCaretDown
+  faCaretDown,
+  faKeyboard,
+  faImage,
+  faLink
 );

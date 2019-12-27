@@ -1,0 +1,38 @@
+.layout {
+  &__container {
+    max-width: 1248px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+  }
+
+  // the left column
+  &__column:nth-of-type(1) {
+    width: 100%;
+  }
+
+  // the right column
+  &__column:nth-of-type(2) {
+    display: none;
+    flex: 0 0 312px;
+    width: 312px;
+    margin-left: 24px;
+  }
+}
+
+@media screen and (min-width: 640px) {
+  .layout {
+    &__container {
+      padding: 20px 24px;
+    }
+  }
+}
+
+@media screen and (min-width: 960px) {
+  .layout {
+    &__column:nth-of-type(2) {
+      display: block;
+    }
+  }
+}

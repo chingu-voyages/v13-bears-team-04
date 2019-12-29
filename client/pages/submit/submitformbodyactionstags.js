@@ -35,7 +35,7 @@ const labelBtns = [
 const SubmitFormBodyActionsTags = () => (
   <div>
     {labelBtns.map(props => (
-      <SubmitFormBodyActionsTagsBtn {...props} />
+      <SubmitFormBodyActionsTagsBtn key={`${props.text}-tag`} {...props} />
     ))}
   </div>
 );

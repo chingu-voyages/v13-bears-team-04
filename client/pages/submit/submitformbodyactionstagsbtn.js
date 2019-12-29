@@ -24,7 +24,6 @@ const SubmitFormBodyActionsTagsBtn = ({
 
   return (
     <div
-      key={`${text}-tag`}
       className={className}
       style={styles}
       role="button"

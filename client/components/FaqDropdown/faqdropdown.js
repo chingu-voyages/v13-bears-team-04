@@ -5,14 +5,14 @@ export default function FaqDropdown() {
   const [openedQuestion, toggleQuestion] = useState(-1);
 
   function revealAnswer(index) {
-    toggleQuestion(selectedQuestion === index ? -1 : index);
+    toggleQuestion(openedQuestion === index ? -1 : index);
   }
 
-  const faqs = getFaqs();
+  const questionList = getQuestions();
 
   return (
     <div className="faqdropdown">
-      {faqs.map(({ question, answer }, index) => (
+      {questionList.map(({ question, answer }, index) => (
         <div
           key={`item-${index}`}
           className={`item ${
@@ -32,8 +32,8 @@ export default function FaqDropdown() {
   );
 }
 
-function getFaqs() {
-  const faqs = [
+function getQuestions() {
+  const questionsAndAnswers = [
     {
       question: "What is a Reddit Premium Membership?",
       answer:
@@ -61,5 +61,5 @@ function getFaqs() {
         "Monthly Coins are a great benefit for being a Premium member, but if you wish you can also buy individual quantities of Coins here. Additionally, you will receive Coins if you are awarded Gold or Platinum.",
     },
   ];
-  return faqs;
+  return questionsAndAnswers;
 }

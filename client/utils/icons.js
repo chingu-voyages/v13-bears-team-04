@@ -32,6 +32,8 @@ import {
   faKeyboard,
   faImage,
   faLink,
+  faTag,
+  faCheck,
 } from "@fortawesome/free-solid-svg-icons";
 
 library.add(
@@ -62,5 +64,7 @@ library.add(
   faCaretDown,
   faKeyboard,
   faImage,
-  faLink
+  faLink,
+  faTag,
+  faCheck
 );

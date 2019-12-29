@@ -1,0 +1,14 @@
+.faqdropdown {
+  &__question {
+    font-weight: bold;
+    cursor: pointer;
+  }
+
+  &__answer {
+    display: none;
+  }
+
+  &__open &__answer {
+    display: block;
+  }
+}

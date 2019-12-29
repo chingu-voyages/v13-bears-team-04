@@ -7,15 +7,16 @@ const SubmitFormBodyContentNotify = () => {
   const handleToggle = () => setIsChecked(state => !state);
 
   return (
-    <div className="submit__form__body__content__notify">
+    <div className="submit__form__body__notify">
       <Checkbox
-        className="submit__form__body__content__notify__check"
+        className="submit__form__body__notify__check"
         isChecked={isChecked}
         handleClick={handleToggle}
+        svgCx="submit__form__body__notify__check__svg"
       >
         Send me post reply notifications
       </Checkbox>
-      <div className="submit__form__body__content__notify__connect">
+      <div className="submit__form__body__notify__connect">
         Connect accounts to share your post
       </div>
     </div>

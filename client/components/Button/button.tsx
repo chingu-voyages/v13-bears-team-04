@@ -4,7 +4,19 @@ import ButtonWithIcon from "./buttonwithicon";
 import ButtonWithLink from "./buttonwithlink";
 import "./button.scss";
 
-export default function Button({
+interface Props {
+  type?: "button" | "submit";
+  text: string;
+  icon?: string;
+  color?: "blue" | "orange";
+  inverted?: boolean;
+  size?: "tight" | "normal";
+  href?: string;
+  handleClick?: (e: {}) => void;
+  cx?: string;
+}
+
+const Button: React.FC<Props> = ({
   type,
   text,
   icon,
@@ -14,7 +26,7 @@ export default function Button({
   href,
   handleClick,
   cx,
-}) {
+}) => {
   const className = clsx(
     "btn",
     `btn--${color}${inverted ? "--inverted" : ""}`,
@@ -37,7 +49,7 @@ export default function Button({
       {icon ? <ButtonWithIcon icon={icon} text={text} /> : text}
     </button>
   );
-}
+};
 
 // DEFAULT PROPS
 Button.defaultProps = {
@@ -61,3 +73,5 @@ Button.defaultProps = {
   // String - extra className
   cx: "",
 };
+
+export default Button;

@@ -2,6 +2,9 @@
   "compilerOptions": {
     "allowJs": true,
     "allowSyntheticDefaultImports": true,
+    // can flip this to true to use TS
+    "checkJs": false,
+    "forceConsistentCasingInFileNames": true,
     "jsx": "preserve",
     "lib": ["dom", "es2017"],
     "module": "esnext",
@@ -11,15 +14,12 @@
     "noUnusedParameters": true,
     "preserveConstEnums": true,
     "removeComments": false,
+    "resolveJsonModule": true,
     "skipLibCheck": true,
     "sourceMap": true,
     "strict": true,
     "target": "esnext",
-    "forceConsistentCasingInFileNames": true,
-    "esModuleInterop": true,
-    "resolveJsonModule": true,
-    "isolatedModules": true
+    "watch": true
   },
-  "exclude": ["node_modules"],
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"]
+  "exclude": ["node_modules"]
 }

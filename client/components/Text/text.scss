@@ -1,0 +1,60 @@
+.editor {
+  &__toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f6f7f8;
+    position: sticky;
+    top: 48px;
+    z-index: 11;
+    box-sizing: border-box;
+    min-height: 37px;
+    padding: 4px;
+
+    &__mdheader {
+      line-height: 1.8rem;
+      font-size: 1.4rem;
+      font-weight: 500;
+      color: #1c1c1c;
+    }
+
+    &__toggler {
+      background-color: transparent;
+      border: none;
+      height: 29px;
+
+      &:hover {
+        background-color: rgba(26, 26, 27, 0.1);
+        border: none;
+      }
+    }
+
+    &__options {
+      display: flex;
+      flex-wrap: wrap;
+
+      &__item {
+        display: flex;
+        justify-content: center;
+        box-sizing: border-box;
+        height: 28px;
+        width: 28px;
+        transition: background-color 0.1s;
+        border: none;
+        background-color: transparent;
+        padding: 4px;
+        outline: none;
+
+        &:hover {
+          background-color: rgba(26, 26, 27, 0.1);
+          outline: none;
+        }
+
+        &__icon {
+          font-size: 1.6rem;
+          color: #878a8c;
+        }
+      }
+    }
+  }
+}

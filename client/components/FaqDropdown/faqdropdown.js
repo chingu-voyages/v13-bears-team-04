@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import "./faqdropdown.scss";
 
 export default function FaqDropdown() {
-  const [openedQuestion, toggleQuestion] = useState(-1);
+  const [dropdownIndex, setDropdownIndex] = useState(-1);
 
   function revealAnswer(index) {
-    toggleQuestion(openedQuestion === index ? -1 : index);
+    setDropdownIndex(dropdownIndex === index ? -1 : index);
   }
 
   const questionList = getQuestions();
@@ -16,7 +16,7 @@ export default function FaqDropdown() {
         <div
           key={`item-${index}`}
           className={`item ${
-            openedQuestion === index ? "faqdropdown__open" : ""
+            dropdownIndex === index ? "faqdropdown__open" : ""
           }`}
         >
           <p

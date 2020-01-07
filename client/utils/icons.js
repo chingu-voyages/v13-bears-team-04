@@ -34,6 +34,15 @@ import {
   faLink,
   faTag,
   faCheck,
+  faBold,
+  faItalic,
+  faStrikethrough,
+  faCode,
+  faSuperscript,
+  faExclamationCircle,
+  faHeading,
+  faListUl,
+  faQuoteLeft,
 } from "@fortawesome/free-solid-svg-icons";
 
 library.add(
@@ -66,5 +75,14 @@ library.add(
   faImage,
   faLink,
   faTag,
-  faCheck
+  faCheck,
+  faBold,
+  faItalic,
+  faStrikethrough,
+  faCode,
+  faSuperscript,
+  faExclamationCircle,
+  faHeading,
+  faListUl,
+  faQuoteLeft
 );

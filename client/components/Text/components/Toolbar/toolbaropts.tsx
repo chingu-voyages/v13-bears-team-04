@@ -11,7 +11,7 @@ const options = [
   { name: "spoiler", icon: "exclamation-circle" },
   { name: "heading", icon: "heading" },
   { name: "bulleted", icon: "list-ul" },
-  { name: "numbered", icon: "list-ul" },
+  { name: "numbered", icon: "list-ol" },
   { name: "blockquote", icon: "quote-left" },
 ];
 

@@ -5,14 +5,14 @@ import Toolbar from "./components/Toolbar";
 import { useRenderElement, useRenderLeaf } from "./renderers";
 import "./text.scss";
 
+const initialState = [{ type: "paragraph", children: [{ text: "" }] }];
+
 const Text = ({ isRich = true, readOnly = false }) => {
   const editor = useMemo(() => withReact(createEditor()), []);
   const renderElement = useRenderElement();
   const renderLeaf = useRenderLeaf();
 
-  const [value, setValue] = useState<Node[]>([
-    { type: "paragraph", children: [{ text: "" }] },
-  ]);
+  const [value, setValue] = useState<Node[]>(initialState);
 
   const [showRichOptions, setShowRichOptions] = useState(isRich);
   const toggleShowRichOptions = () => setShowRichOptions(state => !state);

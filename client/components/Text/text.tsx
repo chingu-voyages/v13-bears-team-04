@@ -1,13 +1,14 @@
-// https://docs.slatejs.org/walkthroughs/01-installing-slate
-
 import React, { useMemo, useState } from "react";
 import { createEditor, Node } from "slate";
 import { Slate, Editable, withReact } from "slate-react";
 import Toolbar from "./components/Toolbar";
+import { useRenderElement, useRenderLeaf } from "./renderers";
 import "./text.scss";
 
-const Text = ({ isRich = true }) => {
+const Text = ({ isRich = true, readOnly = false }) => {
   const editor = useMemo(() => withReact(createEditor()), []);
+  const renderElement = useRenderElement();
+  const renderLeaf = useRenderLeaf();
 
   const [value, setValue] = useState<Node[]>([
     { type: "paragraph", children: [{ text: "" }] },
@@ -23,7 +24,13 @@ const Text = ({ isRich = true }) => {
           showRichOptions={showRichOptions}
           toggleShowRichOptions={toggleShowRichOptions}
         />
-        <Editable className="editor__body" placeholder="Text (Optional)" />
+        <Editable
+          className="editor__body"
+          readOnly={readOnly}
+          renderElement={renderElement}
+          renderLeaf={renderLeaf}
+          placeholder="Text (Optional)"
+        />
       </Slate>
     </div>
   );

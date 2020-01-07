@@ -23,7 +23,7 @@ const Text = ({ isRich = true }) => {
           showRichOptions={showRichOptions}
           toggleShowRichOptions={toggleShowRichOptions}
         />
-        <Editable placeholder="Text (Optional)" />
+        <Editable className="editor__body" placeholder="Text (Optional)" />
       </Slate>
     </div>
   );

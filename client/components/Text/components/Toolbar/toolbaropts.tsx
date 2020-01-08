@@ -10,8 +10,8 @@ const options = [
   { name: "superscript", icon: "superscript" },
   { name: "spoiler", icon: "exclamation-circle" },
   { name: "heading", icon: "heading" },
-  { name: "bulleted", icon: "list-ul" },
-  { name: "numbered", icon: "list-ol" },
+  { name: "bulleted-list", icon: "list-ul" },
+  { name: "numbered-list", icon: "list-ol" },
   { name: "blockquote", icon: "quote-left" },
 ];
 

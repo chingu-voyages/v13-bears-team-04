@@ -6,11 +6,13 @@ type RichOptions =
   | "italic"
   | "link"
   | "strike"
-  | "code"
+  | "inlinecode"
+  | "superscript"
+  | "spoiler"
   | "heading"
+  | "bulleted-list"
   | "numbered-list"
-  | "ordered-list"
-  | "code-block";
+  | "blockcode";
 
 type Action =
   | { type: "TOGGLE_IS_RICH" }

@@ -38,7 +38,12 @@ type State = {
   isOver18: boolean;
 };
 
-type ProviderProps = { children: React.ReactNode };
+type ProviderTypes = { children: React.ReactNode };
+
+type ContextTypes = {
+  state: State;
+  createPostDispatch: Dispatch;
+};
 
 const initialState: State = {
   isRich: true,
@@ -82,18 +87,15 @@ const reducer = (state: State, action: Action): State => {
   }
 };
 
-const CreatePostContext = createContext<(State & Dispatch) | undefined>(
-  undefined
-);
+const CreatePostContext = createContext({} as ContextTypes);
 
 export const useCreatePost = () => useContext(CreatePostContext);
 
-export const CreatePostProvider = ({ children }: ProviderProps) => {
-  const [state, dispatch] = useReducer(reducer, initialState);
+export const CreatePostProvider = ({ children }: ProviderTypes) => {
+  const [state, createPostDispatch] = useReducer(reducer, initialState);
 
-  const value = { dispatch, ...state };
   return (
-    <CreatePostContext.Provider value={value}>
+    <CreatePostContext.Provider value={{ state, createPostDispatch }}>
       {children}
     </CreatePostContext.Provider>
   );

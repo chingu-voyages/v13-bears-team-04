@@ -11,14 +11,14 @@ export default function HomeBox() {
         <h1>Home</h1>
         <p>Your personal Reddit frontpage. Come here</p>
         <p>to check in with your favorite communities.</p>
-        <Button cx="homebox__btn" text="Create Post"></Button>
+        <Button cx="homebox__btn" text="Create Post" />
         <Button
           href="/subreddits/create"
           cx="homebox__btn"
           color="blue"
           text="Create Community"
           inverted
-        ></Button>
+        />
       </div>
     </div>
   );

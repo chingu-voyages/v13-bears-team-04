@@ -28,3 +28,17 @@ export type LeafTypes = ChildrenType &
     };
     toggleSpoiler?: () => void;
   };
+
+export type LinkTypes = ChildrenType & {
+  attributes: React.HTMLAttributes<HTMLAnchorElement>;
+  element: {
+    url: string;
+  };
+};
+
+export type BlockQuoteTypes = ChildrenType & {
+  attributes: React.BlockquoteHTMLAttributes<HTMLElement>;
+  element: {
+    url: string;
+  };
+};

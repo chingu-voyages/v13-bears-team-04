@@ -16,13 +16,13 @@ export default function SubredditInfo() {
 
   return (
     <div className="row">
-      <div className="col-1-of-4 subredditinfo--container">
-        <div className="subredditinfo--header">
+      <div className="col-1-of-4 subredditinfo__container">
+        <div className="subredditinfo__header">
           <img
-            className="subredditinfo--icon"
+            className="subredditinfo__icon"
             src="https://b.thumbs.redditmedia.com/B7IpR8P1mEsQIjdizK5x79s5aGfJUtKk3u2ksGZ9n2Q.png"
           ></img>
-          <h1 className="subredditinfo--headertext">{info.name}</h1>
+          <h1 className="subredditinfo__headertext">{info.name}</h1>
         </div>
         <div>
           <h2>
@@ -30,10 +30,10 @@ export default function SubredditInfo() {
           </h2>
         </div>
         <div>
-          <p className="subredditinfo--description">{info.description}</p>
+          <p className="subredditinfo__description">{info.description}</p>
         </div>
         <div>
-          <Button text="Join"></Button>
+          <Button text="Join" />
         </div>
       </div>
     </div>

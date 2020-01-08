@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Button from "../Button";
 import "../Button/";
+import "./homebox.scss";
 
 export default function HomeBox() {
   return (
@@ -10,16 +11,14 @@ export default function HomeBox() {
         <h1>Home</h1>
         <p>Your personal Reddit frontpage. Come here</p>
         <p>to check in with your favorite communities.</p>
-        <div className="homebox-btn">
-          <Button color="blue" inverted={false}>
-            Create Post
-          </Button>
-        </div>
-        <div className="homebox-btn">
-          <Button color="blue" inverted={false}>
-            Create Community
-          </Button>
-        </div>
+        <Button cx="homebox__btn" text="Create Post" />
+        <Button
+          href="/subreddits/create"
+          cx="homebox__btn"
+          color="blue"
+          text="Create Community"
+          inverted
+        />
       </div>
     </div>
   );

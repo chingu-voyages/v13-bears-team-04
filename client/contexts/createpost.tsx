@@ -1,18 +1,18 @@
 import React, { createContext, useContext, useReducer } from "react";
 import { Node } from "slate";
 
-type RichOptions =
-  | "bold"
-  | "italic"
-  | "link"
-  | "strike"
-  | "inlinecode"
-  | "superscript"
-  | "spoiler"
-  | "heading"
-  | "bulleted-list"
-  | "numbered-list"
-  | "blockcode";
+// type RichOptions =
+//   | "bold"
+//   | "italic"
+//   | "link"
+//   | "strike"
+//   | "inlinecode"
+//   | "superscript"
+//   | "spoiler"
+//   | "heading"
+//   | "bulleted-list"
+//   | "numbered-list"
+//   | "blockcode";
 
 type Action =
   | { type: "TOGGLE_IS_RICH" }
@@ -21,8 +21,8 @@ type Action =
   | { type: "SET_TITLE"; title: string }
   | { type: "SET_CONTENT"; content: Node[] }
   | { type: "SET_LINK"; link: string }
-  | { type: "ACTIVATE_OPT"; name: RichOptions }
-  | { type: "DEACTIVATE_OPT"; name: RichOptions }
+  | { type: "ACTIVATE_OPT"; name: string }
+  | { type: "DEACTIVATE_OPT"; name: string }
   | { type: "TOGGLE_EXTRA"; name: "isOC" | "isSpoiler" | "isOver18" };
 
 type Dispatch = (action: Action) => void;
@@ -80,7 +80,7 @@ const reducer = (state: State, action: Action): State => {
     case "DEACTIVATE_OPT":
       return {
         ...state,
-        activeOptions: activeOptions.filter(a => a === action.name),
+        activeOptions: activeOptions.filter(a => a !== action.name),
       };
     case "TOGGLE_EXTRA":
       return { ...state, [action.name]: !state[name] };

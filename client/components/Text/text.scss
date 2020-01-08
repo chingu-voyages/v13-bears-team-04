@@ -66,6 +66,10 @@
           outline: none;
         }
 
+        &__active svg {
+          color: #1a1a1b;
+        }
+
         &__icon {
           font-size: 1.6rem;
           color: #878a8c;

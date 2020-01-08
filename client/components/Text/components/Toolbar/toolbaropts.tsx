@@ -1,5 +1,7 @@
 import React from "react";
+import clsx from "clsx";
 import FAIcon from "../../../FAIcon";
+import { useCreatePost } from "../../../../contexts/createpost";
 
 const options = [
   { name: "bold", icon: "bold" },
@@ -15,18 +17,34 @@ const options = [
   { name: "blockquote", icon: "quote-left" },
 ];
 
-const ToolbarOpts = ({ handleClick = () => console.log("clicked") }) => (
-  <div className="editor__toolbar__options">
-    {options.map(({ name, icon }) => (
-      <button
-        key={name}
-        className="editor__toolbar__options__item"
-        onClick={handleClick}
-      >
-        <FAIcon icon={icon} className="editor__toolbar__options__item__icon" />
-      </button>
-    ))}
-  </div>
-);
+export default function ToolbarOpts() {
+  const { state, createPostDispatch } = useCreatePost();
 
-export default ToolbarOpts;
+  return (
+    <div className="editor__toolbar__options">
+      {options.map(({ name, icon }) => {
+        const isActive = state.activeOptions.includes(name);
+        const cx = clsx("editor__toolbar__options__item", {
+          editor__toolbar__options__item__active: isActive,
+        });
+        return (
+          <button
+            key={name}
+            className={cx}
+            onClick={() =>
+              createPostDispatch({
+                type: isActive ? "DEACTIVATE_OPT" : "ACTIVATE_OPT",
+                name,
+              })
+            }
+          >
+            <FAIcon
+              icon={icon}
+              className="editor__toolbar__options__item__icon"
+            />
+          </button>
+        );
+      })}
+    </div>
+  );
+}

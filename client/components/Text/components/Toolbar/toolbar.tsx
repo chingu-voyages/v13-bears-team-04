@@ -1,16 +1,14 @@
 import React from "react";
 import ToolbarOpts from "./toolbaropts";
 import Button from "../../../Button";
+import { useCreatePost } from "../../../../contexts/createpost";
 
-type Options = {
-  showRichOptions: boolean;
-  toggleShowRichOptions: () => void;
-};
+export default function Toolbar() {
+  const { state, createPostDispatch } = useCreatePost();
 
-const Toolbar = ({ showRichOptions, toggleShowRichOptions }: Options) => {
   return (
     <div className="editor__toolbar">
-      {showRichOptions ? (
+      {state.isRich ? (
         <ToolbarOpts />
       ) : (
         <div className="editor__toolbar__mdheader">Markdown</div>
@@ -18,14 +16,10 @@ const Toolbar = ({ showRichOptions, toggleShowRichOptions }: Options) => {
       <Button
         inverted
         size="tight"
-        handleClick={toggleShowRichOptions}
+        handleClick={() => createPostDispatch({ type: "TOGGLE_IS_RICH" })}
         cx="editor__toolbar__toggler"
-        text={`Switch to ${
-          showRichOptions ? "markdown" : "Fancy Pants Editor"
-        }`}
+        text={`Switch to ${state.isRich ? "markdown" : "Fancy Pants Editor"}`}
       />
     </div>
   );
-};
-
-export default Toolbar;
+}

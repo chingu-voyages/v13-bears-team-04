@@ -22,8 +22,10 @@ export default function FaqDropdown() {
               onClick={() => revealAnswer(index)}
             >
               {question}
+              <i className="faqdropdown__arrow"></i>
             </p>
             <p className="faqdropdown__answer">{answer}</p>
+            <hr className="faqdropdown__line" />
           </div>
         );
       })}

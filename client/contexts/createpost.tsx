@@ -83,7 +83,7 @@ const reducer = (state: State, action: Action): State => {
         activeOptions: activeOptions.filter(a => a !== action.name),
       };
     case "TOGGLE_EXTRA":
-      return { ...state, [action.name]: !state[name] };
+      return { ...state, [action.name]: !state[action.name] };
     default:
       return state;
   }

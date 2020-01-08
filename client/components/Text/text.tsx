@@ -6,7 +6,7 @@ import { useRenderElement, useRenderLeaf } from "./renderers";
 import { useCreatePost } from "../../contexts/createpost";
 import "./text.scss";
 
-const Text = ({ readOnly = false }) => {
+export default function Text({ readOnly = false }) {
   const editor = useMemo(() => withReact(createEditor()), []);
   const renderElement = useRenderElement();
   const renderLeaf = useRenderLeaf();
@@ -31,6 +31,4 @@ const Text = ({ readOnly = false }) => {
       </Slate>
     </div>
   );
-};
-
-export default Text;
+}

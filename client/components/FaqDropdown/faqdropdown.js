@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./faqdropdown.scss";
+import clsx from "clsx";
 
 export default function FaqDropdown() {
   const [dropdownIndex, setDropdownIndex] = useState(-1);
@@ -12,22 +13,20 @@ export default function FaqDropdown() {
 
   return (
     <div className="faqdropdown">
-      {questionList.map(({ question, answer }, index) => (
-        <div
-          key={`item-${index}`}
-          className={`item ${
-            dropdownIndex === index ? "faqdropdown__open" : ""
-          }`}
-        >
-          <p
-            className="faqdropdown__question"
-            onClick={() => revealAnswer(index)}
-          >
-            {question}
-          </p>
-          <p className="faqdropdown__answer">{answer}</p>
-        </div>
-      ))}
+      {questionList.map(({ question, answer }, index) => {
+        const cx = clsx("item", { faqdropdown__open: dropdownIndex === index });
+        return (
+          <div key={`item-${index}`} className={cx}>
+            <p
+              className="faqdropdown__question"
+              onClick={() => revealAnswer(index)}
+            >
+              {question}
+            </p>
+            <p className="faqdropdown__answer">{answer}</p>
+          </div>
+        );
+      })}
     </div>
   );
 }

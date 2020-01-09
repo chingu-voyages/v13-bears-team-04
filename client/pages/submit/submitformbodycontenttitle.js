@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
+import { useCreatePost } from "../../contexts/createpost";
 
-const SubmitFormBodyContentTitle = () => {
-  const [title, setTitle] = useState("");
+export default function SubmitFormBodyContentTitle() {
+  const { state, createPostDispatch } = useCreatePost();
 
   return (
     <div className="submit__form__body__content__title">
@@ -10,13 +11,18 @@ const SubmitFormBodyContentTitle = () => {
         placeholder="Title"
         minLength="4"
         maxLength="300"
-        value={title}
-        onChange={e => setTitle(e.target.value)}
+        value={state.title}
+        onChange={e => {
+          createPostDispatch({
+            type: "SET_TITLE",
+            title: e.target.value,
+          });
+        }}
         className="submit__form__body__content__title__input"
       />
-      <div className="submit__form__body__content__title__count">{`${title.length}/300`}</div>
+      <div className="submit__form__body__content__title__count">
+        {`${state.title.length}/300`}
+      </div>
     </div>
   );
-};
-
-export default SubmitFormBodyContentTitle;
+}

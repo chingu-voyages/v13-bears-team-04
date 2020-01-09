@@ -79,7 +79,7 @@
             align-items: center;
             color: rgb(135, 138, 140);
 
-            &.--active {
+            &--active {
               color: $blue;
 
               &:after {
@@ -92,6 +92,10 @@
                 bottom: -1px;
                 height: 2px;
               }
+            }
+
+            &--disabled {
+              cursor: not-allowed;
             }
 
             &__icon {

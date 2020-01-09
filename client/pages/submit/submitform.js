@@ -3,16 +3,12 @@ import SubmitFormHeading from "./submitformheading";
 import SubmitFormSelect from "./submitformselect";
 import SubmitFormBody from "./submitformbody";
 
-export default function SubmitForm() {
-  // function handleSubmit() {
-  //   console.log("processing...");
-  // }
+const SubmitForm = () => (
+  <div className="submit__form">
+    <SubmitFormHeading />
+    <SubmitFormSelect />
+    <SubmitFormBody />
+  </div>
+);
 
-  return (
-    <div className="submit__form">
-      <SubmitFormHeading />
-      <SubmitFormSelect />
-      <SubmitFormBody />
-    </div>
-  );
-}
+export default SubmitForm;

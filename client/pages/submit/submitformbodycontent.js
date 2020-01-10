@@ -1,6 +1,6 @@
 import React from "react";
 import SubmitFormBodyContentTitle from "./submitformbodycontenttitle";
-import Text from "../../components/Text";
+import CustomEditor from "../../components/CustomEditor";
 import { useCreatePost } from "../../contexts/createpost";
 
 export default function SubmitFormBodyContent() {
@@ -9,7 +9,7 @@ export default function SubmitFormBodyContent() {
   return (
     <div className="submit__form__body__content">
       <SubmitFormBodyContentTitle />
-      <Text
+      <CustomEditor
         activeOptions={state.activeOptions}
         value={state.content}
         setValue={val => {

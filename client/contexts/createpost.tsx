@@ -1,21 +1,7 @@
 import React, { createContext, useContext, useReducer } from "react";
 import { Node } from "slate";
 
-// type RichOptions =
-//   | "bold"
-//   | "italic"
-//   | "link"
-//   | "strike"
-//   | "inlinecode"
-//   | "superscript"
-//   | "spoiler"
-//   | "heading"
-//   | "bulleted-list"
-//   | "numbered-list"
-//   | "blockcode";
-
 type Action =
-  | { type: "TOGGLE_IS_RICH" }
   | { type: "SET_COMMUNITY"; communityId: string }
   | { type: "SET_TYPE"; postType: "text" | "link" }
   | { type: "SET_TITLE"; title: string }
@@ -28,7 +14,6 @@ type Action =
 type Dispatch = (action: Action) => void;
 
 type State = {
-  isRich: boolean;
   activeOptions: string[];
   communityId: string;
   postType: "text" | "link";
@@ -48,7 +33,6 @@ type ContextTypes = {
 };
 
 const initialState: State = {
-  isRich: true,
   activeOptions: [],
   communityId: "",
   postType: "text",
@@ -61,10 +45,8 @@ const initialState: State = {
 };
 
 const reducer = (state: State, action: Action): State => {
-  const { isRich, activeOptions } = state;
+  const { activeOptions } = state;
   switch (action.type) {
-    case "TOGGLE_IS_RICH":
-      return { ...state, isRich: !isRich };
     case "SET_COMMUNITY":
       return { ...state, communityId: action.communityId };
     case "SET_TYPE":

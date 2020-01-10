@@ -7,14 +7,11 @@ type Action =
   | { type: "SET_TITLE"; title: string }
   | { type: "SET_CONTENT"; content: Node[] }
   | { type: "SET_LINK"; link: string }
-  | { type: "ACTIVATE_OPT"; name: string }
-  | { type: "DEACTIVATE_OPT"; name: string }
   | { type: "TOGGLE_EXTRA"; name: "isOC" | "isSpoiler" | "isOver18" };
 
 type Dispatch = (action: Action) => void;
 
 type State = {
-  activeOptions: string[];
   communityId: string;
   postType: "text" | "link";
   title: string;
@@ -33,7 +30,6 @@ type ContextTypes = {
 };
 
 const initialState: State = {
-  activeOptions: [],
   communityId: "",
   postType: "text",
   title: "",
@@ -45,7 +41,6 @@ const initialState: State = {
 };
 
 const reducer = (state: State, action: Action): State => {
-  const { activeOptions } = state;
   switch (action.type) {
     case "SET_COMMUNITY":
       return { ...state, communityId: action.communityId };
@@ -57,13 +52,6 @@ const reducer = (state: State, action: Action): State => {
       return { ...state, content: action.content };
     case "SET_LINK":
       return { ...state, link: action.link };
-    case "ACTIVATE_OPT":
-      return { ...state, activeOptions: [...activeOptions, action.name] };
-    case "DEACTIVATE_OPT":
-      return {
-        ...state,
-        activeOptions: activeOptions.filter(a => a !== action.name),
-      };
     case "TOGGLE_EXTRA":
       return { ...state, [action.name]: !state[action.name] };
     default:

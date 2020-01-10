@@ -21,6 +21,8 @@ type OnKeyDownEvent = KeyboardEvent & React.KeyboardEvent<HTMLDivElement>;
 const HOTKEYS: HotkeyTypes = {
   "mod+b": "bold",
   "mod+i": "italic",
+  "mod+u": "underline",
+  "mod+s": "strike",
   "mod+`": "code",
 };
 

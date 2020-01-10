@@ -5,6 +5,8 @@ const ToolbarOpts = () => (
   <div className="editor__toolbar__options">
     <MarkButton format="bold" icon="bold" />
     <MarkButton format="italic" icon="italic" />
+    <MarkButton format="underline" icon="underline" />
+    <MarkButton format="strike" icon="strikethrough" />
     <MarkButton format="code" icon="code" />
     <BlockButton format="heading" icon="heading" />
     <BlockButton format="block-quote" icon="quote-left" />

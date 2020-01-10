@@ -1,4 +1,5 @@
 import React from "react";
+import clsx from "clsx";
 import { LeafTypes } from "./types";
 
 const Leaf = ({
@@ -16,7 +17,10 @@ const Leaf = ({
       padding: leaf.code ? "3px" : "inherit",
       fontWeight: leaf.bold ? "bold" : "normal",
       fontStyle: leaf.italic ? "italic" : "normal",
-      // textDecoration: leaf.strike ? "line-through" : "none",
+      textDecoration: clsx(
+        { "line-through": leaf.strike },
+        { underline: leaf.underline }
+      ),
       ...spoilerStyles,
     }}
     onClick={toggleSpoiler}

@@ -9,6 +9,7 @@ export type SpoilerTypes = ChildrenType & {
     strike?: boolean;
     spoiler?: boolean;
     code?: boolean;
+    underline?: boolean;
   };
 };
 

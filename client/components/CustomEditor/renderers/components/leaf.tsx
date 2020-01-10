@@ -12,7 +12,7 @@ const Leaf = ({
     {...attributes}
     style={{
       fontFamily: leaf.code ? "monospace" : "inherit",
-      backgroundColor: leaf.code ? "#333" : "inherit",
+      backgroundColor: leaf.code ? "#eee" : "inherit",
       padding: leaf.code ? "3px" : "inherit",
       fontWeight: leaf.bold ? "bold" : "normal",
       fontStyle: leaf.italic ? "italic" : "normal",

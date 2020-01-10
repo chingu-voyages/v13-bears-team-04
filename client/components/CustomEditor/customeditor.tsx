@@ -1,9 +1,12 @@
 import React, { useMemo, useCallback, useState } from "react";
+import isHotkey from "is-hotkey";
 import { createEditor, Node } from "slate";
 import { Slate, Editable, withReact } from "slate-react";
 import Button from "../Button";
 import Toolbar from "./toolbar";
 import { useRenderElement, useRenderLeaf } from "./renderers";
+import { toggleMark } from "./utils";
+import { HotkeyTypes } from "./utils/types";
 import "./customeditor.scss";
 
 type Props = {
@@ -11,6 +14,14 @@ type Props = {
   readOnly: boolean;
   value: Node[];
   setValue: (val: Node[]) => void;
+};
+
+type OnKeyDownEvent = KeyboardEvent & React.KeyboardEvent<HTMLDivElement>;
+
+const HOTKEYS: HotkeyTypes = {
+  "mod+b": "bold",
+  "mod+i": "italic",
+  "mod+`": "code",
 };
 
 export default function CustomEditor(props: Props) {
@@ -47,7 +58,15 @@ export default function CustomEditor(props: Props) {
           readOnly={readOnly}
           renderElement={renderElement}
           renderLeaf={renderLeaf}
-          // onKeyDown={handleKeyDown}
+          onKeyDown={(event: OnKeyDownEvent) => {
+            for (const hotkey in HOTKEYS) {
+              if (isHotkey(hotkey, event)) {
+                event.preventDefault();
+                const mark = HOTKEYS[hotkey];
+                toggleMark(editor, mark);
+              }
+            }
+          }}
         />
         {isComment && tools}
       </Slate>

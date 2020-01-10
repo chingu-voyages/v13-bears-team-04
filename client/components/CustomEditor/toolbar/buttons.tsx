@@ -1,9 +1,14 @@
 import React from "react";
-import clsx from "clsx";
-import FAIcon from "../../FAIcon";
 import { useSlate } from "slate-react";
+import ToolbarOptsBtn from "./toolbaroptsbtn";
+import { isBlockActive, toggleBlock, isMarkActive, toggleMark } from "../utils";
 
-export const BlockButton = ({ format, icon }) => {
+type Props = {
+  format: string;
+  icon: string;
+};
+
+export const MarkButton = ({ format, icon }: Props) => {
   const editor = useSlate();
   return (
     <ToolbarOptsBtn
@@ -17,7 +22,7 @@ export const BlockButton = ({ format, icon }) => {
   );
 };
 
-export const MarkButton = ({ format, icon }) => {
+export const BlockButton = ({ format, icon }: Props) => {
   const editor = useSlate();
   return (
     <ToolbarOptsBtn
@@ -30,14 +35,3 @@ export const MarkButton = ({ format, icon }) => {
     />
   );
 };
-
-const ToolbarOptsBtn = ({ handleClick, icon, isActive }) => (
-  <button
-    className={clsx("editor__toolbar__options__item", {
-      editor__toolbar__options__item__active: isActive,
-    })}
-    onClick={handleClick}
-  >
-    <FAIcon icon={icon} className="editor__toolbar__options__item__icon" />
-  </button>
-);

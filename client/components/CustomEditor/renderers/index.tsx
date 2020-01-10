@@ -1,4 +1,1 @@
-import useRenderElement from "./useRenderElement";
-import useRenderLeaf from "./useRenderLeaf";
-
-export { useRenderElement, useRenderLeaf };
+export { useRenderElement, useRenderLeaf } from "./useRenderers";

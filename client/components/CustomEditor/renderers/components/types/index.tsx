@@ -1,13 +1,5 @@
 type ChildrenType = { children: React.ReactNode };
 
-export type CodeTypes = ChildrenType & {
-  attributes: React.HTMLAttributes<HTMLPreElement>;
-};
-
-export type DefaultTypes = ChildrenType & {
-  attributes: React.HTMLAttributes<HTMLParagraphElement>;
-};
-
 export type SpoilerTypes = ChildrenType & {
   attributes: React.HTMLAttributes<HTMLSpanElement>;
   children: React.ReactNode;
@@ -16,6 +8,7 @@ export type SpoilerTypes = ChildrenType & {
     italic?: boolean;
     strike?: boolean;
     spoiler?: boolean;
+    code?: boolean;
   };
 };
 
@@ -31,13 +24,6 @@ export type LeafTypes = ChildrenType &
 
 export type LinkTypes = ChildrenType & {
   attributes: React.HTMLAttributes<HTMLAnchorElement>;
-  element: {
-    url: string;
-  };
-};
-
-export type BlockQuoteTypes = ChildrenType & {
-  attributes: React.BlockquoteHTMLAttributes<HTMLElement>;
   element: {
     url: string;
   };

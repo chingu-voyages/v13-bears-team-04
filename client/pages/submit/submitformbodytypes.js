@@ -7,7 +7,7 @@ const baseCX = "submit__form__body__types__btn";
 const types = [
   { icon: "keyboard", text: "Post", postType: "text" },
   { icon: "image", text: "Image & Video", postType: "file", disabled: true },
-  { icon: "link", text: "Link", postType: "link" },
+  { icon: "link", text: "Link", postType: "link", disabled: true },
 ];
 
 export default function SubmitFormBodyTypes() {

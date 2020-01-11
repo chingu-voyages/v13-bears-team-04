@@ -15,6 +15,7 @@ const ToolbarOpts = () => (
     <BlockButton format="block-quote" icon="quote-left" />
     <BlockButton format="numbered-list" icon="list-ol" />
     <BlockButton format="bulleted-list" icon="list-ul" />
+    <BlockButton format="code-block" icon={["square", "code"]} />
   </div>
 );
 

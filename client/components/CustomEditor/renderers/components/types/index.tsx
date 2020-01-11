@@ -29,3 +29,8 @@ export type LinkTypes = ChildrenType & {
     url: string;
   };
 };
+
+export type CodeTypes = ChildrenType &
+  SpoilerTypes & {
+    attributes: React.HTMLAttributes<HTMLElement>;
+  };

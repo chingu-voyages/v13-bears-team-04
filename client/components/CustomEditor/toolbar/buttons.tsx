@@ -5,7 +5,7 @@ import { isBlockActive, toggleBlock, isMarkActive, toggleMark } from "../utils";
 
 type Props = {
   format: string;
-  icon: string;
+  icon: string | string[];
 };
 
 export const MarkButton = ({ format, icon }: Props) => {

@@ -1,5 +1,5 @@
 import React, { useCallback } from "react";
-import { Leaf, Spoiler } from "./components";
+import { Leaf, Spoiler, Code } from "./components";
 
 export const useRenderElement = () =>
   useCallback(({ attributes, children, element }) => {
@@ -14,14 +14,20 @@ export const useRenderElement = () =>
         return <ol {...attributes}>{children}</ol>;
       case "list-item":
         return <li {...attributes}>{children}</li>;
+      case "code-block":
+        return (
+          <pre>
+            <code {...attributes}>{children}</code>
+          </pre>
+        );
       default:
         return <p {...attributes}>{children}</p>;
     }
   }, []);
 
 export const useRenderLeaf = () =>
-  useCallback(
-    props =>
-      props.leaf.spoiler ? <Spoiler {...props} /> : <Leaf {...props} />,
-    []
-  );
+  useCallback(props => {
+    if (props.leaf.spoiler) return <Spoiler {...props} />;
+    if (props.leaf.code) return <Code {...props} />;
+    return <Leaf {...props} />;
+  }, []);

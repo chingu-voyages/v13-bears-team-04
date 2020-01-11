@@ -26,16 +26,21 @@ const HOTKEYS: HotkeyTypes = {
   "mod+`": "code",
 };
 
-export default function CustomEditor(props: Props) {
-  const { isComment = false, readOnly = false, value, setValue } = props;
+export default function CustomEditor({
+  isComment = false,
+  readOnly = false,
+  value,
+  setValue,
+}: Props) {
+  // things needed and used in Slate
   const editor = useMemo(() => withReact(createEditor()), []);
   const renderElement = useRenderElement();
   const renderLeaf = useRenderLeaf();
+  const onChange = useCallback(val => setValue(val), []);
 
+  // handles if RichText or Markdown
   const [isRich, setIsRich] = useState(true);
   const toggleIsRich = () => setIsRich(state => !state);
-
-  const onChange = useCallback(val => setValue(val), []);
 
   // pull our toolbar out here because it can be on top or the bottom
   const tools = (

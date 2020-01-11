@@ -38,11 +38,11 @@ import {
   faItalic,
   faStrikethrough,
   faCode,
-  faSuperscript,
   faExclamationCircle,
   faHeading,
   faListUl,
   faQuoteLeft,
+  faSquare,
 } from "@fortawesome/free-solid-svg-icons";
 
 library.add(
@@ -80,9 +80,9 @@ library.add(
   faItalic,
   faStrikethrough,
   faCode,
-  faSuperscript,
   faExclamationCircle,
   faHeading,
   faListUl,
-  faQuoteLeft
+  faQuoteLeft,
+  faSquare
 );

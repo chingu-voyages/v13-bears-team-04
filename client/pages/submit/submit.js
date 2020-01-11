@@ -1,17 +1,19 @@
 import React from "react";
+import { isBrowser } from "react-device-detect";
+
 import Layout from "../../components/Layout";
 import SubmitForm from "./submitform";
 import SubmitRules from "./submitrules";
 import SubmitText from "./submittext";
-import "./submit.scss";
 import { CreatePostProvider } from "../../contexts/createpost";
+import "./submit.scss";
 
-export default function Submit() {
+export default function Submit({ isUserBrowser }) {
   return (
     <CreatePostProvider>
       <Layout cx="submit-container">
         <Layout.Column cx="submit__left">
-          <SubmitForm />
+          <SubmitForm isUserBrowser={isUserBrowser} />
         </Layout.Column>
 
         <Layout.Column>
@@ -23,3 +25,8 @@ export default function Submit() {
     </CreatePostProvider>
   );
 }
+
+Submit.getInitialProps = () => {
+  const isUserBrowser = isBrowser;
+  return { isUserBrowser };
+};

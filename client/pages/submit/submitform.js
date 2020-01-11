@@ -3,11 +3,11 @@ import SubmitFormHeading from "./submitformheading";
 import SubmitFormSelect from "./submitformselect";
 import SubmitFormBody from "./submitformbody";
 
-const SubmitForm = () => (
+const SubmitForm = ({ isUserBrowser }) => (
   <div className="submit__form">
     <SubmitFormHeading />
     <SubmitFormSelect />
-    <SubmitFormBody />
+    <SubmitFormBody isUserBrowser={isUserBrowser} />
   </div>
 );
 

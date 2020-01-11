@@ -4,10 +4,10 @@ import SubmitFormBodyContent from "./submitformbodycontent";
 import SubmitFormBodyActions from "./submitformbodyactions";
 import SubmitFormBodyNotify from "./submitformbodynotify";
 
-const SubmitFormBody = () => (
+const SubmitFormBody = ({ isUserBrowser }) => (
   <div className="submit__form__body">
     <SubmitFormBodyTypes />
-    <SubmitFormBodyContent />
+    <SubmitFormBodyContent isUserBrowser={isUserBrowser} />
     <SubmitFormBodyActions />
     <SubmitFormBodyNotify />
   </div>

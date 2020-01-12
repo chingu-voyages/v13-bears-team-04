@@ -71,7 +71,14 @@
     &__toggler {
       background-color: transparent;
       border: none;
-      height: 29px;
+      min-height: 29px;
+      height: 100%;
+      // SWITCH - if markdown support is added
+      cursor: not-allowed;
+      &:active,
+      &:focus {
+        outline: none;
+      }
 
       &:hover {
         background-color: rgba(26, 26, 27, 0.1);
@@ -83,6 +90,7 @@
       display: flex;
       align-items: center;
       flex-wrap: wrap;
+      min-width: 57%;
 
       &__item {
         display: flex;
@@ -130,6 +138,14 @@
         margin: 0 6px;
         width: 1px;
       }
+    }
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .editor {
+    &__toolbar {
+      justify-content: flex-end;
     }
   }
 }

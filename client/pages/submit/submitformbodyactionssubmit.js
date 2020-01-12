@@ -1,36 +1,22 @@
 import React from "react";
 import Button from "../../components/Button";
-import fetchIt from "../../utils/fetch";
-import { useCreatePost } from "../../contexts/createpost";
-import { useUser } from "../../contexts/user";
+// import { useCreatePost } from "../../contexts/createpost";
 
 export default function SubmitFormBodyActionsSubmit() {
-  const { state } = useCreatePost();
-  const { user } = useUser();
+  // const { state } = useCreatePost();
+  // const {
+  //   communityId,
+  //   postType,
+  //   title,
+  //   content,
+  //   link,
+  //   isOver18,
+  //   isOC,
+  //   isSpoiler,
+  // } = state;
 
-  async function handleSubmit() {
+  function handleSubmit() {
     console.log("processing...");
-    try {
-      const body = JSON.stringify({
-        community: state.communityId,
-        postType: state.postType,
-        title: state.title,
-        content: JSON.stringify(state.content),
-        link: state.link,
-        isOver18: state.isOver18,
-        isOC: state.isOC,
-        isSpoiler: state.isSpoiler,
-        author: user._id,
-      });
-      const newPost = await fetchIt(`/posts/${state.communityId}`, {
-        method: "POST",
-        body,
-        ctx: {},
-      });
-      console.log(newPost);
-    } catch (err) {
-      console.log(err);
-    }
   }
 
   function handleSaveDraft() {

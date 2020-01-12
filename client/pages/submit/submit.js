@@ -8,6 +8,7 @@ import SubmitText from "./submittext";
 import { CreatePostProvider } from "../../contexts/createpost";
 import "./submit.scss";
 
+// handling of the post creation is located in the `submitformactionssubmit` file
 export default function Submit({ isUserBrowser }) {
   return (
     <CreatePostProvider>

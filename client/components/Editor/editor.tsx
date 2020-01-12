@@ -20,7 +20,7 @@ type Props = {
 
 export default function Editor({
   isBrowser = false,
-  isComment = true,
+  isComment = false,
   readOnly = false,
   value,
   setValue,

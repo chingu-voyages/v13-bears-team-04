@@ -4,7 +4,19 @@ import ButtonWithIcon from "./buttonwithicon";
 import ButtonWithLink from "./buttonwithlink";
 import "./button.scss";
 
-export default function Button({
+interface Props {
+  type?: "button" | "submit";
+  text: string;
+  icon?: string;
+  color?: "blue" | "orange";
+  inverted?: boolean;
+  size?: "tight" | "normal";
+  href?: string;
+  handleClick?: (e: {}) => void;
+  cx?: string;
+}
+
+const Button: React.FC<Props> = ({
   type,
   text,
   icon,
@@ -14,7 +26,7 @@ export default function Button({
   href,
   handleClick,
   cx,
-}) {
+}) => {
   const className = clsx(
     "btn",
     `btn--${color}${inverted ? "--inverted" : ""}`,
@@ -37,27 +49,19 @@ export default function Button({
       {icon ? <ButtonWithIcon icon={icon} text={text} /> : text}
     </button>
   );
-}
+};
 
 // DEFAULT PROPS
 Button.defaultProps = {
-  // String - (button, submit)
-  type: "button",
-  // String - (blue, orange)
-  color: "blue",
-  // Boolean
-  inverted: false,
-  // String - (tight, normal)
-  size: "normal",
-  // String - Font-Awesome Icon name - ex)plus
-  // * remember to load your icons too * //
-  icon: "",
-  // String
-  text: "Bueller?",
-  // String - use if you're linking your another page
-  href: "",
-  // Function - use if you want to do something on click
-  handleClick: () => console.log("Bueller? Bueller?"),
-  // String - extra className
-  cx: "",
+  type: "button", // String - (button, submit)
+  color: "blue", // String - (blue, orange)
+  inverted: false, // Boolean
+  size: "normal", // String - (tight, normal)
+  icon: "", // String - Font-Awesome Icon name - ex)plus * remember to load your icons too *
+  text: "Bueller?", // String
+  href: "", // String - use if you're linking your another page
+  handleClick: () => console.log("Bueller? Bueller?"), // Function - use if you want to do something on click
+  cx: "", // String - extra className
 };
+
+export default Button;

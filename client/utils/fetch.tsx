@@ -1,8 +1,17 @@
 import fetch from "isomorphic-unfetch";
 import { parseCookies } from "nookies";
 
+type GivenOptionsType = {
+  ctx?: {};
+  method?: "GET" | "POST" | "PUT" | "DELETE";
+  body?: string;
+};
+
 // custom fetch wrapper
-export default async function fetchIt(url, givenOptions = {}) {
+export default async function fetchIt(
+  url: string,
+  givenOptions: GivenOptionsType = {}
+): Promise<{}> {
   const options = makeOptions(givenOptions);
   // typical fetch
   const resp = await fetch(`${process.env.API_URL}${url}`, options);
@@ -15,7 +24,7 @@ export default async function fetchIt(url, givenOptions = {}) {
 }
 
 // used to expand our fetch options object with additional details
-function makeOptions({ method = "GET", body, ctx }) {
+function makeOptions({ method = "GET", body, ctx }: GivenOptionsType) {
   const auth = ctx ? getSessionId(ctx) : {};
   return {
     method,
@@ -26,7 +35,7 @@ function makeOptions({ method = "GET", body, ctx }) {
 
 // when needed, we send our session cookie along with requests
 // if no cookies are found, we will NOT fetch
-function getSessionId(ctx) {
+function getSessionId(ctx: {}) {
   const { sid } = parseCookies(ctx);
   if (!sid) throw new Error("Sorry, no session cookie found");
   return { Authorization: JSON.stringify({ sid }) };

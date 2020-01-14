@@ -19,7 +19,7 @@ export default function PremiumHero() {
             and directly supports Reddit. The more Reddit is user-supported, the
             freer we are to make Reddit the best it can be.
           </p>
-          <Button text="Get Reddit Premium" color="orange"></Button>
+          <Button text="Get Reddit Premium" color="orange" />
         </div>
       </div>
       <div className="premium__subsection">
@@ -37,8 +37,8 @@ export default function PremiumHero() {
             <img
               className="premium__benefits__image"
               src="https://www.redditstatic.com/desktop2x/img/gold/crest-with-background.jpg"
-            ></img>
-            <Button text="$5.99/Month" color="orange"></Button>
+            />
+            <Button text="$5.99/Month" color="orange" />
             <div className="premium__benefits__gift">
               <p>1,000 Coins Sign Up Gift</p>
             </div>
@@ -46,7 +46,7 @@ export default function PremiumHero() {
           <div>
             <h3>Subscription automatically renews monthly</h3>
             <h3>
-              <a href="#">REDEEM A GIFT CODE</a>
+              <a>REDEEM A GIFT CODE</a>
             </h3>
           </div>
           <div>

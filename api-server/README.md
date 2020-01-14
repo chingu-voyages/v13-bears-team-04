@@ -218,10 +218,15 @@ Status Code: 400
 ```javascript
 const fetchOptions = {
   body: {
+    community,
+    postType,
     title, // unique _ minLength:4 _ maxLength:300
-    body,
-    author,
-    community
+    content,
+    link,
+    isOver18,
+    isOC,
+    isSpoiler,
+    author
   }
 };
 ```
@@ -229,8 +234,8 @@ const fetchOptions = {
 #### Response:
 
 ```javascript
-Status Code: 200
-{ post }
+Status Code: 201
+{ newPost }
 
 Status Code: 400
 { message: 'errorMessage' }

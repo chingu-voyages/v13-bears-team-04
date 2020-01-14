@@ -1,7 +1,7 @@
 import React, { createContext, useState, useContext } from "react";
 import { setCookie, destroyCookie } from "nookies";
 import fetchIt from "../utils/fetch";
-import { getCookieOptions } from "../utils/cookies";
+import getCookieOptions from "../utils/cookies";
 
 const UserContext = createContext();
 

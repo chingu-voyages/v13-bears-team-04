@@ -1,6 +1,5 @@
-import React, { useState } from "react";
+import React from "react";
 import Button from "../Button";
-import "../Button/";
 import "./homebox.scss";
 
 export default function HomeBox() {

@@ -12,7 +12,11 @@ const PostSchema = new Schema({
     minlength: [4, "Password must be at least 4 characters"],
     maxlength: [300, "Password must be 300 characters or less"]
   },
-  body: {
+  postType: {
+    type: String,
+    required: [true, "Post Type Required"]
+  },
+  content: {
     type: String,
     required: [true, "Content Required"]
   },
@@ -43,6 +47,21 @@ const PostSchema = new Schema({
     required: [true, "isDeleted is Required"]
   },
   isReported: {
+    type: Boolean,
+    default: false,
+    required: [true, "isReported is Required"]
+  },
+  isOver18: {
+    type: Boolean,
+    default: false,
+    required: [true, "isReported is Required"]
+  },
+  isOC: {
+    type: Boolean,
+    default: false,
+    required: [true, "isReported is Required"]
+  },
+  isSpoiler: {
     type: Boolean,
     default: false,
     required: [true, "isReported is Required"]

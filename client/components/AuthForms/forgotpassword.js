@@ -32,12 +32,14 @@ export default function ForgotPassword() {
 
       <form action="#" onSubmit={handleSubmit}>
         <Input
+          required
           label="Username"
           value={username}
           handleChange={e => setUsername(e.target.value)}
           type="text"
         />
         <Input
+          required
           label="Email"
           value={email}
           handleChange={e => setEmail(e.target.value)}

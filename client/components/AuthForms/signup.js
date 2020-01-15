@@ -29,18 +29,21 @@ export default function SignUp() {
 
       <form action="#" onSubmit={handleSubmit}>
         <Input
+          required
           label="Email"
           value={email}
           handleChange={e => setEmail(e.target.value)}
           type="email"
         />
         <Input
+          required
           label="Username"
           value={username}
           handleChange={e => setUsername(e.target.value)}
           type="text"
         />
         <Input
+          required
           label="Password"
           value={password}
           handleChange={e => setPassword(e.target.value)}

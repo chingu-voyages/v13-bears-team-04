@@ -36,36 +36,28 @@ export default function trendingcommunity() {
         return (
           // CHANGE THIS KEY TO SOMETHING OTHER THAN INDEX IN THE FUTURE
           <div key={index}>
-            <div className="row">
-              <div className="col-1-of-4">
-                <div className="image-wrapper">
-                  <img
-                    className="icon"
-                    src={`/trending-images/icon-${index + 1}.jpg`}
-                    alt="photo1"
-                  />
-                </div>
+            <div className="trending-community__row">
+              <img
+                className="trending-community__row__image"
+                src={`/trending-images/icon-${index + 1}.jpg`}
+                alt="photo1"
+              />
+              <div className="trending-community__row__subreddit-info">
+                <p className="trending-community__subreddit-info__sub-info-1">
+                  {subReddit.name}
+                </p>
+                <p className="trending-community__subreddit-info__sub-info-2">
+                  {`${subReddit.numOfMembers} k members`}
+                </p>
               </div>
-              <div className="col-2-of-4">
-                <div className="subreddit-info">
-                  <p className="trending-community__subreddit-info__sub-info-1">
-                    {subReddit.name}
-                  </p>
-                  <p className="trending-community__subreddit-info__sub-info-2">
-                    {`${subReddit.numOfMembers} k members`}
-                  </p>
-                </div>
-              </div>
-              <div className="col-1-of-4">
-                {/* <div className="trending-community__join-btn"> */}
-                <Button
-                  cx="trending-community__join-btn"
-                  text="Join"
-                  size="normal"
-                ></Button>
-                {/* </div> */}
-              </div>
+              <Button
+                cx="trending-community__join-btn"
+                text="Join"
+                size="normal"
+              ></Button>
+              {/* </div> */}
             </div>
+            {/* </div> */}
           </div>
         );
       })}

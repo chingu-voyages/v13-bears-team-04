@@ -30,7 +30,7 @@ export default function trendingcommunity() {
 
   // if (isLoading) return <div>Loading...</div>;
 
-  return (
+  return user ? (
     <div className="trending-community">
       <p className="trending-community__headline">Trending communities</p>
       {subReddits.map((subReddit, index) => {
@@ -55,11 +55,40 @@ export default function trendingcommunity() {
                 cx="trending-community__join-btn"
                 text="Join"
                 size="normal"
-                handleClick={() => setAuthPopup("signin")}
               ></Button>
-              {/* </div> */}
             </div>
-            {/* </div> */}
+          </div>
+        );
+      })}
+    </div>
+  ) : (
+    <div className="trending-community">
+      <p className="trending-community__headline">Trending communities</p>
+      {subReddits.map((subReddit, index) => {
+        return (
+          // CHANGE THIS KEY TO SOMETHING OTHER THAN INDEX IN THE FUTURE
+          <div key={index}>
+            <div className="trending-community__row">
+              <img
+                className="trending-community__row__image"
+                src={`/trending-images/icon-${index + 1}.jpg`}
+                alt="photo1"
+              />
+              <div className="trending-community__row__subreddit-info">
+                <p className="trending-community__subreddit-info__sub-info-1">
+                  {subReddit.name}
+                </p>
+                <p className="trending-community__subreddit-info__sub-info-2">
+                  {`${subReddit.numOfMembers} k members`}
+                </p>
+              </div>
+              <Button
+                cx="trending-community__join-btn"
+                text="Join"
+                size="normal"
+                handleClick={() => setAuthPopup("signup")}
+              ></Button>
+            </div>
           </div>
         );
       })}

@@ -6,7 +6,8 @@ import { useUser } from "../../contexts/user";
 import Button from "../Button/button";
 
 export default function trendingcommunity() {
-  const { setAuthProps } = useAuthPopup();
+  const { user } = useUser();
+  const { setAuthPopup } = useAuthPopup();
 
   const [subReddits, setTrendingSubReddit] = useState([
     { id: 1, name: "r/climate-change", numOfMembers: 27000 },
@@ -17,15 +18,15 @@ export default function trendingcommunity() {
   ]);
   // const [isLoading, setLoader] = useEffect(true);
 
-  useEffect(() => {
-    // const getTrendingCommunties = async () => {
-    //   const res = await fetch(`${process.env.API_URL}/trendingcommunities/test`);
-    //   const data = await res.json();
-    //   setTrendingSubReddit(data);
-    //   setLoader(false);
-    // };
-    //   getTrendingCommunties();
-  }, []);
+  // useEffect(() => {
+  // const getTrendingCommunties = async () => {
+  //   const res = await fetch(`${process.env.API_URL}/trendingcommunities/test`);
+  //   const data = await res.json();
+  //   setTrendingSubReddit(data);
+  //   setLoader(false);
+  // };
+  //   getTrendingCommunties();
+  // }, []);
 
   // if (isLoading) return <div>Loading...</div>;
 
@@ -54,6 +55,7 @@ export default function trendingcommunity() {
                 cx="trending-community__join-btn"
                 text="Join"
                 size="normal"
+                handleClick={() => setAuthPopup("signin")}
               ></Button>
               {/* </div> */}
             </div>

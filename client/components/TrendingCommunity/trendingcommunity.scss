@@ -6,6 +6,19 @@
   border-radius: 0.5rem;
   background-color: $white;
 
+  &__row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    &__image {
+      align-self: center;
+      height: 4.5rem;
+      width: 4.5rem;
+      border-radius: 50%;
+    }
+  }
+
   &__headline {
     text-transform: uppercase;
     margin-left: 1rem;
@@ -13,29 +26,16 @@
   }
 
   &__subreddit-info {
+    align-self: flex-start;
     &__sub-info-1 {
-      margin-top: 1rem;
       font-weight: bold;
-    }
-
-    &__sub-info-2 {
-      margin-top: 0.6rem;
     }
   }
 
   &__join-btn {
-    vertical-align: middle;
+    width: 12rem;
+    height: 4rem;
+    margin-right: 0.5rem;
+    align-self: center;
   }
-}
-
-.image-wrapper {
-  padding: 0.5rem 0.6rem;
-}
-
-.icon {
-  transform: translateY(0.2rem);
-  height: 4.5rem;
-  width: 4.5rem;
-  border-radius: 50%;
-  vertical-align: middle;
 }

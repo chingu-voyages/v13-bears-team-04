@@ -111,7 +111,7 @@ export default function RecentPosts() {
                     <span className="recent-posts__info">{`${recentPost.numOfComments} comments`}</span>
                   </div>
                   <div className="col-1-of-3">
-                    <span className="recent-posts__info">{`${recentPost.time} h`}</span>
+                    <span className="recent-posts__info">{`${recentPost.time}`}</span>
                   </div>
                 </div>
               </div>

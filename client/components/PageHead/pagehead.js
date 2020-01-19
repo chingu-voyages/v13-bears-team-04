@@ -6,7 +6,7 @@ export default function PageHead(props) {
     <Head>
       <title>{props.title}</title>
       <meta name="description" content={props.description} />
-      <link rel="canonical" href={`${props.canonical}`} />
+      <link rel="canonical" href={`${props.url}`} />
     </Head>
   );
 }

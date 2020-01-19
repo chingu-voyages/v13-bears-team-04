@@ -20,7 +20,15 @@ router
 
 async function getAllPosts(_, res, next) {
   try {
-    const posts = await Post.find();
+    const posts = await Post.find()
+      .populate({
+        path: "author",
+        select: "username -_id"
+      })
+      .populate({
+        path: "community",
+        select: "name -_id"
+      });
     res.status(200).json(posts);
   } catch (err) {
     next(err);

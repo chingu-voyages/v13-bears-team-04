@@ -2,7 +2,6 @@ import React from "react";
 import PostListCardActions from "./postlistcardactions";
 import PostListCardInfo from "./postlistcardinfo";
 import PostListCardVote from "./postlistcardvote";
-import "./postlistcard.scss";
 
 export default function PostListCard(props) {
   const {

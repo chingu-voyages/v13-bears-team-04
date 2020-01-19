@@ -1,5 +1,39 @@
 .growing-communities {
+  width: 100%;
+  font-size: 1.2rem;
+  display: inline-block;
+  border: 1px solid rgba($grey, 0.2);
+  border-radius: 0.5rem;
+  background-color: $white;
+  text-align: left;
+
   &__viewall-btn {
     width: 80%;
+  }
+
+  &__row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    &__image {
+      align-self: center;
+      height: 4.5rem;
+      width: 4.5rem;
+      border-radius: 50%;
+    }
+  }
+
+  &__headline {
+    text-transform: uppercase;
+    margin-left: 1rem;
+    font-weight: bold;
+  }
+
+  &__subreddit-info {
+    align-self: flex-start;
+    &__sub-info-1 {
+      font-weight: bold;
+    }
   }
 }

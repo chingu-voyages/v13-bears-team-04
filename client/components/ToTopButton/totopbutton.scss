@@ -1,6 +1,6 @@
 .totopbutton {
-  position: fixed;
-  right: 10px;
-  bottom: 10px;
+  position: sticky;
+  margin: 0 auto;
+  top: calc(100vh - 40px);
   z-index: 111;
 }

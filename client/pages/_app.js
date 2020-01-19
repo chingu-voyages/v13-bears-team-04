@@ -4,7 +4,6 @@ import React from "react";
 import App from "next/app";
 
 import Nav from "../components/Nav";
-import ToTopButton from "../components/ToTopButton";
 import { UserProvider } from "../contexts/user";
 import { AuthPopupProvider } from "../contexts/authpopup";
 import fetchIt from "../utils/fetch";
@@ -19,7 +18,6 @@ const MyApp = ({ Component, pageProps, user }) => (
       <div style={{ marginTop: "4.9rem" }}>
         <Component {...pageProps} />
       </div>
-      <ToTopButton />
     </AuthPopupProvider>
   </UserProvider>
 );

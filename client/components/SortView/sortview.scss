@@ -23,8 +23,7 @@
     &__view {
       display: flex;
       align-items: center;
-      // REMOVE ME WHEN PAGE WIDTH IS RESPONSIVE
-      margin-left: 150px;
+      margin-left: 10px;
       padding: 10px 0;
 
       &__icons {
@@ -105,6 +104,26 @@
             white-space: nowrap;
           }
         }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 640px) {
+  .sortview-container {
+    .sortview {
+      &__view {
+        margin-left: 75px;
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 960px) {
+  .sortview-container {
+    .sortview {
+      &__view {
+        margin-left: 150px;
       }
     }
   }

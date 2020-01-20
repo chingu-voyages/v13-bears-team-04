@@ -27,9 +27,11 @@ export default function growingcommunities() {
 
   return (
     <div className="growing-communities">
-      <p className="growing-communities__headline">
-        Today's Top Growing Communities
-      </p>
+      <div className="growing-communities__background">
+        <p className="growing-communities__headline">
+          Today's Top Growing Communities
+        </p>
+      </div>
       {subReddits.map((subReddit, index) => {
         return (
           <div key={index}>

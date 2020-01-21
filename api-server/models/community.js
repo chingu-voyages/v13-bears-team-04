@@ -9,9 +9,10 @@ var CommunitySchema = new Schema({
   name: {
     type: String,
     required: [true, "Community Name Required"],
-    unique: true,
     minlength: [4, "Name must be at least 4 characters"],
-    maxlength: [40, "Name must be 40 characters or less"]
+    maxlength: [40, "Name must be 40 characters or less"],
+    unique: true,
+    uniqueCaseInsensitive: true
   },
   description: {
     type: String,

@@ -21,9 +21,10 @@ const UserSchema = new Schema({
   username: {
     type: String,
     required: [true, "Username Required"],
-    unique: true,
     minlength: [3, "Username must be at least 3 characters"],
-    maxlength: [20, "Username must be 20 characters or less"]
+    maxlength: [20, "Username must be 20 characters or less"],
+    unique: true,
+    uniqueCaseInsensitive: true
   },
   communities: {
     member: [

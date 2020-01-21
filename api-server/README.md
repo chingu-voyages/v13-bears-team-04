@@ -302,7 +302,7 @@ Status Code: 400
 
 <!-- NEW DROPDOWN -->
 <details>
-<summary><strong>GET api/community/:communityId</strong></summary>
+<summary><strong>GET api/community/:communityName</strong></summary>
 
 #### Required:
 

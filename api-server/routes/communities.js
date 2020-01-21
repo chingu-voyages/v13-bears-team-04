@@ -53,7 +53,6 @@ async function createCommunity(req, res, next) {
     // create new community
     const partialCommunity = await new Community({
       name,
-      lowerName: name,
       topics,
       description,
       communityType,

@@ -12,7 +12,8 @@ const CommunitySchema = new Schema({
     minlength: [4, "Name must be at least 4 characters"],
     maxlength: [40, "Name must be 40 characters or less"],
     unique: true,
-    uniqueCaseInsensitive: true
+    uniqueCaseInsensitive: true,
+    trim: true
   },
   lowerName: {
     type: String,
@@ -22,7 +23,8 @@ const CommunitySchema = new Schema({
     type: String,
     required: [true, "Description Required"],
     minlength: [4, "Password must be at least 4 characters"],
-    maxlength: [500, "Name must be 500 characters or less"]
+    maxlength: [500, "Name must be 500 characters or less"],
+    trim: true
   },
   rules: [
     {
@@ -96,6 +98,10 @@ const CommunitySchema = new Schema({
     type: {
       "--community-theme-main": String,
       "--community-theme-text": String
+    },
+    default: {
+      "--community-theme-main": "#0079d3",
+      "--community-theme-text": "#ffffff"
     }
   }
 });
@@ -104,4 +110,19 @@ CommunitySchema.plugin(uniqueValidator, {
   message: "That community name is already taken"
 });
 
+CommunitySchema.pre("save", function(next) {
+  // remove spaces in name
+  const name = this.name.split(" ").join("");
+  this.name = name;
+  this.lowerName = name;
+  next();
+});
+
+CommunitySchema.post("save", function(error, _, next) {
+  if (error.name === "MongoError" && error.code === 11000) {
+    next(new Error("That community name is already taken"));
+  }
+});
+
+CommunitySchema.save;
 module.exports = model("Community", CommunitySchema);

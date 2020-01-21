@@ -5,15 +5,17 @@ const { Schema, model } = mongoose;
 const ObjectId = Schema.Types.ObjectId;
 const checkCount = arr => arr.length > 0;
 
-var CommunitySchema = new Schema({
-  name: {
-    type: String,
-    required: [true, "Community Name Required"],
-    minlength: [4, "Name must be at least 4 characters"],
-    maxlength: [40, "Name must be 40 characters or less"],
-    unique: true,
-    uniqueCaseInsensitive: true
-  },
+const NameOptions = {
+  type: String,
+  required: [true, "Community Name Required"],
+  minlength: [4, "Name must be at least 4 characters"],
+  maxlength: [40, "Name must be 40 characters or less"],
+  unique: true
+};
+
+const CommunitySchema = new Schema({
+  name: { ...NameOptions, uniqueCaseInsensitive: true },
+  lowerName: NameOptions,
   description: {
     type: String,
     required: [true, "Description Required"],

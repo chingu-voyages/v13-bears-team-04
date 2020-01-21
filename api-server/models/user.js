@@ -5,6 +5,14 @@ const uniqueValidator = require("mongoose-unique-validator");
 const { Schema, model } = mongoose;
 const ObjectId = Schema.Types.ObjectId;
 
+const usernameOptions = {
+  type: String,
+  required: [true, "Username Required"],
+  minlength: [3, "Username must be at least 3 characters"],
+  maxlength: [20, "Username must be 20 characters or less"],
+  unique: true
+};
+
 const UserSchema = new Schema({
   email: {
     type: String,
@@ -18,14 +26,8 @@ const UserSchema = new Schema({
     minlength: [8, "Password must be at least 8 characters"],
     maxlength: [60, "Password must be 60 characters or less"]
   },
-  username: {
-    type: String,
-    required: [true, "Username Required"],
-    minlength: [3, "Username must be at least 3 characters"],
-    maxlength: [20, "Username must be 20 characters or less"],
-    unique: true,
-    uniqueCaseInsensitive: true
-  },
+  username: { ...usernameOptions, uniqueCaseInsensitive: true },
+  lowerUsername: usernameOptions,
   communities: {
     member: [
       {

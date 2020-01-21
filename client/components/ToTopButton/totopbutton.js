@@ -1,24 +1,22 @@
-import React, { useState } from "react";
-import Button from "../Button/button";
+import React, { useState, useEffect, useCallback } from "react";
+import Button from "../Button";
 import "./totopbutton.scss";
 
 export default function ToTopButton() {
-  const [top, resetYPosition] = useState(0);
+  const [showButton, setShowButton] = useState(false);
 
-  function scrollToTop() {
-    if (window.scrollY > 0) {
-      window.scrollTo({
-        top,
-        behavior: "smooth",
-      });
-    }
-  }
+  const handleScroll = useCallback(() => setShowButton(window.scrollY), []);
+
+  const scrollToTop = useCallback(() => window.scrollTo({ top: 0 }), []);
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  if (!showButton) return null;
 
   return (
-    <div>
-      <Button>
-        <button onClick={scrollToTop}>Scroll To Top</button>
-      </Button>
-    </div>
+    <Button cx="totopbutton" text="Scroll To Top" handleClick={scrollToTop} />
   );
 }

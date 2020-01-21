@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import PostListCard from "../PostListCard";
+import PostListCard from "./postlistcard";
 import fetchIt from "../../utils/fetch";
 import "./postlist.scss";
 

@@ -1,0 +1,265 @@
+.nav-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background: rgb(255, 255, 255);
+  border-bottom: 1px solid rgb(237, 239, 241);
+  padding: 0 20px;
+
+  .nav__item {
+    &__logo {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      &__icon {
+        fill: $orange;
+        height: 32px;
+        padding: 8px 8px 8px 0;
+        width: 32px;
+      }
+
+      &__text {
+        display: none;
+        height: 18px;
+        margin-right: 20px;
+        width: auto;
+        color: black;
+      }
+    }
+
+    &__filter {
+      width: 100px;
+      font-size: 1.4rem;
+
+      &__value {
+        &__icon {
+          @include navOptionIcons();
+        }
+
+        &__label {
+          display: none;
+          @include navOptionLabels();
+        }
+      }
+
+      &__option {
+        @include navOptionContainer("8px 16px");
+
+        &:hover {
+          background-color: #f6f7f8;
+        }
+
+        &__icon {
+          @include navOptionIcons();
+        }
+
+        &__label {
+          @include navOptionLabels();
+        }
+      }
+    }
+
+    &__search {
+      position: relative;
+      margin: 0 16px;
+      width: auto;
+      flex-grow: 1;
+
+      &__label__icon {
+        position: absolute;
+        left: 12.5px;
+        margin: 11.5px 0;
+        z-index: 30;
+        color: #878a8c;
+        height: 15px;
+        width: 15px;
+      }
+
+      &__input {
+        -webkit-appearance: none;
+        appearance: none;
+        background-color: #f6f7f8;
+        border-radius: 4px;
+        border: 1px solid #edeff1;
+        box-shadow: none;
+        color: #1c1c1c;
+        display: block;
+        height: 38px;
+        outline: none;
+        padding: 0 16px 0 40px;
+        width: 100%;
+        box-sizing: border-box;
+        font-size: 1.3rem;
+
+        &:focus {
+          background-color: #ffffff;
+          border: 1px solid #0079d3;
+        }
+      }
+    }
+
+    &__quicklinks {
+      display: none;
+      border-right: 1px solid #edeff1;
+      padding-right: 8px;
+      margin-right: 8px;
+
+      &__link {
+        border-radius: 2px;
+        fill: #1a1a1b;
+        height: 16px;
+        width: 16px;
+        line-height: 14px;
+        padding: 8px;
+        font-size: 1.6rem;
+
+        &:hover,
+        &:focus {
+          background-color: rgba(26, 26, 27, 0.1);
+          outline: none;
+        }
+
+        &:not(:nth-of-type(1)) {
+          margin-left: 8px;
+        }
+
+        &__icon {
+          color: #1a1a1b;
+        }
+
+        &__icon[color="blue"] {
+          color: $blue;
+        }
+
+        &__icon[color="orange"] {
+          color: $orange;
+        }
+      }
+    }
+
+    &__auth {
+      display: none;
+
+      &__btn {
+        min-width: 90px;
+      }
+    }
+
+    &__drop {
+      &__option {
+        @include navOptionContainer("0 0 0 16px");
+
+        &:hover,
+        &:active {
+          background-color: $blue;
+          color: $white;
+          outline: 0;
+        }
+
+        &:hover > svg {
+          color: inherit;
+        }
+
+        &__icon {
+          height: 20px;
+          width: 20px;
+          color: #878a8c;
+          margin-right: 10px;
+        }
+
+        &__label {
+          color: inherit;
+          font-weight: normal;
+          margin: 0;
+          font-size: 1.4rem;
+        }
+      }
+
+      &__value {
+        margin-left: 5px;
+
+        &__icon {
+          height: 16px;
+          width: 16px;
+          color: #878a8c;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 616px) {
+  .nav-container {
+    .nav__item {
+      &__auth {
+        display: flex;
+
+        &__btn {
+          &:nth-of-type(2) {
+            margin-left: 0.4rem;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 788px) {
+  .nav-container {
+    .nav__item {
+      &__quicklinks {
+        display: flex;
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 995px) {
+  .nav-container {
+    .nav__item {
+      &__filter {
+        width: 270px;
+
+        &__value {
+          &__label {
+            display: flex;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 1070px) {
+  .nav-container {
+    .nav__item {
+      &__logo {
+        &__text {
+          display: block;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 1180px) {
+  .nav-container {
+    .nav__item {
+      &__auth {
+        &__btn {
+          width: 120px;
+
+          &:nth-of-type(2) {
+            margin-left: 1.6rem;
+          }
+        }
+      }
+    }
+  }
+}

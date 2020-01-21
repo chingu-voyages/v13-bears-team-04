@@ -1,0 +1,214 @@
+.form {
+  &__popup {
+    height: 100vh;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    background-color: rgba($black, 0.6);
+    opacity: 1;
+    visibility: visible;
+  }
+
+  &__content {
+    width: 95%;
+    min-width: 300px;
+    max-width: 750px;
+    height: 100%;
+    max-height: 550px;
+    background-color: $white;
+    box-shadow: 0 2rem 4rem rgba($black, 0.2);
+    border-radius: 0.3rem;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+  }
+
+  &__close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 10px;
+    font-size: 4rem;
+    line-height: 3rem;
+    height: 3rem;
+    width: 3rem;
+    text-align: center;
+    cursor: pointer;
+    text-decoration: none;
+    color: $dark-grey;
+  }
+
+  &__left {
+    width: 20%;
+    height: 100%;
+    background-image: url("/static/form_image.png");
+    background-size: cover;
+  }
+
+  &__right {
+    width: 80%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+  }
+
+  &__wrapper {
+    padding: 24px;
+    min-width: 260px;
+    max-width: 440px;
+    color: #1a1a1b;
+
+    & > h2 {
+      font-size: 2rem;
+      font-weight: bold;
+      margin: 0;
+    }
+
+    &__icon {
+      width: 4rem;
+      height: 4rem;
+      margin-bottom: 8px;
+    }
+
+    &__title {
+      text-transform: uppercase;
+      margin: 12px 0 20px 0;
+      font-size: 1.7rem;
+      font-weight: bold;
+    }
+
+    &__input {
+      margin: 1.5rem 0;
+    }
+
+    &__button {
+      width: 15.5rem;
+      font-size: 1.4rem;
+      height: 35px;
+    }
+
+    &__links {
+      margin: 16px 0 24px;
+      font-size: 1.2rem;
+
+      a {
+        font-size: 1.2rem;
+      }
+    }
+
+    &__link {
+      display: inline-block;
+      font-size: 1.4rem;
+      color: $blue;
+      cursor: pointer;
+
+      &:hover {
+        color: rgba($blue, 0.6);
+      }
+    }
+
+    &__info {
+      font-size: 1.2rem;
+      margin: 12px 0;
+      line-height: 1.8rem;
+
+      a {
+        color: $blue;
+        font-weight: bold;
+        text-transform: uppercase;
+        font-size: 1.2rem;
+      }
+
+      span {
+        color: $blue;
+      }
+    }
+
+    &__middot {
+      margin: 0 5px;
+      color: $blue;
+    }
+
+    .--capitalize {
+      text-transform: uppercase;
+      font-weight: bold;
+    }
+
+    .sub-description {
+      font-size: 1.4rem;
+      line-height: 2.1rem;
+      margin: 0 0 10px;
+      // font-weight: lighter !important;
+    }
+  }
+
+  &__field {
+    position: relative;
+    height: 48px;
+    width: 300px;
+    margin: 24px 0;
+
+    &__input {
+      height: 100%;
+      width: 100%;
+      font-size: 1.2rem;
+      outline: 0;
+      -webkit-appearance: none;
+      padding: 22px 12px 10px;
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      border-radius: 4px;
+      background-color: #fcfcfb;
+      box-sizing: border-box;
+
+      &:hover,
+      &:focus,
+      &:active,
+      &:valid {
+        & + label {
+          transform: translate(7px, 0px) scale(0.8);
+          &.required-dot:after {
+            opacity: 0;
+          }
+        }
+      }
+    }
+
+    &__label {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      position: absolute;
+      top: 0;
+      left: 0;
+      display: inline-block;
+      vertical-align: middle;
+      color: #a5a4a4;
+      text-transform: uppercase;
+      pointer-events: none;
+      line-height: 23px;
+      transform: translate(12px, 12px) scale(1);
+      transition: 0.25s transform, 0.2s opacity;
+    }
+  }
+
+  &__container {
+    position: relative;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .form {
+    &__left {
+      width: 0;
+      display: none;
+    }
+    &__right {
+      width: 100%;
+    }
+  }
+}

@@ -1,0 +1,346 @@
+.submit-container {
+  .submit {
+    &__form {
+      //
+
+      &__heading {
+        display: flex;
+        padding: 4px;
+        margin: 16px 0;
+        border-bottom: solid 1px rgb(237, 239, 241);
+
+        &__title {
+          line-height: 2.2rem;
+          font-size: 1.8rem;
+          font-weight: 500;
+          color: #1c1c1c;
+          flex: 1;
+        }
+
+        &__button {
+          font-size: 12px;
+          font-weight: 700;
+          letter-spacing: 0.5px;
+          line-height: 24px;
+          text-transform: uppercase;
+          border: none;
+          padding: 0;
+          margin-left: 10px;
+          color: $blue;
+          background-color: rgba(0, 0, 0, 0);
+
+          span {
+            line-height: 1.6rem;
+            font-size: 1.2rem;
+            font-weight: 400;
+            background-color: rgb(135, 138, 140);
+            border-radius: 2px;
+            color: white;
+            margin-left: 4px;
+            padding: 1px 3px;
+          }
+        }
+      }
+
+      &__select {
+        margin-bottom: 8px;
+        // might just do all these styles through react-select styles api
+      }
+
+      &__body {
+        background-color: white;
+        margin-bottom: 15px;
+        border-radius: 5px;
+
+        &__types {
+          display: flex;
+          align-items: center;
+          margin-bottom: 12px;
+
+          &__btn {
+            background: none;
+            line-height: 3.2rem;
+            font-size: 1.4rem;
+            font-weight: 700;
+            cursor: pointer;
+            outline: none;
+            box-sizing: border-box;
+            padding: 10px 24px;
+            z-index: 1;
+            position: relative;
+            border-style: solid;
+            flex: 1;
+            text-align: center;
+            border-color: rgb(237, 239, 241);
+            border-width: 0 1px 1px 0;
+            border-radius: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: rgb(135, 138, 140);
+
+            &--active {
+              color: $blue;
+
+              &:after {
+                content: "";
+                box-sizing: border-box;
+                background-color: $blue;
+                position: absolute;
+                left: 0;
+                right: 0;
+                bottom: -1px;
+                height: 2px;
+              }
+            }
+
+            &--disabled {
+              cursor: not-allowed;
+            }
+
+            &__icon {
+              margin-right: 8px;
+              height: 16px;
+              width: 16px;
+            }
+          }
+        }
+
+        &__content {
+          margin: 16px;
+
+          &__title {
+            position: relative;
+            margin-bottom: 8px;
+
+            &__input {
+              height: 39px;
+              box-sizing: border-box;
+              padding: 8px 68px 8px 16px;
+              border: 1px solid rgb(237, 239, 241);
+              background-color: transparent;
+              color: rgb(28, 28, 28);
+              border-radius: 4px;
+              width: 100%;
+              outline: none;
+              line-height: 2.1rem;
+              font-size: 1.4rem;
+            }
+
+            &__count {
+              position: absolute;
+              font-size: 10px;
+              font-weight: 700;
+              letter-spacing: 0.5px;
+              line-height: 12px;
+              text-transform: uppercase;
+              bottom: 12px;
+              color: rgb(135, 138, 140);
+              pointer-events: none;
+              right: 12px;
+            }
+          }
+        }
+
+        &__actions {
+          display: flex;
+          flex-direction: row;
+          justify-content: space-between;
+          align-items: center;
+          flex-wrap: wrap;
+          padding: 0 16px 16px;
+
+          & > div:nth-of-type(1) {
+            display: flex;
+            margin: 2px;
+          }
+
+          & > div:nth-of-type(2) {
+            display: flex;
+            justify-content: space-between;
+
+            & > button:nth-of-type(2) {
+              margin-left: 8px;
+            }
+          }
+
+          &__tag {
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 2.8rem;
+            line-height: 2.4rem;
+            font-size: 1.2rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            border: 1px solid rgb(237, 239, 241);
+            border-color: rgb(237, 239, 241);
+            border-radius: 4px;
+            margin: 0 2px;
+            padding: 0 8px;
+            position: relative;
+            color: rgb(135, 138, 140);
+            background-color: rgba(150, 150, 150, 0.05);
+            fill: rgb(135, 138, 140);
+            user-select: none;
+            box-sizing: border-box;
+
+            &:focus {
+              outline: none;
+            }
+
+            &--disabled {
+              cursor: not-allowed;
+              opacity: 0.5;
+            }
+
+            > svg {
+              height: 1.2rem;
+              width: 1.2rem;
+            }
+            > svg:nth-of-type(1) {
+              margin-right: 5px;
+            }
+            > svg:nth-of-type(2) {
+              margin-left: 2px;
+              margin-right: -2px;
+            }
+          }
+        }
+
+        &__notify {
+          background-color: rgb(246, 247, 248);
+          border-radius: 0 0 6px 6px;
+          border-top: solid 1px rgb(237, 239, 241);
+          display: flex;
+          flex-direction: column;
+          padding: 8px 16px 21px;
+          position: relative;
+          line-height: 1.8rem;
+          font-size: 1.4rem;
+          font-weight: 500;
+          color: rgb(28, 28, 28);
+
+          &__check {
+            margin-top: 8px;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+
+            &:focus {
+              outline: none;
+            }
+
+            &__svg {
+              height: 16px;
+              width: 16px;
+            }
+          }
+
+          &__connect {
+            line-height: 1.8rem;
+            font-size: 1.4rem;
+            font-weight: 500;
+            color: $blue;
+            display: block;
+            margin: 8px 4px 0 0;
+          }
+        }
+      }
+    }
+
+    &__rules {
+      background-color: white;
+      border-radius: 4px;
+      margin-top: 15px;
+      padding: 12px;
+      width: 100%;
+      box-sizing: border-box;
+
+      &__header {
+        line-height: 2rem;
+        font-size: 1.6rem;
+        font-weight: bold;
+        border-bottom: 1px solid rgb(237, 239, 241);
+        color: rgb(28, 28, 28);
+        display: flex;
+        align-items: center;
+
+        &__icon {
+          height: 40px;
+          margin-right: 8px;
+          padding-bottom: 5px;
+          width: 40px;
+        }
+      }
+
+      &__list {
+        line-height: 1.8rem;
+        font-size: 1.4rem;
+        font-weight: 500;
+        list-style: decimal;
+        list-style-position: inside;
+        padding: 0;
+        margin: 0;
+
+        &__item {
+          border-bottom: 1px solid rgb(237, 239, 241);
+          color: #1c1c1c;
+          padding: 10px 5px;
+        }
+      }
+    }
+
+    &__text {
+      line-height: 1.6rem;
+      font-size: 1.2rem;
+      font-weight: 500;
+      color: rgb(124, 124, 124);
+      margin: 16px auto 16px 0;
+      max-width: 312px;
+
+      &__span {
+        color: $blue;
+        cursor: default;
+      }
+    }
+  }
+}
+
+@media (max-width: 550px) {
+  .submit-container {
+    .submit {
+      &__form {
+        &__body {
+          &__types {
+            flex-wrap: wrap;
+
+            &__btn {
+              flex-basis: 100%;
+            }
+          }
+
+          &__actions {
+            flex-direction: column;
+
+            & > div:nth-of-type(2) {
+              margin-top: 16px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: 960px) {
+  .submit-container {
+    .submit {
+      &__left {
+        width: 864px;
+      }
+    }
+  }
+}

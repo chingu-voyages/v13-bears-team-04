@@ -1,25 +1,39 @@
-import React, { useState } from "react";
+import React from "react";
 import Button from "../Button";
-import "../Button/";
+import { useUser } from "../../contexts/user";
+import "./homebox.scss";
 
 export default function HomeBox() {
+  const { user } = useUser();
+
+  if (!user) return null;
+
   return (
-    <div className="row">
-      <div className="col-2-0f-4 homebox">
-        <div>image</div>
-        <h1>Home</h1>
-        <p>Your personal Reddit frontpage. Come here</p>
-        <p>to check in with your favorite communities.</p>
-        <div className="homebox-btn">
-          <Button color="blue" inverted={false}>
-            Create Post
-          </Button>
+    <div className="homebox-container">
+      <img
+        src="https://www.redditstatic.com/desktop2x/img/id-cards/home-banner@2x.png"
+        alt="home-banner"
+        className="homebox__banner"
+      />
+      <div className="homebox__content">
+        <div className="homebox__heading">
+          <img
+            src="https://www.redditstatic.com/desktop2x/img/id-cards/snoo-home@2x.png"
+            alt="home-alien"
+          />
+          <span>Home</span>
         </div>
-        <div className="homebox-btn">
-          <Button color="blue" inverted={false}>
-            Create Community
-          </Button>
-        </div>
+        <p>
+          Your personal Reddit frontpage. Come here to check in with your
+          favorite communities.
+        </p>
+        <Button href="/submit" cx="homebox__btn" text="Create Post" />
+        <Button
+          inverted
+          href="/subreddits/create"
+          cx="homebox__btn"
+          text="Create Community"
+        />
       </div>
     </div>
   );

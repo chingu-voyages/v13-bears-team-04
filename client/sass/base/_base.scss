@@ -17,10 +17,16 @@
 html {
   // This defines what 1 rem is in this project.
   font-size: 62.5%;
+  background: #dae0e6;
 }
 
 // TODO: We should declare default font-family and font-weight here.
 body {
   box-sizing: border-box;
+  // this seems to be the font most frequently used
+  font-family: IBMPlexSans, sans-serif;
+  // this font is used as post content and 'footer' box
+  font-family: Noto Sans, sans-serif;
+  // this property below isn't valid - did you mean letter-spacing or line-height?
   line-spacing: 1.7;
 }

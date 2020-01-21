@@ -72,7 +72,7 @@ async function createCommunity(req, res, next) {
 
     // add community to user document
     const user = res.locals.user;
-    user.communities.administrator.push(userId);
+    user.communities.administrator.push(newCommunity._id);
     await user.save();
     const { password, ...goodUser } = user._doc;
 

@@ -26,8 +26,18 @@ const UserSchema = new Schema({
     minlength: [8, "Password must be at least 8 characters"],
     maxlength: [60, "Password must be 60 characters or less"]
   },
-  username: { ...usernameOptions, uniqueCaseInsensitive: true },
-  lowerUsername: usernameOptions,
+  username: {
+    type: String,
+    required: [true, "Username Required"],
+    minlength: [3, "Username must be at least 3 characters"],
+    maxlength: [20, "Username must be 20 characters or less"],
+    unique: true,
+    uniqueCaseInsensitive: true
+  },
+  lowerUsername: {
+    type: String,
+    lowercase: true
+  },
   communities: {
     member: [
       {

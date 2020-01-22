@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import "./faqdropdown.scss";
 import clsx from "clsx";
 
 export default function FaqDropdown() {

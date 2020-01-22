@@ -9,7 +9,7 @@ dayjs.extend(relativeTime);
 
 import "./recentposts.scss";
 
-function limitrecentposttitle(title, recipe, limit = 10) {
+function limitrecentposttitle(title, recipe, limit = 9) {
   const newTitle = [];
   const numOfTitleElements = title.split(" ").length;
   let cnt = 0;
@@ -90,8 +90,8 @@ export default function RecentPosts() {
         {recentPosts.slice(0, 5).map(recentPost => {
           return (
             <div key={recentPost.title} className="recent-posts__element">
-              <div className="row recent-posts__element--border-length">
-                <div className="col-1-of-4">
+              <div className="recent-posts__row">
+                <div className="recent-post-left">
                   <div className="recent-posts__image-wrapper">
                     <img
                       className="recent-posts__image-wrapper--icon"
@@ -100,18 +100,20 @@ export default function RecentPosts() {
                     />
                   </div>
                 </div>
-                <div className="col-3-of-4">
+                <div className="recent-posts-right">
                   <p className="recent-posts__title">
                     {limitrecentposttitle(recentPost.title)}
                   </p>
-                  <div className="col-1-of-3">
-                    <span className="recent-posts__info">{`${recentPost.points} points`}</span>
-                  </div>
-                  <div className="col-1-of-3">
-                    <span className="recent-posts__info">{`${recentPost.numOfComments} comments`}</span>
-                  </div>
-                  <div className="col-1-of-3">
-                    <span className="recent-posts__info">{`${recentPost.time}`}</span>
+                  <div className="recent-posts__title-sub">
+                    <div className="recent-posts__title-sub__points">
+                      <span className="recent-posts__info">{`${recentPost.points} points`}</span>
+                    </div>
+                    <div className="recent-posts__title-sub__comments">
+                      <span className="recent-posts__info">{`${recentPost.numOfComments} comments`}</span>
+                    </div>
+                    <div className="recent-posts__title-sub__info">
+                      <span className="recent-posts__info">{`${recentPost.time}`}</span>
+                    </div>
                   </div>
                 </div>
               </div>

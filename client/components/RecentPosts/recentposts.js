@@ -5,10 +5,6 @@ import relativeTime from "dayjs/plugin/relativeTime";
 
 dayjs.extend(relativeTime);
 
-// import fetch from "isomorphic-unfetch";
-
-import "./recentposts.scss";
-
 function limitrecentposttitle(title, recipe, limit = 10) {
   const newTitle = [];
   const numOfTitleElements = title.split(" ").length;
@@ -28,8 +24,6 @@ function limitrecentposttitle(title, recipe, limit = 10) {
 }
 
 export default function RecentPosts() {
-  // eslint-disable-next-line no-shadow
-  // eslint-disable-next-line no-unused-vars
   const [recentPosts, setRecentPosts] = useState([
     {
       id: 1,

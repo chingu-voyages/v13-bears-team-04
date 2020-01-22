@@ -2,7 +2,6 @@ import React from "react";
 import Button from "../Button/button";
 import FaqDropdown from "../FaqDropdown/faqdropdown";
 import StaticFooter from "../StaticFooter/staticfooter";
-import "./premiumhero.scss";
 
 export default function PremiumHero() {
   return (

@@ -26,7 +26,7 @@ export default function trendingcommunity() {
   }
 
   return (
-    <div className="trending-community">
+    <div className="trending-community u-margin-bottom-small">
       <p className="trending-community__headline">Trending communities</p>
       {subReddits.map((subReddit, index) => {
         return (

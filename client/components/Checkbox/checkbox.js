@@ -1,6 +1,5 @@
 import React from "react";
 import CheckboxIcon from "./checkboxicon";
-import "./checkbox.scss";
 
 const Checkbox = ({ children, className, isChecked, handleClick, svgCx }) => (
   <div

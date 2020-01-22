@@ -1,6 +1,6 @@
 import React from "react";
-import SubmitFormBodyActionsTags from "./submitformbodyactionstags";
-import SubmitFormBodyActionsSubmit from "./submitformbodyactionssubmit";
+import SubmitFormBodyActionsTags from "./formbodyactionstags";
+import SubmitFormBodyActionsSubmit from "./formbodyactionssubmit";
 
 const SubmitFormBodyActions = () => (
   <div className="submit__form__body__actions">

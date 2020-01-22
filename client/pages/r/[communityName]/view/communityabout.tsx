@@ -2,8 +2,8 @@ import React from "react";
 import dayjs from "dayjs";
 import CommunityBox from "./communitybox";
 import CommunityAboutUsers from "./communityaboutusers";
-import Button from "../../../components/Button";
-import { useUser } from "../../../contexts/user";
+import Button from "../../../../components/Button";
+import { useUser } from "../../../../contexts/user";
 
 type Props = {
   description: string;

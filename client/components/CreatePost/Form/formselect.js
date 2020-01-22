@@ -1,11 +1,16 @@
 import React from "react";
 import AsyncSelect from "react-select/async";
-import styles from "./submitformselectstyles";
-import getOptions from "./submitformselectoptions";
-import { useCreatePost } from "../../contexts/createpost";
+import styles from "./formselectstyles";
+import getOptions from "./formselectoptions";
+import { useCreatePost } from "../../../contexts/createpost";
 
 export default function SubmitFormSelect() {
-  const { createPostDispatch } = useCreatePost();
+  const { state, createPostDispatch } = useCreatePost();
+
+  const { communityId, communityName } = state;
+  const defaultValue = communityId
+    ? { label: communityName, value: communityId, key: communityId }
+    : null;
 
   return (
     <AsyncSelect
@@ -14,6 +19,7 @@ export default function SubmitFormSelect() {
       defaultOptions
       cacheOptions
       loadOptions={getOptions}
+      defaultValue={defaultValue}
       styles={styles}
       onChange={selection => {
         createPostDispatch({

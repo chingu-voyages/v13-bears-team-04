@@ -1,7 +1,7 @@
 import React from "react";
 import clsx from "clsx";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useCreatePost } from "../../contexts/createpost";
+import { useCreatePost } from "../../../contexts/createpost";
 
 const addStyles = backgroundColor => ({
   backgroundColor,

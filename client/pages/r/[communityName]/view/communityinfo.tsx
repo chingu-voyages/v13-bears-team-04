@@ -1,6 +1,6 @@
 import React from "react";
-import { useUser } from "../../../contexts/user";
-import Button from "../../../components/Button";
+import { useUser } from "../../../../contexts/user";
+import Button from "../../../../components/Button";
 
 type UserCommunities = {
   [level: string]: string[];

@@ -1,6 +1,6 @@
 import React from "react";
 import Link from "next/link";
-import { useUser } from "../../../contexts/user";
+import { useUser } from "../../../../contexts/user";
 
 type Props = {
   communityName: string;

@@ -2,11 +2,11 @@ import React from "react";
 import { NextPage } from "next";
 import Error from "next/error";
 
-import Layout from "../../../components/Layout";
-import PostList from "../../../components/PostList";
-import ToTopButton from "../../../components/ToTopButton";
-import fetchIt from "../../../utils/fetch";
-import { useSetCSSVariable } from "../../../hooks";
+import Layout from "../../../../components/Layout";
+import PostList from "../../../../components/PostList";
+import ToTopButton from "../../../../components/ToTopButton";
+import fetchIt from "../../../../utils/fetch";
+import { useSetCSSVariable } from "../../../../hooks";
 
 import CommunityInfo from "./communityinfo";
 import CommunityAbout from "./communityabout";

@@ -1,5 +1,5 @@
 import React from "react";
-import SubmitFormBodyActionsTagsBtn from "./submitformbodyactionstagsbtn";
+import SubmitFormBodyActionsTagsBtn from "./formbodyactionstagsbtn";
 
 const labelBtns = [
   {

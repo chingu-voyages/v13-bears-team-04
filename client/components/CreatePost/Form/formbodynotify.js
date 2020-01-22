@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Checkbox from "../../components/Checkbox";
+import Checkbox from "../../Checkbox";
 
 const SubmitFormBodyContentNotify = () => {
   const [isChecked, setIsChecked] = useState(false);

@@ -1,14 +1,16 @@
 .recent-posts {
-  width: 33rem;
+  width: 32rem;
   display: inline-block;
   border: 1px solid rgba($grey, 0.2);
   border-radius: 0.5rem;
   background-color: $white;
 
+  padding: 0.5rem;
+
   &__element {
     &:not(:last-child) {
       display: inline-block;
-      padding-bottom: 2rem;
+      padding-bottom: 1rem;
       border-bottom: 1px solid rgba($grey, 0.9);
     }
   }

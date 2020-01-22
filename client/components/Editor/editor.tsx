@@ -7,7 +7,6 @@ import RichTextEditor from "./richtext";
 import PlainTextEditor from "./plaintext";
 import Toolbar from "./toolbar";
 import { useIsDesktop } from "../../hooks";
-import "./editor.scss";
 
 type Props = {
   isBrowser: boolean;

@@ -14,7 +14,6 @@ import CommunityRules from "./communityrules";
 import CommunityMods from "./communitymods";
 import CommunityCreatePost from "./communitycreatepost";
 import { Props } from "./types";
-import "./community.scss";
 
 const Community: NextPage<Props> = ({ error, community }) => {
   useSetCSSVariable(community.theme);

@@ -1,7 +1,6 @@
 import React from "react";
 import Button from "../Button";
 import { useUser } from "../../contexts/user";
-import "./homebox.scss";
 
 export default function HomeBox() {
   const { user } = useUser();

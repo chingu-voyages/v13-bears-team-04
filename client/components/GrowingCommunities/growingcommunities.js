@@ -27,39 +27,38 @@ export default function growingcommunities() {
 
   return (
     <div className="growing-communities">
-      <p className="growing-communities__headline">Growing Communities</p>
+      <div className="growing-communities__background">
+        <p className="growing-communities__headline">
+          Today's Top Growing Communities
+        </p>
+      </div>
       {subReddits.map((subReddit, index) => {
         return (
           <div key={index}>
-            <div className="row">
-              <div className="col-1-of-4">
-                <div className="image-wrapper">
-                  <img
-                    className="icon"
-                    src={`/growing-images/icon-${index + 1}.png`}
-                    alt="icon1"
-                  />
-                </div>
-              </div>
-              <div className="col-2-of-4">
-                <div className="subreddit-info">
-                  <p className="growing-communities__subreddit-info__sub-info-1">
-                    {subReddit.name}
-                  </p>
-                  <p className="growing-communities__subreddit-info__sub-info-2">
-                    {`${subReddit.numOfMembers} k members`}
-                  </p>
-                </div>
+            <div className="growing-communities__row">
+              <p>{index + 1}.</p>
+              <img
+                className="growing-communities__row__image"
+                src={`/growing-images/icon-${index + 1}.png`}
+                alt="icon1"
+              />
+              <div className="growingcommunities__subreddit-info">
+                <p className="growing-communities__subreddit-info__sub-info-1">
+                  {subReddit.name}
+                </p>
+                <p className="growing-communities__subreddit-info__sub-info-2">
+                  {`${subReddit.numOfMembers} k members`}
+                </p>
               </div>
             </div>
           </div>
         );
       })}
-      <div className="row">
-        <div className="col-2-of-4">
-          <Button cx="growing-communities__viewall-btn" text="View All" />
-        </div>
-      </div>
+      <Button
+        cx="growing-communities__viewall-btn"
+        text="View All"
+        size="large"
+      />
     </div>
   );
 }

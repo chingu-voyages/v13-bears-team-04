@@ -1,7 +1,7 @@
 import React from "react";
 import clsx from "clsx";
-import FAIcon from "../../components/FAIcon";
-import { useCreatePost } from "../../contexts/createpost";
+import FAIcon from "../../FAIcon";
+import { useCreatePost } from "../../../contexts/createpost";
 
 const baseCX = "submit__form__body__types__btn";
 const types = [

@@ -1,8 +1,8 @@
 import React from "react";
-import Button from "../../components/Button";
-import fetchIt from "../../utils/fetch";
-import { useCreatePost } from "../../contexts/createpost";
-import { useUser } from "../../contexts/user";
+import Button from "../../Button";
+import fetchIt from "../../../utils/fetch";
+import { useCreatePost } from "../../../contexts/createpost";
+import { useUser } from "../../../contexts/user";
 
 export default function SubmitFormBodyActionsSubmit() {
   const { state } = useCreatePost();

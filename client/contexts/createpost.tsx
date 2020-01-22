@@ -13,6 +13,7 @@ type Dispatch = (action: Action) => void;
 
 type State = {
   communityId: string;
+  communityName: string;
   postType: "text" | "link";
   title: string;
   content: Node[];
@@ -22,15 +23,25 @@ type State = {
   isOver18: boolean;
 };
 
-type ProviderTypes = { children: React.ReactNode };
+type ProviderTypes = {
+  communityId: string;
+  communityName: string;
+  children: React.ReactNode;
+};
 
 type ContextTypes = {
   state: State;
   createPostDispatch: Dispatch;
 };
 
-const initialState: State = {
-  communityId: "",
+type InitProps = {
+  communityId: string;
+  communityName: string;
+};
+
+const init: (props: InitProps) => State = ({ communityId, communityName }) => ({
+  communityId,
+  communityName,
   postType: "text",
   title: "",
   content: [{ type: "paragraph", children: [{ text: "" }] }],
@@ -38,7 +49,7 @@ const initialState: State = {
   isOC: false,
   isSpoiler: false,
   isOver18: false,
-};
+});
 
 const reducer = (state: State, action: Action): State => {
   switch (action.type) {
@@ -63,8 +74,16 @@ const CreatePostContext = createContext({} as ContextTypes);
 
 export const useCreatePost = () => useContext(CreatePostContext);
 
-export const CreatePostProvider = ({ children }: ProviderTypes) => {
-  const [state, createPostDispatch] = useReducer(reducer, initialState);
+export const CreatePostProvider = ({
+  communityId = "",
+  communityName = "",
+  children,
+}: ProviderTypes) => {
+  const [state, createPostDispatch] = useReducer(
+    reducer,
+    { communityId, communityName },
+    init
+  );
 
   return (
     <CreatePostContext.Provider value={{ state, createPostDispatch }}>

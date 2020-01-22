@@ -85,7 +85,9 @@ async function handleLogout(req, res, next) {
 
 async function handleSignup(req, res, next) {
   try {
-    const newUser = await User.create(req.body);
+    const { email, password, username } = req.body;
+    const user = { email, password, username };
+    const newUser = await User.create(user);
     if (!newUser) throw createError(400, "Error creating user");
     const session = await Session.create({ userId: newUser._id });
     if (!session || !session._id) {

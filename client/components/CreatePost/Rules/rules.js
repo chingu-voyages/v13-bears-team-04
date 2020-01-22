@@ -1,6 +1,6 @@
 import React from "react";
-import SubmitRulesIcon from "./submitrulesicon";
-import SubmitRulesItem from "./submitrulesitem";
+import SubmitRulesIcon from "./rulesicon";
+import SubmitRulesItem from "./rulesitem";
 
 const SubmitRules = () => (
   <div className="submit__rules">

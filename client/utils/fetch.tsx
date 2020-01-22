@@ -11,7 +11,7 @@ type GivenOptionsType = {
 export default async function fetchIt(
   url: string,
   givenOptions: GivenOptionsType = {}
-): Promise<{}> {
+): Promise<any> {
   const options = makeOptions(givenOptions);
   // typical fetch
   const resp = await fetch(`${process.env.API_URL}${url}`, options);

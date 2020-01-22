@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import fetch from "isomorphic-unfetch";
-import "./trendingcommunity.scss";
 import { useAuthPopup } from "../../contexts/authpopup";
 import { useUser } from "../../contexts/user";
 import Button from "../Button/button";

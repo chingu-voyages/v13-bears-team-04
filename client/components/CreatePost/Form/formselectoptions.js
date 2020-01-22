@@ -1,4 +1,4 @@
-import fetchIt from "../../utils/fetch";
+import fetchIt from "../../../utils/fetch";
 
 // formats options for our Select
 const createOption = ({ name, _id }) => ({ label: name, value: _id, key: _id });

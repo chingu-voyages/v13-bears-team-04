@@ -1,7 +1,7 @@
 import React from "react";
-import SubmitFormHeading from "./submitformheading";
-import SubmitFormSelect from "./submitformselect";
-import SubmitFormBody from "./submitformbody";
+import SubmitFormHeading from "./formheading";
+import SubmitFormSelect from "./formselect";
+import SubmitFormBody from "./formbody";
 
 const SubmitForm = ({ isUserBrowser }) => (
   <div className="submit__form">

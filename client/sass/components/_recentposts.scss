@@ -1,14 +1,33 @@
 .recent-posts {
-  width: 33rem;
+  width: 32rem;
   display: inline-block;
   border: 1px solid rgba($grey, 0.2);
   border-radius: 0.5rem;
   background-color: $white;
 
+  padding: 0.5rem;
+
+  &__row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    flex-wrap: nowrap;
+
+    padding-right: 0.5rem;
+  }
+
+  &-right {
+    padding-left: 2rem;
+  }
+
+  &-left {
+  }
+
   &__element {
     &:not(:last-child) {
       display: inline-block;
-      padding-bottom: 2rem;
+      padding-bottom: 1rem;
       border-bottom: 1px solid rgba($grey, 0.9);
     }
   }
@@ -16,6 +35,13 @@
   &__title {
     font-size: 1.3rem;
     font-weight: bold;
+    margin-bottom: 1.5rem;
+
+    &-sub {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+    }
 
     &:hover {
       text-decoration: underline;
@@ -28,7 +54,6 @@
   }
 
   &__image-wrapper {
-    //padding: 0.5rem;
     &--icon {
       transform: translate(11%, 25%);
       height: 5.5rem;
@@ -49,8 +74,8 @@
 .clear {
   text-align: right;
   display: inline-block;
-  padding: 1rem;
-  margin-left: 28rem;
+  padding: 1rem 3rem 0.5rem 2rem;
+  margin-left: 26rem;
   font-size: 1.3rem;
   color: $grey;
   cursor: pointer;

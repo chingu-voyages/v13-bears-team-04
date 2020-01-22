@@ -21,9 +21,14 @@ const UserSchema = new Schema({
   username: {
     type: String,
     required: [true, "Username Required"],
-    unique: true,
     minlength: [3, "Username must be at least 3 characters"],
-    maxlength: [20, "Username must be 20 characters or less"]
+    maxlength: [20, "Username must be 20 characters or less"],
+    unique: true,
+    uniqueCaseInsensitive: true
+  },
+  lowerUsername: {
+    type: String,
+    lowercase: true
   },
   communities: {
     member: [
@@ -72,11 +77,23 @@ UserSchema.plugin(uniqueValidator, {
 
 // before we save the user document we'll convert the plain text password to a hash
 UserSchema.pre("save", function(next) {
+  // remove spaces in username
+  const username = this.username.split(" ").join("");
+  this.username = username;
+  this.lowerUsername = username;
+
+  // hash password if it's been modified
   if (!this.isModified("password")) return next();
   bcrypt.hash(this.password, 10).then(hashedPassword => {
     this.password = hashedPassword;
     next();
   });
+});
+
+UserSchema.post("save", function(error, _, next) {
+  if (error.name === "MongoError" && error.code === 11000) {
+    next(new Error("That username name is already taken"));
+  }
 });
 
 // STEPS TO USE

@@ -1,8 +1,8 @@
 import React from "react";
-import SubmitFormBodyTypes from "./submitformbodytypes";
-import SubmitFormBodyContent from "./submitformbodycontent";
-import SubmitFormBodyActions from "./submitformbodyactions";
-import SubmitFormBodyNotify from "./submitformbodynotify";
+import SubmitFormBodyTypes from "./formbodytypes";
+import SubmitFormBodyContent from "./formbodycontent";
+import SubmitFormBodyActions from "./formbodyactions";
+import SubmitFormBodyNotify from "./formbodynotify";
 
 const SubmitFormBody = ({ isUserBrowser }) => (
   <div className="submit__form__body">

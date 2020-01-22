@@ -1,8 +1,16 @@
 import React from "react";
 import clsx from "clsx";
-import LayoutColumn from "./layoutcolumn";
 
-const Layout = ({ children, cx, styles }) => {
+type Optionals = {
+  cx?: string;
+  styles?: {};
+};
+
+type Parent = Optionals & { children: JSX.Element[] };
+
+type Childs = Optionals & { children: Element[] | JSX.Element[] | JSX.Element };
+
+const Layout = ({ children, cx, styles }: Parent) => {
   if (process.env.NODE_ENV === "development") {
     // check if there's more than two children
     if (children.length !== 2) {
@@ -24,6 +32,15 @@ const Layout = ({ children, cx, styles }) => {
 
   // make a className and return the component
   const className = clsx("layout__container", cx);
+  return (
+    <div className={className} style={styles}>
+      {children}
+    </div>
+  );
+};
+
+const LayoutColumn = ({ children, cx, styles }: Childs) => {
+  const className = clsx(`layout__column`, cx);
   return (
     <div className={className} style={styles}>
       {children}

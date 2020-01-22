@@ -1,7 +1,7 @@
 import React from "react";
-import Editor from "../../components/Editor";
-import SubmitFormBodyContentTitle from "./submitformbodycontenttitle";
-import { useCreatePost } from "../../contexts/createpost";
+import Editor from "../../Editor";
+import SubmitFormBodyContentTitle from "./formbodycontenttitle";
+import { useCreatePost } from "../../../contexts/createpost";
 
 export default function SubmitFormBodyContent({ isUserBrowser }) {
   const { state, createPostDispatch } = useCreatePost();

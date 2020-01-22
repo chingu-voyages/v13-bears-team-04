@@ -8,6 +8,7 @@ import RecentPosts from "../components/RecentPosts";
 import SortView from "../components/SortView";
 import TrendingCommunity from "../components/TrendingCommunity";
 import ToTopButton from "../components/ToTopButton";
+import FooterBox from "../components/FooterBox";
 
 export default function Index() {
   return (
@@ -22,6 +23,7 @@ export default function Index() {
           <TrendingCommunity />
           <HomeBox />
           <RecentPosts />
+          <FooterBox />
           <ToTopButton />
         </Layout.Column>
       </Layout>

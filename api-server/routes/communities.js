@@ -14,10 +14,9 @@ router
   .get(getAllCommunities)
   .post(checkSession, createCommunity);
 
-router
-  .route("/:communityId")
-  .get(getCommunity)
-  .delete(checkSession, deleteCommunity);
+router.route("/:communityName").get(getCommunity);
+
+router.route("/:communityId").delete(checkSession, deleteCommunity);
 
 router
   .route("/:communityId/edit/:key")
@@ -73,7 +72,7 @@ async function createCommunity(req, res, next) {
 
     // add community to user document
     const user = res.locals.user;
-    user.communities.administrator.push(userId);
+    user.communities.administrator.push(newCommunity._id);
     await user.save();
     const { password, ...goodUser } = user._doc;
 
@@ -85,8 +84,9 @@ async function createCommunity(req, res, next) {
 
 async function getCommunity(req, res, next) {
   try {
-    const { communityId } = req.params;
-    const community = await Community.findById(communityId);
+    const { communityName } = req.params;
+    const lowerName = communityName.toLowerCase();
+    const community = await Community.findOne({ lowerName });
     res.status(200).json(community);
   } catch (err) {
     next(err);

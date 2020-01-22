@@ -12,6 +12,7 @@ import CommunityInfo from "./communityinfo";
 import CommunityAbout from "./communityabout";
 import CommunityRules from "./communityrules";
 import CommunityMods from "./communitymods";
+import CommunityCreatePost from "./communitycreatepost";
 import { Props } from "./types";
 import "./community.scss";
 
@@ -26,6 +27,7 @@ const Community: NextPage<Props> = ({ error, community }) => {
 
       <Layout>
         <Layout.Column>
+          <CommunityCreatePost communityName={community.name} />
           <PostList />
         </Layout.Column>
 

@@ -1,7 +1,6 @@
 import React from "react";
 import clsx from "clsx";
 import LayoutColumn from "./layoutcolumn";
-import "./layout.scss";
 
 const Layout = ({ children, cx, styles }) => {
   if (process.env.NODE_ENV === "development") {

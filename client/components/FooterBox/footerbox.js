@@ -1,5 +1,4 @@
 import React from "react";
-import "./footerbox.scss";
 
 export default function FooterBox() {
   return (

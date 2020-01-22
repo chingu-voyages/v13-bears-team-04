@@ -2,7 +2,6 @@ import React from "react";
 import clsx from "clsx";
 import ButtonWithIcon from "./buttonwithicon";
 import ButtonWithLink from "./buttonwithlink";
-import "./button.scss";
 
 interface Props {
   type?: "button" | "submit";

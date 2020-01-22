@@ -8,7 +8,6 @@ import Text from "./Text";
 
 import { useForceSignIn } from "../../hooks";
 import { CreatePostProvider } from "../../contexts/createpost";
-import "./createpost.scss";
 
 type Props = {
   communityId: string;

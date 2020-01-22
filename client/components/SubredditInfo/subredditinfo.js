@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 
-import "./subredditinfo.scss";
 import Button from "../Button/button";
 
 export default function SubredditInfo() {

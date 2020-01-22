@@ -8,7 +8,6 @@ import Button from "../../../components/Button";
 import { useForceSignIn } from "../../../hooks";
 import { useUser } from "../../../contexts/user";
 import fetchIt from "../../../utils/fetch";
-import "./create.scss";
 
 export default function Create() {
   useForceSignIn();

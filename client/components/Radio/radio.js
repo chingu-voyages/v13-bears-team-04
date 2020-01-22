@@ -1,6 +1,5 @@
 import React from "react";
 import RadioIcon from "./radioicon";
-import "./radio.scss";
 
 const Radio = ({ children, className, isChecked, handleClick, svgCx }) => (
   <div

@@ -1,15 +1,11 @@
 import React, { useState } from "react";
 import dayjs from "dayjs";
-import AdvancedFormat from "dayjs/plugin/advancedFormat";
+// import AdvancedFormat from "dayjs/plugin/advancedFormat";
 import relativeTime from "dayjs/plugin/relativeTime";
 
 dayjs.extend(relativeTime);
 
-// import fetch from "isomorphic-unfetch";
-
-import "./recentposts.scss";
-
-function limitrecentposttitle(title, recipe, limit = 9) {
+function limitrecentposttitle(title, recipe, limit = 10) {
   const newTitle = [];
   const numOfTitleElements = title.split(" ").length;
   let cnt = 0;
@@ -28,8 +24,6 @@ function limitrecentposttitle(title, recipe, limit = 9) {
 }
 
 export default function RecentPosts() {
-  // eslint-disable-next-line no-shadow
-  // eslint-disable-next-line no-unused-vars
   const [recentPosts, setRecentPosts] = useState([
     {
       id: 1,
@@ -82,6 +76,8 @@ export default function RecentPosts() {
         "https://images.unsplash.com/photo-1574392022138-a7d369a6ada3?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2468&q=80",
     },
   ]);
+
+  console.log("delete me later: ", setRecentPosts);
 
   return (
     <div className="recent-posts u-margin-bottom-small">

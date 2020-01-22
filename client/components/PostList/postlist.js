@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import PostListCard from "./postlistcard";
 import fetchIt from "../../utils/fetch";
-import "./postlist.scss";
 
 export default function PostList() {
   const [posts, setPosts] = useState([]);

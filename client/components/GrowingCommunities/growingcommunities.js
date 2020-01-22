@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import "./growingcommunities.scss";
 import Button from "../Button/button";
 
 export default function growingcommunities() {

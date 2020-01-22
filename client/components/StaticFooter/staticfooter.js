@@ -1,5 +1,4 @@
 import React from "react";
-import "./staticfooter.scss";
 
 export default function StaticFooter() {
   return (

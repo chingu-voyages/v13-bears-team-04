@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import CustomSortSelect from "./customsortselect";
 import { sortOptions, countryOptions, dateOptions } from "./optionsdata";
-import "./sortview.scss";
 
 export default function Sort() {
   const [sortSelection, setSortSelection] = useState(sortOptions[0]);

@@ -7,7 +7,6 @@ import ForgotUsername from "./forgotusername";
 import AuthFormLink from "./authformlink";
 
 import { useAuthPopup } from "../../contexts/authpopup";
-import "./authforms.scss";
 
 export default function AuthFormPopup() {
   const { authPopupName, setAuthPopup } = useAuthPopup();

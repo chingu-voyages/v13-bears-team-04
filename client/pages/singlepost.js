@@ -7,6 +7,7 @@ import FooterBox from "../components/FooterBox";
 
 import { useAuth } from "../utils/authcontext";
 import fetchIt from "../utils/fetch";
+import ToTopButton from "../components/ToTopButton";
 
 const SinglePost = () => {
   const { user, login, logout, signup } = useAuth();
@@ -59,6 +60,8 @@ const SinglePost = () => {
         <Layout.Column></Layout.Column>
         <Layout.Column>
           <SubredditInfo />
+          <FooterBox />
+          <ToTopButton />
           {!user && (
             <button type="button" onClick={handleSignup}>
               Signup

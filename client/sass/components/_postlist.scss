@@ -18,6 +18,7 @@
       width: 40px;
       position: absolute;
       top: 0;
+      border-radius: 0.5rem 0 0 0.5rem;
 
       .postlist-card__vote {
         display: flex;
@@ -55,6 +56,8 @@
       height: 100%;
 
       &__info {
+        line-height: 1.6rem;
+        font-size: 1.2rem;
         height: 30px;
         margin: 5px 0;
         display: flex;
@@ -81,14 +84,14 @@
           &__text {
             font-weight: bold;
             margin-left: 5px;
+            text-decoration: none;
+            color: inherit;
           }
         }
 
         &__user,
         &__date {
           color: #787c7e;
-          font-size: 0.9em;
-          line-height: 0.9em;
         }
       }
 

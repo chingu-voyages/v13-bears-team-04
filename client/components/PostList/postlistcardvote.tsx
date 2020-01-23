@@ -1,7 +1,11 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-export default function PostListCardVote({ voteScore }) {
+type Props = {
+  voteScore: number;
+};
+
+export default function PostListCardVote({ voteScore }: Props) {
   return (
     <div className="postlist-card__vote-container">
       <div className="postlist-card__vote">

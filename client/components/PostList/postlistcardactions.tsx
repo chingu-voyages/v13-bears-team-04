@@ -1,7 +1,11 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-export default function PostListCardActions({ numOfComments }) {
+type Props = {
+  numOfComments: number;
+};
+
+export default function PostListCardActions({ numOfComments }: Props) {
   return (
     <div className="postlist-card__actions">
       <div className="postlist-card__actions__comments">

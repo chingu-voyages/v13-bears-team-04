@@ -9,11 +9,11 @@ import Toolbar from "./toolbar";
 import { useIsDesktop } from "../../hooks";
 
 type Props = {
-  isBrowser: boolean;
-  isComment: boolean;
-  readOnly: boolean;
+  isBrowser?: boolean;
+  isComment?: boolean;
+  readOnly?: boolean;
   value: Node[];
-  setValue: (value: Node[]) => void;
+  setValue?: (value: Node[]) => void;
   handleCommentSubmit?: () => void;
 };
 
@@ -22,7 +22,7 @@ export default function Editor({
   isComment = false,
   readOnly = false,
   value,
-  setValue,
+  setValue = () => {},
   handleCommentSubmit,
 }: Props) {
   // things needed and used in Slate

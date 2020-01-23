@@ -38,7 +38,15 @@ async function getAllPosts(_, res, next) {
 async function getCommunityPosts(req, res, next) {
   try {
     const { communityId } = req.params;
-    const posts = await Post.find({ community: communityId });
+    const posts = await Post.find({ community: communityId })
+      .populate({
+        path: "author",
+        select: "username -_id"
+      })
+      .populate({
+        path: "community",
+        select: "name -_id"
+      });
     res.status(200).json(posts);
   } catch (err) {
     next(err);

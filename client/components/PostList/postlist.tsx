@@ -22,7 +22,6 @@ export default function PostList({ endpoint }: Props) {
     async function getPosts() {
       try {
         const data = await fetchIt(endpoint);
-        console.log(canSet);
         if (!canSet) return;
         setPosts(data);
       } catch (err) {

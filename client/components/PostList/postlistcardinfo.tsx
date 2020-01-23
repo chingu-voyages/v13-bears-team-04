@@ -1,22 +1,21 @@
 import React from "react";
 import Link from "next/link";
-import { useRouter } from "next/router";
 import makeDateAgo from "../../utils/date";
 
 type Props = {
   community: string;
   author: string;
   createdOn: string;
+  onCommunityPage: boolean;
 };
 
 export default function PostListCardInfo({
   community,
   author,
   createdOn,
+  onCommunityPage,
 }: Props) {
   const redditName = `r/${community}`;
-  const router = useRouter();
-  console.log("router: ", router);
 
   return (
     <div className="postlist-card__details__info">
@@ -24,11 +23,13 @@ export default function PostListCardInfo({
         <div className="postlist-card__details__info__sub__img">
           <img src="/nav-images/logo-icon.svg" alt="/r" />
         </div>
-        <Link href={redditName}>
-          <a className="postlist-card__details__info__sub__text">
-            {redditName}
-          </a>
-        </Link>
+        {!onCommunityPage && (
+          <Link href={redditName}>
+            <a className="postlist-card__details__info__sub__text">
+              {redditName}
+            </a>
+          </Link>
+        )}
       </div>
       <div className="postlist-card__details__info__user">{`Posted by u/${author}`}</div>
       <div className="postlist-card__details__info__date">

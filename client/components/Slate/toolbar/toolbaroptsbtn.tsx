@@ -12,8 +12,8 @@ const iconCX = "slate__toolbar__options__item__icon";
 
 const ToolbarOptsBtn = ({ handleClick, icon, isActive }: Props) => (
   <button
-    className={clsx("editor__toolbar__options__item", {
-      editor__toolbar__options__item__active: isActive,
+    className={clsx("slate__toolbar__options__item", {
+      slate__toolbar__options__item__active: isActive,
     })}
     onMouseDown={handleClick}
   >

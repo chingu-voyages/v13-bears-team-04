@@ -17,9 +17,9 @@ const Toolbar = ({
   isDesktop,
   handleCommentSubmit,
 }: Props) => (
-  <div className="editor__toolbar">
+  <div className="slate__toolbar">
     {/* If Markdown is active show it */}
-    {!isRich && <div className="editor__toolbar__mdheader">Markdown</div>}
+    {!isRich && <div className="slate__toolbar__mdheader">Markdown</div>}
 
     {/* Rich Text Option Buttons */}
     {isRich && isDesktop && <ToolbarOpts />}
@@ -30,7 +30,7 @@ const Toolbar = ({
         inverted
         size="tight"
         handleClick={toggleIsRich}
-        cx="editor__toolbar__toggler"
+        cx="slate__toolbar__toggler"
         text={`Switch to ${isRich ? "markdown" : "Fancy Pants Editor"}`}
       />
     )}

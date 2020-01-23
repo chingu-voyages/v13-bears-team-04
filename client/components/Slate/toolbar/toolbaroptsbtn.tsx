@@ -8,7 +8,7 @@ type Props = {
   isActive: boolean;
 };
 
-const iconCX = "editor__toolbar__options__item__icon";
+const iconCX = "slate__toolbar__options__item__icon";
 
 const ToolbarOptsBtn = ({ handleClick, icon, isActive }: Props) => (
   <button
@@ -20,7 +20,7 @@ const ToolbarOptsBtn = ({ handleClick, icon, isActive }: Props) => (
     {typeof icon === "string" ? (
       <FAIcon icon={icon} className={iconCX} />
     ) : (
-      <span className="editor__toolbar__options__item__multi-icon">
+      <span className="slate__toolbar__options__item__multi-icon">
         <FAIcon icon={icon[0]} className={iconCX} />
         <FAIcon icon={icon[1]} className={iconCX} />
       </span>

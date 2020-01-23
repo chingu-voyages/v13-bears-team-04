@@ -25,7 +25,7 @@ export default function RichTextEditor({ readOnly = false }: Props) {
 
   return (
     <Editable
-      className="editor__body"
+      className="slate__body"
       placeholder="Text (Optional)"
       readOnly={readOnly}
       renderElement={renderElement}

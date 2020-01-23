@@ -1,10 +1,10 @@
 import React from "react";
 import { MarkButton, BlockButton } from "./buttons";
 
-const Divider = () => <div className="editor__toolbar__options__divider" />;
+const Divider = () => <div className="slate__toolbar__options__divider" />;
 
 const ToolbarOpts = () => (
-  <div className="editor__toolbar__options">
+  <div className="slate__toolbar__options">
     <MarkButton format="bold" icon="bold" />
     <MarkButton format="italic" icon="italic" />
     <MarkButton format="underline" icon="underline" />

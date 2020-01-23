@@ -44,7 +44,7 @@ export default function Editor({
   const toolbar = <Toolbar {...toolbarProps} />;
 
   return (
-    <div className="editor">
+    <div className="slate slate__editor">
       <Slate editor={editor} value={value} onChange={handleChange}>
         {isDesktop ? (
           <>

@@ -16,7 +16,7 @@ export default function Render({ content }: Props) {
   }, [content]);
 
   return (
-    <div className="slate-render">
+    <div className="slate slate__render">
       <Slate editor={editor} value={value} onChange={onChange}>
         <RichTextEditor readOnly />
       </Slate>

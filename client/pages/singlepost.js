@@ -54,30 +54,34 @@ const SinglePost = () => {
   }
 
   return (
-    <div>
-      <Nav />
-      <SubredditInfo />
-      {!user && (
-        <button type="button" onClick={handleSignup}>
-          Signup
-        </button>
-      )}
-      {!user && (
-        <button type="button" onClick={handleLogin}>
-          Login
-        </button>
-      )}
-      {user && (
-        <button type="button" onClick={handleLogout}>
-          Logout
-        </button>
-      )}
-      {user && (
-        <button type="button" onClick={createPost}>
-          Create Post
-        </button>
-      )}
-    </div>
+    <>
+      <Layout>
+        <Layout.Column></Layout.Column>
+        <Layout.Column>
+          <SubredditInfo />
+          {!user && (
+            <button type="button" onClick={handleSignup}>
+              Signup
+            </button>
+          )}
+          {!user && (
+            <button type="button" onClick={handleLogin}>
+              Login
+            </button>
+          )}
+          {user && (
+            <button type="button" onClick={handleLogout}>
+              Logout
+            </button>
+          )}
+          {user && (
+            <button type="button" onClick={createPost}>
+              Create Post
+            </button>
+          )}
+        </Layout.Column>
+      </Layout>
+    </>
   );
 };
 

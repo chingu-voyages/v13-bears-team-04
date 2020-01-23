@@ -1,10 +1,7 @@
 import React from "react";
 import Link from "next/link";
-import dayjs from "dayjs";
-import relativeTime from "dayjs/plugin/relativeTime";
 import { useRouter } from "next/router";
-
-dayjs.extend(relativeTime);
+import makeDateAgo from "../../utils/date";
 
 type Props = {
   community: string;
@@ -19,7 +16,8 @@ export default function PostListCardInfo({
 }: Props) {
   const redditName = `r/${community}`;
   const router = useRouter();
-  console.log(router);
+  console.log("router: ", router);
+
   return (
     <div className="postlist-card__details__info">
       <div className="postlist-card__details__info__sub">
@@ -34,7 +32,7 @@ export default function PostListCardInfo({
       </div>
       <div className="postlist-card__details__info__user">{`Posted by u/${author}`}</div>
       <div className="postlist-card__details__info__date">
-        {dayjs().to(dayjs(createdOn))}
+        {makeDateAgo(createdOn)}
       </div>
     </div>
   );

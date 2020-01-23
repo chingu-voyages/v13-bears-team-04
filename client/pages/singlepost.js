@@ -1,7 +1,9 @@
 import React from "react";
 
+import Layout from "../components/Layout";
 import Nav from "../components/Nav";
 import SubredditInfo from "../components/SubredditInfo";
+import FooterBox from "../components/FooterBox";
 
 import { useAuth } from "../utils/authcontext";
 import fetchIt from "../utils/fetch";

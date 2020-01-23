@@ -27,7 +27,7 @@ const Community: NextPage<Props> = ({ error, community }) => {
       <Layout>
         <Layout.Column>
           <CommunityCreatePost communityName={community.name} />
-          <PostList />
+          <PostList endpoint={`/posts/${community._id}`} />
         </Layout.Column>
 
         <Layout.Column>

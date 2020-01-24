@@ -8,7 +8,7 @@ const labelBtns = [
     value: "isOC",
     backgroundColor: "rgb(255, 69, 0)",
     dropdown: false,
-    disabled: true,
+    disabled: false,
   },
   {
     icon: "plus",

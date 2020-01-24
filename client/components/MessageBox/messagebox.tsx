@@ -4,8 +4,8 @@ import clsx from "clsx";
 type Props = {
   msg: string;
   status: "error" | "success" | "default";
-  mT: number;
-  mB: number;
+  mT?: number;
+  mB?: number;
 };
 
 export default function MessageBox({ msg, status, mT = 0, mB = 0 }: Props) {

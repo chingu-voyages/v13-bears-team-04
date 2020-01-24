@@ -55,19 +55,23 @@ async function getCommunityPosts(req, res, next) {
 
 async function createPost(req, res, next) {
   try {
-    const { community, author } = req.body;
+    const { community } = req.body;
+
     const newPost = await Post.create(req.body);
     const postId = newPost._id;
 
     const targetCommunity = await Community.findById(community);
     targetCommunity.posts.push(postId);
     await targetCommunity.save();
+    const communityName = targetCommunity.name;
 
-    const targetUser = await User.findById(author);
-    targetUser.posts.push(postId);
-    await targetUser.save();
+    const user = res.locals.user;
+    user.posts.push(postId);
+    await user.save();
 
-    res.status(201).json(newPost);
+    const { password, ...updatedUser } = user._doc;
+
+    res.status(201).json({ postId, communityName, updatedUser });
   } catch (err) {
     next(err);
   }

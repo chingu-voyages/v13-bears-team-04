@@ -158,11 +158,12 @@ async function addCommunityUser(req, res, next) {
     await community.save();
 
     // update user document
-    const user = await User.findById(userId);
+    const user = res.locals.user;
     user.communities[singularKey].push(communityId);
-    const updatedUser = await user.save();
+    await user.save();
+    const { password, lowerUsername, ...goodUser } = user._doc;
 
-    res.status(200).json(updatedUser);
+    res.status(200).json(goodUser);
   } catch (err) {
     next(err);
   }
@@ -184,13 +185,14 @@ async function deleteCommunityUser(req, res, next) {
     await community.save();
 
     // update user document
-    const user = await User.findById(userId);
+    const user = res.locals.user;
     user.communities[singularKey] = user.communities[singularKey].filter(
       community => community.toString() !== communityId
     );
-    const updatedUser = await user.save();
+    await user.save();
+    const { password, lowerUsername, ...goodUser } = user._doc;
 
-    res.status(200).json(updatedUser);
+    res.status(200).json(goodUser);
   } catch (err) {
     next(err);
   }

@@ -2,6 +2,7 @@ import React, { useMemo, useCallback } from "react";
 import { Node, createEditor } from "slate";
 import { withReact, Slate } from "slate-react";
 import { withHistory } from "slate-history";
+import { isBrowser } from "react-device-detect";
 
 import RichTextEditor from "./richtext";
 import PlainTextEditor from "./plaintext";
@@ -9,7 +10,6 @@ import Toolbar from "./toolbar";
 import { useIsDesktop } from "../../hooks";
 
 type Props = {
-  isBrowser?: boolean;
   isComment?: boolean;
   readOnly?: boolean;
   value: Node[];
@@ -18,7 +18,6 @@ type Props = {
 };
 
 export default function Editor({
-  isBrowser = false,
   isComment = false,
   readOnly = false,
   value,

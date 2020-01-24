@@ -2,11 +2,11 @@ import React from "react";
 import { NextPage } from "next";
 import Error from "next/error";
 
-import Layout from "../../../../components/Layout";
-import PostList from "../../../../components/PostList";
-import ToTopButton from "../../../../components/ToTopButton";
-import fetchIt from "../../../../utils/fetch";
-import { useSetCSSVariable } from "../../../../hooks";
+import Layout from "../Layout";
+import PostList from "../PostList";
+import ToTopButton from "../ToTopButton";
+import fetchIt from "../../utils/fetch";
+import { useSetCSSVariable, useCheckMembership } from "../../hooks";
 
 import CommunityInfo from "./communityinfo";
 import CommunityAbout from "./communityabout";
@@ -16,17 +16,29 @@ import CommunityCreatePost from "./communitycreatepost";
 import { Props } from "./types";
 
 const Community: NextPage<Props> = ({ error, community }) => {
+  const userMemberLevel = useCheckMembership(community._id);
   useSetCSSVariable(community.theme);
+
+  console.log(userMemberLevel);
+
+  // async function handleMembership() {}
 
   if (error) return <Error title={error} statusCode={404} />;
 
   return (
     <div className="community-container">
-      <CommunityInfo communityId={community._id} title={community.name} />
+      <CommunityInfo
+        communityId={community._id}
+        title={community.name}
+        userMemberLevel={userMemberLevel}
+      />
 
       <Layout>
         <Layout.Column>
-          <CommunityCreatePost communityName={community.name} />
+          <CommunityCreatePost
+            communityName={community.name}
+            userMemberLevel={userMemberLevel}
+          />
           <PostList endpoint={`/posts/${community._id}`} />
         </Layout.Column>
 
@@ -35,6 +47,7 @@ const Community: NextPage<Props> = ({ error, community }) => {
             description={community.description}
             createdOn={community.createdOn}
             memberCount={community.users.members.length}
+            userMemberLevel={userMemberLevel}
           />
           <CommunityRules
             communityName={community.name}
@@ -81,9 +94,6 @@ Community.getInitialProps = async ctx => {
   try {
     const foundCommunity = await fetchIt(`/community/${communityName}`);
     if (!foundCommunity) throw "";
-
-    // const foundPosts = await fetchIt(`/posts/${community._id}`);
-    // console.log("foundPosts: ", foundPosts);
     community = foundCommunity;
   } catch (err) {
     error = `r/${communityName} not found. Try again`;

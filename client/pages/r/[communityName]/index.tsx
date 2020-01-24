@@ -1,1 +1,1 @@
-export { default } from "./view/community";
+export { default } from "../../../components/ViewCommunity";

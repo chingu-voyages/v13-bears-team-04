@@ -2,21 +2,22 @@ import React from "react";
 import dayjs from "dayjs";
 import CommunityBox from "./communitybox";
 import CommunityAboutUsers from "./communityaboutusers";
-import Button from "../../../../components/Button";
-import { useUser } from "../../../../contexts/user";
+import Button from "../Button";
 
 type Props = {
   description: string;
   createdOn: string;
   memberCount: number;
+  userMemberLevel: string;
 };
 
-const randomViewerCount = Math.floor(Math.random() * 1000000);
-
 export default function CommunityAbout(props: Props) {
-  const { description, createdOn, memberCount } = props;
+  const { description, createdOn, memberCount, userMemberLevel } = props;
 
-  const { user } = useUser();
+  let randomViewerCount = 0;
+  if (typeof window !== "undefined") {
+    randomViewerCount = Math.floor(Math.random() * 1000000);
+  }
 
   return (
     <CommunityBox header="About Community" cx="community__about">
@@ -27,7 +28,7 @@ export default function CommunityAbout(props: Props) {
       </div>
       <hr />
       <div>Created {dayjs(createdOn).format("MMMM D[,] YYYY")}</div>
-      {!!user && (
+      {!!userMemberLevel && (
         <>
           <Button href="/submit" text="Create Post" />
           <hr />

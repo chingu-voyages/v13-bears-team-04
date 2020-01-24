@@ -1,15 +1,16 @@
 import React from "react";
 import Link from "next/link";
-import { useUser } from "../../../../contexts/user";
 
 type Props = {
   communityName: string;
+  userMemberLevel: string;
 };
 
-export default function CommunityCreatePost({ communityName }: Props) {
-  const { user } = useUser();
-
-  if (!user) return null;
+export default function CommunityCreatePost({
+  communityName,
+  userMemberLevel,
+}: Props) {
+  if (!userMemberLevel) return null;
 
   return (
     <div className="community__createpost">

@@ -111,17 +111,20 @@ CommunitySchema.plugin(uniqueValidator, {
 });
 
 CommunitySchema.pre("save", function(next) {
-  // remove spaces in name
-  const name = this.name.split(" ").join("");
-  this.name = name;
-  this.lowerName = name;
+  if (this.isNew) {
+    // remove spaces in name
+    const name = this.name.split(" ").join("");
+    this.name = name;
+    this.lowerName = name;
+  }
   next();
 });
 
 CommunitySchema.post("save", function(error, _, next) {
   if (error.name === "MongoError" && error.code === 11000) {
-    next(new Error("That community name is already taken"));
+    return next(new Error("That community name is already taken"));
   }
+  next();
 });
 
 CommunitySchema.save;

@@ -1,9 +1,7 @@
 import React from "react";
 import { Editable } from "slate-react";
 
-type Props = {};
-
-const PlainTextEditor = ({}: Props) => (
+const PlainTextEditor = () => (
   <Editable className="slate__body" placeholder="Text (Optional)" />
 );
 

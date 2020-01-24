@@ -108,15 +108,18 @@ async function deleteCommunity(req, res, next) {
 async function updateCommunityDetails(req, res, next) {
   try {
     const { communityId, key } = req.params;
+
     const acceptableKeys = ["name", "description", "rules"];
     if (!acceptableKeys.includes(key)) {
       throw createError(400, "Invalid key param");
     }
+
     const updatedCommunity = await Community.findByIdAndUpdate(
       communityId,
       { [key]: req.body[key] },
       { new: true }
     );
+
     res.status(200).json(updatedCommunity);
   } catch (err) {
     next(err);
@@ -127,15 +130,14 @@ async function updateCommunityDetails(req, res, next) {
 async function getCommunityUsers(req, res, next) {
   try {
     const { communityId, key } = req.params;
-    const acceptableKeys = ["members", "moderators", "administrators"];
-    if (!acceptableKeys.includes(key)) {
-      throw createError(400, "Invalid key param");
-    }
+    checkKeyParam(key);
+
     const { users } = await Community.findById(communityId).populate({
       path: `users.${key}`,
       select: "username -_id"
     });
     const targetedUsers = users[key];
+
     res.status(200).json(targetedUsers);
   } catch (err) {
     next(err);
@@ -147,21 +149,20 @@ async function addCommunityUser(req, res, next) {
   try {
     const { communityId, key } = req.params;
     const { userId } = req.body;
-    const acceptableKeys = ["members", "moderators", "administrators"];
-    if (!acceptableKeys.includes(key)) {
-      throw createError(400, "Invalid key param");
-    }
+
+    const singularKey = checkKeyParam(key);
+
     // update community document
     const community = await Community.findById(communityId);
     community.users[key].push(userId);
-    const updatedCommunity = await community.save();
+    await community.save();
+
     // update user document
     const user = await User.findById(userId);
-    // community's users are plural, user's are singular
-    const singularKey = key.substring(0, key.length - 1);
     user.communities[singularKey].push(communityId);
-    await user.save();
-    res.status(200).json(updatedCommunity);
+    const updatedUser = await user.save();
+
+    res.status(200).json(updatedUser);
   } catch (err) {
     next(err);
   }
@@ -172,33 +173,40 @@ async function deleteCommunityUser(req, res, next) {
   try {
     const { communityId, key } = req.params;
     const { userId } = req.body;
-    const acceptableKeys = ["members", "moderators", "administrators"];
-    if (!acceptableKeys.includes(key)) {
-      throw createError(400, "Invalid key param");
-    }
+
+    const singularKey = checkKeyParam(key);
+
     // update community document
-    const community = await Community.findByIdAndUpdate(
-      communityId,
-      {
-        users: { $pull: { [key]: userId } }
-      },
-      { new: true }
+    const community = await Community.findById(communityId);
+    community.users[key] = community.users[key].filter(
+      user => user.toString() !== userId
     );
-    const updatedCommunity = await community.save();
+    await community.save();
+
     // update user document
-    const singularKey = key.substring(0, key.length - 1);
-    const user = await User.findByIdAndUpdate(
-      userId,
-      {
-        communities: { $pull: { [singularKey]: userId } }
-      },
-      { new: true }
+    const user = await User.findById(userId);
+    user.communities[singularKey] = user.communities[singularKey].filter(
+      community => community.toString() !== communityId
     );
-    await user.save();
-    res.status(200).json(updatedCommunity);
+    const updatedUser = await user.save();
+
+    res.status(200).json(updatedUser);
   } catch (err) {
     next(err);
   }
 }
 
 module.exports = router;
+
+// check if key param is correct, throws if not
+// changes plural key to singular key string, returns singular version
+function checkKeyParam(key) {
+  const acceptableKeys = ["members", "moderators", "administrators"];
+  if (!acceptableKeys.includes(key)) {
+    throw createError(
+      400,
+      "Invalid Key - must be one of [members, moderators, administrators]"
+    );
+  }
+  return key.substring(0, key.length - 1);
+}

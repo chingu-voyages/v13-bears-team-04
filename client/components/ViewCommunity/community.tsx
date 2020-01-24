@@ -19,10 +19,6 @@ const Community: NextPage<Props> = ({ error, community }) => {
   const userMemberLevel = useCheckMembership(community._id);
   useSetCSSVariable(community.theme);
 
-  console.log(userMemberLevel);
-
-  // async function handleMembership() {}
-
   if (error) return <Error title={error} statusCode={404} />;
 
   return (

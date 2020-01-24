@@ -45,8 +45,11 @@ async function handleVerification(req, res, next) {
 async function handleLogin(req, res, next) {
   try {
     const { username, password } = req.body;
-    const user = await User.findOne({ username });
+    const lowerUsername = username.toLowerCase();
+
+    const user = await User.findOne({ lowerUsername });
     if (!user) throw createError(401, "User not found");
+
     user.comparePassword(password, async (err, isMatch) => {
       if (err) throw createError(400, "An error occured");
       if (!isMatch) throw createError(401, "Wrong password");
@@ -77,6 +80,7 @@ async function handleLogout(req, res, next) {
     }
     // delete all this user's sessions
     await Session.deleteMany({ userId });
+
     res.status(200).json({ message: "Successfully logged out" });
   } catch (err) {
     next(err);
@@ -85,16 +89,19 @@ async function handleLogout(req, res, next) {
 
 async function handleSignup(req, res, next) {
   try {
-    const { email, password, username } = req.body;
-    const user = { email, password, username };
-    const newUser = await User.create(user);
+    // create user
+    const newUser = await User.create(req.body);
     if (!newUser) throw createError(400, "Error creating user");
+
+    // create a session
     const session = await Session.create({ userId: newUser._id });
     if (!session || !session._id) {
       throw createError(400, "Error creating session");
     }
-    // don't want to send the user's password to the client
+
+    // separate password since we don't want to send to the client
     const { password, ...goodUser } = newUser._doc;
+
     res.status(200).json({ sid: session._id, ...goodUser });
   } catch (err) {
     next(err);

@@ -30,24 +30,20 @@ export default function CommunityInfo({
       // leave the community
       if (userMemberLevel) {
         const leaveURL = `${baseURL}/${userMemberLevel}s`;
-        console.log(leaveURL);
         const updatedUser = await fetchIt(leaveURL, {
           method: "DELETE",
           ...opts,
         });
-        console.log(updatedUser);
         setUser(updatedUser);
       }
 
       // join the community
       if (!userMemberLevel) {
         const joinURL = `${baseURL}/members`;
-        console.log(joinURL);
         const updatedUser = await fetchIt(joinURL, {
           method: "POST",
           ...opts,
         });
-        console.log(updatedUser);
         setUser(updatedUser);
       }
     } catch (err) {

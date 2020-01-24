@@ -14,7 +14,7 @@ export default function CommunityMods({ administrators, moderators }: Props) {
       {!!users.length ? (
         <ul>
           {users.map(user => (
-            <li>{user}</li>
+            <li key={user}>{user}</li>
           ))}
         </ul>
       ) : (

@@ -4,6 +4,15 @@
       background-color: #fff;
     }
 
+    &__color-picker {
+      text-align: center;
+
+      .chrome-picker,
+      button {
+        margin: 0 auto;
+      }
+    }
+
     &__banner {
       height: 80px;
       width: 100%;

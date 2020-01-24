@@ -6,18 +6,18 @@ import Layout from "../Layout";
 import PostList from "../PostList";
 import ToTopButton from "../ToTopButton";
 import fetchIt from "../../utils/fetch";
-import { useSetCSSVariable, useCheckMembership } from "../../hooks";
+import { useCheckMembership } from "../../hooks";
 
-import CommunityInfo from "./communityinfo";
 import CommunityAbout from "./communityabout";
-import CommunityRules from "./communityrules";
-import CommunityMods from "./communitymods";
+import CommunityColors from "./communitycolors";
 import CommunityCreatePost from "./communitycreatepost";
+import CommunityInfo from "./communityinfo";
+import CommunityMods from "./communitymods";
+import CommunityRules from "./communityrules";
 import { Props } from "./types";
 
 const Community: NextPage<Props> = ({ error, community }) => {
   const userMemberLevel = useCheckMembership(community._id);
-  useSetCSSVariable(community.theme);
 
   if (error) return <Error title={error} statusCode={404} />;
 
@@ -39,6 +39,11 @@ const Community: NextPage<Props> = ({ error, community }) => {
         </Layout.Column>
 
         <Layout.Column>
+          <CommunityColors
+            theme={community.theme}
+            communityId={community._id}
+            userMemberLevel={userMemberLevel}
+          />
           <CommunityAbout
             description={community.description}
             createdOn={community.createdOn}

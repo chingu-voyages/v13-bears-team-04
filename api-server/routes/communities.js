@@ -18,6 +18,8 @@ router.route("/:communityName").get(getCommunity);
 
 router.route("/:communityId").delete(checkSession, deleteCommunity);
 
+router.route("/:communityId/theme").put(checkSession, updateCommunityTheme);
+
 router
   .route("/:communityId/edit/:key")
   .put(checkSession, updateCommunityDetails);
@@ -99,6 +101,21 @@ async function deleteCommunity(req, res, next) {
     const { communityId } = req.params;
     const deletedCommunity = await Community.findByIdAndDelete(communityId);
     res.status(200).json(deletedCommunity);
+  } catch (err) {
+    next(err);
+  }
+}
+
+async function updateCommunityTheme(req, res, next) {
+  try {
+    const { communityId } = req.params;
+    const theme = req.body.theme;
+
+    const community = await Community.findById(communityId);
+    community.theme = theme;
+    await community.save();
+
+    res.status(200).json({ updatedCommunity: community });
   } catch (err) {
     next(err);
   }

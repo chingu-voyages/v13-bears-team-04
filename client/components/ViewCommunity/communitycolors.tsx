@@ -22,7 +22,7 @@ export default function CommunityColors({
   userMemberLevel,
   communityId,
 }: Props) {
-  const { msg, status, setInfo } = useMessageBox();
+  const { msg, status, setMessageBox } = useMessageBox();
   const [bgColor, setBgColor] = useState(theme["--community-theme-main"]);
   const [textColor, setTextColor] = useState(theme["--community-theme-text"]);
 
@@ -34,16 +34,16 @@ export default function CommunityColors({
   useSetCSSVariable(newTheme);
 
   async function handleColorChange() {
-    setInfo({ msg: "Processing...", status: "default" });
+    setMessageBox({ msg: "Processing...", status: "default" });
     try {
       await fetchIt(`/community/${communityId}/theme`, {
         method: "PUT",
         body: JSON.stringify({ theme: newTheme }),
         ctx: {},
       });
-      setInfo({ msg: "Successfully Updated", status: "success" });
+      setMessageBox({ msg: "Successfully Updated", status: "success" });
     } catch (err) {
-      setInfo({ msg: err.message, status: "error" });
+      setMessageBox({ msg: err.message, status: "error" });
     }
   }
 

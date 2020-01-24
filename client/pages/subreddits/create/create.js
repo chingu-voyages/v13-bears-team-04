@@ -15,7 +15,7 @@ export default function Create() {
   useForceSignIn();
 
   const { user, setUser } = useUser();
-  const { msg, status, setInfo } = useMessageBox();
+  const { msg, status, setMessageBox } = useMessageBox();
 
   // the following are used to create a community
   const [name, setName] = useState("");
@@ -25,7 +25,7 @@ export default function Create() {
   const [isOver18, setIsOver18] = useState(false);
 
   async function handleSubmit() {
-    setInfo({ msg: "Processing...", status: "default" });
+    setMessageBox({ msg: "Processing...", status: "default" });
 
     try {
       const body = JSON.stringify({
@@ -44,7 +44,7 @@ export default function Create() {
       // send user to new community
       Router.push(`/r/${newCommunity.name}`);
     } catch (err) {
-      setInfo({ msg: err.message, status: "error" });
+      setMessageBox({ msg: err.message, status: "error" });
     }
   }
 

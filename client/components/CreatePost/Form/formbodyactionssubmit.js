@@ -12,10 +12,10 @@ import fetchIt from "../../../utils/fetch";
 export default function SubmitFormBodyActionsSubmit() {
   const { state } = useCreatePost();
   const { user, setUser } = useUser();
-  const { status, msg, setInfo } = useMessageBox();
+  const { status, msg, setMessageBox } = useMessageBox();
 
   async function handleSubmit() {
-    setInfo({ msg: "Processing...", status: "default" });
+    setMessageBox({ msg: "Processing...", status: "default" });
 
     try {
       const body = JSON.stringify({
@@ -37,7 +37,7 @@ export default function SubmitFormBodyActionsSubmit() {
       // send user to new post
       Router.push(`/r/${communityName}/${postId}`);
     } catch (err) {
-      setInfo({ msg: err.message, status: "error" });
+      setMessageBox({ msg: err.message, status: "error" });
     }
   }
 

@@ -6,10 +6,10 @@ type State = {
 };
 
 export default function useMessageBox() {
-  const [{ msg, status }, setInfo] = useState<State>({
+  const [{ msg, status }, setMessageBox] = useState<State>({
     msg: "",
     status: "default",
   });
 
-  return { msg, status, setInfo };
+  return { msg, status, setMessageBox };
 }

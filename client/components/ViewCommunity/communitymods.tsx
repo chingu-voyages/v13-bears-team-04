@@ -9,16 +9,17 @@ type Props = {
 export default function CommunityMods({ administrators, moderators }: Props) {
   const users = [...administrators, ...moderators];
 
-  console.log("users: ", users);
-
   return (
     <CommunityBox header="Moderators" cx="community__mods">
-      <p>No Mods Found</p>
-      {/* <div>
-        {
-          users.map()
-        }
-      </div> */}
+      {!!users.length ? (
+        <ul>
+          {users.map(user => (
+            <li>{user}</li>
+          ))}
+        </ul>
+      ) : (
+        <p>No Mods Found</p>
+      )}
     </CommunityBox>
   );
 }

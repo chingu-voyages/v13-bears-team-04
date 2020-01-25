@@ -33,6 +33,7 @@
     "slate-react": "^0.57.1"
   },
   "devDependencies": {
+    "@svgr/cli": "^5.1.0",
     "@types/node": "^13.1.2",
     "@types/react": "^16.9.17",
     "eslint": "^6.1.0",

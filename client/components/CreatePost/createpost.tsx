@@ -1,5 +1,6 @@
 import React from "react";
 
+import FooterBox from "../FooterBox";
 import Layout from "../Layout";
 import Form from "./Form";
 import Rules from "./Rules";
@@ -27,7 +28,7 @@ export default function CreatePost({ communityId, communityName }: Props) {
         <Layout.Column>
           <Rules />
           <Text />
-          {/* <StaticFooter /> */}
+          <FooterBox />
         </Layout.Column>
       </Layout>
     </CreatePostProvider>

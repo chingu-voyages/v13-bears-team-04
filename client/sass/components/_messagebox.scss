@@ -1,0 +1,43 @@
+.message-box {
+  color: #034271;
+  background-color: rgba(255, 255, 255, 1);
+  border: 1px solid #034271;
+  border-radius: 0.5rem;
+  padding: 12px;
+  line-height: 130%;
+  font-size: 1.25em;
+  text-align: center;
+  width: 100%;
+  box-sizing: border-box;
+  position: relative;
+
+  &--error {
+    color: #af0909;
+    background-color: rgba(255, 0, 0, 0.12);
+    border: 1px solid #af0909;
+  }
+
+  &--success {
+    color: #2b5603;
+    background-color: rgba(91, 193, 21, 0.12);
+    border: 1px solid #2b5603;
+  }
+
+  .message-box__icon {
+    color: #797979;
+    position: absolute;
+    right: 3px;
+    top: 3px;
+    cursor: pointer;
+    height: 15px;
+    width: 15px;
+    font-size: 1.3rem;
+    border-radius: 100%;
+    padding: 2px;
+    transition: all 0.2s;
+
+    &:hover {
+      background-color: rgba(170, 170, 170, 0.5);
+    }
+  }
+}

@@ -25,6 +25,7 @@ export default function SubmitFormSelect() {
         createPostDispatch({
           type: "SET_COMMUNITY",
           communityId: selection ? selection.value : "",
+          communityName: selection ? selection.label : "",
         });
       }}
       className="submit__form__select"

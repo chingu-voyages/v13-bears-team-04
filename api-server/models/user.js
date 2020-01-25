@@ -94,6 +94,7 @@ UserSchema.post("save", function(error, _, next) {
   if (error.name === "MongoError" && error.code === 11000) {
     next(new Error("That username name is already taken"));
   }
+  next();
 });
 
 // STEPS TO USE

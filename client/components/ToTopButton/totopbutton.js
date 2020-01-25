@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react";
 import Button from "../Button";
-// import "./totopbutton.scss";
 
 export default function ToTopButton() {
   const [showButton, setShowButton] = useState(false);

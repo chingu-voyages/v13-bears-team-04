@@ -1,15 +1,22 @@
 import React from "react";
+import Router from "next/router";
+
 import Button from "../../Button";
-import fetchIt from "../../../utils/fetch";
+import MessageBox from "../../MessageBox";
+
+import { useMessageBox } from "../../../hooks";
 import { useCreatePost } from "../../../contexts/createpost";
 import { useUser } from "../../../contexts/user";
+import fetchIt from "../../../utils/fetch";
 
 export default function SubmitFormBodyActionsSubmit() {
   const { state } = useCreatePost();
-  const { user } = useUser();
+  const { user, setUser } = useUser();
+  const { status, msg, setMessageBox } = useMessageBox();
 
   async function handleSubmit() {
-    console.log("processing...");
+    setMessageBox({ msg: "Processing...", status: "default" });
+
     try {
       const body = JSON.stringify({
         community: state.communityId,
@@ -22,14 +29,15 @@ export default function SubmitFormBodyActionsSubmit() {
         isSpoiler: state.isSpoiler,
         author: user._id,
       });
-      const newPost = await fetchIt(`/posts/${state.communityId}`, {
-        method: "POST",
-        body,
-        ctx: {},
-      });
-      console.log(newPost);
+      const options = { method: "POST", body, ctx: {} };
+      const data = await fetchIt(`/posts/${state.communityId}`, options);
+      const { postId, communityName, updatedUser } = data;
+      // update the current user context
+      setUser(updatedUser);
+      // send user to new post
+      Router.push(`/r/${communityName}/${postId}`);
     } catch (err) {
-      console.log(err);
+      setMessageBox({ msg: err.message, status: "error" });
     }
   }
 
@@ -38,9 +46,12 @@ export default function SubmitFormBodyActionsSubmit() {
   }
 
   return (
-    <div>
-      <Button inverted text="Save Draft" handleClick={handleSaveDraft} />
-      <Button text="Post" handleClick={handleSubmit} />
-    </div>
+    <>
+      <div>
+        <Button inverted text="Save Draft" handleClick={handleSaveDraft} />
+        <Button text="Post" handleClick={handleSubmit} />
+      </div>
+      <MessageBox msg={msg} status={status} mT={16} mB={0} />
+    </>
   );
 }

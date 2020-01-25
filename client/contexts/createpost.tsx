@@ -2,7 +2,7 @@ import React, { createContext, useContext, useReducer } from "react";
 import { Node } from "slate";
 
 type Action =
-  | { type: "SET_COMMUNITY"; communityId: string }
+  | { type: "SET_COMMUNITY"; communityId: string; communityName: string }
   | { type: "SET_TYPE"; postType: "text" | "link" }
   | { type: "SET_TITLE"; title: string }
   | { type: "SET_CONTENT"; content: Node[] }
@@ -54,7 +54,11 @@ const init: (props: InitProps) => State = ({ communityId, communityName }) => ({
 const reducer = (state: State, action: Action): State => {
   switch (action.type) {
     case "SET_COMMUNITY":
-      return { ...state, communityId: action.communityId };
+      return {
+        ...state,
+        communityId: action.communityId,
+        communityName: action.communityName,
+      };
     case "SET_TYPE":
       return { ...state, postType: action.postType };
     case "SET_TITLE":

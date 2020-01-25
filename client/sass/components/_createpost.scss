@@ -44,7 +44,7 @@
 
       &__select {
         margin-bottom: 8px;
-        // might just do all these styles through react-select styles api
+        z-index: 111;
       }
 
       &__body {

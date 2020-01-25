@@ -16,7 +16,7 @@ export default function Index() {
       <SortView />
       <Layout>
         <Layout.Column>
-          <PostList />
+          <PostList endpoint="/posts" />
         </Layout.Column>
         <Layout.Column>
           <GrowingCommunities />

@@ -4,6 +4,15 @@
       background-color: #fff;
     }
 
+    &__color-picker {
+      text-align: center;
+
+      .chrome-picker,
+      button {
+        margin: 0 auto;
+      }
+    }
+
     &__banner {
       height: 80px;
       width: 100%;
@@ -21,11 +30,9 @@
 
       &__icon {
         border: 4px solid #fff;
-        background-color: #fff;
         border-radius: 100%;
         height: 72px;
         width: 72px;
-        // fill: var(--community-theme-text);
       }
 
       &__titles {
@@ -52,78 +59,6 @@
         margin: 0 0 30px 16px;
         width: 100%;
         max-width: 100px;
-      }
-    }
-
-    &__box {
-      width: 100%;
-      margin-bottom: 16px;
-      border-radius: 0.5rem;
-      background-color: $white;
-      color: #1c1c1c;
-      line-height: 1.8rem;
-      font-size: 1.4rem;
-
-      &__header {
-        height: 46px;
-        display: flex;
-        align-items: center;
-        line-height: 1.8rem;
-        font-size: 1.4rem;
-        font-weight: bold;
-        background-color: var(--community-theme-main);
-        color: var(--community-theme-text);
-        padding: 16px;
-        box-sizing: border-box;
-        border-radius: 0.5rem 0.5rem 0 0;
-      }
-
-      &__content {
-        padding: 12px;
-
-        & > div {
-          margin-bottom: 8px;
-        }
-      }
-
-      hr {
-        background-color: #edeff1;
-        border: none;
-        height: 1px;
-        margin: 16px 0;
-      }
-    }
-
-    &__about {
-      &__users {
-        display: flex;
-
-        div {
-          display: flex;
-          flex-direction: column;
-          width: 45%;
-
-          p {
-            margin: 0 0 4px;
-          }
-
-          p:nth-of-type(1) {
-            line-height: 2rem;
-            font-size: 1.6rem;
-            font-weight: bold;
-          }
-
-          p:nth-of-type(2) {
-            line-height: 1.6rem;
-            font-size: 1.2rem;
-          }
-        }
-      }
-
-      span {
-        line-height: 1.6rem;
-        font-size: 1.2rem;
-        font-weight: bold;
       }
     }
 
@@ -156,6 +91,81 @@
         font-size: 1.4rem;
         cursor: text;
       }
+    }
+  }
+}
+
+// these is extracted from above because it's used on the create post page too
+.community {
+  &__box {
+    width: 100%;
+    margin-bottom: 16px;
+    border-radius: 0.5rem;
+    background-color: $white;
+    color: #1c1c1c;
+    line-height: 1.8rem;
+    font-size: 1.4rem;
+
+    &__header {
+      height: 46px;
+      display: flex;
+      align-items: center;
+      line-height: 1.8rem;
+      font-size: 1.4rem;
+      font-weight: bold;
+      background-color: var(--community-theme-main);
+      color: var(--community-theme-text);
+      padding: 16px;
+      box-sizing: border-box;
+      border-radius: 0.5rem 0.5rem 0 0;
+    }
+
+    &__content {
+      padding: 12px;
+
+      & > div {
+        margin-bottom: 8px;
+      }
+    }
+
+    hr {
+      background-color: #edeff1;
+      border: none;
+      height: 1px;
+      margin: 16px 0;
+    }
+  }
+
+  &__about {
+    &__users {
+      display: flex;
+
+      div {
+        display: flex;
+        flex-direction: column;
+        width: 45%;
+
+        p {
+          margin: 0 0 4px;
+        }
+
+        p:nth-of-type(1) {
+          line-height: 2rem;
+          font-size: 1.6rem;
+          font-weight: bold;
+        }
+
+        p:nth-of-type(2) {
+          line-height: 1.6rem;
+          font-size: 1.2rem;
+        }
+      }
+    }
+
+    span {
+      line-height: 1.6rem;
+      font-size: 1.2rem;
+      font-weight: bold;
     }
   }
 }

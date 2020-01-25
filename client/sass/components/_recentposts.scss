@@ -1,16 +1,16 @@
 .recent-posts {
-  width: 32rem;
+  width: 100%;
   display: inline-block;
   border: 1px solid rgba($grey, 0.2);
   border-radius: 0.5rem;
   background-color: $white;
 
-  padding: 0.5rem;
+  // padding: 0.5rem;
 
   &__row {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: space-evenly;
 
     flex-wrap: nowrap;
 
@@ -74,8 +74,9 @@
 .clear {
   text-align: right;
   display: inline-block;
-  padding: 1rem 3rem 0.5rem 2rem;
-  margin-left: 26rem;
+  padding: 2rem 4rem 1rem 2rem;
+  // padding: 2rem;
+  margin-left: 24.5rem;
   font-size: 1.3rem;
   color: $grey;
   cursor: pointer;

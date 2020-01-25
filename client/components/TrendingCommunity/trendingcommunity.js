@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from "react";
-import fetch from "isomorphic-unfetch";
+import React, { useState } from "react";
 import { useAuthPopup } from "../../contexts/authpopup";
 import { useUser } from "../../contexts/user";
-import Button from "../Button/button";
+import Button from "../Button";
 
 export default function trendingcommunity() {
   const { user } = useUser();
@@ -50,7 +49,7 @@ export default function trendingcommunity() {
                 text="Join"
                 size="normal"
                 handleClick={() => handleClick()}
-              ></Button>
+              />
             </div>
           </div>
         );

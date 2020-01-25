@@ -22,7 +22,7 @@ export default function CommunityColors({
   userMemberLevel,
   communityId,
 }: Props) {
-  const { msg, status, setMessageBox } = useMessageBox();
+  const { msg, status, setMessageBox, resetMessageBox } = useMessageBox();
   const [bgColor, setBgColor] = useState(theme["--community-theme-main"]);
   const [textColor, setTextColor] = useState(theme["--community-theme-text"]);
 
@@ -66,7 +66,12 @@ export default function CommunityColors({
       />
       <hr />
       <Button text="Submit New Theme" handleClick={handleColorChange} />
-      <MessageBox msg={msg} status={status} mT={16} />
+      <MessageBox
+        msg={msg}
+        status={status}
+        handleClose={resetMessageBox}
+        mT={16}
+      />
     </CommunityBox>
   );
 }

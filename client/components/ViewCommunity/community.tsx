@@ -3,10 +3,11 @@ import { NextPage } from "next";
 import Error from "next/error";
 
 import Layout from "../Layout";
+import MessageBox from "../MessageBox";
 import PostList from "../PostList";
 import ToTopButton from "../ToTopButton";
 import fetchIt from "../../utils/fetch";
-import { useCheckMembership } from "../../hooks";
+import { useCheckMembership, useMessageBox } from "../../hooks";
 
 import CommunityAbout from "./communityabout";
 import CommunityColors from "./communitycolors";
@@ -18,6 +19,7 @@ import { Props } from "./types";
 
 const Community: NextPage<Props> = ({ error, community }) => {
   const userMemberLevel = useCheckMembership(community._id);
+  const { msg, status, setMessageBox, resetMessageBox } = useMessageBox();
 
   if (error) return <Error title={error} statusCode={404} />;
 
@@ -27,10 +29,17 @@ const Community: NextPage<Props> = ({ error, community }) => {
         communityId={community._id}
         title={community.name}
         userMemberLevel={userMemberLevel}
+        setMessageBox={setMessageBox}
       />
 
       <Layout>
         <Layout.Column>
+          <MessageBox
+            msg={msg}
+            status={status}
+            handleClose={resetMessageBox}
+            mB={16}
+          />
           <CommunityCreatePost
             communityName={community.name}
             userMemberLevel={userMemberLevel}

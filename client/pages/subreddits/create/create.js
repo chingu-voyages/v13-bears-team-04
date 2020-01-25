@@ -15,7 +15,7 @@ export default function Create() {
   useForceSignIn();
 
   const { user, setUser } = useUser();
-  const { msg, status, setMessageBox } = useMessageBox();
+  const { msg, status, setMessageBox, resetMessageBox } = useMessageBox();
 
   // the following are used to create a community
   const [name, setName] = useState("");
@@ -63,7 +63,13 @@ export default function Create() {
         />
         <CreateType setComType={setComType} checkedValue={comType} />
         <CreateAdult setIsOver18={setIsOver18} isChecked={isOver18} />
-        <MessageBox msg={msg} status={status} mT={12} mB={-20} />
+        <MessageBox
+          msg={msg}
+          status={status}
+          handleClose={resetMessageBox}
+          mT={12}
+          mB={-20}
+        />
         <Button
           cx="subcreate__button"
           text="Create Community"

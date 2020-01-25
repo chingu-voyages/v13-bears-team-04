@@ -3,17 +3,20 @@ import Button from "../Button";
 import { useUser } from "../../contexts/user";
 import { useAuthPopup } from "../../contexts/authpopup";
 import fetchIt from "../../utils/fetch";
+import { State as SetMessageSetter } from "../../hooks/useMessageBox";
 
 type Props = {
   communityId: string;
   title: string;
   userMemberLevel: string;
+  setMessageBox: ({ msg, status }: SetMessageSetter) => void;
 };
 
 export default function CommunityInfo({
   communityId,
   title,
   userMemberLevel,
+  setMessageBox,
 }: Props) {
   const { user, setUser } = useUser();
   const { setAuthPopup } = useAuthPopup();
@@ -35,6 +38,10 @@ export default function CommunityInfo({
           ...opts,
         });
         setUser(updatedUser);
+        setMessageBox({
+          msg: `You've successfully left your r/${title} family. Congrats.`,
+          status: "success",
+        });
       }
 
       // join the community
@@ -45,9 +52,13 @@ export default function CommunityInfo({
           ...opts,
         });
         setUser(updatedUser);
+        setMessageBox({
+          msg: `Thanks for joining, r/${title}!`,
+          status: "success",
+        });
       }
     } catch (err) {
-      console.log(err);
+      setMessageBox({ msg: err.message, status: "error" });
     }
   }
 

@@ -1,15 +1,19 @@
-import { useState } from "react";
+import { useState, useCallback } from "react";
 
-type State = {
+export type State = {
   msg: string;
   status: "error" | "success" | "default";
 };
 
-export default function useMessageBox() {
-  const [{ msg, status }, setMessageBox] = useState<State>({
-    msg: "",
-    status: "default",
-  });
+const initialState: State = {
+  msg: "",
+  status: "default",
+};
 
-  return { msg, status, setMessageBox };
+export default function useMessageBox() {
+  const [{ msg, status }, setMessageBox] = useState(initialState);
+
+  const resetMessageBox = useCallback(() => setMessageBox(initialState), []);
+
+  return { msg, status, setMessageBox, resetMessageBox };
 }

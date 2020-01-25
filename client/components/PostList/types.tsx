@@ -9,6 +9,9 @@ export type PostType = {
   _id: string;
   community: {
     name: string;
+    theme: {
+      [key: string]: string;
+    };
   };
   postType: string;
   title: string;

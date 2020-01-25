@@ -4,12 +4,16 @@ import { useUser } from "../../contexts/user";
 import { useAuthPopup } from "../../contexts/authpopup";
 import fetchIt from "../../utils/fetch";
 import { State as SetMessageSetter } from "../../hooks/useMessageBox";
+import { LogoIcon } from "../../svgs";
 
 type Props = {
   communityId: string;
   title: string;
   userMemberLevel: string;
   setMessageBox: ({ msg, status }: SetMessageSetter) => void;
+  theme: {
+    [key: string]: string;
+  };
 };
 
 export default function CommunityInfo({
@@ -17,6 +21,7 @@ export default function CommunityInfo({
   title,
   userMemberLevel,
   setMessageBox,
+  theme,
 }: Props) {
   const { user, setUser } = useUser();
   const { setAuthPopup } = useAuthPopup();
@@ -66,10 +71,10 @@ export default function CommunityInfo({
     <div className="community__info">
       <div className="community__banner" />
       <div className="community__header">
-        <img
+        <LogoIcon
           className="community__header__icon"
-          src="/nav-images/logo-icon.svg"
-          alt="reddit logo icon"
+          primary={theme["--community-theme-main"]}
+          secondary={theme["--community-theme-text"]}
         />
         <div className="community__header__titles">
           <h1>{title}</h1>

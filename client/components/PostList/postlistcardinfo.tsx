@@ -1,12 +1,16 @@
 import React from "react";
 import Link from "next/link";
 import makeDateAgo from "../../utils/date";
+import { LogoIcon } from "../../svgs";
 
 type Props = {
   community: string;
   author: string;
   createdOn: string;
   onCommunityPage: boolean;
+  theme: {
+    [key: string]: string;
+  };
 };
 
 export default function PostListCardInfo({
@@ -14,6 +18,7 @@ export default function PostListCardInfo({
   author,
   createdOn,
   onCommunityPage,
+  theme,
 }: Props) {
   const redditName = `r/${community}`;
 
@@ -21,7 +26,10 @@ export default function PostListCardInfo({
     <div className="postlist-card__details__info">
       <div className="postlist-card__details__info__sub">
         <div className="postlist-card__details__info__sub__img">
-          <img src="/nav-images/logo-icon.svg" alt="/r" />
+          <LogoIcon
+            primary={theme["--community-theme-main"]}
+            secondary={theme["--community-theme-text"]}
+          />
         </div>
         {!onCommunityPage && (
           <Link href={redditName}>

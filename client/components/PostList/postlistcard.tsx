@@ -21,6 +21,7 @@ export default function PostListCard(props: Props) {
               author={props.author.username}
               createdOn={props.createdOn}
               onCommunityPage={props.onCommunityPage}
+              theme={props.community.theme}
             />
             <h3 className="postlist-card__details__title">{props.title}</h3>
 

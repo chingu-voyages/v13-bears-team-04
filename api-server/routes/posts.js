@@ -27,7 +27,7 @@ async function getAllPosts(_, res, next) {
       })
       .populate({
         path: "community",
-        select: "name -_id"
+        select: "name theme -_id"
       });
     res.status(200).json(posts);
   } catch (err) {
@@ -45,7 +45,7 @@ async function getCommunityPosts(req, res, next) {
       })
       .populate({
         path: "community",
-        select: "name -_id"
+        select: "name theme -_id"
       });
     res.status(200).json(posts);
   } catch (err) {

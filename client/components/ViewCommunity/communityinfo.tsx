@@ -11,9 +11,6 @@ type Props = {
   title: string;
   userMemberLevel: string;
   setMessageBox: ({ msg, status }: SetMessageSetter) => void;
-  theme: {
-    [key: string]: string;
-  };
 };
 
 export default function CommunityInfo({
@@ -21,7 +18,6 @@ export default function CommunityInfo({
   title,
   userMemberLevel,
   setMessageBox,
-  theme,
 }: Props) {
   const { user, setUser } = useUser();
   const { setAuthPopup } = useAuthPopup();
@@ -73,8 +69,8 @@ export default function CommunityInfo({
       <div className="community__header">
         <LogoIcon
           className="community__header__icon"
-          primary={theme["--community-theme-main"]}
-          secondary={theme["--community-theme-text"]}
+          primary={"var(--community-theme-main)"}
+          secondary={"var(--community-theme-text)"}
         />
         <div className="community__header__titles">
           <h1>{title}</h1>

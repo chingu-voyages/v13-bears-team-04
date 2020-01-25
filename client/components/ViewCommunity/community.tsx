@@ -26,7 +26,6 @@ const Community: NextPage<Props> = ({ error, community }) => {
   return (
     <div className="community-container">
       <CommunityInfo
-        theme={community.theme}
         communityId={community._id}
         title={community.name}
         userMemberLevel={userMemberLevel}

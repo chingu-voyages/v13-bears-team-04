@@ -1,8 +1,9 @@
 import React from "react";
 
 import FooterBox from "../FooterBox";
-import Layout from "../Layout";
 import Form from "./Form";
+import Info from "./Info";
+import Layout from "../Layout";
 import Rules from "./Rules";
 import Text from "./Text";
 
@@ -26,6 +27,7 @@ export default function CreatePost({ communityId, communityName }: Props) {
         </Layout.Column>
 
         <Layout.Column>
+          <Info />
           <Rules />
           <Text />
           <FooterBox />

@@ -1,7 +1,6 @@
 import React from "react";
+import { LogoIcon } from "../../svgs";
 
-const AuthFormRedditIcon = ({ cx }) => (
-  <img className={cx} src="/nav-images/logo-icon.svg" alt="reddit logo icon" />
-);
+const AuthFormRedditIcon = ({ cx }) => <LogoIcon className={cx} />;
 
 export default AuthFormRedditIcon;

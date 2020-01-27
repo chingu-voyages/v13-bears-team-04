@@ -1,18 +1,21 @@
 import React, { useState } from "react";
+import Router from "next/router";
 
 import CreateAdult from "./createadult";
 import CreateFields from "./createfields";
 import CreateType from "./createtype";
 import Button from "../../../components/Button";
+import MessageBox from "../../../components/MessageBox";
 
-import { useForceSignIn } from "../../../hooks";
+import { useForceSignIn, useMessageBox } from "../../../hooks";
 import { useUser } from "../../../contexts/user";
 import fetchIt from "../../../utils/fetch";
 
 export default function Create() {
   useForceSignIn();
 
-  const { user } = useUser();
+  const { user, setUser } = useUser();
+  const { msg, status, setMessageBox, resetMessageBox } = useMessageBox();
 
   // the following are used to create a community
   const [name, setName] = useState("");
@@ -22,7 +25,8 @@ export default function Create() {
   const [isOver18, setIsOver18] = useState(false);
 
   async function handleSubmit() {
-    console.log("processing...");
+    setMessageBox({ msg: "Processing...", status: "default" });
+
     try {
       const body = JSON.stringify({
         name,
@@ -33,10 +37,14 @@ export default function Create() {
         userId: user._id,
       });
       const options = { method: "POST", body, ctx: {} };
-      const newCommunity = await fetchIt("/community", options);
-      console.log(newCommunity);
+      const data = await fetchIt("/community", options);
+      const { newCommunity, updatedUser } = data;
+      // update the current user context
+      setUser(updatedUser);
+      // send user to new community
+      Router.push(`/r/${newCommunity.name}`);
     } catch (err) {
-      console.log(err.message);
+      setMessageBox({ msg: err.message, status: "error" });
     }
   }
 
@@ -55,6 +63,13 @@ export default function Create() {
         />
         <CreateType setComType={setComType} checkedValue={comType} />
         <CreateAdult setIsOver18={setIsOver18} isChecked={isOver18} />
+        <MessageBox
+          msg={msg}
+          status={status}
+          handleClose={resetMessageBox}
+          mT={12}
+          mB={-20}
+        />
         <Button
           cx="subcreate__button"
           text="Create Community"

@@ -28,7 +28,8 @@ mongoose
   .connect(DB_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
-    useCreateIndex: true
+    useCreateIndex: true,
+    useFindAndModify: false
   })
   .catch(error => console.log("Database error: " + JSON.stringify(error)));
 

@@ -1,9 +1,9 @@
 import React from "react";
-import Editor from "../../Editor";
+import { Editor } from "../../Slate";
 import SubmitFormBodyContentTitle from "./formbodycontenttitle";
 import { useCreatePost } from "../../../contexts/createpost";
 
-export default function SubmitFormBodyContent({ isUserBrowser }) {
+export default function SubmitFormBodyContent() {
   const { state, createPostDispatch } = useCreatePost();
 
   const setValue = value => {
@@ -13,11 +13,7 @@ export default function SubmitFormBodyContent({ isUserBrowser }) {
   return (
     <div className="submit__form__body__content">
       <SubmitFormBodyContentTitle />
-      <Editor
-        isBrowser={isUserBrowser}
-        value={state.content}
-        setValue={setValue}
-      />
+      <Editor value={state.content} setValue={setValue} />
     </div>
   );
 }

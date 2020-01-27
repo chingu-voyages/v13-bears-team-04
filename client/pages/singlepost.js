@@ -2,6 +2,7 @@ import React from "react";
 
 import Layout from "../components/Layout";
 import Nav from "../components/Nav";
+import Post from "../components/Post";
 import SubredditInfo from "../components/SubredditInfo";
 import FooterBox from "../components/FooterBox";
 
@@ -12,7 +13,9 @@ const SinglePost = () => {
   return (
     <>
       <Layout>
-        <Layout.Column></Layout.Column>
+        <Layout.Column>
+          <Post />
+        </Layout.Column>
         <Layout.Column>
           <SubredditInfo />
           <FooterBox />

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Select from "react-select";
-import styles from "./createfieldsselectstyles";
+import { styles } from "./createfieldsselectstyles";
 import fetchIt from "../../../utils/fetch";
 
 export default function CreateFieldsSelect({ setTopics, topics }) {

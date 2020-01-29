@@ -1,4 +1,4 @@
-export default {
+export const styles = {
   control: provided => ({
     ...provided,
     minHeight: 48,

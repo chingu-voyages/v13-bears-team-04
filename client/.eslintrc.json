@@ -19,7 +19,8 @@
         "specialLink": ["hrefLeft", "hrefRight"],
         "aspects": ["invalidHref"]
       }
-    ]
+    ],
+    "import/prefer-default-export": "off"
   },
   "settings": {
     "import/resolver": {
@@ -27,6 +28,5 @@
         "extensions": [".js", ".jsx", ".ts", ".tsx"]
       }
     }
-  },
-  "import/prefer-default-export": "off"
+  }
 }

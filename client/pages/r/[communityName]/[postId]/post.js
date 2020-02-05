@@ -2,6 +2,7 @@ import React from "react";
 
 import FooterBox from "../../../../components/FooterBox";
 import Layout from "../../../../components/Layout";
+import PageHead from "../../../../components/PageHead";
 import SubredditInfo from "../../../../components/SubredditInfo";
 import ToTopButton from "../../../../components/ToTopButton";
 import ViewPost from "../../../../components/ViewPost";
@@ -15,6 +16,7 @@ export default function Post({ post }) {
 
   return (
     <>
+      <PageHead title={`${post.title} ${post.community.name}`} />
       <Layout>
         {/* Daniel's */}
         <Layout.Column>
@@ -40,11 +42,13 @@ export default function Post({ post }) {
 }
 
 Post.getInitialProps = async ctx => {
-  const { communityName, postId } = ctx.query;
+  var { communityName, postId } = ctx.query;
+
+  console.log(communityName);
 
   try {
     const posts = await fetchIt("/posts");
-    const [post] = posts.filter(post => postId === post._id);
+    const [post] = posts.filter(({ _id }) => postId === _id);
     return { post };
   } catch (err) {
     return { error: err.message };

@@ -42,9 +42,9 @@ export default function Post({ post }) {
 }
 
 Post.getInitialProps = async ctx => {
-  var { communityName, postId } = ctx.query;
+  const { communityName, postId } = ctx.query;
 
-  console.log(communityName);
+  // console.log(communityName);
 
   try {
     const posts = await fetchIt("/posts");

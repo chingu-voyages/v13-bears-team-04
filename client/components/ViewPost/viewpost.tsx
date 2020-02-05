@@ -1,15 +1,40 @@
-import React, { useState } from "react";
-import { Render, Editor } from "../Slate";
+import React from "react";
+import PostListCard from "../PostList/postlistcard";
 
-export default function Post({ post }) {
+type Props = {
+  post: {
+    comments: string[];
+    voteScore: number;
+    isDeleted: boolean;
+    isReported: boolean;
+    isOver18: boolean;
+    isOC: boolean;
+    isSpoiler: boolean;
+    _id: string;
+    community: {
+      theme: {
+        ["--community-theme-main"]: string;
+        ["--community-theme-text"]: string;
+      };
+      name: string;
+    };
+    postType: string;
+    title: string;
+    content: string;
+    author: { username: string };
+    createdOn: string;
+    lastModified: string;
+    lastUpvoted: string;
+  };
+};
+
+export default function Post({ post }: Props) {
   console.log(post);
 
   return (
     <div className="post__container">
+      <PostListCard {...post} onCommunityPage={false} />
       <div className="post__container__title">
-        <h1>{post.title}</h1>
-        <Render content={post.content} />
-
         {/* Show the comments / give award etc. */}
         {/* ..... */}
 
@@ -27,15 +52,6 @@ export default function Post({ post }) {
     </div>
   );
 } //
-
-//
-//
-// I guess I'll make that since it connects with the backend
-// and I still haven't even written up comments there yet anyways
-//
-// I'll leave this component as is for now
-//
-//
 
 // const samplePost = {
 //   comments: [],

@@ -50,7 +50,6 @@ Post.getInitialProps = async ctx => {
   const { communityName, postId } = ctx.query;
 
   // console.log(communityName);
-
   try {
     const posts = await fetchIt("/posts");
     const [post] = posts.filter(({ _id }) => postId === _id);

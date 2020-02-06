@@ -1,14 +1,35 @@
-.viewpost-banner {
-  background-color: #030303;
-  color: #fff;
-  position: fixed;
-  top: 48px;
-  left: 0;
-  right: 0;
-  height: 48px;
-  width: calc(100% - 80px * 2);
-  max-width: 1280px;
+@mixin getViewPostCoords($buffer) {
+  width: calc(100% - #{$buffer} * 2);
+  max-width: 976px;
+  min-width: 300px;
   margin: 0 auto;
+}
+
+.viewpost-container {
+  @include getViewPostCoords(80px);
+  background-color: #eee;
+}
+
+.viewpost-banner {
+  &__container {
+    @include getViewPostCoords(80px);
+    background-color: #030303;
+    color: #fff;
+    position: fixed;
+    top: 48px;
+    left: 0;
+    right: 0;
+    height: 48px;
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-sizing: border-box;
+  }
+  &__closebtn {
+    background-color: transparent;
+    border: 1px solid transparent;
+  }
 }
 
 .post {
@@ -17,6 +38,15 @@
     background-color: #fff;
     width: 100%;
     &__title {
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .viewpost-container {
+    @include getViewPostCoords(10px);
+    .viewpost-banner &__container {
+      @include getViewPostCoords(10px);
     }
   }
 }

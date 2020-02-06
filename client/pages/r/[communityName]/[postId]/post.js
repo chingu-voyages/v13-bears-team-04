@@ -1,8 +1,9 @@
-import React, { useMemo } from "react";
+import React from "react";
 
 import FooterBox from "../../../../components/FooterBox";
 import Layout from "../../../../components/Layout";
 import PageHead from "../../../../components/PageHead";
+import PostBanner from "./postbanner";
 import SubredditInfo from "../../../../components/SubredditInfo";
 import ToTopButton from "../../../../components/ToTopButton";
 import ViewPost from "../../../../components/ViewPost";
@@ -11,18 +12,11 @@ import fetchIt from "../../../../utils/fetch";
 export default function Post({ post }) {
   console.log(post);
 
-  const width = useMemo(() => {
-    const columns = document.getElementsByClassName("layout__column");
-    return [...columns]
-      .map(column => column.offsetWidth)
-      .reduce((a, b) => a + b);
-  }, []);
-
   return (
-    <>
+    <div className="viewpost-container">
       <PageHead title={`${post.title} | ${post.community.name}`} />
-      <div className="viewpost-banner" style={{ width }} />
-      <Layout>
+      <PostBanner title={post.title} votes={[]} />
+      <Layout styles={{ paddingTop: "68px" }}>
         {/* Daniel's */}
         <Layout.Column>
           <ViewPost post={post} />
@@ -42,7 +36,7 @@ export default function Post({ post }) {
           <ToTopButton />
         </Layout.Column>
       </Layout>
-    </>
+    </div>
   );
 }
 

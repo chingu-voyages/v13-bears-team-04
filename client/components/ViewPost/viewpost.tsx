@@ -28,7 +28,7 @@ type Props = {
   };
 };
 
-export default function Post({ post }: Props) {
+export default function Post({ post }: Props): React.ReactNode {
   console.log(post);
 
   return (

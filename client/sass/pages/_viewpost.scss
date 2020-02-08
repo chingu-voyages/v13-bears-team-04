@@ -1,14 +1,85 @@
-.viewpost-banner {
-  background-color: #030303;
-  color: #fff;
-  position: fixed;
-  top: 48px;
-  left: 0;
-  right: 0;
-  height: 48px;
-  width: calc(100% - 80px * 2);
-  max-width: 1280px;
+@mixin getViewPostWidth() {
+  width: 100%;
+  min-width: 310px;
+  max-width: 976px;
   margin: 0 auto;
+}
+
+.viewpost {
+  &__background {
+    background-color: rgba(28, 28, 28, 0.9);
+  }
+
+  &__container {
+    @include getViewPostWidth();
+    background-color: #dae0e6;
+    padding-top: 48px;
+  }
+
+  &__banner {
+    @include getViewPostWidth();
+    background-color: #030303;
+    color: #fff;
+    position: fixed;
+    top: 48px;
+    left: 0;
+    right: 0;
+    height: 48px;
+    padding: 0 32px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: #d7dadc;
+
+    &__votes {
+      font-size: 1.2rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      margin: 10px 5px;
+
+      svg {
+        transition: 0.2s all;
+        padding: 2px;
+        border-radius: 2px;
+        font-size: 1.5rem;
+
+        &:hover {
+          background-color: $grey;
+        }
+
+        &.viewpost__banner__votes__arrow {
+          cursor: pointer;
+
+          &__up:hover {
+            color: $orange;
+          }
+          &__down:hover {
+            color: $blue;
+          }
+        }
+      }
+
+      &__score {
+      }
+    }
+
+    &__title {
+    }
+
+    &__closebtn {
+      background-color: transparent;
+      border-color: transparent;
+      color: inherit;
+
+      &:hover {
+        color: #fff;
+        border-color: transparent;
+      }
+    }
+  }
 }
 
 .post {

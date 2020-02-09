@@ -2,9 +2,9 @@ import React from "react";
 import Link from "next/link";
 import { Render } from "../Slate";
 
+import Votes from "../Votes";
 import PostCardActions from "./postcardactions";
 import PostCardInfo from "./postcardinfo";
-import PostCardVote from "./postcardvote";
 import { PostType } from "../PostList/types";
 
 type Props = PostType & { onCommunityPage: boolean };
@@ -22,7 +22,7 @@ export default function PostListCard({
 }: Props): JSX.Element {
   return (
     <div className="postcard">
-      <PostCardVote voteScore={voteScore} />
+      <Votes voteScore={voteScore} cxContainer="postcard__votes" vote="" />
       <Link href={`/r/${community.name}/${_id}`}>
         <div>
           <div className="postcard__details">

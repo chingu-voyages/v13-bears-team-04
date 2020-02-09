@@ -1,13 +1,12 @@
 import React from "react";
 
+import PostBanner from "./postbanner";
 import FooterBox from "../../../../components/FooterBox";
 import Layout from "../../../../components/Layout";
 import PageHead from "../../../../components/PageHead";
 import SubredditInfo from "../../../../components/SubredditInfo";
 import ToTopButton from "../../../../components/ToTopButton";
 import ViewPost from "../../../../components/ViewPost";
-import Button from "../../../../components/Button";
-import FAIcon from "../../../../components/FAIcon";
 import fetchIt from "../../../../utils/fetch";
 
 export default function Post({ post }) {
@@ -18,31 +17,12 @@ export default function Post({ post }) {
       <PageHead title={`${post.title} | ${post.community.name}`} />
       <div className="viewpost__background">
         <div className="viewpost__container">
-          <div className="viewpost__banner">
-            <div className="viewpost__banner__votes">
-              <FAIcon
-                icon="arrow-up"
-                className="viewpost__banner__votes__arrow__up"
-                onClick={() => console.log("upvote")}
-              />
-              <span className="viewpost__banner__votes__score">
-                {post.voteScore}
-              </span>
-              <FAIcon
-                icon="arrow-down"
-                className="viewpost__banner__votes__arrow__down"
-                onClick={() => console.log("downvote")}
-              />
-            </div>
-            <h2 className="viewpost__banner__title">{post.title}</h2>
-            <Button
-              text="Close"
-              icon="times"
-              size="tight"
-              href={`/r/${post.community.name}`}
-              cx="viewpost__banner__closebtn"
-            />
-          </div>
+          <PostBanner
+            vote=""
+            voteScore={post.voteScore}
+            title={post.title}
+            communityName={post.community.name}
+          />
           <Layout>
             {/* Daniel's */}
             <Layout.Column>

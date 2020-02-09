@@ -63,14 +63,10 @@
       }
     }
   }
-}
 
-.post {
-  &__container {
+  &__content {
     border-radius: 0.5rem;
     background-color: #fff;
     width: 100%;
-    &__title {
-    }
   }
 }

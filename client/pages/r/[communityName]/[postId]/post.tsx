@@ -19,8 +19,6 @@ type Props = {
 };
 
 const Post: NextPage<Props> = ({ post, error }) => {
-  console.log(post);
-
   if (error || !post) return <Error title={error} statusCode={404} />;
 
   return (

@@ -1,5 +1,6 @@
 import React from "react";
 import PostCard from "../../../../components/PostCard";
+import PostComment from "./postcomment";
 import { PostType } from "../../../../types/post";
 
 type Props = {
@@ -10,23 +11,22 @@ export default function PostView({ post }: Props): JSX.Element {
   console.log(post);
 
   return (
-    <div className="post__container">
+    <div className="viewpost__content">
       <PostCard {...post} onCommunityPage={false} />
-      <div className="post__container__title">
-        {/* Show the comments / give award etc. */}
-        {/* ..... */}
+      <PostComment />
+      {/* Show the comments / give award etc. */}
+      {/* ..... */}
 
-        {/* Add comment here */}
-        {/* <Editor
+      {/* Add comment here */}
+      {/* <Editor
           isComment
           //  value: Node[];
           //  setValue?: (value: Node[]) => void;
           //  handleCommentSubmit?: () => void;
         /> */}
 
-        {/* Show comments here */}
-        {/* ... */}
-      </div>
+      {/* Show comments here */}
+      {/* ... */}
     </div>
   );
 }

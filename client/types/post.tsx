@@ -10,7 +10,8 @@ export type PostType = {
   community: {
     name: string;
     theme: {
-      [key: string]: string;
+      ["--community-theme-main"]: string;
+      ["--community-theme-text"]: string;
     };
   };
   postType: string;

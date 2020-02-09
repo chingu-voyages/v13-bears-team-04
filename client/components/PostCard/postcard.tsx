@@ -5,7 +5,7 @@ import { Render } from "../Slate";
 import Votes from "../Votes";
 import PostCardActions from "./postcardactions";
 import PostCardInfo from "./postcardinfo";
-import { PostType } from "../PostList/types";
+import { PostType } from "../../types/post";
 
 type Props = PostType & { onCommunityPage: boolean };
 

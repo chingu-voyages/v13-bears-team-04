@@ -1,16 +1,27 @@
 import React from "react";
+import { NextPage, NextPageContext } from "next";
+import Error from "next/error";
 
-import PostBanner from "./postbanner";
 import FooterBox from "../../../../components/FooterBox";
 import Layout from "../../../../components/Layout";
 import PageHead from "../../../../components/PageHead";
 import SubredditInfo from "../../../../components/SubredditInfo";
 import ToTopButton from "../../../../components/ToTopButton";
-import ViewPost from "../../../../components/ViewPost";
 import fetchIt from "../../../../utils/fetch";
 
-export default function Post({ post }) {
+import PostBanner from "./postbanner";
+import PostView from "./postview";
+import { PostType } from "../../../../types/post";
+
+type Props = {
+  error?: string;
+  post?: PostType;
+};
+
+const Post: NextPage<Props> = ({ post, error }) => {
   console.log(post);
+
+  if (error || !post) return <Error title={error} statusCode={404} />;
 
   return (
     <>
@@ -24,9 +35,8 @@ export default function Post({ post }) {
             communityName={post.community.name}
           />
           <Layout>
-            {/* Daniel's */}
             <Layout.Column>
-              <ViewPost post={post} />
+              <PostView post={post} />
             </Layout.Column>
 
             {/* Seth's */}
@@ -47,17 +57,20 @@ export default function Post({ post }) {
       </div>
     </>
   );
-}
+};
 
-Post.getInitialProps = async ctx => {
+Post.getInitialProps = async (ctx: NextPageContext): Promise<Props> => {
   const { communityName, postId } = ctx.query;
+  console.log(communityName);
 
-  // console.log(communityName);
   try {
     const posts = await fetchIt("/posts");
-    const [post] = posts.filter(({ _id }) => postId === _id);
+    const [post] = posts.filter(({ _id }: { _id: string }) => postId === _id);
+    if (!post) throw post;
     return { post };
   } catch (err) {
-    return { error: err.message };
+    return { error: `Post not found. Please try again` };
   }
 };
+
+export default Post;

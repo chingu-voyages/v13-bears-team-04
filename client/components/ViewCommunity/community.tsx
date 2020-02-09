@@ -1,5 +1,5 @@
 import React from "react";
-import { NextPage } from "next";
+import { NextPage, NextPageContext } from "next";
 import Error from "next/error";
 
 import Layout from "../Layout";
@@ -15,13 +15,18 @@ import CommunityCreatePost from "./communitycreatepost";
 import CommunityInfo from "./communityinfo";
 import CommunityMods from "./communitymods";
 import CommunityRules from "./communityrules";
-import { Props } from "./types";
+import { CommunityType } from "../../types/community";
+
+type Props = {
+  error?: string;
+  community?: CommunityType;
+};
 
 const Community: NextPage<Props> = ({ error, community }) => {
+  if (error || !community) return <Error title={error} statusCode={404} />;
+
   const userMemberLevel = useCheckMembership(community._id);
   const { msg, status, setMessageBox, resetMessageBox } = useMessageBox();
-
-  if (error) return <Error title={error} statusCode={404} />;
 
   return (
     <div className="community-container">
@@ -74,42 +79,16 @@ const Community: NextPage<Props> = ({ error, community }) => {
   );
 };
 
-Community.getInitialProps = async ctx => {
+Community.getInitialProps = async (ctx: NextPageContext): Promise<Props> => {
   const { communityName } = ctx.query;
-
-  let error = "";
-  let community = {
-    users: {
-      members: [],
-      moderators: [],
-      administrators: [],
-    },
-    rules: [],
-    posts: [],
-    communitiesRelated: [],
-    topics: [],
-    theme: {
-      "--community-theme-main": "",
-      "--community-theme-text": "",
-    },
-    _id: "",
-    name: "",
-    description: "",
-    communityType: "public",
-    isOver18: false,
-    createdOn: "",
-    lastUpvoted: "",
-  };
 
   try {
     const foundCommunity = await fetchIt(`/community/${communityName}`);
-    if (!foundCommunity) throw "";
-    community = foundCommunity;
+    if (!foundCommunity) throw foundCommunity;
+    return { community: foundCommunity };
   } catch (err) {
-    error = `r/${communityName} not found. Try again`;
+    return { error: `r/${communityName} not found. Try again` };
   }
-
-  return { error, community };
 };
 
 export default Community;

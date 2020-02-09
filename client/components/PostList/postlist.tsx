@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import PostCard from "../PostCard";
 import fetchIt from "../../utils/fetch";
-import { PostType } from "./types";
+import { PostType } from "../../types/post";
 
 type Props = {
   endpoint: string;

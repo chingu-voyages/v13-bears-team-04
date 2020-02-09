@@ -10,45 +10,15 @@
   line-height: 1.6rem;
   font-size: 1.2rem;
 
-  &__vote-container {
+  &__votes {
     background-color: #f7f7f7;
     height: 100%;
     width: 40px;
     position: absolute;
     top: 0;
     border-radius: 0.5rem 0 0 0.5rem;
-
-    .postcard__vote {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      margin: 10px 5px;
-
-      svg {
-        transition: 0.2s all;
-        padding: 2px;
-        border-radius: 2px;
-        font-size: 1.5rem;
-
-        &:hover {
-          background-color: $grey;
-        }
-
-        &.postcard__vote__up:hover {
-          color: $orange;
-        }
-
-        &.postcard__vote__down:hover {
-          color: $blue;
-        }
-      }
-
-      &__text {
-        font-weight: bold;
-        padding: 2px 0;
-      }
-    }
+    padding: 10px 5px;
+    box-sizing: border-box;
   }
 
   &__details {

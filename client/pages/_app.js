@@ -15,7 +15,7 @@ const MyApp = ({ Component, pageProps, user }) => (
   <UserProvider user={user}>
     <AuthPopupProvider>
       <Nav />
-      <div style={{ marginTop: "4.9rem" }}>
+      <div style={{ marginTop: "4.9rem", height: "calc(100vh - 49px)" }}>
         <Component {...pageProps} />
       </div>
     </AuthPopupProvider>

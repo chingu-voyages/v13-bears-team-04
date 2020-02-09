@@ -5,19 +5,19 @@ type Props = {
   voteScore: number;
 };
 
-export default function PostListCardVote({ voteScore }: Props): JSX.Element {
+export default function PostCardVote({ voteScore }: Props): JSX.Element {
   return (
-    <div className="postlist-card__vote-container">
-      <div className="postlist-card__vote">
+    <div className="postcard__vote-container">
+      <div className="postcard__vote">
         <FontAwesomeIcon
           icon="arrow-up"
-          className="postlist-card__vote__up"
+          className="postcard__vote__up"
           onClick={(): void => console.log("upVote")}
         />
-        <span className="postlist-card__vote__text">{voteScore}</span>
+        <span className="postcard__vote__text">{voteScore}</span>
         <FontAwesomeIcon
           icon="arrow-down"
-          className="postlist-card__vote__down"
+          className="postcard__vote__down"
           onClick={(): void => console.log("downVote")}
         />
       </div>

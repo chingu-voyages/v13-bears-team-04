@@ -1,5 +1,5 @@
 import React from "react";
-import PostListCard from "../PostList/postlistcard";
+import PostCard from "../PostCard/postcard";
 
 type Props = {
   post: {
@@ -33,7 +33,7 @@ export default function Post({ post }: Props): React.ReactNode {
 
   return (
     <div className="post__container">
-      <PostListCard {...post} onCommunityPage={false} />
+      <PostCard {...post} onCommunityPage={false} />
       <div className="post__container__title">
         {/* Show the comments / give award etc. */}
         {/* ..... */}

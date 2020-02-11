@@ -44,25 +44,25 @@ async function handleVerification(req, res, next) {
 
 async function handleLogin(req, res, next) {
   try {
-    const { username, password } = req.body;
-    const lowerUsername = username.toLowerCase();
+    const lowerUsername = req.body.username.toLowerCase();
 
     const user = await User.findOne({ lowerUsername });
     if (!user) throw createError(401, "User not found");
 
-    user.comparePassword(password, async (err, isMatch) => {
-      if (err) throw createError(400, "An error occured");
-      if (!isMatch) throw createError(401, "Wrong password");
-      // successful; create a user session
-      const session = await Session.create({ userId: user._id });
-      if (!session || !session._id) {
-        throw createError(401, "Error creating session");
-      }
-      // don't want to send the user's password to the client
-      const { password, ...goodUser } = user._doc;
-      res.status(200).json({ sid: session._id, ...goodUser });
-    });
+    const isMatch = await user.checkPassword(req.body.password, user.password);
+    if (!isMatch) throw createError(401, "Wrong password");
+
+    // successful login; create a user session
+    const session = await Session.create({ userId: user._id });
+    if (!session || !session._id) {
+      throw createError(401, "Error creating session");
+    }
+
+    // don't want to send the user's password to the client
+    const { password, ...goodUser } = user._doc;
+    res.status(200).json({ sid: session._id, ...goodUser });
   } catch (err) {
+    console.log("NEXT:", err);
     next(err);
   }
 }

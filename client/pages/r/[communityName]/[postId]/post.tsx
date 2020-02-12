@@ -5,7 +5,7 @@ import Error from "next/error";
 import FooterBox from "../../../../components/FooterBox";
 import Layout from "../../../../components/Layout";
 import PageHead from "../../../../components/PageHead";
-import SubredditInfo from "../../../../components/SubredditInfo";
+import CommunityAbout from "../../../../components/ViewCommunity/communityabout";
 import ToTopButton from "../../../../components/ToTopButton";
 import fetchIt from "../../../../utils/fetch";
 
@@ -44,7 +44,12 @@ const Post: NextPage<Props> = ({ post, error }) => {
               {/* ... while typing out the props */}
               {/* always */}
               {/* /ViewCommunity/communityabout.tsx  */}
-              <SubredditInfo />
+              <CommunityAbout
+                description={post.community.name}
+                createdOn=""
+                memberCount={5}
+                userMemberLevel=""
+              />
               {/* if the user is logged in */}
               {/* /ViewCommunity/communitymods.tsx  */}
               <FooterBox />

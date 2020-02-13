@@ -1,28 +1,39 @@
 // https://nextjs.org/docs#custom-app
 
 import React from "react";
-import App from "next/app";
+import App, { AppProps, AppContext } from "next/app";
 
 import Nav from "../components/Nav";
-import { UserProvider } from "../contexts/user";
 import { AuthPopupProvider } from "../contexts/authpopup";
-import fetchIt from "../utils/fetch";
+import { UserProvider } from "../contexts/user";
+import { UserType } from "../types/user";
 
+import fetchIt from "../utils/fetch";
 import "../utils/icons";
 import "../sass/main.scss";
 
-const MyApp = ({ Component, pageProps, user }) => (
-  <UserProvider user={user}>
+type Props = AppProps & {
+  user?: UserType;
+  isAuthenticated?: boolean;
+};
+
+const MyApp = ({
+  Component,
+  pageProps,
+  user,
+  isAuthenticated,
+}: Props): React.ReactNode => (
+  <UserProvider user={user} isAuthenticated={isAuthenticated}>
     <AuthPopupProvider>
       <Nav />
-      <div style={{ marginTop: "4.9rem" }}>
+      <div style={{ marginTop: "4.9rem", height: "calc(100vh - 49px)" }}>
         <Component {...pageProps} />
       </div>
     </AuthPopupProvider>
   </UserProvider>
 );
 
-MyApp.getInitialProps = async appContext => {
+MyApp.getInitialProps = async (appContext: AppContext): Promise<{}> => {
   // this calls the getInitialProps on individual pages components
   const appProps = await App.getInitialProps(appContext);
   try {
@@ -31,9 +42,10 @@ MyApp.getInitialProps = async appContext => {
     if (!appContext.ctx) throw new Error("Client side; skip fetch");
     // verify user through their sessionId stored in a cookie
     const user = await fetchIt("/user/verify", { ctx: appContext.ctx });
-    return { user, ...appProps };
+    console.log(user);
+    return { isAuthenticated: true, user, ...appProps };
   } catch (err) {
-    return { user: null, ...appProps };
+    return { ...appProps };
   }
 };
 

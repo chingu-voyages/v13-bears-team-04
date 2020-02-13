@@ -5,10 +5,10 @@ type Props = {
   numOfComments: number;
 };
 
-export default function PostListCardActions({ numOfComments }: Props) {
+export default function PostCardActions({ numOfComments }: Props): JSX.Element {
   return (
-    <div className="postlist-card__actions">
-      <div className="postlist-card__actions__comments">
+    <div className="postcard__actions">
+      <div className="postcard__actions__comments">
         <FontAwesomeIcon icon="comment-alt" />
         {`${numOfComments} Comments`}
       </div>

@@ -1,23 +1,35 @@
 import React from "react";
+import Votes from "../../../../components/Votes";
 import Button from "../../../../components/Button";
 
 type Props = {
+  vote: "upvoted" | "downvoted" | "";
+  voteScore: number;
   title: string;
-  votes: string[];
+  communityName: string;
 };
 
-export default function PostBanner({ title, votes }: Props): JSX.Element {
+export default function PostBanner({
+  vote,
+  voteScore,
+  title,
+  communityName,
+}: Props): JSX.Element {
   return (
-    <div className="viewpost-banner__container">
-      {votes.map(vote => (
-        <span key={vote}>{vote}</span>
-      ))}
-      <h2>{title}</h2>
+    <div className="viewpost__banner">
+      <Votes
+        isHorizontal
+        vote={vote}
+        voteScore={voteScore}
+        cxInner="viewpost__banner__votes"
+      />
+      <h2 className="viewpost__banner__title">{title}</h2>
       <Button
         text="Close"
         icon="times"
         size="tight"
-        cx="viewpost-banner__closebtn"
+        href={`/r/${communityName}`}
+        cx="viewpost__banner__closebtn"
       />
     </div>
   );

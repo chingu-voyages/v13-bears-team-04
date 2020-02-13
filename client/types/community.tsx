@@ -1,8 +1,3 @@
-export type Props = {
-  error: string;
-  community: CommunityType;
-};
-
 export type CommunityType = {
   users: {
     members: string[];

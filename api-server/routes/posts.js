@@ -27,7 +27,7 @@ async function getAllPosts(_, res, next) {
       })
       .populate({
         path: "community",
-        select: "name theme -_id"
+        select: "name theme description createdOn users"
       });
     res.status(200).json(posts);
   } catch (err) {

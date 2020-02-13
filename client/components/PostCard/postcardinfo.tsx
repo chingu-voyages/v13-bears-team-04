@@ -13,34 +13,32 @@ type Props = {
   };
 };
 
-export default function PostListCardInfo({
+export default function PostCardInfo({
   community,
   author,
   createdOn,
   onCommunityPage,
   theme,
-}: Props) {
+}: Props): JSX.Element {
   const redditName = `r/${community}`;
 
   return (
-    <div className="postlist-card__details__info">
-      <div className="postlist-card__details__info__sub">
-        <div className="postlist-card__details__info__sub__img">
+    <div className="postcard__details__info">
+      <div className="postcard__details__info__sub">
+        <div className="postcard__details__info__sub__img">
           <LogoIcon
             primary={theme["--community-theme-main"]}
             secondary={theme["--community-theme-text"]}
           />
         </div>
         {!onCommunityPage && (
-          <Link href={redditName}>
-            <a className="postlist-card__details__info__sub__text">
-              {redditName}
-            </a>
+          <Link href={`/${redditName}`}>
+            <a className="postcard__details__info__sub__text">{redditName}</a>
           </Link>
         )}
       </div>
-      <div className="postlist-card__details__info__user">{`Posted by u/${author}`}</div>
-      <div className="postlist-card__details__info__date">
+      <div className="postcard__details__info__user">{`Posted by u/${author}`}</div>
+      <div className="postcard__details__info__date">
         {makeDateAgo(createdOn)}
       </div>
     </div>

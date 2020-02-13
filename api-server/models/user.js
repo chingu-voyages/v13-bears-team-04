@@ -97,19 +97,8 @@ UserSchema.post("save", function(error, _, next) {
   next();
 });
 
-// STEPS TO USE
-// 1) find user by email or username
-// const user = User.findOne({ email/username })
-// 2) compare the password entered
-// user.comparePassword(submittedPW, callback)
-// 3) callback is called with two parameters
-// function(err, isMatch)
-// 4) use if statements to handle the results
-UserSchema.methods.comparePassword = function(candidatePassword, next) {
-  bcrypt.compare(candidatePassword, this.password, (err, isMatch) => {
-    if (err) return next(err);
-    next(null, isMatch);
-  });
+UserSchema.methods.checkPassword = (givenPassword, userPassword) => {
+  return bcrypt.compare(givenPassword, userPassword);
 };
 
 module.exports = model("User", UserSchema);

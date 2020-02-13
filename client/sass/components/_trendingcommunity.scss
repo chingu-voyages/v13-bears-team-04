@@ -1,7 +1,6 @@
 .trending-community {
-  width: 32rem;
-  // height: 30rem;
-  padding: 0.5rem;
+  width: 100%;
+  // padding: 0.5rem;
   font-size: 1.2rem;
   display: inline-block;
   border: 1px solid rgba($grey, 0.2);
@@ -11,7 +10,7 @@
   &__row {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: space-evenly;
 
     &__image {
       align-self: center;

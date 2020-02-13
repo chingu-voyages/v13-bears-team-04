@@ -13,6 +13,14 @@ export type PostType = {
       ["--community-theme-main"]: string;
       ["--community-theme-text"]: string;
     };
+    description?: string;
+    users?: {
+      members: string[];
+      moderators: string[];
+      administrators: string[];
+    };
+    createdOn?: string;
+    _id?: string;
   };
   postType: string;
   title: string;

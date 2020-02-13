@@ -12,6 +12,7 @@ import fetchIt from "../../../../utils/fetch";
 import PostBanner from "./postbanner";
 import PostView from "./postview";
 import { PostType } from "../../../../types/post";
+import { useCheckMembership } from "../../../../hooks";
 
 type Props = {
   error?: string;
@@ -20,6 +21,10 @@ type Props = {
 
 const Post: NextPage<Props> = ({ post, error }) => {
   if (error || !post) return <Error title={error} statusCode={404} />;
+
+  // need to check the user level to determine if we should ...
+  // ... display 'Create Post' button in CommunityAbout
+  const userMemberLevel = useCheckMembership(post.community._id || "");
 
   return (
     <>
@@ -37,18 +42,16 @@ const Post: NextPage<Props> = ({ post, error }) => {
               <PostView post={post} />
             </Layout.Column>
 
-            {/* Seth's */}
             <Layout.Column>
-              {/* check the props in both those files, but either way I wrote... */}
-              {/* ... them in typescript, so you should get some autocomplete... */}
-              {/* ... while typing out the props */}
-              {/* always */}
-              {/* /ViewCommunity/communityabout.tsx  */}
               <CommunityAbout
                 description={post.community.name}
-                createdOn=""
-                memberCount={5}
-                userMemberLevel=""
+                createdOn={post.community.createdOn || ""}
+                memberCount={
+                  post.community.users
+                    ? post.community.users.members.length
+                    : 12345
+                }
+                userMemberLevel={userMemberLevel}
               />
               {/* if the user is logged in */}
               {/* /ViewCommunity/communitymods.tsx  */}

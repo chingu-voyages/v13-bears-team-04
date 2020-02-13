@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 
+import "../../sass/components/_subredditinfo.scss";
 import Button from "../Button/button";
 
 export default function SubredditInfo() {
@@ -14,8 +15,8 @@ export default function SubredditInfo() {
   });
 
   return (
-    <div className="row">
-      <div className="col-1-of-4 subredditinfo__container">
+    <div>
+      <div className="subredditinfo__container">
         <div className="subredditinfo__header">
           <img
             className="subredditinfo__icon"
@@ -23,16 +24,19 @@ export default function SubredditInfo() {
           ></img>
           <h1 className="subredditinfo__headertext">{info.name}</h1>
         </div>
-        <div>
+        <div className="subredditinfo__members">
           <h2>
-            {info.numOnline} | {info.numOfMembers} | {info.cakeDay}
+            {info.numOnline} members {info.numOfMembers} online
           </h2>
+          <div className="subredditinfo__cakeday">
+            <h2>{info.cakeDay}</h2>
+          </div>
         </div>
         <div>
           <p className="subredditinfo__description">{info.description}</p>
         </div>
         <div>
-          <Button text="Join" />
+          <Button cx="subredditinfo__joinbtn" text="Join" />
         </div>
       </div>
     </div>

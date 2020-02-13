@@ -17,7 +17,7 @@
 @import "components/layout";
 @import "components/messagebox";
 @import "components/nav";
-@import "components/postlist";
+@import "components/postcard";
 @import "components/premiumhero";
 @import "components/radio";
 @import "components/recentposts";
@@ -28,9 +28,11 @@
 @import "components/subredditinfo";
 @import "components/totopbutton";
 @import "components/trendingcommunity";
+@import "components/votes";
 
 @import "pages/home";
 @import "pages/subredditcreate";
 @import "pages/viewcommunity";
+@import "pages/viewpost";
 
 @import "vendors/normalize";

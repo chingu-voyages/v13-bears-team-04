@@ -1,9 +1,30 @@
 .subredditinfo {
   &__container {
-    margin: 15rem 0 0 85rem;
+    display: flex;
+    flex-flow: row wrap;
+    background-color: $white;
+    border-radius: 0.5rem;
+    box-sizing: border-box;
+    width: 30rem;
+    line-height: 2rem;
+  }
+
+  &__header,
+  &__members,
+  &__icon {
+    margin-left: 1rem;
   }
 
   &__header {
+    display: inline;
+  }
+
+  &__members {
+    display: flex;
+    font-size: 0.7rem;
+  }
+
+  &__cakeDay {
     display: inline;
   }
 
@@ -20,5 +41,9 @@
 
   &__headertext {
     left: 3rem;
+  }
+
+  &__joinbtn {
+    width: 20rem;
   }
 }

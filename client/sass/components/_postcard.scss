@@ -1,0 +1,106 @@
+.postcard {
+  width: 100%;
+  border-radius: 4px;
+  background-color: $white;
+  border: 1px solid $grey;
+  margin-bottom: 10px;
+  position: relative;
+  cursor: pointer;
+  box-sizing: border-box;
+  line-height: 1.6rem;
+  font-size: 1.2rem;
+
+  &__votes {
+    background-color: #f7f7f7;
+    height: 100%;
+    width: 40px;
+    position: absolute;
+    top: 0;
+    border-radius: 0.5rem 0 0 0.5rem;
+    padding: 10px 5px;
+    box-sizing: border-box;
+  }
+
+  &__details {
+    padding-left: 45px;
+    margin: 5px 5px 5px 0;
+    height: 100%;
+
+    &__info {
+      height: 30px;
+      margin: 5px 0;
+      display: flex;
+      align-items: center;
+
+      > div {
+        margin: 0 6px;
+      }
+
+      &__sub {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        &__img {
+          height: 20px;
+          width: 20px;
+          img {
+            height: inherit;
+            width: inherit;
+          }
+        }
+
+        &__text {
+          font-weight: bold;
+          margin-left: 5px;
+          text-decoration: none;
+          color: inherit;
+
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+      }
+
+      &__user,
+      &__date {
+        color: #787c7e;
+      }
+    }
+
+    &__title {
+      font-size: 1.4em;
+      margin: 10px 10px 0;
+    }
+
+    &__content {
+      letter-spacing: 0.3px;
+      -webkit-mask-image: linear-gradient(180deg, #000 60%, transparent);
+      mask-image: linear-gradient(180deg, #000 60%, transparent);
+      max-height: 150px;
+    }
+  }
+
+  &__actions {
+    margin: 0px 0 5px;
+    height: 30px;
+    padding-left: 50px;
+    color: #787c7e;
+    display: flex;
+    align-items: center;
+
+    &__comments {
+      padding: 5px;
+      border-radius: 2px;
+      transition: 0.2s all;
+
+      &:hover {
+        background-color: $grey;
+      }
+
+      svg {
+        margin-right: 4px;
+      }
+    }
+  }
+}

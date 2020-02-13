@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
-import PostListCard from "./postlistcard";
-import fetchIt from "../../utils/fetch";
-import { PostType } from "./types";
 import { useRouter } from "next/router";
+import PostCard from "../PostCard";
+import fetchIt from "../../utils/fetch";
+import { PostType } from "../../types/post";
 
 type Props = {
   endpoint: string;
 };
 
-export default function PostList({ endpoint }: Props) {
+export default function PostList({ endpoint }: Props): JSX.Element {
   const [posts, setPosts] = useState<PostType[]>([]);
   const [isError, setError] = useState(false);
   const [isLoading, setLoader] = useState(true);
@@ -19,7 +19,7 @@ export default function PostList({ endpoint }: Props) {
   useEffect(() => {
     let canSet = true;
 
-    async function getPosts() {
+    async function getPosts(): Promise<void> {
       try {
         const data = await fetchIt(endpoint);
         if (!canSet) return;
@@ -33,7 +33,7 @@ export default function PostList({ endpoint }: Props) {
 
     getPosts();
 
-    return () => {
+    return (): void => {
       canSet = false;
     };
   }, [endpoint]);
@@ -45,13 +45,9 @@ export default function PostList({ endpoint }: Props) {
   if (!posts.length) return <div>No posts found</div>;
 
   return (
-    <div className="postlist-container">
+    <div>
       {posts.map(post => (
-        <PostListCard
-          key={post._id}
-          onCommunityPage={onCommunityPage}
-          {...post}
-        />
+        <PostCard key={post._id} onCommunityPage={onCommunityPage} {...post} />
       ))}
     </div>
   );

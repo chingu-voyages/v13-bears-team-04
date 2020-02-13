@@ -76,13 +76,13 @@ const reducer = (state: State, action: Action): State => {
 
 const CreatePostContext = createContext({} as ContextTypes);
 
-export const useCreatePost = () => useContext(CreatePostContext);
+export const useCreatePost = (): ContextTypes => useContext(CreatePostContext);
 
 export const CreatePostProvider = ({
   communityId = "",
   communityName = "",
   children,
-}: ProviderTypes) => {
+}: ProviderTypes): JSX.Element => {
   const [state, createPostDispatch] = useReducer(
     reducer,
     { communityId, communityName },

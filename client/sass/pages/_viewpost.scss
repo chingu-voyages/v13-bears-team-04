@@ -1,0 +1,72 @@
+@mixin getViewPostWidth() {
+  width: 100%;
+  min-width: 310px;
+  max-width: 976px;
+  margin: 0 auto;
+}
+
+.viewpost {
+  &__background {
+    background-color: rgba(28, 28, 28, 0.9);
+    height: 100%;
+  }
+
+  &__container {
+    @include getViewPostWidth();
+    background-color: #dae0e6;
+    padding-top: 48px;
+  }
+
+  &__banner {
+    @include getViewPostWidth();
+    background-color: #030303;
+    color: #fff;
+    position: fixed;
+    top: 48px;
+    left: 0;
+    right: 0;
+    height: 48px;
+    padding: 0 32px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: #d7dadc;
+    z-index: 11;
+
+    &__votes {
+      padding: 0 12px;
+      border-left: 1px solid #616161;
+      border-right: 1px solid #616161;
+
+      svg:hover {
+        background-color: transparent;
+      }
+    }
+
+    &__title {
+      width: 100%;
+      padding: 0 16px;
+      white-space: pre;
+      text-overflow: ellipsis;
+      overflow: hidden;
+    }
+
+    &__closebtn {
+      background-color: transparent;
+      border-color: transparent;
+      color: inherit;
+
+      &:hover {
+        background-color: #616161;
+        border-color: transparent;
+      }
+    }
+  }
+
+  &__content {
+    border-radius: 0.5rem;
+    background-color: #fff;
+    width: 100%;
+  }
+}

@@ -1,19 +1,26 @@
 import { useUser } from "../contexts/user";
 
-export default function useCheckMembership(communityId: string) {
+type CommunityType = {
+  communities: { [key: string]: string[] };
+};
+
+export default function useCheckMembership(communityId: string): string {
   let userMemberLevel = "";
 
   const { user } = useUser();
   if (!user) return userMemberLevel;
 
-  const membershipLevels = Object.keys(user.communities);
+  const { communities }: CommunityType = user;
 
-  membershipLevels.some((level: string) => {
-    if (user.communities[level].some((id: string) => id === communityId)) {
+  Object.keys(communities).some(level => {
+    const foundLevel: boolean = communities[level].some(
+      (id: string) => id === communityId
+    );
+
+    if (foundLevel) {
       userMemberLevel = level;
-      return true;
     }
-    return false;
+    return userMemberLevel;
   });
 
   return userMemberLevel;

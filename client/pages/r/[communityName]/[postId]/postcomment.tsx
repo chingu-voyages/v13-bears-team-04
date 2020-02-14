@@ -1,12 +1,12 @@
 import React from "react";
-import { useUser } from "../../../../contexts/user";
+import PostCommentCreate from "./postcommentcreate";
+import PostCommentList from "./postcommentlist";
 
-export default function PostComment(): JSX.Element {
-  const { user } = useUser();
+const PostComment: React.ReactNode = () => (
+  <div className="viewpost__comment">
+    <PostCommentCreate />
+    <PostCommentList />
+  </div>
+);
 
-  if (!user) {
-    return <div className="post__comment">Show authentication here</div>;
-  }
-
-  return <div className="post__comment">Show comment editor here</div>;
-}
+export default PostComment;

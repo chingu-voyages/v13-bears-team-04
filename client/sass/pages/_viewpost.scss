@@ -70,12 +70,3 @@
     width: 100%;
   }
 }
-
-@media screen and (max-width: 768px) {
-  .viewpost-container {
-    @include getViewPostCoords(10px);
-    .viewpost-banner &__container {
-      @include getViewPostCoords(10px);
-    }
-  }
-}

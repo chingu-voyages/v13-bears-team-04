@@ -1,6 +1,5 @@
-const express = require("express");
-const router = express.Router();
-const Topic = require("../models/topic");
+const router = require("express").Router();
+const { Topic } = require("../models");
 const { checkSession } = require("../middleware");
 
 // ===== ROUTES ===== //

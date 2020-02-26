@@ -1,10 +1,5 @@
-const createError = require("http-errors");
-const express = require("express");
-const router = express.Router();
-
-const Post = require("../models/post");
-const Community = require("../models/community");
-const User = require("../models/user");
+const router = require("express").Router();
+const { Post, Community } = require("../models");
 const { checkSession } = require("../middleware");
 
 // ===== ROUTES ===== //

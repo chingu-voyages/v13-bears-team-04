@@ -1,9 +1,6 @@
 const createError = require("http-errors");
-const express = require("express");
-const router = express.Router();
-
-const User = require("../models/user");
-const Session = require("../models/session");
+const router = require("express").Router();
+const { User, Session } = require("../models");
 const { checkSession } = require("../middleware");
 
 // ===== ROUTES ===== //

@@ -1,10 +1,6 @@
 const createError = require("http-errors");
-const express = require("express");
-const router = express.Router();
-
-const Community = require("../models/community");
-const User = require("../models/user");
-const Topic = require("../models/topic");
+const router = require("express").Router();
+const { Community, Topic } = require("../models");
 const { checkSession } = require("../middleware");
 
 // ===== ROUTES ===== //
@@ -49,7 +45,7 @@ async function createCommunity(req, res, next) {
       description,
       communityType,
       isOver18,
-      userId
+      userId,
     } = req.body;
 
     // create new community
@@ -58,7 +54,7 @@ async function createCommunity(req, res, next) {
       topics,
       description,
       communityType,
-      isOver18
+      isOver18,
     });
     partialCommunity.users.administrators.push(userId);
     const newCommunity = await partialCommunity.save();
@@ -67,8 +63,8 @@ async function createCommunity(req, res, next) {
     const topicUpdater = topics.map(topicId => ({
       updateOne: {
         filter: { _id: topicId },
-        update: { $push: { communities: newCommunity._id } }
-      }
+        update: { $push: { communities: newCommunity._id } },
+      },
     }));
     await Topic.bulkWrite(topicUpdater);
 
@@ -151,7 +147,7 @@ async function getCommunityUsers(req, res, next) {
 
     const { users } = await Community.findById(communityId).populate({
       path: `users.${key}`,
-      select: "username -_id"
+      select: "username -_id",
     });
     const targetedUsers = users[key];
 

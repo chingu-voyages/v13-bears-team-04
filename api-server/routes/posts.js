@@ -18,16 +18,36 @@ router
 
 // ===== FUNCTIONS ===== //
 
+async function getOnePost(req, res, next) {
+  try {
+    const { postId } = req.params;
+    const post = await Post.findById(postId)
+      .populate({
+        path: "author",
+        // can use the communities to determine if the poster is a moderator
+        // could create a util function to reuse that logic on the frontend
+        select: "username communities",
+      })
+      .populate({
+        path: "community",
+        select: "name description users theme createdOn",
+      });
+    res.status(200).json(post);
+  } catch (err) {
+    next(err);
+  }
+}
+
 async function getAllPosts(_, res, next) {
   try {
     const posts = await Post.find()
       .populate({
         path: "author",
-        select: "username -_id"
+        select: "username -_id",
       })
       .populate({
         path: "community",
-        select: "name theme description createdOn users"
+        select: "name theme description createdOn users",
       });
     res.status(200).json(posts);
   } catch (err) {
@@ -41,11 +61,11 @@ async function getCommunityPosts(req, res, next) {
     const posts = await Post.find({ community: communityId })
       .populate({
         path: "author",
-        select: "username -_id"
+        select: "username -_id",
       })
       .populate({
         path: "community",
-        select: "name theme -_id"
+        select: "name theme -_id",
       });
     res.status(200).json(posts);
   } catch (err) {

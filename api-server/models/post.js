@@ -10,81 +10,82 @@ const PostSchema = new Schema({
     required: [true, "Title Required"],
     unique: true,
     minlength: [4, "Password must be at least 4 characters"],
-    maxlength: [300, "Password must be 300 characters or less"]
+    maxlength: [300, "Password must be 300 characters or less"],
   },
   postType: {
     type: String,
-    required: [true, "Post Type Required"]
+    required: [true, "Post Type Required"],
   },
   content: {
     type: String,
-    required: [true, "Content Required"]
+    required: [true, "Content Required"],
   },
   author: {
     type: ObjectId,
     ref: "User",
-    required: [true, "Author Required"]
+    required: [true, "Author Required"],
   },
   community: {
     type: ObjectId,
     ref: "Community",
-    required: [true, "Community Required"]
+    required: [true, "Community Required"],
   },
   comments: [
     {
       type: ObjectId,
-      ref: "Comment"
-    }
+      ref: "Comment",
+    },
   ],
-  voteScore: {
-    type: Number,
-    default: 0,
-    required: [true, "Vote Score Required"]
-  },
+  votes: [
+    {
+      type: ObjectId,
+      ref: "Vote",
+    },
+  ],
   isDeleted: {
     type: Boolean,
     default: false,
-    required: [true, "isDeleted is Required"]
+    required: [true, "isDeleted is Required"],
   },
   isReported: {
     type: Boolean,
     default: false,
-    required: [true, "isReported is Required"]
+    required: [true, "isReported is Required"],
   },
   isOver18: {
     type: Boolean,
     default: false,
-    required: [true, "isReported is Required"]
+    required: [true, "isOver18 is Required"],
   },
   isOC: {
     type: Boolean,
     default: false,
-    required: [true, "isReported is Required"]
+    required: [true, "isOC is Required"],
   },
   isSpoiler: {
     type: Boolean,
     default: false,
-    required: [true, "isReported is Required"]
+    required: [true, "isSpoiler is Required"],
   },
   createdOn: {
     type: Date,
     default: Date.now,
-    required: [true, "Creation Date Required"]
+    required: [true, "Creation Date Required"],
   },
   lastModified: {
     type: Date,
     default: Date.now,
-    required: [true, "Last Date Modified Required"]
+    required: [true, "Last Date Modified Required"],
   },
   lastUpvoted: {
     type: Date,
     default: Date.now,
-    required: [true, "Last Date Upvoted Required"]
-  }
+    required: [true, "Last Date Upvoted Required"],
+  },
 });
 
 PostSchema.plugin(uniqueValidator, {
-  message: "That post title is already taken"
+  message: "That post title is already taken",
 });
 
 module.exports = model("Post", PostSchema);

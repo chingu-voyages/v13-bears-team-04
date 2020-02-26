@@ -24,6 +24,7 @@ router.route("/signup").post(handleSignup);
 async function getAllUsers(req, res, next) {
   try {
     const users = await User.find();
+    console.log(users);
     res.status(200).json(users);
   } catch (err) {
     next(err);

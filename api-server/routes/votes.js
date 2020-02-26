@@ -8,7 +8,7 @@ router.get("/all", getAllVotes);
 router.post("/onPost/:postId", voteOnPost);
 router.post("/onComment/:commentId", voteOnComment);
 
-// ===== FUNCTIONS ===== //
+// ===== CONTROLLERS ===== //
 
 async function getAllVotes(req, res, next) {
   try {

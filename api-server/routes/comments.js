@@ -12,7 +12,7 @@ router.put("/:commentId", editComment);
 router.delete("/:commentId", deleteComment);
 router.post("/:commentId/report", reportComment);
 
-// ===== FUNCTIONS ===== //
+// ===== CONTROLLERS ===== //
 
 async function getPostComments(req, res, next) {
   try {

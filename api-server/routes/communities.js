@@ -5,28 +5,17 @@ const { checkSession } = require("../middleware");
 
 // ===== ROUTES ===== //
 
-router
-  .route("/")
-  .get(getAllCommunities)
-  .post(checkSession, createCommunity);
+router.get("/", getAllCommunities);
+router.post("/", createCommunity);
+router.get("/:communityName", getCommunity);
+router.delete("/:communityId", checkSession, deletedCommunity);
+router.put("/:communityId/theme", checkSession, updateCommunityTheme);
+router.put("/:communityId/edit/:key", checkSession, updateCommunityDetails);
+router.get("/:communityId/users/:key", checkSession, getCommunityUsers);
+router.post("/:communityId/users/:key", checkSession, addCommunityUser);
+router.delete("/:communityId/users/:key", checkSession, deleteCommunityUser);
 
-router.route("/:communityName").get(getCommunity);
-
-router.route("/:communityId").delete(checkSession, deleteCommunity);
-
-router.route("/:communityId/theme").put(checkSession, updateCommunityTheme);
-
-router
-  .route("/:communityId/edit/:key")
-  .put(checkSession, updateCommunityDetails);
-
-router
-  .route("/:communityId/users/:key")
-  .get(checkSession, getCommunityUsers)
-  .post(checkSession, addCommunityUser)
-  .delete(checkSession, deleteCommunityUser);
-
-// ===== FUNCTIONS ===== //
+// ===== CONTROLLERS ===== //
 
 async function getAllCommunities(req, res, next) {
   try {

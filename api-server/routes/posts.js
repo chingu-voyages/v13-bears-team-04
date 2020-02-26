@@ -4,14 +4,11 @@ const { checkSession } = require("../middleware");
 
 // ===== ROUTES ===== //
 
-router.route("/").get(getAllPosts);
+router.get("/", getAllPosts);
+router.get("/:communityId", getCommunityPosts);
+router.post("/:communityId", checkSession, createPost);
 
-router
-  .route("/:communityId")
-  .get(getCommunityPosts)
-  .post(checkSession, createPost);
-
-// ===== FUNCTIONS ===== //
+// ===== CONTROLLERS ===== //
 
 async function getOnePost(req, res, next) {
   try {

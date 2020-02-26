@@ -8,7 +8,7 @@ const { checkSession } = require("../middleware");
 router.get("/", getAllCommunities);
 router.post("/", createCommunity);
 router.get("/:communityName", getCommunity);
-router.delete("/:communityId", checkSession, deletedCommunity);
+router.delete("/:communityId", checkSession, deleteCommunity);
 router.put("/:communityId/theme", checkSession, updateCommunityTheme);
 router.put("/:communityId/edit/:key", checkSession, updateCommunityDetails);
 router.get("/:communityId/users/:key", checkSession, getCommunityUsers);
@@ -84,8 +84,8 @@ async function getCommunity(req, res, next) {
 async function deleteCommunity(req, res, next) {
   try {
     const { communityId } = req.params;
-    const deletedCommunity = await Community.findByIdAndDelete(communityId);
-    res.status(200).json(deletedCommunity);
+    const deleteCommunity = await Community.findByIdAndDelete(communityId);
+    res.status(200).json(deleteCommunity);
   } catch (err) {
     next(err);
   }

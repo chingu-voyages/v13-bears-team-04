@@ -1,9 +1,9 @@
-import Comment from "./comment";
-import Community from "./community";
-import Post from "./post";
-import Session from "./session";
-import Topic from "./topic";
-import User from "./user";
-import Vote from "./vote";
+const Comment = require("./comment");
+const Community = require("./community");
+const Post = require("./post");
+const Session = require("./session");
+const Topic = require("./topic");
+const User = require("./user");
+const Vote = require("./vote");
 
-export { Comment, Community, Post, Session, Topic, User, Vote };
+module.exports = { Comment, Community, Post, Session, Topic, User, Vote };

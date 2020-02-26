@@ -62,7 +62,7 @@ async function voteOnPost(req, res, next) {
   }
 }
 
-async function voteOnCommment(req, res, next) {
+async function voteOnComment(req, res, next) {
   try {
     const { user } = res.locals;
     const { commentId } = req.params;

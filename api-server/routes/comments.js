@@ -1,16 +1,17 @@
 const createError = require("http-errors");
 const router = require("express").Router();
 const { Comment } = require("../models");
+const { checkSession } = require("../middleware");
 
 // ===== ROUTES ===== //
 
 router.get("/:commentId", getOneComment);
 router.post("/onComment/:commentId", createCommentOnComment);
 router.get("/:postId", getPostComments);
-router.post("/onPost/:postId", createCommentOnPost);
-router.put("/:commentId", editComment);
-router.delete("/:commentId", deleteComment);
-router.post("/:commentId/report", reportComment);
+router.post("/onPost/:postId", checkSession, createCommentOnPost);
+router.put("/:commentId", checkSession, editComment);
+router.delete("/:commentId", checkSession, deleteComment);
+router.post("/:commentId/report", checkSession, reportComment);
 
 // ===== CONTROLLERS ===== //
 

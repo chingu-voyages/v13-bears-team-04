@@ -1,12 +1,13 @@
 const createError = require("http-errors");
 const router = require("express").Router();
 const { Vote, Post } = require("../models");
+const { checkSession } = require("../middleware");
 
 // ===== ROUTES ===== //
 
 router.get("/all", getAllVotes);
-router.post("/onPost/:postId", voteOnPost);
-router.post("/onComment/:commentId", voteOnComment);
+router.post("/onPost/:postId", checkSession, voteOnPost);
+router.post("/onComment/:commentId", checkSession, voteOnComment);
 
 // ===== CONTROLLERS ===== //
 

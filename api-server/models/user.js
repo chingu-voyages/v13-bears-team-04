@@ -10,13 +10,13 @@ const UserSchema = new Schema({
     type: String,
     required: [true, "Email Required"],
     unique: true,
-    lowercase: true
+    lowercase: true,
   },
   password: {
     type: String,
     required: [true, "Password Required"],
     minlength: [8, "Password must be at least 8 characters"],
-    maxlength: [60, "Password must be 60 characters or less"]
+    maxlength: [60, "Password must be 60 characters or less"],
   },
   username: {
     type: String,
@@ -24,55 +24,61 @@ const UserSchema = new Schema({
     minlength: [3, "Username must be at least 3 characters"],
     maxlength: [20, "Username must be 20 characters or less"],
     unique: true,
-    uniqueCaseInsensitive: true
+    uniqueCaseInsensitive: true,
   },
   lowerUsername: {
     type: String,
-    lowercase: true
+    lowercase: true,
   },
   communities: {
     member: [
       {
         type: ObjectId,
-        ref: "Community"
-      }
+        ref: "Community",
+      },
     ],
     moderator: [
       {
         type: ObjectId,
-        ref: "Community"
-      }
+        ref: "Community",
+      },
     ],
     administrator: [
       {
         type: ObjectId,
-        ref: "Community"
-      }
-    ]
+        ref: "Community",
+      },
+    ],
   },
   posts: [
     {
       type: ObjectId,
-      ref: "Post"
-    }
+      ref: "Post",
+    },
   ],
   comments: [
     {
       type: ObjectId,
-      ref: "Comment"
-    }
+      ref: "Comment",
+    },
   ],
   createdOn: {
     type: Date,
     default: Date.now,
-    required: [true, "Creation Date Required"]
-  }
+    required: [true, "Creation Date Required"],
+  },
+  votes: [
+    {
+      type: ObjectId,
+      ref: "Vote",
+    },
+  ],
 });
 
 // returns the following error message, if the value isn't unique
 // ex) Error, email must be unique.
 UserSchema.plugin(uniqueValidator, {
-  message: "Error, {PATH} must be unique."
+  message: "Error, {PATH} must be unique.",
 });
 
 // before we save the user document we'll convert the plain text password to a hash

@@ -1,29 +1,23 @@
 const createError = require("http-errors");
-const express = require("express");
-const router = express.Router();
-
-const User = require("../models/user");
-const Session = require("../models/session");
+const router = require("express").Router();
+const { User, Session } = require("../models");
 const { checkSession } = require("../middleware");
 
 // ===== ROUTES ===== //
 
-router.route("/").get(getAllUsers);
+router.get("/", getAllUsers);
+router.get("/verify", checkSession, handleVerification);
+router.post("/login", handleLogin);
+router.post("/logout", checkSession, handleLogout);
+router.post("/signup", handleSignup);
 
-router.route("/verify").get(checkSession, handleVerification);
-
-router.route("/login").post(handleLogin);
-
-router.route("/logout").post(checkSession, handleLogout);
-
-router.route("/signup").post(handleSignup);
-
-// ===== FUNCTIONS ===== //
+// ===== CONTROLLERS ===== //
 
 // SECURE ME
 async function getAllUsers(req, res, next) {
   try {
     const users = await User.find();
+    console.log(users);
     res.status(200).json(users);
   } catch (err) {
     next(err);

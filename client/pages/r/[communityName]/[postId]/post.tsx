@@ -33,7 +33,7 @@ const Post: NextPage<Props> = ({ post, error }) => {
         <div className="viewpost__container">
           <PostBanner
             vote=""
-            voteScore={post.voteScore}
+            votes={post.votes}
             title={post.title}
             communityName={post.community.name}
           />

@@ -1,14 +1,12 @@
 import React from "react";
-import Button from "../Button";
-import { useAuthPopup } from "../../contexts/authpopup";
-import { useUser } from "../../contexts/user";
+import AuthButtons from "../AuthButtons";
 import NavQuickLinksLink from "./navquicklinkslink";
+import { useUser } from "../../contexts/user";
 
 export default function NavAuth() {
-  const { user } = useUser();
-  const { setAuthPopup } = useAuthPopup();
+  const { isAuthenticated } = useUser();
 
-  return user ? (
+  return isAuthenticated ? (
     <div className="nav__item__quicklinks">
       <NavQuickLinksLink
         href="/chat"
@@ -30,17 +28,7 @@ export default function NavAuth() {
     </div>
   ) : (
     <div className="nav__item__auth">
-      <Button
-        cx="nav__item__auth__btn"
-        handleClick={() => setAuthPopup("signin")}
-        inverted
-        text="log in"
-      />
-      <Button
-        cx="nav__item__auth__btn"
-        handleClick={() => setAuthPopup("signup")}
-        text="sign up"
-      />
+      <AuthButtons cxBtn="nav__item__auth__btn" />
     </div>
   );
 }

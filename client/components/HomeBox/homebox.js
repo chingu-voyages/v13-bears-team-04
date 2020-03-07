@@ -3,9 +3,9 @@ import Button from "../Button";
 import { useUser } from "../../contexts/user";
 
 export default function HomeBox() {
-  const { user } = useUser();
+  const { isAuthenticated } = useUser();
 
-  if (!user) return null;
+  if (!isAuthenticated) return null;
 
   return (
     <div className="homebox-container">

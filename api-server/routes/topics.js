@@ -1,16 +1,12 @@
-const express = require("express");
-const router = express.Router();
-const Topic = require("../models/topic");
+const router = require("express").Router();
+const { Topic } = require("../models");
 const { checkSession } = require("../middleware");
 
 // ===== ROUTES ===== //
+router.get("/", getAllTopics);
+router.post("/", checkSession, createTopics);
 
-router
-  .route("/")
-  .get(getAllTopics)
-  .post(checkSession, createTopics);
-
-// ===== FUNCTIONS ===== //
+// ===== CONTROLLERS ===== //
 
 async function getAllTopics(req, res, next) {
   try {

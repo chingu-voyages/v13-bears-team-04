@@ -7,8 +7,8 @@ type CommunityType = {
 export default function useCheckMembership(communityId: string): string {
   let userMemberLevel = "";
 
-  const { user } = useUser();
-  if (!user) return userMemberLevel;
+  const { isAuthenticated, user } = useUser();
+  if (!isAuthenticated) return userMemberLevel;
 
   const { communities }: CommunityType = user;
 

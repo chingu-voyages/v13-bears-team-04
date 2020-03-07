@@ -4,7 +4,7 @@ import { useUser } from "../../contexts/user";
 import Button from "../Button";
 
 export default function trendingcommunity() {
-  const { user } = useUser();
+  const { isAuthenticated } = useUser();
   const { setAuthPopup } = useAuthPopup();
 
   const [subReddits, setTrendingSubReddit] = useState([
@@ -16,7 +16,8 @@ export default function trendingcommunity() {
   ]);
 
   function handleClick() {
-    if (!user) {
+    console.log("Delete Me:", setTrendingSubReddit);
+    if (!isAuthenticated) {
       setAuthPopup("signin");
     } else {
       console.log("Already Signed in");
@@ -29,7 +30,7 @@ export default function trendingcommunity() {
       {subReddits.map((subReddit, index) => {
         return (
           // CHANGE THIS KEY TO SOMETHING OTHER THAN INDEX IN THE FUTURE
-          <div key={index}>
+          <div key={`r/${subReddit}`}>
             <div className="trending-community__row">
               <img
                 className="trending-community__row__image"

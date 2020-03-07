@@ -4,14 +4,14 @@ import Button from "../../../../components/Button";
 
 type Props = {
   vote: "upvoted" | "downvoted" | "";
-  voteScore: number;
+  votes: string[];
   title: string;
   communityName: string;
 };
 
 export default function PostBanner({
   vote,
-  voteScore,
+  votes,
   title,
   communityName,
 }: Props): JSX.Element {
@@ -20,7 +20,7 @@ export default function PostBanner({
       <Votes
         isHorizontal
         vote={vote}
-        voteScore={voteScore}
+        votes={votes}
         cxInner="viewpost__banner__votes"
       />
       <h2 className="viewpost__banner__title">{title}</h2>

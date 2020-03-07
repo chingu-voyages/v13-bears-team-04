@@ -18,12 +18,15 @@ export default function CommunityInfo({
   title,
   userMemberLevel,
   setMessageBox,
-}: Props) {
-  const { user, setUser } = useUser();
+}: Props): JSX.Element {
+  const { isAuthenticated, user, setUser } = useUser();
   const { setAuthPopup } = useAuthPopup();
 
-  async function handleMembership() {
-    if (!user) return setAuthPopup("signup");
+  async function handleMembership(): Promise<void> {
+    if (!isAuthenticated) {
+      setAuthPopup("signup");
+      return;
+    }
 
     // reusable values
     const baseURL = `/community/${communityId}/users`;
@@ -69,8 +72,8 @@ export default function CommunityInfo({
       <div className="community__header">
         <LogoIcon
           className="community__header__icon"
-          primary={"var(--community-theme-main)"}
-          secondary={"var(--community-theme-text)"}
+          primary="var(--community-theme-main)"
+          secondary="var(--community-theme-text)"
         />
         <div className="community__header__titles">
           <h1>{title}</h1>

@@ -1,36 +1,21 @@
 const createError = require("http-errors");
-const express = require("express");
-const router = express.Router();
-
-const Community = require("../models/community");
-const User = require("../models/user");
-const Topic = require("../models/topic");
+const router = require("express").Router();
+const { Community, Topic } = require("../models");
 const { checkSession } = require("../middleware");
 
 // ===== ROUTES ===== //
 
-router
-  .route("/")
-  .get(getAllCommunities)
-  .post(checkSession, createCommunity);
+router.get("/", getAllCommunities);
+router.post("/", createCommunity);
+router.get("/:communityName", getCommunity);
+router.delete("/:communityId", checkSession, deleteCommunity);
+router.put("/:communityId/theme", checkSession, updateCommunityTheme);
+router.put("/:communityId/edit/:key", checkSession, updateCommunityDetails);
+router.get("/:communityId/users/:key", checkSession, getCommunityUsers);
+router.post("/:communityId/users/:key", checkSession, addCommunityUser);
+router.delete("/:communityId/users/:key", checkSession, deleteCommunityUser);
 
-router.route("/:communityName").get(getCommunity);
-
-router.route("/:communityId").delete(checkSession, deleteCommunity);
-
-router.route("/:communityId/theme").put(checkSession, updateCommunityTheme);
-
-router
-  .route("/:communityId/edit/:key")
-  .put(checkSession, updateCommunityDetails);
-
-router
-  .route("/:communityId/users/:key")
-  .get(checkSession, getCommunityUsers)
-  .post(checkSession, addCommunityUser)
-  .delete(checkSession, deleteCommunityUser);
-
-// ===== FUNCTIONS ===== //
+// ===== CONTROLLERS ===== //
 
 async function getAllCommunities(req, res, next) {
   try {
@@ -49,7 +34,7 @@ async function createCommunity(req, res, next) {
       description,
       communityType,
       isOver18,
-      userId
+      userId,
     } = req.body;
 
     // create new community
@@ -58,7 +43,7 @@ async function createCommunity(req, res, next) {
       topics,
       description,
       communityType,
-      isOver18
+      isOver18,
     });
     partialCommunity.users.administrators.push(userId);
     const newCommunity = await partialCommunity.save();
@@ -67,8 +52,8 @@ async function createCommunity(req, res, next) {
     const topicUpdater = topics.map(topicId => ({
       updateOne: {
         filter: { _id: topicId },
-        update: { $push: { communities: newCommunity._id } }
-      }
+        update: { $push: { communities: newCommunity._id } },
+      },
     }));
     await Topic.bulkWrite(topicUpdater);
 
@@ -99,8 +84,8 @@ async function getCommunity(req, res, next) {
 async function deleteCommunity(req, res, next) {
   try {
     const { communityId } = req.params;
-    const deletedCommunity = await Community.findByIdAndDelete(communityId);
-    res.status(200).json(deletedCommunity);
+    const deleteCommunity = await Community.findByIdAndDelete(communityId);
+    res.status(200).json(deleteCommunity);
   } catch (err) {
     next(err);
   }
@@ -151,7 +136,7 @@ async function getCommunityUsers(req, res, next) {
 
     const { users } = await Community.findById(communityId).populate({
       path: `users.${key}`,
-      select: "username -_id"
+      select: "username -_id",
     });
     const targetedUsers = users[key];
 

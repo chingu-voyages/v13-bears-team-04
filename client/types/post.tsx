@@ -1,6 +1,6 @@
 export type PostType = {
   comments: string[];
-  voteScore: number;
+  votes: string[];
   isDeleted: boolean;
   isReported: boolean;
   isOver18: boolean;

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import CommunityAbout from "../../ViewCommunity/communityabout";
 import CommunityRules from "../../ViewCommunity/communityrules";
-import { CommunityType } from "../../ViewCommunity/types";
+import { CommunityType } from "../../../types/community";
 
 import { useCreatePost } from "../../../contexts/createpost";
 import { useSetCSSVariable } from "../../../hooks";

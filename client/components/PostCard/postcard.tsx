@@ -11,7 +11,7 @@ type Props = PostType & { onCommunityPage: boolean };
 
 export default function PostListCard({
   _id,
-  voteScore,
+  votes,
   community,
   author,
   createdOn,
@@ -22,7 +22,7 @@ export default function PostListCard({
 }: Props): JSX.Element {
   return (
     <div className="postcard">
-      <Votes voteScore={voteScore} cxContainer="postcard__votes" vote="" />
+      <Votes votes={votes} cxContainer="postcard__votes" vote="" />
       <Link href={`/r/${community.name}/${_id}`}>
         <div>
           <div className="postcard__details">

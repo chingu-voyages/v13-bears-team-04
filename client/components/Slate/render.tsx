@@ -7,13 +7,14 @@ type Props = {
   content: string;
 };
 
-export default function Render({ content }: Props) {
-  const { value, editor, onChange } = useMemo(() => {
+export default function Render({ content }: Props): JSX.Element {
+  const state = useMemo(() => {
     const value = JSON.parse(content);
     const editor = withReact(createEditor());
-    const onChange = () => {};
+    const onChange = (): void => undefined;
     return { value, editor, onChange };
   }, [content]);
+  const { value, editor, onChange } = state;
 
   return (
     <div className="slate slate__render">

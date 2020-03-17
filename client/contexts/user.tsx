@@ -96,7 +96,7 @@ function useUserSetter(initUser: InitProps): State {
         body: JSON.stringify({ username, password }),
       });
       // if successful, set cookie and user
-      setCookie({}, "sid", sid, getCookieOptions());
+      setCookie(null, "sid", sid, getCookieOptions());
       setUser({ type: "SET_USER", user: foundUser });
       return `Success! Welcome back ${foundUser.username}`;
     } catch (err) {
@@ -111,10 +111,10 @@ function useUserSetter(initUser: InitProps): State {
       await fetchIt("/user/logout", {
         method: "POST",
         body: JSON.stringify({ userId }),
-        ctx: {},
+        // ctx: {},
       });
       // if successful, set cookie and user
-      destroyCookie({}, "sid", {});
+      destroyCookie(null, "sid", {});
       setUser({ type: "REMOVE_USER" });
       return "Logged out successfully";
     } catch (err) {
@@ -135,7 +135,7 @@ function useUserSetter(initUser: InitProps): State {
         body: JSON.stringify({ username, password, email }),
       });
       // if successful, set cookie and user
-      setCookie({}, "sid", sid, getCookieOptions());
+      setCookie(null, "sid", sid, getCookieOptions());
       setUser({ type: "SET_USER", user: newUser });
       return "Success! Welcome to our Reddit... clone";
     } catch (err) {

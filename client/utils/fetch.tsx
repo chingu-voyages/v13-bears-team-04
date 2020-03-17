@@ -1,15 +1,16 @@
 import fetch from "isomorphic-unfetch";
 import { parseCookies } from "nookies";
+import { NextPageContext } from "next";
 
 type GivenOptionsType = {
-  ctx?: {};
+  ctx?: NextPageContext;
   method?: "GET" | "POST" | "PUT" | "DELETE";
   body?: string;
 };
 
 // when needed, we send our session cookie along with requests
 // if no cookies are found, we will NOT fetch
-function getSessionId(ctx: {}): { Authorization: string } {
+function getSessionId(ctx: NextPageContext): { Authorization: string } {
   const { sid } = parseCookies(ctx);
   if (!sid) throw new Error("Sorry, no session cookie found");
   return { Authorization: JSON.stringify({ sid }) };

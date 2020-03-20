@@ -31,7 +31,7 @@ export default function CommunityInfo({
     // reusable values
     const baseURL = `/community/${communityId}/users`;
     const body = JSON.stringify({ userId: user._id });
-    const opts = { body, ctx: {} };
+    const opts = { body };
 
     try {
       // leave the community

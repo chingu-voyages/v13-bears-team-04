@@ -109,17 +109,16 @@ const CustomValue = props => {
 };
 
 export default function NavDrop() {
-  const { user, logout } = useUser();
+  const { isAuthenticated, logout } = useUser();
   const { setAuthPopup } = useAuthPopup();
 
   async function handleLogout() {
-    const userId = user._id;
-    const message = await logout({ userId });
+    const message = await logout();
     console.log(message);
   }
 
   const { loggedIn, notLoggedIn } = options;
-  const opts = user ? loggedIn : notLoggedIn;
+  const opts = isAuthenticated ? loggedIn : notLoggedIn;
   return (
     <Select
       className="nav__item__drop"

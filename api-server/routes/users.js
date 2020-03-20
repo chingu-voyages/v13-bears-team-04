@@ -1,14 +1,15 @@
 const createError = require("http-errors");
+const jwt = require("jsonwebtoken");
 const router = require("express").Router();
 const { User, Session } = require("../models");
-const { checkSession } = require("../middleware");
+const { verifyToken } = require("../middleware");
 
 // ===== ROUTES ===== //
 
 router.get("/", getAllUsers);
-router.get("/verify", checkSession, handleVerification);
+router.post("/verify", handleVerification);
 router.post("/login", handleLogin);
-router.post("/logout", checkSession, handleLogout);
+router.post("/logout", verifyToken, handleLogout);
 router.post("/signup", handleSignup);
 
 // ===== CONTROLLERS ===== //
@@ -26,11 +27,29 @@ async function getAllUsers(req, res, next) {
 
 async function handleVerification(req, res, next) {
   try {
-    // user was set in checkSession middleware
-    const user = res.locals.user;
-    // don't want to send the user's password to the client
-    const { password, ...goodUser } = user._doc;
-    res.status(200).json(goodUser);
+    const { cookie } = req.headers;
+    if (!cookie) throw createError(400, "No cookie found");
+
+    const { sid } = JSON.parse(cookie);
+    if (!sid) throw createError(400, "No session cookie found");
+
+    const session = await Session.findById(sid);
+    if (!session) throw createError(401, "Invalid session. Please log in.");
+
+    const user = await User.findById(session.userId)
+      .select({ password: 0 })
+      .lean();
+    if (!user) {
+      // there's no user for that session, so we'll remove it
+      await session.remove();
+      throw createError(401, "Valid session. Invalid user");
+    }
+
+    const token = jwt.sign(user, process.env.JWT_SECRET, {
+      expiresIn: "3h",
+    });
+
+    res.status(200).json({ token, user });
   } catch (err) {
     next(err);
   }
@@ -48,30 +67,26 @@ async function handleLogin(req, res, next) {
 
     // successful login; create a user session
     const session = await Session.create({ userId: user._id });
-    if (!session || !session._id) {
-      throw createError(401, "Error creating session");
-    }
+    if (!session) throw createError(401, "Error creating session");
+    const sid = session._id;
 
     // don't want to send the user's password to the client
     const { password, ...goodUser } = user._doc;
-    res.status(200).json({ sid: session._id, ...goodUser });
+
+    const token = jwt.sign(goodUser, process.env.JWT_SECRET, {
+      expiresIn: "3h",
+    });
+
+    res.status(200).json({ sid, token, user: goodUser });
   } catch (err) {
-    console.log("NEXT:", err);
     next(err);
   }
 }
 
 async function handleLogout(req, res, next) {
   try {
-    const { userId } = req.body;
-    // user was set in checkSession middleware
-    const { _id } = res.locals.user;
-    if (String(_id) !== userId) {
-      throw createError(
-        401,
-        "Sorry not sorry. You can't sign out another user"
-      );
-    }
+    const { _id: userId } = res.locals.user;
+
     // delete all this user's sessions
     await Session.deleteMany({ userId });
 
@@ -83,20 +98,20 @@ async function handleLogout(req, res, next) {
 
 async function handleSignup(req, res, next) {
   try {
-    // create user
     const newUser = await User.create(req.body);
     if (!newUser) throw createError(400, "Error creating user");
 
     // create a session
     const session = await Session.create({ userId: newUser._id });
-    if (!session || !session._id) {
-      throw createError(400, "Error creating session");
-    }
+    if (!session) throw createError(400, "Error creating session");
 
-    // separate password since we don't want to send to the client
-    const { password, ...goodUser } = newUser._doc;
+    const { password, ...user } = newUser._doc;
 
-    res.status(200).json({ sid: session._id, ...goodUser });
+    const token = jwt.sign(user, process.env.JWT_SECRET, {
+      expiresIn: "3h",
+    });
+
+    res.status(200).json({ sid: session._id, token, user });
   } catch (err) {
     next(err);
   }

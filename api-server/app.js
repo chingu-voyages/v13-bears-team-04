@@ -1,6 +1,7 @@
 require("dotenv").config();
 
 const express = require("express");
+const cookieParser = require("cookie-parser");
 const cors = require("cors");
 const rateLimit = require("express-rate-limit");
 const morganBody = require("morgan-body");
@@ -20,7 +21,7 @@ const TEST_PROD = process.env.TEST_PROD;
 app.set("trust proxy", 1);
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000,
-  max: 100
+  max: 100,
 });
 
 // MONGO CONNECTION
@@ -29,7 +30,7 @@ mongoose
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useCreateIndex: true,
-    useFindAndModify: false
+    useFindAndModify: false,
   })
   .catch(error => console.log("Database error: " + JSON.stringify(error)));
 
@@ -38,10 +39,11 @@ const corsOpts = {
     NODE_ENV === "production" && TEST_PROD === "true"
       ? CLIENT_URL_PROD
       : CLIENT_URL_DEV,
-  credentials: true
+  credentials: true,
 };
 
 // MIDDLEWARE
+app.use(cookieParser());
 app.use(cors(corsOpts));
 app.use(limiter);
 app.use(express.json());
@@ -51,7 +53,7 @@ app.use(express.urlencoded({ extended: false }));
 morganBody(app, {
   prettify: NODE_ENV !== "production",
   theme: "darkened",
-  dateTimeFormat: "utc"
+  dateTimeFormat: "utc",
 });
 
 // API ROUTES

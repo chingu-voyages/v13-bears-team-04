@@ -1,104 +1,110 @@
-import React, { createContext, useContext, useReducer } from "react";
-import { setCookie, destroyCookie } from "nookies";
-import fetchIt from "../utils/fetch";
-import getCookieOptions from "../utils/cookies";
+import React, { createContext, useContext, useReducer, useEffect } from "react";
 import { UserType } from "../types/user";
 
-const initialUser = {
-  _id: "",
-  username: "",
-  email: "",
-  posts: [],
-  comments: [],
-  communities: {
-    member: [],
-    moderator: [],
-    administrator: [],
+type ReducerState = {
+  isAuthenticated: boolean;
+  token: string;
+  user: UserType;
+};
+
+const initialReducerState = {
+  isAuthenticated: false,
+  token: "",
+  user: {
+    _id: "",
+    username: "",
+    email: "",
+    posts: [],
+    comments: [],
+    communities: {
+      member: [],
+      moderator: [],
+      administrator: [],
+    },
+    createdOn: "",
   },
-  createdOn: "",
 };
 
-type Action = { type: "SET_USER"; user: UserType } | { type: "REMOVE_USER" };
+type ReducerAction =
+  | { type: "SET_USER"; token: string; user: UserType }
+  | { type: "REMOVE_USER" };
 
-type Dispatch = (action: Action) => void;
-
-type State = {
-  isAuthenticated: boolean;
-  user: User;
-  setUser: Dispatch;
-  login: (obj: Login) => void;
-  logout: (obj: Logout) => void;
-  signup: (obj: Signup) => void;
-};
-
-type ProviderTypes = {
-  isAuthenticated?: boolean;
-  user?: User;
-  children: React.ReactNode;
-};
-
-export type InitProps = {
-  isAuthenticated: boolean;
-  user: User;
-};
-
-const init: (props: InitProps) => InitProps = ({ isAuthenticated, user }) => ({
-  isAuthenticated,
-  user,
-});
-
-const reducer = (state: InitProps, action: Action): InitProps => {
+const reducer = (state: ReducerState, action: ReducerAction): ReducerState => {
   switch (action.type) {
     case "SET_USER":
-      return { ...state, isAuthenticated: true, user: action.user };
+      return {
+        ...state,
+        isAuthenticated: true,
+        token: action.token,
+        user: action.user,
+      };
     case "REMOVE_USER":
-      return { ...state, isAuthenticated: false, user: initialUser };
+      return initialReducerState;
     default:
       return state;
   }
 };
 
-type Email = string;
-type Password = string;
-type UserId = string;
-type Username = string;
-type User = UserType;
-
 type Login = {
-  username: Username;
-  password: Password;
-};
-
-type Logout = {
-  userId: UserId;
+  username: string;
+  password: string;
 };
 
 type Signup = {
-  username: Username;
-  password: Password;
-  email: Email;
+  username: string;
+  password: string;
+  email: string;
+};
+
+type UseUserSetterState = ReducerState & {
+  setUser: (action: ReducerAction) => void;
+  login: (obj: Login) => void;
+  logout: () => void;
+  signup: (obj: Signup) => void;
 };
 
 // custom auth hook
-function useUserSetter(initUser: InitProps): State {
-  const [{ isAuthenticated, user }, setUser] = useReducer(
-    reducer,
-    initUser,
-    init
-  );
+function useUserSetter(): UseUserSetterState {
+  const [state, setUser] = useReducer(reducer, initialReducerState);
+  const { isAuthenticated, user, token } = state;
+
+  // on mounting we'll check if there was a user previously logged ...
+  // ... in through cookies and if valid, log them back in
+  useEffect(() => {
+    async function checkForUser() {
+      try {
+        const resp = await fetch("/api/verify");
+
+        const data = await resp.json();
+        if (!resp.ok) throw data;
+
+        const { token, user } = data;
+        setUser({ type: "SET_USER", token, user });
+      } catch (err) {
+        console.log(err);
+      }
+    }
+
+    checkForUser();
+  }, []);
 
   // logs user in, if successful
   // returns a success or error message string
   async function login({ username, password }: Login): Promise<string> {
     try {
-      const { sid, ...foundUser } = await fetchIt("/user/login", {
+      const resp = await fetch("/api/login", {
         method: "POST",
         body: JSON.stringify({ username, password }),
+        headers: { "Content-Type": "application/json" },
       });
-      // if successful, set cookie and user
-      setCookie(null, "sid", sid, getCookieOptions());
-      setUser({ type: "SET_USER", user: foundUser });
-      return `Success! Welcome back ${foundUser.username}`;
+
+      const data = await resp.json();
+      if (!resp.ok) throw data;
+
+      const { token, user } = data;
+      setUser({ type: "SET_USER", token, user });
+
+      return `Success! Welcome back ${user.username}`;
     } catch (err) {
       return err.message;
     }
@@ -106,16 +112,19 @@ function useUserSetter(initUser: InitProps): State {
 
   // logs a user out and deletes session cookie, if successful
   // returns a success or error message string
-  async function logout({ userId }: Logout): Promise<string> {
+  async function logout(): Promise<string> {
     try {
-      await fetchIt("/user/logout", {
+      const resp = await fetch("/api/logout", {
         method: "POST",
-        body: JSON.stringify({ userId }),
-        // ctx: {},
+        body: JSON.stringify({ token }),
+        headers: { "Content-Type": "application/json" },
       });
-      // if successful, set cookie and user
-      destroyCookie(null, "sid", {});
+
+      const data = await resp.json();
+      if (!resp.ok) throw data;
+
       setUser({ type: "REMOVE_USER" });
+
       return "Logged out successfully";
     } catch (err) {
       return err.message;
@@ -130,37 +139,40 @@ function useUserSetter(initUser: InitProps): State {
     email,
   }: Signup): Promise<string> {
     try {
-      const { sid, ...newUser } = await fetchIt("/user/signup", {
+      const resp = await fetch("/api/signup", {
         method: "POST",
         body: JSON.stringify({ username, password, email }),
+        headers: { "Content-Type": "application/json" },
       });
-      // if successful, set cookie and user
-      setCookie(null, "sid", sid, getCookieOptions());
-      setUser({ type: "SET_USER", user: newUser });
+
+      const data = await resp.json();
+      if (!resp.ok) throw data;
+
+      const { token, user } = data;
+      setUser({ type: "SET_USER", token, user });
+
       return "Success! Welcome to our Reddit... clone";
     } catch (err) {
       return err.message;
     }
   }
 
-  return { isAuthenticated, user, setUser, login, logout, signup };
+  return { isAuthenticated, user, setUser, login, logout, signup, token };
 }
 
-const UserContext = createContext({} as State);
+const UserContext = createContext({} as UseUserSetterState);
+
+type ProviderTypes = {
+  children: React.ReactNode;
+};
 
 // used to wrap all components in _app.js
-export const UserProvider = ({
-  children,
-  isAuthenticated = false,
-  user = initialUser,
-}: ProviderTypes): JSX.Element => {
-  const userObj = useUserSetter({ isAuthenticated, user });
+export const UserProvider = ({ children }: ProviderTypes): JSX.Element => {
+  const user = useUserSetter();
 
-  return (
-    <UserContext.Provider value={userObj}>{children}</UserContext.Provider>
-  );
+  return <UserContext.Provider value={user}>{children}</UserContext.Provider>;
 };
 
 // can use this hook in any file to get our user and auth functions
 // eg) const { user, setUser, login, logout, signup } = useUser()
-export const useUser = (): State => useContext(UserContext);
+export const useUser = (): UseUserSetterState => useContext(UserContext);

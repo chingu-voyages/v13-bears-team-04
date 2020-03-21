@@ -25,6 +25,7 @@ Submit.getInitialProps = async ctx => {
 
   try {
     const foundCommunity = await fetchIt(`/community/${name}`);
+    // eslint-disable-next-line no-throw-literal
     if (!foundCommunity) throw "";
     communityId = foundCommunity._id;
     communityName = foundCommunity.name;

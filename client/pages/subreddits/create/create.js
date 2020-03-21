@@ -14,7 +14,7 @@ import fetchIt from "../../../utils/fetch";
 export default function Create() {
   useForceSignIn();
 
-  const { user, setUser } = useUser();
+  const { user, setUser, token } = useUser();
   const { msg, status, setMessageBox, resetMessageBox } = useMessageBox();
 
   // the following are used to create a community
@@ -36,7 +36,7 @@ export default function Create() {
         isOver18,
         userId: user._id,
       });
-      const options = { method: "POST", body, ctx: {} };
+      const options = { method: "POST", body, token };
       const data = await fetchIt("/community", options);
       const { newCommunity, updatedUser } = data;
       // update the current user context

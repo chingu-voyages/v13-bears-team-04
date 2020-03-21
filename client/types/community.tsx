@@ -20,3 +20,26 @@ export type CommunityType = {
   createdOn: string;
   lastUpvoted: string;
 };
+
+export const initialCommunity: CommunityType = {
+  users: {
+    members: [],
+    moderators: [],
+    administrators: [],
+  },
+  rules: [],
+  posts: [],
+  communitiesRelated: [],
+  topics: [],
+  theme: {
+    "--community-theme-main": "",
+    "--community-theme-text": "",
+  },
+  _id: "",
+  name: "",
+  description: "",
+  communityType: "public",
+  isOver18: false,
+  createdOn: "",
+  lastUpvoted: "",
+};

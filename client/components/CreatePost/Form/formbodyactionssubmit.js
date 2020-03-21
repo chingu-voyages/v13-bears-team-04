@@ -11,7 +11,7 @@ import fetchIt from "../../../utils/fetch";
 
 export default function SubmitFormBodyActionsSubmit() {
   const { state } = useCreatePost();
-  const { user, setUser } = useUser();
+  const { user, setUser, token } = useUser();
   const { status, msg, setMessageBox } = useMessageBox();
 
   async function handleSubmit() {
@@ -29,8 +29,9 @@ export default function SubmitFormBodyActionsSubmit() {
         isSpoiler: state.isSpoiler,
         author: user._id,
       });
-      const options = { method: "POST", body, ctx: {} };
+      const options = { method: "POST", body, token };
       const data = await fetchIt(`/posts/${state.communityId}`, options);
+
       const { postId, communityName, updatedUser } = data;
       // update the current user context
       setUser(updatedUser);

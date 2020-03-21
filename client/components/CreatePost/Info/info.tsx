@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import CommunityAbout from "../../ViewCommunity/communityabout";
 import CommunityRules from "../../ViewCommunity/communityrules";
-import { CommunityType } from "../../../types/community";
+import { CommunityType, initialCommunity } from "../../../types/community";
 
 import { useCreatePost } from "../../../contexts/createpost";
 import { useSetCSSVariable } from "../../../hooks";
@@ -21,7 +21,7 @@ export default function Info() {
     async function fetchCommunityInfo() {
       try {
         const community = await fetchIt(`/community/${communityName}`);
-        if (!community) throw "";
+        if (!community) throw new Error("Error, fetching community");
         setCommunityInfo(community);
       } catch (err) {
         console.log(err.message);
@@ -52,26 +52,3 @@ export default function Info() {
     </>
   );
 }
-
-const initialCommunity = {
-  users: {
-    members: [],
-    moderators: [],
-    administrators: [],
-  },
-  rules: [],
-  posts: [],
-  communitiesRelated: [],
-  topics: [],
-  theme: {
-    "--community-theme-main": "",
-    "--community-theme-text": "",
-  },
-  _id: "",
-  name: "",
-  description: "",
-  communityType: "public",
-  isOver18: false,
-  createdOn: "",
-  lastUpvoted: "",
-};

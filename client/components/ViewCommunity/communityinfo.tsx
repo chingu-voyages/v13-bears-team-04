@@ -19,7 +19,7 @@ export default function CommunityInfo({
   userMemberLevel,
   setMessageBox,
 }: Props): JSX.Element {
-  const { isAuthenticated, user, setUser } = useUser();
+  const { isAuthenticated, user, setUser, token } = useUser();
   const { setAuthPopup } = useAuthPopup();
 
   async function handleMembership(): Promise<void> {
@@ -31,7 +31,7 @@ export default function CommunityInfo({
     // reusable values
     const baseURL = `/community/${communityId}/users`;
     const body = JSON.stringify({ userId: user._id });
-    const opts = { body };
+    const opts = { body, token };
 
     try {
       // leave the community

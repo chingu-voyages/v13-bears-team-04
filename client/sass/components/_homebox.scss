@@ -5,6 +5,8 @@
   border-radius: 0.5rem;
   font-size: 1.2rem;
   margin-bottom: 16px;
+  box-sizing: border-box;
+  border: 1px solid #d7d7d7;
 
   .homebox {
     &__banner {

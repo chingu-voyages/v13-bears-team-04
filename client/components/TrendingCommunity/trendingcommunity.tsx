@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import Link from "next/link";
+
 import Button from "../Button";
 import { useAuthPopup } from "../../contexts/authpopup";
 import { useUser } from "../../contexts/user";
@@ -10,6 +12,8 @@ import { LogoIcon } from "../../svgs";
 export default function TrendingCommunities() {
   const { isAuthenticated } = useUser();
   const { setAuthPopup } = useAuthPopup();
+
+  const [isLoading, setLoader] = useState(true);
   const [communities, setCommunities] = useState<CommunityType[]>([]);
 
   useEffect(() => {
@@ -20,7 +24,9 @@ export default function TrendingCommunities() {
       } catch (err) {
         console.log(err);
       }
+      setLoader(false);
     };
+
     getCommunities();
   }, []);
 
@@ -42,35 +48,40 @@ export default function TrendingCommunities() {
   }
 
   return (
-    <div className="trending-community u-margin-bottom-small u-margin-top-small">
+    <div className="trending-community">
       <p className="trending-community__headline">Trending communities</p>
-      {communities.map(({ _id, name, theme, users }) => {
-        return (
-          <div key={_id}>
-            <div className="trending-community__row">
-              <LogoIcon
-                primary={theme["--community-theme-main"]}
-                secondary={theme["--community-theme-text"]}
-                className="growing-communities__row__image"
-              />
-              <div className="trending-community__row__subreddit-info">
-                <p className="trending-community__subreddit-info__sub-info-1">
-                  {name}
-                </p>
-                <p className="trending-community__subreddit-info__sub-info-2">
-                  {`${users.members.length}k members`}
-                </p>
-              </div>
-              <Button
-                cx="trending-community__join-btn"
-                handleClick={() => handleClick(_id)}
-                text="Join"
-                size="tight"
-              />
-            </div>
-          </div>
-        );
-      })}
+
+      <div className="trending-community__container">
+        {isLoading
+          ? "Loading..."
+          : communities.map(({ _id, name, theme, users }) => {
+              return (
+                <div key={_id} className="trending-community__row">
+                  <div className="trending-community__row__info">
+                    <LogoIcon
+                      primary={theme["--community-theme-main"]}
+                      secondary={theme["--community-theme-text"]}
+                      className="trending-community__row__info__image"
+                    />
+
+                    <div className="trending-community__row__info__text">
+                      <Link href={`/r/${name}`}>
+                        <a>r/{name}</a>
+                      </Link>
+                      <p>{`${users.members.length}k members`}</p>
+                    </div>
+                  </div>
+
+                  <Button
+                    cx="trending-community__join-btn"
+                    handleClick={() => handleClick(_id)}
+                    text="Join"
+                    size="tight"
+                  />
+                </div>
+              );
+            })}
+      </div>
     </div>
   );
 }

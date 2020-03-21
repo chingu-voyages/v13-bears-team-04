@@ -1,19 +1,15 @@
-import fetch from "isomorphic-unfetch";
 import cookieWrapper, { NextApiFunction } from "../../utils/cookies";
+import fetchIt from "../../utils/fetch";
 
 const logout: NextApiFunction = async (req, res) => {
   try {
-    const { token } = req.body;
+    const token = req.headers.authorization?.split(" ")[1];
+    if (!token) throw new Error("Missing Token");
 
-    const resp = await fetch("http://localhost:3000/api/user/logout", {
+    const data = await fetchIt("/user/logout", {
       method: "POST",
-      headers: { Authorization: `Bearer ${token}` },
+      token,
     });
-
-    const data = await resp.json();
-    // if there's was an error, throw it
-    if (!resp.ok) throw data;
-    // otherwise return the results
 
     res.cookie("sid", "", { expires: new Date() });
     res.status(200).json({ message: data.message });

@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useReducer, useEffect } from "react";
 import { UserType } from "../types/user";
+import fetchIt from "../utils/fetch";
 
 type ReducerState = {
   isAuthenticated: boolean;
@@ -73,11 +74,7 @@ function useUserSetter(): UseUserSetterState {
   useEffect(() => {
     async function checkForUser() {
       try {
-        const resp = await fetch("/api/verify");
-
-        const data = await resp.json();
-        if (!resp.ok) throw data;
-
+        const data = await fetchIt("/api/verify", {}, window.location.origin);
         const { token, user } = data;
         setUser({ type: "SET_USER", token, user });
       } catch (err) {
@@ -92,14 +89,11 @@ function useUserSetter(): UseUserSetterState {
   // returns a success or error message string
   async function login({ username, password }: Login): Promise<string> {
     try {
-      const resp = await fetch("/api/login", {
-        method: "POST",
-        body: JSON.stringify({ username, password }),
-        headers: { "Content-Type": "application/json" },
-      });
-
-      const data = await resp.json();
-      if (!resp.ok) throw data;
+      const data = await fetchIt(
+        "/api/login",
+        { method: "POST", body: JSON.stringify({ username, password }) },
+        window.location.origin
+      );
 
       const { token, user } = data;
       setUser({ type: "SET_USER", token, user });
@@ -114,14 +108,11 @@ function useUserSetter(): UseUserSetterState {
   // returns a success or error message string
   async function logout(): Promise<string> {
     try {
-      const resp = await fetch("/api/logout", {
-        method: "POST",
-        body: JSON.stringify({ token }),
-        headers: { "Content-Type": "application/json" },
-      });
-
-      const data = await resp.json();
-      if (!resp.ok) throw data;
+      await fetchIt(
+        "/api/logout",
+        { method: "POST", token },
+        window.location.origin
+      );
 
       setUser({ type: "REMOVE_USER" });
 
@@ -139,14 +130,11 @@ function useUserSetter(): UseUserSetterState {
     email,
   }: Signup): Promise<string> {
     try {
-      const resp = await fetch("/api/signup", {
-        method: "POST",
-        body: JSON.stringify({ username, password, email }),
-        headers: { "Content-Type": "application/json" },
-      });
-
-      const data = await resp.json();
-      if (!resp.ok) throw data;
+      const data = await fetchIt(
+        "/api/signup",
+        { method: "POST", body: JSON.stringify({ username, password, email }) },
+        window.location.origin
+      );
 
       const { token, user } = data;
       setUser({ type: "SET_USER", token, user });
@@ -157,14 +145,12 @@ function useUserSetter(): UseUserSetterState {
     }
   }
 
-  return { isAuthenticated, user, setUser, login, logout, signup, token };
+  return { isAuthenticated, token, user, setUser, login, logout, signup };
 }
 
 const UserContext = createContext({} as UseUserSetterState);
 
-type ProviderTypes = {
-  children: React.ReactNode;
-};
+type ProviderTypes = { children: React.ReactNode };
 
 // used to wrap all components in _app.js
 export const UserProvider = ({ children }: ProviderTypes): JSX.Element => {
@@ -174,5 +160,5 @@ export const UserProvider = ({ children }: ProviderTypes): JSX.Element => {
 };
 
 // can use this hook in any file to get our user and auth functions
-// eg) const { user, setUser, login, logout, signup } = useUser()
+// eg) const { isAuthenticated, token, user, setUser, login, logout, signup } = useUser()
 export const useUser = (): UseUserSetterState => useContext(UserContext);

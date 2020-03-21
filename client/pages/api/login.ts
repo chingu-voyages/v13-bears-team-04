@@ -1,20 +1,14 @@
-import fetch from "isomorphic-unfetch";
 import cookieWrapper, { NextApiFunction } from "../../utils/cookies";
+import fetchIt from "../../utils/fetch";
 
 const login: NextApiFunction = async (req, res) => {
   try {
     const { username, password } = req.body;
 
-    const resp = await fetch("http://localhost:3000/api/user/login", {
+    const data = await fetchIt("/user/login", {
       method: "POST",
       body: JSON.stringify({ username, password }),
-      headers: { "Content-Type": "application/json" },
     });
-
-    const data = await resp.json();
-    // if there's was an error, throw it
-    if (!resp.ok) throw data;
-    // otherwise return the results
 
     const { sid, token, user } = data;
     res.cookie("sid", sid);

@@ -1,15 +1,15 @@
 import React from "react";
 import Button from "../Button";
-import FaqDropdown from "../FaqDropdown";
-import StaticFooter from "../StaticFooter";
-import { Premium } from "../../svgs";
+import Faqs from "./premiumfaqs";
+import Footer from "./premiumfooter";
+import { Premium as PremiumSVG } from "../../svgs";
 
-export default function PremiumHero() {
+export default function Premium() {
   return (
     <div className="premium">
       <div className="premium__hero">
         <div className="premium__info">
-          <Premium className="premium__image" />
+          <PremiumSVG className="premium__image" />
           <p>
             Reddit Premium gives you an ad-free experience, special benefits,
             and directly supports Reddit. The more Reddit is user-supported, the
@@ -46,13 +46,11 @@ export default function PremiumHero() {
               <a>REDEEM A GIFT CODE</a>
             </h3>
           </div>
-          <div>
-            <h2>Reddit Premium FAQ</h2>
-          </div>
-          <FaqDropdown />
+
+          <Faqs />
         </div>
       </div>
-      <StaticFooter />
+      <Footer />
     </div>
   );
 }

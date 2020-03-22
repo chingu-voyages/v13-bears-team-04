@@ -30,9 +30,3 @@ export default function Index() {
     </>
   );
 }
-
-// ok we'll try like this
-// cause you're internet is a potato
-//
-
-//      r/[communityName]/[postId]

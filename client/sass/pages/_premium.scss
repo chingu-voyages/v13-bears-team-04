@@ -1,0 +1,180 @@
+.premium {
+  background-color: $white;
+
+  &__hero {
+    background-image: url(https://www.redditstatic.com/desktop2x/img/gold/premium-hero-g.jpg);
+    box-sizing: border-box;
+    padding-top: 11rem;
+    padding-left: 5rem;
+    margin-top: 5rem;
+    min-height: 544px;
+    background-repeat: no-repeat;
+    background-size: auto 100%;
+    background-color: black;
+    color: white;
+  }
+
+  &__info {
+    display: block;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin: 0 0 0 8rem;
+    max-width: 50rem;
+    font-size: 18px;
+    line-height: 28px;
+  }
+
+  &__subsection {
+    padding: 5rem 0;
+
+    &__header {
+      text-align: center;
+    }
+  }
+
+  &__benefits {
+    &__text-align {
+      text-align: center;
+    }
+  }
+
+  &__benefits {
+    text-align: center;
+
+    &__info {
+      display: flex;
+      flex: 1;
+      flex-direction: column;
+      align-items: center;
+      height: 100%;
+    }
+
+    &__list {
+      font-size: 22px;
+      font-weight: 500;
+      line-height: 26px;
+      text-align: left;
+      list-style: none;
+    }
+
+    &__point {
+      margin-top: 2rem;
+    }
+
+    &__gift {
+      position: absolute;
+      top: 70rem;
+      left: 35rem;
+      padding: 0.5rem;
+      border: solid 2px white;
+      border-radius: 0.2rem;
+      background-color: #ffd635;
+      vertical-align: baseline;
+      font-size: 16px;
+      font-weight: 700;
+    }
+
+    &__image {
+      background-image: url(https://www.redditstatic.com/desktop2x/img/gold/crest-with-background.jpg);
+      width: 331px;
+      height: 100%;
+      background-size: cover;
+      background-repeat: no-repeat;
+      border-radius: 0 4px 4px 0;
+    }
+  }
+
+  &__faqs {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+
+    &__header {
+      margin-bottom: 36px;
+      font-weight: 600;
+      font-size: 2.2rem;
+      line-height: 2.6rem;
+      text-align: center;
+    }
+
+    &__container {
+      width: 100%;
+      max-width: 660px;
+      margin: auto;
+    }
+
+    &__item {
+      border-bottom: 1px solid #edeff1;
+      font-size: 1.4rem;
+      text-align: left;
+      color: #1c1c1c;
+      width: 100%;
+
+      &__question {
+        font-weight: bold;
+        width: 100%;
+        background-color: $white;
+        border: none;
+        padding: 20px 24px;
+        cursor: pointer;
+        display: flex;
+        justify-content: space-between;
+
+        &:focus,
+        &:active {
+          outline: none;
+        }
+      }
+
+      &__answer {
+        display: none;
+        margin: 0 24px 24px;
+
+        &--open {
+          display: block;
+        }
+      }
+    }
+  }
+
+  &__footer {
+    padding: 3rem 1.25rem 2rem;
+    background: #142736;
+    color: white;
+    font-size: 14px;
+    line-height: 21px;
+
+    &__links {
+      box-sizing: border-box;
+      max-width: 770px;
+      margin: 0 auto;
+    }
+
+    &__pages {
+      display: flex;
+      flex-direction: row;
+      align-items: stretch;
+      margin-left: 3rem;
+      margin-bottom: 44px;
+
+      &__column {
+        margin-right: 8rem;
+        flex: 1 1 auto;
+        text-align: left;
+        list-style: none;
+      }
+    }
+
+    &__policy {
+      list-style: none;
+      text-align: center;
+
+      &__item {
+        display: inline-block;
+        vertical-align: top;
+        margin: 0 8px;
+      }
+    }
+  }
+}

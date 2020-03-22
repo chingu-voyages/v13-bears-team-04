@@ -9,10 +9,12 @@ import SortView from "../components/SortView";
 import TrendingCommunity from "../components/TrendingCommunities";
 import ToTopButton from "../components/ToTopButton";
 import FooterBox from "../components/FooterBox";
+import PageHead from "../components/PageHead";
 
 export default function Index() {
   return (
     <>
+      <PageHead title="reddit: the front page of the internet" />
       <SortView />
       <Layout>
         <Layout.Column>

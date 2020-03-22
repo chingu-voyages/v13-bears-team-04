@@ -2,11 +2,13 @@ import React from "react";
 import Button from "../Button";
 import Faqs from "./premiumfaqs";
 import Footer from "./premiumfooter";
+import PageHead from "../PageHead";
 import { Premium as PremiumSVG } from "../../svgs";
 
 export default function Premium() {
   return (
     <div className="premium">
+      <PageHead title="Reddit Premium" />
       <div className="premium__hero">
         <div className="premium__info">
           <PremiumSVG className="premium__image" />

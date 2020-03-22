@@ -21,7 +21,7 @@ const TEST_PROD = process.env.TEST_PROD;
 app.set("trust proxy", 1);
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000,
-  max: 100,
+  max: 1000,
 });
 
 // MONGO CONNECTION

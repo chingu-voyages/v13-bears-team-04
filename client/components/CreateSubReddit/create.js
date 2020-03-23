@@ -40,7 +40,7 @@ export default function Create() {
       const data = await fetchIt("/community", options);
       const { newCommunity, updatedUser } = data;
       // update the current user context
-      setUser(updatedUser);
+      setUser({ type: "SET_USER", token, user: updatedUser });
       // send user to new community
       Router.push(`/r/${newCommunity.name}`);
     } catch (err) {

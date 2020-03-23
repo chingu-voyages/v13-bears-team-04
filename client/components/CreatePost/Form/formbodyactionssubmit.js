@@ -34,7 +34,7 @@ export default function SubmitFormBodyActionsSubmit() {
 
       const { postId, communityName, updatedUser } = data;
       // update the current user context
-      setUser(updatedUser);
+      setUser({ type: "SET_USER", token, user: updatedUser });
       // send user to new post
       Router.push(`/r/${communityName}/${postId}`);
     } catch (err) {

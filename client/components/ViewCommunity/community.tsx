@@ -49,7 +49,7 @@ const Community: NextPage<Props> = ({ error, community }) => {
             communityName={community.name}
             userMemberLevel={userMemberLevel}
           />
-          <PostList endpoint={`/posts/${community._id}`} />
+          <PostList endpoint={`/posts/community/${community._id}`} />
         </Layout.Column>
 
         <Layout.Column>

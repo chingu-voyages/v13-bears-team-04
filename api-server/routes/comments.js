@@ -1,17 +1,17 @@
 const createError = require("http-errors");
 const router = require("express").Router();
-const { Comment } = require("../models");
-const { checkSession } = require("../middleware");
+const { Comment, Post } = require("../models");
+const { verifyToken } = require("../middleware");
 
 // ===== ROUTES ===== //
 
+router.post("/", verifyToken, createCommentOnPost);
 router.get("/:commentId", getOneComment);
-router.post("/onComment/:commentId", createCommentOnComment);
-router.get("/:postId", getPostComments);
-router.post("/onPost/:postId", checkSession, createCommentOnPost);
-router.put("/:commentId", checkSession, editComment);
-router.delete("/:commentId", checkSession, deleteComment);
-router.post("/:commentId/report", checkSession, reportComment);
+router.post("/onComment/:commentId", verifyToken, createCommentOnComment);
+router.get("/post/:postId", getPostComments);
+router.put("/:commentId", verifyToken, editComment);
+router.delete("/:commentId", verifyToken, deleteComment);
+router.post("/:commentId/report", verifyToken, reportComment);
 
 // ===== CONTROLLERS ===== //
 
@@ -32,7 +32,7 @@ async function getOneComment(req, res, next) {
       .populate({ path: "owner", select: "username communities" })
       .populate("comments");
     if (!comment) {
-      throw createError(400, `Couldn't find comment (${commentId})`);
+      throw createError(404, `Couldn't find comment (${commentId})`);
     }
     res.status(200).json(comment);
   } catch (err) {
@@ -46,6 +46,9 @@ async function createCommentOnComment(req, res, next) {
     const { commentId } = req.params;
     const { postId, content } = req.body;
 
+    const post = await Post.findById(postId);
+    if (!post) throw createError(404, `Couldn't find post (${postId})`);
+
     const newComment = await new Comment({
       content,
       postId,
@@ -54,6 +57,9 @@ async function createCommentOnComment(req, res, next) {
       isOnComment: true,
     });
     await newComment.save();
+
+    post.comments.push(newComment._id);
+    await post.save();
 
     user.comments.push(newComment._id);
     await user.save();
@@ -67,8 +73,10 @@ async function createCommentOnComment(req, res, next) {
 async function createCommentOnPost(req, res, next) {
   try {
     const { user } = res.locals;
-    const { postId } = req.params;
-    const { content } = req.body;
+    const { postId, content } = req.body;
+
+    const post = await Post.findById(postId);
+    if (!post) throw createError(404, `Couldn't find post (${postId})`);
 
     const newComment = await new Comment({
       content,
@@ -77,6 +85,9 @@ async function createCommentOnPost(req, res, next) {
       isOnPost: true,
     });
     await newComment.save();
+
+    post.comments.push(newComment._id);
+    await post.save();
 
     user.comments.push(newComment._id);
     await user.save();

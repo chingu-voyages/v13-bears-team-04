@@ -9,18 +9,20 @@ type Props = {
   isHorizontal?: boolean;
   cxContainer?: string;
   cxInner?: string;
+  hideNum?: boolean;
 };
 
 export default function Votes({
   vote = "",
   isHorizontal = false,
-  votes,
+  // votes,
   cxContainer,
   cxInner,
+  hideNum,
 }: Props): JSX.Element {
   // need to get the difference between up and ...
   // ... down votes and pass it to 'shrinkNum'
-  console.log(votes)
+  // console.log(votes)
   const score = shrinkNum(232323);
   const flexDirection = isHorizontal ? "row" : "column";
   const colorUp = vote === "upvoted" ? "#ff6314" : "";
@@ -35,9 +37,13 @@ export default function Votes({
           color={colorUp}
           onClick={(): void => console.log("upVote")}
         />
-        <span style={{ color: colorUp || colorDown }} className="votes__text">
-          {score}
-        </span>
+
+        {!hideNum && (
+          <span style={{ color: colorUp || colorDown }} className="votes__text">
+            {score}
+          </span>
+        )}
+
         <FAIcon
           icon="arrow-down"
           className="votes__down"

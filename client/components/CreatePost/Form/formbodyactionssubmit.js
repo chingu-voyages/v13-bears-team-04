@@ -29,8 +29,11 @@ export default function SubmitFormBodyActionsSubmit() {
         isSpoiler: state.isSpoiler,
         author: user._id,
       });
-      const options = { method: "POST", body, token };
-      const data = await fetchIt(`/posts/${state.communityId}`, options);
+      const data = await fetchIt(`/posts/community/${state.communityId}`, {
+        method: "POST",
+        body,
+        token,
+      });
 
       const { postId, communityName, updatedUser } = data;
       // update the current user context

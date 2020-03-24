@@ -44,6 +44,10 @@ import {
   faListUl,
   faQuoteLeft,
   faSquare,
+  faAward,
+  faFlag,
+  faTrashAlt,
+  faPencilAlt,
   faTimes,
 } from "@fortawesome/free-solid-svg-icons";
 
@@ -88,5 +92,9 @@ library.add(
   faListUl,
   faQuoteLeft,
   faSquare,
+  faAward,
+  faFlag,
+  faTrashAlt,
+  faPencilAlt,
   faTimes
 );

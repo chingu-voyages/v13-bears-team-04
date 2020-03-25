@@ -20,6 +20,7 @@
 
   &__left {
     width: 40px;
+    min-width: 40px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -41,7 +42,7 @@
 
   &__nested {
     display: flex;
-    margin-left: 18px;
+    margin-left: 19px;
     margin-top: -10px;
 
     &__cards {

@@ -25,7 +25,7 @@ export const handleMembership = async (
         method: "DELETE",
         ...opts,
       });
-      setUser(updatedUser);
+      setUser({ type: "SET_USER", token, user: updatedUser });
       setMessageBox({
         msg: `You've successfully left your r/${title} family. Congrats.`,
         status: "success",
@@ -39,7 +39,7 @@ export const handleMembership = async (
         method: "POST",
         ...opts,
       });
-      setUser(updatedUser);
+      setUser({ type: "SET_USER", token, user: updatedUser });
       setMessageBox({
         msg: `Thanks for joining, r/${title}!`,
         status: "success",

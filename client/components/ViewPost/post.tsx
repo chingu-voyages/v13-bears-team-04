@@ -66,13 +66,10 @@ const Post: NextPage<Props> = ({ post, error }) => {
 };
 
 Post.getInitialProps = async (ctx: NextPageContext): Promise<Props> => {
-  const { communityName, postId } = ctx.query;
-  console.log(communityName);
+  const { postId } = ctx.query;
 
   try {
-    const posts = await fetchIt("/posts");
-    const [post] = posts.filter(({ _id }: { _id: string }) => postId === _id);
-    if (!post) throw post;
+    const post = await fetchIt(`/posts/${postId}`);
     return { post };
   } catch (err) {
     return { error: `Post not found. Please try again` };

@@ -1,18 +1,21 @@
+const createError = require("http-errors");
 const router = require("express").Router();
-const { Post, Community } = require("../models");
-const { checkSession } = require("../middleware");
+const { Post, Community, Comment } = require("../models");
+const { verifyToken } = require("../middleware");
 
 // ===== ROUTES ===== //
 
 router.get("/", getAllPosts);
-router.get("/:communityId", getCommunityPosts);
-router.post("/:communityId", checkSession, createPost);
+router.get("/:postId", getOnePost);
+router.get("/community/:communityId", getCommunityPosts);
+router.post("/community/:communityId", verifyToken, createPost);
 
 // ===== CONTROLLERS ===== //
 
 async function getOnePost(req, res, next) {
   try {
     const { postId } = req.params;
+
     const post = await Post.findById(postId)
       .populate({
         path: "author",
@@ -23,8 +26,19 @@ async function getOnePost(req, res, next) {
       .populate({
         path: "community",
         select: "name description users theme createdOn",
-      });
-    res.status(200).json(post);
+      })
+      .select({ comments: 0 })
+      .lean();
+    if (!post) throw createError(400, `Couldn't find post (${postId})`);
+
+    const comments = await Comment.find({ postId: post._id })
+      .populate({
+        path: "author",
+        select: "username",
+      })
+      .lean();
+
+    res.status(200).json({ ...post, comments });
   } catch (err) {
     next(err);
   }
@@ -32,7 +46,7 @@ async function getOnePost(req, res, next) {
 
 async function getAllPosts(_, res, next) {
   try {
-    const posts = await Post.find()
+    const allPosts = await Post.find()
       .populate({
         path: "author",
         select: "username -_id",
@@ -40,7 +54,14 @@ async function getAllPosts(_, res, next) {
       .populate({
         path: "community",
         select: "name theme description createdOn users",
-      });
+      })
+      .lean();
+
+    const posts = allPosts.map(({ comments, ...post }) => ({
+      ...post,
+      numOfComments: comments.length,
+    }));
+
     res.status(200).json(posts);
   } catch (err) {
     next(err);
@@ -50,7 +71,8 @@ async function getAllPosts(_, res, next) {
 async function getCommunityPosts(req, res, next) {
   try {
     const { communityId } = req.params;
-    const posts = await Post.find({ community: communityId })
+
+    const allCommunityPosts = await Post.find({ community: communityId })
       .populate({
         path: "author",
         select: "username -_id",
@@ -58,7 +80,14 @@ async function getCommunityPosts(req, res, next) {
       .populate({
         path: "community",
         select: "name theme -_id",
-      });
+      })
+      .lean();
+
+    const posts = allCommunityPosts.map(({ comments, ...post }) => ({
+      ...post,
+      numOfComments: comments.length,
+    }));
+
     res.status(200).json(posts);
   } catch (err) {
     next(err);

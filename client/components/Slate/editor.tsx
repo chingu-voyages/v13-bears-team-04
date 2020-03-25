@@ -1,4 +1,5 @@
 import React, { useMemo, useCallback } from "react";
+import clsx from "clsx";
 import { Node, createEditor } from "slate";
 import { withReact, Slate } from "slate-react";
 import { withHistory } from "slate-history";
@@ -10,6 +11,7 @@ import Toolbar from "./toolbar";
 import { useIsDesktop } from "../../hooks";
 
 type Props = {
+  cx?: string;
   isComment?: boolean;
   readOnly?: boolean;
   value: Node[];
@@ -18,10 +20,11 @@ type Props = {
 };
 
 export default function Editor({
+  cx,
   isComment = false,
   readOnly = false,
   value,
-  setValue = () => {},
+  setValue = () => undefined,
   handleCommentSubmit,
 }: Props) {
   // things needed and used in Slate
@@ -43,7 +46,7 @@ export default function Editor({
   const toolbar = <Toolbar {...toolbarProps} />;
 
   return (
-    <div className="slate slate__editor">
+    <div className={clsx("slate slate__editor", cx)}>
       <Slate editor={editor} value={value} onChange={handleChange}>
         {isDesktop ? (
           <>

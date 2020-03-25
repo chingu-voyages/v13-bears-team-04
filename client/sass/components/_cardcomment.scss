@@ -1,0 +1,40 @@
+.cardcomment {
+  display: flex;
+  width: 100%;
+  margin: 10px 0;
+
+  &:hover {
+    .cardcomment__connecter {
+      background-color: $blue;
+    }
+  }
+
+  &__left {
+    width: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .cardcomment {
+      &__votes {
+        margin-bottom: 3px;
+      }
+
+      &__connecter {
+        content: "";
+        height: 100%;
+        width: 2px;
+        background-color: #edeff1;
+        transition: all 0.15s;
+      }
+    }
+  }
+
+  &__right {
+    width: 100%;
+
+    .slate.slate__render > .slate__body {
+      padding: 0 3px;
+    }
+  }
+}

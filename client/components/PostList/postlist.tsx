@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
-import PostCard from "../PostCard";
+import { CardPost } from "../Cards";
 import fetchIt from "../../utils/fetch";
 import { PostType } from "../../types/post";
 
@@ -13,8 +13,8 @@ export default function PostList({ endpoint }: Props): JSX.Element {
   const [isError, setError] = useState(false);
   const [isLoading, setLoader] = useState(true);
 
-  const { pathname } = useRouter();
-  const onCommunityPage = pathname.startsWith("/r/");
+  const { query } = useRouter();
+  const hideCommunityName = !!query.communityName && !!query.postId;
 
   useEffect(() => {
     let canSet = true;
@@ -47,7 +47,13 @@ export default function PostList({ endpoint }: Props): JSX.Element {
   return (
     <div>
       {posts.map(post => (
-        <PostCard key={post._id} onCommunityPage={onCommunityPage} {...post} />
+        <CardPost
+          key={post._id}
+          {...post}
+          onPostPage={false}
+          hideCommunityName={hideCommunityName}
+          numOfComments={post.numOfComments}
+        />
       ))}
     </div>
   );

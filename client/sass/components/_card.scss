@@ -1,0 +1,86 @@
+.card {
+  &__info {
+    display: flex;
+    align-items: center;
+    line-height: 1.6rem;
+    font-size: 1.2rem;
+
+    > div:first-child {
+      margin-right: 4px;
+      color: #181c1a;
+    }
+
+    > div:not(:first-child) {
+      margin: 0 4px;
+      white-space: nowrap;
+    }
+
+    &__sub {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      &__svg {
+        height: 20px;
+        width: 20px;
+      }
+
+      &__text {
+        font-weight: bold;
+        margin-left: 4px;
+        text-decoration: none;
+        color: inherit;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+
+    &__user,
+    &__points,
+    &__date {
+      color: #787c7e;
+    }
+
+    &__period {
+      margin-left: 4px;
+      margin-right: -4px;
+      color: #6b757c;
+      font-size: 6px;
+      vertical-align: middle;
+    }
+  }
+
+  &__actions {
+    margin: 0px 0 5px;
+    height: 30px;
+    color: #787c7e;
+    display: flex;
+    align-items: center;
+
+    &__option {
+      padding: 5px;
+      margin-right: 2px;
+      border-radius: 2px;
+      transition: 0.2s all;
+      font-size: 1.2rem;
+      background-color: inherit;
+      outline: none;
+      border: none;
+      color: inherit;
+      line-height: inherit;
+
+      &:not(.card__actions__option--disabled) {
+        cursor: pointer;
+        &:hover {
+          background-color: $grey;
+        }
+      }
+
+      svg {
+        margin-right: 4px;
+      }
+    }
+  }
+}

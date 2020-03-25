@@ -3,7 +3,7 @@ import fetch from "isomorphic-unfetch";
 const API_URL =
   process.env.NODE_ENV === "production"
     ? "https://chinguredditclone.herokuapp.com/api"
-    : "http://localhost:3000/api";
+    : "https://chinguredditclone.herokuapp.com/api";
 
 type GivenOptionsType = {
   method?: "GET" | "POST" | "PUT" | "DELETE";

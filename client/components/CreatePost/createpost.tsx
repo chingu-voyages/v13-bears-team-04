@@ -1,5 +1,6 @@
 import React from "react";
 
+import PageHead from "../PageHead";
 import FooterBox from "../FooterBox";
 import Form from "./Form";
 import Info from "./Info";
@@ -21,6 +22,7 @@ export default function CreatePost({ communityId, communityName }: Props) {
 
   return (
     <CreatePostProvider communityId={communityId} communityName={communityName}>
+      <PageHead title={`Submit to${communityName}`} />
       <Layout cx="submit-container">
         <Layout.Column cx="submit__left">
           <Form />

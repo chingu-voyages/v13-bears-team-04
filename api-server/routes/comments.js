@@ -29,7 +29,7 @@ async function getOneComment(req, res, next) {
   try {
     const { commentId } = req.params;
     const comment = await Comment.findById(commentId)
-      .populate({ path: "owner", select: "username communities" })
+      .populate({ path: "author", select: "username communities" })
       .populate("comments");
     if (!comment) {
       throw createError(404, `Couldn't find comment (${commentId})`);
@@ -56,6 +56,7 @@ async function createCommentOnComment(req, res, next) {
       author: user._id,
       isOnComment: true,
     });
+    newComment.populate({ path: "author", select: "username" }).execPopulate();
     await newComment.save();
 
     post.comments.push(newComment._id);
@@ -84,7 +85,9 @@ async function createCommentOnPost(req, res, next) {
       author: user._id,
       isOnPost: true,
     });
+    newComment.populate({ path: "author", select: "username" }).execPopulate();
     await newComment.save();
+    console.log(newComment);
 
     post.comments.push(newComment._id);
     await post.save();

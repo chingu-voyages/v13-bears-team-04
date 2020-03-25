@@ -3,17 +3,20 @@ import { Node } from "slate";
 import { Editor } from "../Slate";
 import fetchIt from "../../utils/fetch";
 import { useUser } from "../../contexts/user";
+import { CommentType } from "../../types/comment";
 
 type Props = {
   postId: string;
   commentId?: string;
   isOnComment?: boolean;
+  handleAddition: (newComment: CommentType) => void;
 };
 
 export default function CreateComment({
   postId,
   commentId,
   isOnComment,
+  handleAddition,
 }: Props) {
   const { token } = useUser();
 
@@ -34,7 +37,8 @@ export default function CreateComment({
         body,
       });
 
-      console.log(newComment);
+      handleAddition(newComment);
+      setContent([{ type: "paragraph", children: [{ text: "" }] }]);
     } catch (err) {
       console.log(err);
     }

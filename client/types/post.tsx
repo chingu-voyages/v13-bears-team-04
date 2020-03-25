@@ -30,6 +30,7 @@ export type PostType = {
   content: string;
   author: {
     username: string;
+    _id: string;
   };
   createdOn: string;
   lastModified: string;

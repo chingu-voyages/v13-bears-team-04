@@ -2,12 +2,17 @@ import React from "react";
 import AuthButtons from "../AuthButtons";
 import CreateComment from "../CreateComment";
 import { useUser } from "../../contexts/user";
+import { CommentType } from "../../types/comment";
 
 type Props = {
   postId: string;
+  handleAddition: (newComment: CommentType) => void;
 };
 
-export default function PostComment({ postId }: Props): JSX.Element {
+export default function PostComment({
+  postId,
+  handleAddition,
+}: Props): JSX.Element {
   const { isAuthenticated, user } = useUser();
 
   return (
@@ -17,7 +22,7 @@ export default function PostComment({ postId }: Props): JSX.Element {
           <div className="viewpost__comment__as">
             Comment as <span>{user.username}</span>
           </div>
-          <CreateComment postId={postId} />
+          <CreateComment postId={postId} handleAddition={handleAddition} />
         </>
       ) : (
         <div className="viewpost__comment__authneeded">

@@ -47,10 +47,12 @@ export default function CardInfo({
       </div>
 
       {/* Shows the voting score */}
-      <div className="card__info__points">
-        {`${shrinkNum(points)} point${points === 1 ? "" : "s"}`}
-        <span className="card__info__period">•</span>
-      </div>
+      {isComment && (
+        <div className="card__info__points">
+          {`${shrinkNum(points)} point${points === 1 ? "" : "s"}`}
+          <span className="card__info__period">•</span>
+        </div>
+      )}
 
       {/* Shows a date string like 2 days ago or 1 hour ago */}
       <div className="card__info__date">{makeDateAgo(createdOn)}</div>

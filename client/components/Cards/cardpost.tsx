@@ -79,6 +79,8 @@ export default function PostCard({
           <CardPostActions
             numOfComments={numOfComments}
             onPostPage={onPostPage}
+            postId={_id}
+            authorId={author._id}
           />
         </div>
       </div>

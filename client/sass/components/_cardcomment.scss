@@ -4,9 +4,18 @@
   margin: 10px 0;
 
   &:hover {
-    .cardcomment__connecter {
+    .cardcomment__connecter,
+    + .cardcomment__nested > .cardcomment__connecter {
       background-color: $blue;
     }
+  }
+
+  &__connecter {
+    content: "";
+    height: 100%;
+    width: 2px;
+    background-color: #edeff1;
+    transition: all 0.15s;
   }
 
   &__left {
@@ -19,14 +28,6 @@
       &__votes {
         margin-bottom: 3px;
       }
-
-      &__connecter {
-        content: "";
-        height: 100%;
-        width: 2px;
-        background-color: #edeff1;
-        transition: all 0.15s;
-      }
     }
   }
 
@@ -35,6 +36,24 @@
 
     .slate.slate__render > .slate__body {
       padding: 0 3px;
+    }
+  }
+
+  &__nested {
+    display: flex;
+    margin-left: 18px;
+    margin-top: -10px;
+
+    &__cards {
+      width: 100%;
+
+      .cardcomment:last-child {
+        margin-bottom: 0px;
+      }
+    }
+
+    > .cardcomment__connecter {
+      height: auto;
     }
   }
 }

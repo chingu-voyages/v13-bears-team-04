@@ -4,7 +4,7 @@ import { useAuthPopup } from "../contexts/authpopup";
 import { useUser } from "../contexts/user";
 
 export default function useForceSignIn(maxCount = 3) {
-  const { user } = useUser();
+  const { isAuthenticated } = useUser();
   const { authPopupName, setAuthPopup } = useAuthPopup();
 
   // used to redirect user if they have donkey brains
@@ -15,7 +15,7 @@ export default function useForceSignIn(maxCount = 3) {
     let id: number | undefined;
     // if the user isn't logged in, show the popup
     // if they close the popup, show it again
-    if (!user && !authPopupName) {
+    if (!isAuthenticated && !authPopupName) {
       // if the user closes the popup 3 times, send them back to the homepage
       if (timesClosed === maxCount) {
         setAuthPopup("");
@@ -28,5 +28,5 @@ export default function useForceSignIn(maxCount = 3) {
       }
     }
     return () => clearTimeout(id);
-  }, [authPopupName, user, maxCount]);
+  }, [authPopupName, isAuthenticated, maxCount]);
 }

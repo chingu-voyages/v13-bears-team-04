@@ -14,7 +14,7 @@ export default function PostList({ endpoint }: Props): JSX.Element {
   const [isLoading, setLoader] = useState(true);
 
   const { query } = useRouter();
-  const hideCommunityName = !!query.communityName && !!query.postId;
+  const hideCommunityName = !!query.communityName && !query.postId;
 
   useEffect(() => {
     let canSet = true;

@@ -52,22 +52,22 @@ export default function PostCard({
     <div className={cardCX}>
       <Votes votes={votes} cxContainer={voteCX} vote="" />
 
-      <div
-        tabIndex={0}
-        role="button"
-        onClick={goToPost}
-        onKeyPress={goToPost}
-        className="cardpost__link"
-      >
-        <div className={detailsCX}>
-          <CardInfo
-            hideCommunityName={hideCommunityName}
-            communityName={community.name}
-            authorName={author.username}
-            createdOn={createdOn}
-            theme={community.theme}
-          />
+      <div className={detailsCX}>
+        <CardInfo
+          hideCommunityName={hideCommunityName}
+          communityName={community.name}
+          authorName={author.username}
+          createdOn={createdOn}
+          theme={community.theme}
+        />
 
+        <div
+          tabIndex={0}
+          role="button"
+          onClick={goToPost}
+          onKeyPress={goToPost}
+          className="cardpost__link"
+        >
           <h3 className="cardpost__details__title">{title}</h3>
 
           <div className={contentCX}>

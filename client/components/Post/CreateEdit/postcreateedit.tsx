@@ -9,18 +9,20 @@ import Text from "./Text";
 
 import { useForceSignIn } from "../../../hooks";
 import { PostProvider } from "../postcontext";
+import { PostType } from "../../../types/post";
 
 type Props = {
-  communityId: string;
-  communityName: string;
+  post?: PostType;
+  communityId?: string;
+  communityName?: string;
 };
 
 // handling of the post creation is located in the `formbodyactionssubmit` file
-export default function PostCreate({ communityId, communityName }: Props) {
+export default function PostCreateEdit(props: Props) {
   useForceSignIn();
 
   return (
-    <PostProvider communityId={communityId} communityName={communityName}>
+    <PostProvider {...props}>
       <Layout cx="submit-container">
         <Layout.Column cx="submit__left">
           <Form />

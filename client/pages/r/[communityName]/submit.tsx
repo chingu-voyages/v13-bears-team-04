@@ -1,40 +1,44 @@
 import React from "react";
-import { NextPage } from "next";
+import { NextPage, NextPageContext } from "next";
 import Error from "next/error";
-import CreatePost from "../../../components/CreatePost";
+
+import { PostCreate } from "../../../components/Post";
 import fetchIt from "../../../utils/fetch";
+import { CommunityType } from "../../../types/community";
 
 type Props = {
-  error: string;
-  communityId: string;
-  communityName: string;
+  error?: string;
+  communityId?: string;
+  communityName?: string;
 };
 
 const Submit: NextPage<Props> = ({ error, communityId, communityName }) => {
   if (error) return <Error title={error} statusCode={404} />;
 
-  return <CreatePost communityId={communityId} communityName={communityName} />;
+  return <PostCreate communityId={communityId} communityName={communityName} />;
 };
 
-Submit.getInitialProps = async ctx => {
-  const name = ctx.query.communityName;
-
-  let error = "";
-  let communityId = "";
-  let communityName = "";
-
+Submit.getInitialProps = async ({ query }: NextPageContext) => {
   try {
-    const foundCommunity = await fetchIt(`/community/${name}`);
-    // eslint-disable-next-line no-throw-literal
-    if (!foundCommunity) throw "";
-    communityId = foundCommunity._id;
-    communityName = foundCommunity.name;
-  } catch (err) {
-    error = `r/${name} not found. Try again`;
-    communityName = "";
-  }
+    const { communityName } = query;
 
-  return { error, communityId, communityName };
+    const url = `/community/${communityName}`;
+    const community: CommunityType = await fetchIt(url);
+    if (!community) {
+      throw new Error({
+        message: `Community (${communityName}) not found`,
+        statusCode: 404,
+      });
+    }
+
+    return {
+      communityId: community._id,
+      communityName: community.name,
+    };
+  } catch (err) {
+    console.log(err);
+    return { error: err.message };
+  }
 };
 
 export default Submit;

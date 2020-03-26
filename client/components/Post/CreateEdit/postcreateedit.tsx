@@ -15,6 +15,7 @@ type Props = {
   post?: PostType;
   communityId?: string;
   communityName?: string;
+  isEdit?: boolean;
 };
 
 // handling of the post creation is located in the `formbodyactionssubmit` file

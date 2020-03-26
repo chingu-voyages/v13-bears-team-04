@@ -25,7 +25,7 @@ export type PostType = {
     createdOn?: string;
     _id?: string;
   };
-  postType: string;
+  postType: "link" | "text";
   title: string;
   content: string;
   author: {

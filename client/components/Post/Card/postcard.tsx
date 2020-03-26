@@ -81,6 +81,7 @@ export default function PostCard({
             onPostPage={onPostPage}
             postId={_id}
             authorId={author._id}
+            communityName={community.name}
           />
         </div>
       </div>

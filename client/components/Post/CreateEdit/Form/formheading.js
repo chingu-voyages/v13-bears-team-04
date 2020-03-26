@@ -1,13 +1,23 @@
 import React from "react";
+import { usePost } from "../../postcontext";
 
-const SubmitFormHeading = () => (
-  <div className="submit__form__heading">
-    <div className="submit__form__heading__title">Create a post</div>
-    <button className="submit__form__heading__button" type="button">
-      Drafts
-      <span>0</span>
-    </button>
-  </div>
-);
+export default function SubmitFormHeading() {
+  const {
+    state: { isEdit },
+  } = usePost();
 
-export default SubmitFormHeading;
+  return (
+    <div className="submit__form__heading">
+      <div className="submit__form__heading__title">
+        {isEdit ? "Edit" : "Create a"} post
+      </div>
+
+      {!isEdit && (
+        <button className="submit__form__heading__button" type="button">
+          Drafts
+          <span>0</span>
+        </button>
+      )}
+    </div>
+  );
+}

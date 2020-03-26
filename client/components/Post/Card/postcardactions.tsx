@@ -1,6 +1,7 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import clsx from "clsx";
+import Link from "next/link";
 import { useUser } from "../../../contexts/user";
 import fetchIt from "../../../utils/fetch";
 
@@ -9,6 +10,7 @@ type Props = {
   onPostPage: boolean;
   postId: string;
   authorId: string;
+  communityName: string;
 };
 
 export default function CardPostActions({
@@ -16,24 +18,25 @@ export default function CardPostActions({
   onPostPage,
   postId,
   authorId,
+  communityName,
 }: Props): JSX.Element {
   const { isAuthenticated, user, token } = useUser();
   const isOwner = isAuthenticated && user._id === authorId;
 
-  const handleEdit = async () => {
-    console.log("processing...");
-    try {
-      const editedPost = await fetchIt(`/posts/${postId}`, {
-        method: "PUT",
-        // body: JSON.stringify({content})
-        token,
-      });
+  // const handleEdit = async () => {
+  //   console.log("processing...");
+  //   try {
+  //     const editedPost = await fetchIt(`/posts/${postId}`, {
+  //       method: "PUT",
+  //       // body: JSON.stringify({content})
+  //       token,
+  //     });
 
-      console.log(editedPost);
-    } catch (err) {
-      console.log(err);
-    }
-  };
+  //     console.log(editedPost);
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // };
 
   const handleDelete = async () => {
     console.log("processing...");
@@ -74,15 +77,15 @@ export default function CardPostActions({
 
       {isOwner && onPostPage && (
         <>
-          <button
-            type="button"
-            tabIndex={0}
-            className="card__actions__option"
-            onClick={handleEdit}
+          <Link
+            href="/r/[communityName]/[postId]/edit"
+            as={`/r/${communityName}/${postId}/edit`}
           >
-            <FontAwesomeIcon icon="pencil-alt" />
-            Edit
-          </button>
+            <a className="card__actions__option">
+              <FontAwesomeIcon icon="pencil-alt" />
+              Edit
+            </a>
+          </Link>
 
           <button
             type="button"

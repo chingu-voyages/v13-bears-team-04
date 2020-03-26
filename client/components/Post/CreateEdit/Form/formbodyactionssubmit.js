@@ -55,8 +55,14 @@ export default function SubmitFormBodyActionsSubmit() {
   return (
     <>
       <div>
-        <Button inverted text="Save Draft" handleClick={handleSaveDraft} />
-        <Button text="Post" handleClick={handleSubmit} />
+        {!state.isEdit && (
+          <Button inverted text="Save Draft" handleClick={handleSaveDraft} />
+        )}
+
+        <Button
+          text={state.isEdit ? "Update" : "Post"}
+          handleClick={handleSubmit}
+        />
       </div>
       <MessageBox msg={msg} status={status} mT={16} mB={0} />
     </>

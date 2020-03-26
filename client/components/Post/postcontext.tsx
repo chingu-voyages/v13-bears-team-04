@@ -12,24 +12,34 @@ type State = {
   isOC: boolean;
   isSpoiler: boolean;
   isOver18: boolean;
+  isEdit: boolean;
 };
 
 type InitProps = {
   post?: PostType;
-  communityId?: string;
-  communityName?: string;
+  communityId: string;
+  communityName: string;
+  isEdit: boolean;
 };
 
-const init = ({ communityId = "", communityName = "", post }: InitProps) => ({
+const init: (props: InitProps) => State = ({
+  communityId,
+  communityName,
+  post,
+  isEdit,
+}) => ({
+  isEdit,
+  communityId,
+  communityName,
+  content: post?.content
+    ? JSON.parse(post?.content)
+    : [{ type: "paragraph", children: [{ text: "" }] }],
   postType: post?.postType || "text",
   title: post?.title || "",
-  content: post?.content || [{ type: "paragraph", children: [{ text: "" }] }],
-  link: "",
   isOC: post?.isOC || false,
   isSpoiler: post?.isSpoiler || false,
   isOver18: post?.isOver18 || false,
-  communityId,
-  communityName,
+  link: "",
 });
 
 type Action =
@@ -66,7 +76,7 @@ const reducer = (state: State, action: Action): State => {
 const PostContext = createContext(
   {} as {
     state: State;
-    postDispatch: (action: Action) => void;
+    postDispatch: React.Dispatch<Action>;
   }
 );
 
@@ -74,17 +84,22 @@ type ProviderTypes = {
   communityId?: string;
   communityName?: string;
   post?: PostType;
+  isEdit?: boolean;
   children: React.ReactNode;
 };
 
 export const PostProvider = ({
-  communityId,
-  communityName,
+  communityId = "",
+  communityName = "",
+  isEdit = false,
   post,
   children,
 }: ProviderTypes): JSX.Element => {
-  const initialState = { communityId, communityName, post };
-  const [state, postDispatch] = useReducer(reducer, initialState, init);
+  const [state, postDispatch] = useReducer(
+    reducer,
+    { communityId, communityName, post, isEdit },
+    init
+  );
 
   return (
     <PostContext.Provider value={{ state, postDispatch }}>

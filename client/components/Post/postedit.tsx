@@ -12,12 +12,19 @@ type Props = {
   post?: PostType;
 };
 
-export default function PostEdit({ post, error = "" }: Props) {
+function PostEdit({ post, error }: Props) {
   useForceSignIn();
 
   if (error || !post) return <Error title={error} statusCode={404} />;
 
-  return <PostCreateEdit post={post} />;
+  return (
+    <PostCreateEdit
+      isEdit
+      post={post}
+      communityId={post.community._id}
+      communityName={post.community.name}
+    />
+  );
 }
 
 PostEdit.getInitialProps = async ({ query }: NextPageContext) => {
@@ -32,9 +39,11 @@ PostEdit.getInitialProps = async ({ query }: NextPageContext) => {
       });
     }
 
-    return post;
+    return { post };
   } catch (err) {
     console.log(err);
     return { error: err.message };
   }
 };
+
+export default PostEdit;

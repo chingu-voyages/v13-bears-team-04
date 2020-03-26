@@ -3,7 +3,7 @@ import React from "react";
 import HomeBox from "../components/HomeBox";
 import GrowingCommunities from "../components/GrowingCommunities";
 import Layout from "../components/Layout";
-import PostList from "../components/PostList";
+import { PostList } from "../components/Post";
 import RecentPosts from "../components/RecentPosts";
 import SortView from "../components/SortView";
 import TrendingCommunity from "../components/TrendingCommunities";

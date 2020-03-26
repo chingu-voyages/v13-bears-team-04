@@ -4,7 +4,7 @@ import Error from "next/error";
 
 import Layout from "../Layout";
 import MessageBox from "../MessageBox";
-import PostList from "../PostList";
+import { PostList } from "../Post";
 import ToTopButton from "../ToTopButton";
 import fetchIt from "../../utils/fetch";
 import { useCheckMembership, useMessageBox } from "../../hooks";
@@ -83,9 +83,9 @@ Community.getInitialProps = async (ctx: NextPageContext): Promise<Props> => {
   const { communityName } = ctx.query;
 
   try {
-    const foundCommunity = await fetchIt(`/community/${communityName}`);
-    if (!foundCommunity) throw foundCommunity;
-    return { community: foundCommunity };
+    const community = await fetchIt(`/community/${communityName}`);
+    if (!community) throw community;
+    return { community };
   } catch (err) {
     return { error: `r/${communityName} not found. Try again` };
   }

@@ -49,14 +49,14 @@ export default function CardCommentActions({
         {isEditOpen ? "Cancel Edit" : "Edit"}
       </button>
 
-      {/* <button
+      <button
         type="button"
         tabIndex={0}
         className="card__actions__option"
         onClick={() => dispatch({ type: "Delete_Comment" })}
       >
         Delete
-      </button> */}
+      </button>
     </div>
   );
 }

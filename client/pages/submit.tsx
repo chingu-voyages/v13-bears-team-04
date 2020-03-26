@@ -1,1 +1,3 @@
-export { default } from "../components/CreatePost";
+import { PostCreate } from "../components/Post";
+
+export default PostCreate;

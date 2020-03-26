@@ -39,7 +39,10 @@ export default function SubmitFormBodyActionsSubmit() {
       // update the current user context
       setUser({ type: "SET_USER", token, user: updatedUser });
       // send user to new post
-      Router.push(`/r/${communityName}/${postId}`);
+      Router.push(
+        "/r/[communityName]/[postId]",
+        `/r/${communityName}/${postId}`
+      );
     } catch (err) {
       setMessageBox({ msg: err.message, status: "error" });
     }

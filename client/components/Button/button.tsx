@@ -3,7 +3,7 @@ import clsx from "clsx";
 import ButtonWithIcon from "./buttonwithicon";
 import ButtonWithLink from "./buttonwithlink";
 
-interface Props {
+type Props = {
   type?: "button" | "submit";
   text: string;
   icon?: string;
@@ -13,7 +13,8 @@ interface Props {
   href?: string;
   handleClick?: (e: {}) => void;
   cx?: string;
-}
+  as?: string;
+};
 
 const Button: React.FC<Props> = ({
   type,
@@ -25,6 +26,7 @@ const Button: React.FC<Props> = ({
   href,
   handleClick,
   cx,
+  as,
 }) => {
   const className = clsx(
     "btn",
@@ -36,7 +38,7 @@ const Button: React.FC<Props> = ({
   // RETURNS A NEXT LINK
   if (href) {
     return (
-      <ButtonWithLink href={href} className={className}>
+      <ButtonWithLink href={href} as={as} className={className}>
         {icon ? <ButtonWithIcon icon={icon} text={text} /> : text}
       </ButtonWithLink>
     );
@@ -44,6 +46,7 @@ const Button: React.FC<Props> = ({
 
   // RETURNS AN ACTUAL BUTTON
   return (
+    // eslint-disable-next-line react/button-has-type
     <button type={type} className={className} onClick={handleClick}>
       {icon ? <ButtonWithIcon icon={icon} text={text} /> : text}
     </button>
@@ -61,6 +64,7 @@ Button.defaultProps = {
   href: "", // String - use if you're linking your another page
   handleClick: () => console.log("Bueller? Bueller?"), // Function - use if you want to do something on click
   cx: "", // String - extra className
+  as: "", // String - used for dynamic routing
 };
 
 export default Button;

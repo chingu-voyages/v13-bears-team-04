@@ -42,7 +42,7 @@ export default function Create() {
       // update the current user context
       setUser({ type: "SET_USER", token, user: updatedUser });
       // send user to new community
-      Router.push(`/r/${newCommunity.name}`);
+      Router.push("/r/[communityName]", `/r/${newCommunity.name}`);
     } catch (err) {
       setMessageBox({ msg: err.message, status: "error" });
     }

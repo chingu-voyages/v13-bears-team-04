@@ -3,7 +3,7 @@ import Router from "next/router";
 import { useAuthPopup } from "../contexts/authpopup";
 import { useUser } from "../contexts/user";
 
-export default function useForceSignIn(maxCount: number = 3) {
+export default function useForceSignIn(maxCount = 3) {
   const { user } = useUser();
   const { authPopupName, setAuthPopup } = useAuthPopup();
 

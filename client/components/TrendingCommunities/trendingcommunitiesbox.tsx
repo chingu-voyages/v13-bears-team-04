@@ -53,7 +53,7 @@ export default function TrendingCommunitiesBox({ community }: Community) {
         />
 
         <div className="trending-community__row__info__text">
-          <Link href={`/r/${name}`}>
+          <Link href="/r/[communityName]" as={`/r/${name}`}>
             <a>r/{name}</a>
           </Link>
           <p>{`${users.members.length}k members`}</p>

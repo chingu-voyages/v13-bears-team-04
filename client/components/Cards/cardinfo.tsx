@@ -34,7 +34,7 @@ export default function CardInfo({
             secondary={theme["--community-theme-text"]}
           />
 
-          <Link href={`/r/${communityName}`}>
+          <Link href="/r/[communityName]" as={`/r/${communityName}`}>
             <a className="card__info__sub__text">{`r/${communityName}`}</a>
           </Link>
           <span className="card__info__period">•</span>

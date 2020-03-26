@@ -39,7 +39,11 @@ export default function GrowingCommunities(): JSX.Element {
         : communities.map((community, index) => {
             const isEven = index % 2 !== 0;
             return (
-              <Link href={`/r/${community.name}`} key={community._id}>
+              <Link
+                href="/r/[communityName]"
+                as={`/r/${community.name}`}
+                key={community._id}
+              >
                 <a className="growing-communities__row">
                   <span className="growing-communities__row__index">
                     {index + 1}

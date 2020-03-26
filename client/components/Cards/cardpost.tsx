@@ -29,7 +29,7 @@ export default function PostCard({
 
   const goToPost = () => {
     if (onPostPage) return;
-    push(`/r/${community.name}/${_id}`);
+    push("/r/[communityName]/[postId]", `/r/${community.name}/${_id}`);
   };
 
   const cardCX = clsx("cardpost", {

@@ -14,7 +14,7 @@ export default function CommunityCreatePost({
 
   return (
     <div className="community__createpost">
-      <Link href={`/r/${communityName}/submit`}>
+      <Link href="/r/[communityName]/submit" as={`/r/${communityName}/submit`}>
         <a>Create Post</a>
       </Link>
     </div>

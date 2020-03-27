@@ -1,6 +1,6 @@
 const createError = require("http-errors");
 const router = require("express").Router();
-const { Community, Topic } = require("../models");
+const { Community, Topic, Post } = require("../models");
 const { verifyToken } = require("../middleware");
 
 // ===== ROUTES ===== //
@@ -73,7 +73,13 @@ async function getCommunity(req, res, next) {
   try {
     const { communityName } = req.params;
     const lowerName = communityName.toLowerCase();
-    const community = await Community.findOne({ lowerName });
+
+    const community = await Community.findOne({ lowerName })
+      .populate({
+        path: "posts",
+      })
+      .lean();
+
     res.status(200).json(community);
   } catch (err) {
     next(err);

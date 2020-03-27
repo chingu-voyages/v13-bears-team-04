@@ -156,14 +156,22 @@ async function deletePost(req, res, next) {
   try {
     const { postId } = req.params;
 
-    // delete post
-    const deletedPost = await Post.findByIdAndDelete(postId, {
-      select: { community: 1, author: 1 },
-    }).lean();
+    const targetPost = await Post.findById(postId);
 
-    console.log(deletedPost);
+    // check if there are any comments on this post
+    // if so, we'll just deleted all the content and leave it
+    if (targetPost.comments.length === 0) {
+      await targetPost.remove();
+    } else {
+      targetPost.content =
+        '[{"type":"paragraph","children":[{"text":"Post Deleted"}]}]';
+      targetPost.isDeleted = true;
+      targetPost.lastModified = Date.now();
+      await targetPost.save();
+    }
+
     // delete post id from it's community
-    const community = await Community.findById(deletedPost.community);
+    const community = await Community.findById(targetPost.community);
     community.posts = community.posts.filter(id => String(id) !== postId);
     await community.save();
 
@@ -171,13 +179,13 @@ async function deletePost(req, res, next) {
     let isAdmin;
 
     // delete post id from the post's author
-    if (String(res.locals.user._id) === String(deletedPost.author)) {
+    if (String(res.locals.user._id) === String(targetPost.author)) {
       user = res.locals.user;
       user.posts = user.posts.filter(id => String(id) !== postId);
       await user.save();
       isAdmin = false;
     } else {
-      user = await User.findById(deletedPost.author);
+      user = await User.findById(targetPost.author);
       user.posts = user.posts.filter(id => String(id) !== postId);
       await user.save();
       isAdmin = true;

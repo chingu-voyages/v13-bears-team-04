@@ -6,12 +6,16 @@ import PostCard from "../Card";
 
 type Props = {
   endpoint: string;
+  posts?: PostType[];
 };
 
-export default function PostList({ endpoint }: Props): JSX.Element {
-  const [posts, setPosts] = useState<PostType[]>([]);
+export default function PostList({
+  endpoint,
+  posts: givenPosts,
+}: Props): JSX.Element {
+  const [posts, setPosts] = useState<PostType[]>(givenPosts || []);
   const [isError, setError] = useState(false);
-  const [isLoading, setLoader] = useState(true);
+  const [isLoading, setLoader] = useState(!givenPosts);
 
   const { query } = useRouter();
   const hideCommunityName = !!query.communityName && !query.postId;
@@ -31,12 +35,14 @@ export default function PostList({ endpoint }: Props): JSX.Element {
       setLoader(false);
     }
 
-    getPosts();
+    if (!posts) {
+      getPosts();
+    }
 
     return (): void => {
       canSet = false;
     };
-  }, [endpoint]);
+  }, [endpoint, posts]);
 
   if (isLoading) return <div>Loading...</div>;
 

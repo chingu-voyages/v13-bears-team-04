@@ -16,10 +16,11 @@ import CommunityInfo from "./communityinfo";
 import CommunityMods from "./communitymods";
 import CommunityRules from "./communityrules";
 import { CommunityType } from "../../types/community";
+import { PostType } from "../../types/post";
 
 type Props = {
   error?: string;
-  community?: CommunityType;
+  community?: CommunityType & { posts: PostType[] };
 };
 
 const Community: NextPage<Props> = ({ error, community }) => {
@@ -49,7 +50,10 @@ const Community: NextPage<Props> = ({ error, community }) => {
             communityName={community.name}
             userMemberLevel={userMemberLevel}
           />
-          <PostList endpoint={`/posts/community/${community._id}`} />
+          <PostList
+            endpoint={`/posts/community/${community._id}`}
+            posts={community.posts}
+          />
         </Layout.Column>
 
         <Layout.Column>
@@ -84,6 +88,7 @@ Community.getInitialProps = async (ctx: NextPageContext): Promise<Props> => {
 
   try {
     const community = await fetchIt(`/community/${communityName}`);
+    console.log(community);
     if (!community) throw community;
     return { community };
   } catch (err) {

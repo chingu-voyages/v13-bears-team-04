@@ -77,10 +77,19 @@ async function getCommunity(req, res, next) {
     const community = await Community.findOne({ lowerName })
       .populate({
         path: "posts",
+        populate: {
+          path: "author",
+          select: "username -_id",
+        },
       })
       .lean();
 
-    res.status(200).json(community);
+    const posts = community.posts.map(({ comments, ...post }) => ({
+      ...post,
+      numOfComments: comments.length,
+    }));
+
+    res.status(200).json({ ...community, posts });
   } catch (err) {
     next(err);
   }

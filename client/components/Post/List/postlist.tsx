@@ -35,7 +35,7 @@ export default function PostList({
       setLoader(false);
     }
 
-    if (!posts) {
+    if (!givenPosts) {
       getPosts();
     }
 

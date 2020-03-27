@@ -39,13 +39,13 @@ export default function SubmitFormBodyActionsSubmit() {
       });
 
       if (!state.isEdit) {
-        setUser({ type: "SET_USER", token, user: data });
+        setUser({ type: "SET_USER", token, user: data.updatedUser });
       }
 
-      // send user to new post
+      // send user to post
       Router.push(
         "/r/[communityName]/[postId]",
-        `/r/${state.communityName}/${state.postId}`
+        `/r/${state.communityName}/${state.postId || data.postId}`
       );
     } catch (err) {
       setMessageBox({ msg: err.message, status: "error" });

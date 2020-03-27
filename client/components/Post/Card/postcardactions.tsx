@@ -1,9 +1,12 @@
 import React from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import clsx from "clsx";
+import Router from "next/router";
 import Link from "next/link";
+import clsx from "clsx";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 import { useUser } from "../../../contexts/user";
 import fetchIt from "../../../utils/fetch";
+import { useConfirmBox } from "../../ConfirmBox";
 
 type Props = {
   numOfComments: number;
@@ -20,18 +23,25 @@ export default function CardPostActions({
   authorId,
   communityName,
 }: Props): JSX.Element {
-  const { isAuthenticated, user, token } = useUser();
+  const { confirmBoxDispatch } = useConfirmBox();
+  const { isAuthenticated, user, token, setUser } = useUser();
+
   const isOwner = isAuthenticated && user._id === authorId;
 
   const handleDelete = async () => {
     console.log("processing...");
     try {
-      const deletedPost = await fetchIt(`/posts/${postId}`, {
+      const data = await fetchIt(`/posts/${postId}`, {
         method: "DELETE",
         token,
       });
 
-      console.log(deletedPost);
+      const { isAdmin, updatedUser } = data;
+      if (!isAdmin) {
+        setUser({ type: "SET_USER", token, user: updatedUser });
+      }
+
+      Router.push("/r/[communityName]", `/r/${communityName}`);
     } catch (err) {
       console.log(err);
     }
@@ -76,7 +86,14 @@ export default function CardPostActions({
             type="button"
             tabIndex={0}
             className="card__actions__option"
-            onClick={handleDelete}
+            onClick={() =>
+              confirmBoxDispatch({
+                type: "Open_Modal",
+                heading: "Delete Post",
+                subheading: "Are you sure you want to delete this post?",
+                onConfirmClick: handleDelete,
+              })
+            }
           >
             <FontAwesomeIcon icon="trash-alt" />
             Delete

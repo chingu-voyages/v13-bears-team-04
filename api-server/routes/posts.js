@@ -1,13 +1,14 @@
 const createError = require("http-errors");
 const router = require("express").Router();
-const { Post, Community, Comment } = require("../models");
+const { Post, Community, Comment, User } = require("../models");
 const { verifyToken } = require("../middleware");
 
 // ===== ROUTES ===== //
 
 router.get("/", getAllPosts);
 router.get("/:postId", getOnePost);
-router.put("/:postId", updatePost);
+router.put("/:postId", verifyToken, updatePost);
+router.delete("/:postId", verifyToken, deletePost);
 router.get("/community/:communityId", getCommunityPosts);
 router.post("/community/:communityId", verifyToken, createPost);
 
@@ -123,6 +124,22 @@ async function updatePost(req, res, next) {
   try {
     const { postId } = req.params;
 
+    // find the post we're modifying
+    const post = await Post.findById(postId);
+
+    // check if user changed the community because we'll ...
+    // ... have to removed and add the postId reference if so
+    if (String(post.community) !== req.body.community) {
+      // remove the post reference from the original community
+      await Community.findByIdAndUpdate(post.community, {
+        $pull: { posts: postId },
+      });
+      // add that post id to the updated commnunity
+      await Community.findByIdAndUpdate(req.body.community, {
+        $push: { posts: postId },
+      });
+    }
+
     const updatedPost = await Post.findByIdAndUpdate(
       postId,
       { ...req.body, lastModified: Date.now() },
@@ -130,6 +147,43 @@ async function updatePost(req, res, next) {
     ).lean();
 
     res.status(201).json(updatedPost);
+  } catch (err) {
+    next(err);
+  }
+}
+
+async function deletePost(req, res, next) {
+  try {
+    const { postId } = req.params;
+
+    // delete post
+    const deletedPost = await Post.findByIdAndDelete(postId, {
+      select: { community: 1, author: 1 },
+    }).lean();
+
+    console.log(deletedPost);
+    // delete post id from it's community
+    const community = await Community.findById(deletedPost.community);
+    community.posts = community.posts.filter(id => String(id) !== postId);
+    await community.save();
+
+    let user;
+    let isAdmin;
+
+    // delete post id from the post's author
+    if (String(res.locals.user._id) === String(deletedPost.author)) {
+      user = res.locals.user;
+      user.posts = user.posts.filter(id => String(id) !== postId);
+      await user.save();
+      isAdmin = false;
+    } else {
+      user = await User.findById(deletedPost.author);
+      user.posts = user.posts.filter(id => String(id) !== postId);
+      await user.save();
+      isAdmin = true;
+    }
+
+    res.status(201).json({ postId, isAdmin, updatedUser: user });
   } catch (err) {
     next(err);
   }

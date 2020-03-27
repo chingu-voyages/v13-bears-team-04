@@ -18,30 +18,34 @@ export default function SubmitFormBodyActionsSubmit() {
     setMessageBox({ msg: "Processing...", status: "default" });
 
     try {
-      const body = JSON.stringify({
-        community: state.communityId,
-        postType: state.postType,
-        title: state.title,
-        content: JSON.stringify(state.content),
-        link: state.link,
-        isOver18: state.isOver18,
-        isOC: state.isOC,
-        isSpoiler: state.isSpoiler,
-        author: user._id,
-      });
-      const data = await fetchIt(`/posts/community/${state.communityId}`, {
-        method: "POST",
-        body,
+      const url = state.isEdit
+        ? `/posts/${state.postId}`
+        : `/posts/community/${state.communityId}`;
+
+      const data = await fetchIt(url, {
         token,
+        method: state.isEdit ? "PUT" : "POST",
+        body: JSON.stringify({
+          community: state.communityId,
+          postType: state.postType,
+          title: state.title,
+          content: JSON.stringify(state.content),
+          link: state.link,
+          isOver18: state.isOver18,
+          isOC: state.isOC,
+          isSpoiler: state.isSpoiler,
+          author: user._id,
+        }),
       });
 
-      const { postId, communityName, updatedUser } = data;
-      // update the current user context
-      setUser({ type: "SET_USER", token, user: updatedUser });
+      if (!state.isEdit) {
+        setUser({ type: "SET_USER", token, user: data });
+      }
+
       // send user to new post
       Router.push(
         "/r/[communityName]/[postId]",
-        `/r/${communityName}/${postId}`
+        `/r/${state.communityName}/${state.postId}`
       );
     } catch (err) {
       setMessageBox({ msg: err.message, status: "error" });

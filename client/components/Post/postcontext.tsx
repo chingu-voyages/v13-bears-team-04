@@ -13,6 +13,7 @@ type State = {
   isSpoiler: boolean;
   isOver18: boolean;
   isEdit: boolean;
+  postId: string;
 };
 
 type InitProps = {
@@ -39,6 +40,7 @@ const init: (props: InitProps) => State = ({
   isOC: post?.isOC || false,
   isSpoiler: post?.isSpoiler || false,
   isOver18: post?.isOver18 || false,
+  postId: post?._id || "",
   link: "",
 });
 

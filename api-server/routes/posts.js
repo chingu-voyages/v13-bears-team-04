@@ -7,6 +7,7 @@ const { verifyToken } = require("../middleware");
 
 router.get("/", getAllPosts);
 router.get("/:postId", getOnePost);
+router.put("/:postId", updatePost);
 router.get("/community/:communityId", getCommunityPosts);
 router.post("/community/:communityId", verifyToken, createPost);
 
@@ -113,6 +114,22 @@ async function createPost(req, res, next) {
     const { password, ...updatedUser } = user._doc;
 
     res.status(201).json({ postId, communityName, updatedUser });
+  } catch (err) {
+    next(err);
+  }
+}
+
+async function updatePost(req, res, next) {
+  try {
+    const { postId } = req.params;
+
+    const updatedPost = await Post.findByIdAndUpdate(
+      postId,
+      { ...req.body, lastModified: Date.now() },
+      { new: true }
+    ).lean();
+
+    res.status(201).json(updatedPost);
   } catch (err) {
     next(err);
   }

@@ -23,21 +23,6 @@ export default function CardPostActions({
   const { isAuthenticated, user, token } = useUser();
   const isOwner = isAuthenticated && user._id === authorId;
 
-  // const handleEdit = async () => {
-  //   console.log("processing...");
-  //   try {
-  //     const editedPost = await fetchIt(`/posts/${postId}`, {
-  //       method: "PUT",
-  //       // body: JSON.stringify({content})
-  //       token,
-  //     });
-
-  //     console.log(editedPost);
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // };
-
   const handleDelete = async () => {
     console.log("processing...");
     try {

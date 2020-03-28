@@ -12,7 +12,9 @@ type Props = {
   authorName: string;
   communityName?: string;
   createdOn: string;
+  lastModified: string;
   hideCommunityName: boolean;
+  isDeleted: boolean;
   isComment?: boolean;
   points?: number;
   theme?: { [key: string]: string };
@@ -24,8 +26,10 @@ export default function CardInfoHeader({
   authorName,
   createdOn,
   theme,
+  isDeleted,
   isComment,
   postOwnerName,
+  lastModified,
   hideCommunityName = false,
   points = Math.floor(Math.random() * 10000),
 }: Props): JSX.Element {
@@ -51,14 +55,22 @@ export default function CardInfoHeader({
         </div>
       )}
 
-      {/* Shows the user name */}
+      {/* Shows the user name with a microphone icon if the user wrote the post */}
       <div
         className={clsx("card__info__user", {
-          "card__info__user--isOwner": isOwnerOfComment,
+          "card__info__user--isOwner": isOwnerOfComment && !isDeleted,
         })}
       >
-        {isOwnerOfComment && <FontAwesomeIcon icon="microphone" />}
-        {isComment ? authorName : `Posted by u/${authorName || "[unknown]"}`}
+        {isDeleted ? (
+          `${isComment ? "" : "Posted by u/"}[removed]`
+        ) : (
+          <>
+            {isOwnerOfComment && <FontAwesomeIcon icon="microphone" />}
+            {isComment
+              ? authorName
+              : `Posted by u/${authorName || "[unknown]"}`}
+          </>
+        )}
       </div>
 
       {/* Shows the voting score */}
@@ -71,6 +83,18 @@ export default function CardInfoHeader({
 
       {/* Shows a date string like 2 days ago or 1 hour ago */}
       <div className="card__info__date">{makeDateAgo(createdOn)}</div>
+
+      {/* If edited show that */}
+      {createdOn !== lastModified && (
+        <>
+          <span className="card__info__period" style={{ margin: 0 }}>
+            •
+          </span>
+          <div className="card__info__date card__info__date--isEdited">
+            edited {makeDateAgo(lastModified)}
+          </div>
+        </>
+      )}
     </div>
   );
 }

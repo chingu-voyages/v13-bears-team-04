@@ -99,6 +99,9 @@ export default function Comment({
             authorName={state.ownerName}
             createdOn={comment.createdOn}
             postOwnerName={postOwnerName}
+            lastModified={comment.lastModified}
+            isDeleted={state.isDeleted}
+
             // points={}
           />
 
@@ -112,7 +115,7 @@ export default function Comment({
               handleSubmit={handleUpdate}
             />
           ) : (
-            <Render content={state.content} />
+            <Render content={state.content} isDeleted={state.isDeleted} />
           )}
 
           {/* Show the comment actions if the user is logged in */}

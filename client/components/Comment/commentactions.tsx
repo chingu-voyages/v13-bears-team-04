@@ -9,14 +9,12 @@ type Props = {
   openDelete: () => void;
 };
 
-export default function CommentActions({
-  state,
-  dispatch,
-  openDelete,
-}: Props): JSX.Element {
+export default function CommentActions({ state, dispatch, openDelete }: Props) {
   const { isAuthenticated, user } = useUser();
   const { isEditOpen, isReplyOpen } = state;
   const isOwner = user._id === state.ownerId;
+
+  if (state.isDeleted) return null;
 
   return (
     <div className="card__actions">

@@ -43,6 +43,12 @@
       color: #787c7e;
     }
 
+    &__date {
+      &--isEdited {
+        font-style: italic;
+      }
+    }
+
     &__user--isOwner {
       color: $blue !important;
 

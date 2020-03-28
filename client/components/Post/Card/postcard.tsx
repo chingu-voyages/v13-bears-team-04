@@ -25,6 +25,7 @@ export default function PostCard({
   hideCommunityName,
   isDeleted,
   onPostPage,
+  lastModified,
 }: Props): JSX.Element {
   const { push } = useRouter();
 
@@ -59,7 +60,9 @@ export default function PostCard({
           communityName={community.name}
           authorName={author.username}
           createdOn={createdOn}
+          lastModified={lastModified}
           theme={community.theme}
+          isDeleted={isDeleted}
         />
 
         <div
@@ -72,7 +75,7 @@ export default function PostCard({
           <h3 className="cardpost__details__title">{title}</h3>
 
           <div className={contentCX}>
-            <Render content={content} />
+            <Render content={content} isDeleted={isDeleted} />
           </div>
         </div>
 

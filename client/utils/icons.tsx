@@ -49,6 +49,7 @@ import {
   faTrashAlt,
   faPencilAlt,
   faTimes,
+  faMicrophone,
 } from "@fortawesome/free-solid-svg-icons";
 
 library.add(
@@ -96,5 +97,6 @@ library.add(
   faFlag,
   faTrashAlt,
   faPencilAlt,
-  faTimes
+  faTimes,
+  faMicrophone
 );

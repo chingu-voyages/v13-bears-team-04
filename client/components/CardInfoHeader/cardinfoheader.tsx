@@ -1,8 +1,12 @@
 import React from "react";
 import Link from "next/link";
+import clsx from "clsx";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 import { LogoIcon } from "../../svgs";
 import makeDateAgo from "../../utils/date";
 import shrinkNum from "../../utils/shrinknum";
+import { useUser } from "../../contexts/user";
 
 type Props = {
   authorName: string;
@@ -23,6 +27,10 @@ export default function CardInfoHeader({
   hideCommunityName = false,
   points = Math.floor(Math.random() * 10000),
 }: Props): JSX.Element {
+  const { user } = useUser();
+
+  const isOwnerOfComment = authorName === user.username && isComment;
+
   return (
     <div className="card__info">
       {/* Shows the community name and themed SVG icon */}
@@ -42,7 +50,12 @@ export default function CardInfoHeader({
       )}
 
       {/* Shows the user name */}
-      <div className="card__info__user">
+      <div
+        className={clsx("card__info__user", {
+          "card__info__user--isOwner": isOwnerOfComment,
+        })}
+      >
+        {isOwnerOfComment && <FontAwesomeIcon icon="microphone" />}
         {isComment ? authorName : `Posted by u/${authorName || "[unknown]"}`}
       </div>
 

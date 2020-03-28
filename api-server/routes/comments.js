@@ -117,7 +117,7 @@ async function editComment(req, res, next) {
     targetComment.lastModified = Date.now();
     await targetComment.save();
 
-    res.status(200).json(updatedComment);
+    res.status(200).json(targetComment);
   } catch (err) {
     next(err);
   }

@@ -43,6 +43,14 @@
       color: #787c7e;
     }
 
+    &__user--isOwner {
+      color: $blue !important;
+
+      svg {
+        margin-right: 4px;
+      }
+    }
+
     &__period {
       margin-left: 4px;
       margin-right: -4px;

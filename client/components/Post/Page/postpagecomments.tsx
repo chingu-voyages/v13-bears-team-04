@@ -1,5 +1,5 @@
 import React from "react";
-import { CardComment } from "../../Cards";
+import Comment from "../../Comment";
 import { CommentType } from "../../../types/comment";
 
 type Props = {
@@ -39,7 +39,7 @@ export default function PostPageComments({ comments }: Props): JSX.Element {
         <div className="viewpost__comments__none">No Comments Yet</div>
       ) : (
         nestComments(comments).map(comment => (
-          <CardComment key={comment._id} comment={comment} />
+          <Comment key={comment._id} comment={comment} />
         ))
       )}
     </div>

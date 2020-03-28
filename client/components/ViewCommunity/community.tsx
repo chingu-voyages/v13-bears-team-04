@@ -2,6 +2,7 @@ import React from "react";
 import { NextPage, NextPageContext } from "next";
 import Error from "next/error";
 
+import PageHead from "../PageHead";
 import Layout from "../Layout";
 import MessageBox from "../MessageBox";
 import { PostList } from "../Post";
@@ -31,6 +32,7 @@ const Community: NextPage<Props> = ({ error, community }) => {
 
   return (
     <div className="community-container">
+      <PageHead title={community.name} />
       <CommunityInfo
         communityId={community._id}
         title={community.name}

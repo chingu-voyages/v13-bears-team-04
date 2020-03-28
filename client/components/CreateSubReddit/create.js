@@ -6,6 +6,7 @@ import CreateFields from "./createfields";
 import CreateType from "./createtype";
 import Button from "../Button";
 import MessageBox from "../MessageBox";
+import PageHead from "../PageHead";
 
 import { useForceSignIn, useMessageBox } from "../../hooks";
 import { useUser } from "../../contexts/user";
@@ -50,6 +51,7 @@ export default function Create() {
 
   return (
     <div className="subredditscreate-container">
+      <PageHead title="Create Community" />
       <div className="subcreate__left" />
       <div className="subcreate__right">
         <h1 className="subcreate__header">Create a community</h1>

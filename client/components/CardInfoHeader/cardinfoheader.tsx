@@ -16,6 +16,7 @@ type Props = {
   isComment?: boolean;
   points?: number;
   theme?: { [key: string]: string };
+  postOwnerName?: string;
 };
 
 export default function CardInfoHeader({
@@ -24,12 +25,13 @@ export default function CardInfoHeader({
   createdOn,
   theme,
   isComment,
+  postOwnerName,
   hideCommunityName = false,
   points = Math.floor(Math.random() * 10000),
 }: Props): JSX.Element {
   const { user } = useUser();
 
-  const isOwnerOfComment = authorName === user.username && isComment;
+  const isOwnerOfComment = postOwnerName === user.username && isComment;
 
   return (
     <div className="card__info">

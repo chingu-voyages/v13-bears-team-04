@@ -4,6 +4,7 @@ import { CommentType } from "../../../types/comment";
 
 type Props = {
   comments: CommentType[];
+  postOwnerName: string;
   handleDeletion: (commentId: string) => void;
   handleAddition: (newComment: CommentType) => void;
 };
@@ -36,6 +37,7 @@ function nestInOwner(acc: CommentType[], comment: CommentType) {
 
 export default function PostPageComments({
   comments,
+  postOwnerName,
   handleDeletion,
   handleAddition,
 }: Props): JSX.Element {
@@ -48,6 +50,7 @@ export default function PostPageComments({
           <Comment
             key={comment._id}
             comment={comment}
+            postOwnerName={postOwnerName}
             handleDeletion={handleDeletion}
             handleAddition={handleAddition}
           />

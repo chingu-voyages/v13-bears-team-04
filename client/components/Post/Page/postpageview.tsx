@@ -41,6 +41,7 @@ export default function PostPageView({ post }: Props): JSX.Element {
 
         {/* Show all the comments here */}
         <PostPageComments
+          postOwnerName={state.author.username}
           comments={state.comments}
           handleDeletion={handleDeletion}
           handleAddition={handleAddition}

@@ -15,16 +15,19 @@ import fetchIt from "../../utils/fetch";
 
 type Props = {
   comment: CommentType;
+  postOwnerName: string;
   handleDeletion: (commentId: string) => void;
   handleAddition: (newComment: CommentType) => void;
 };
 
 export default function Comment({
   comment,
+  postOwnerName,
   handleDeletion,
   handleAddition,
 }: Props) {
   const [isDeleted, setIsDeleted] = useState(false);
+
   const { isAuthenticated, token } = useUser();
   const { state, dispatch } = useComment(comment);
   const { confirmBoxDispatch } = useConfirmBox();
@@ -95,6 +98,7 @@ export default function Comment({
             hideCommunityName
             authorName={state.ownerName}
             createdOn={comment.createdOn}
+            postOwnerName={postOwnerName}
             // points={}
           />
 
@@ -141,6 +145,7 @@ export default function Comment({
               <Comment
                 key={nestedComment._id}
                 comment={nestedComment}
+                postOwnerName={postOwnerName}
                 handleDeletion={handleDeletion}
                 handleAddition={handleAddition}
               />

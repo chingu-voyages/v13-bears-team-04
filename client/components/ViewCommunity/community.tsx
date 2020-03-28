@@ -90,7 +90,6 @@ Community.getInitialProps = async (ctx: NextPageContext): Promise<Props> => {
 
   try {
     const community = await fetchIt(`/community/${communityName}`);
-    console.log(community);
     if (!community) throw community;
     return { community };
   } catch (err) {

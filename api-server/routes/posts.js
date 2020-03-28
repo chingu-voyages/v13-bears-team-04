@@ -48,7 +48,7 @@ async function getOnePost(req, res, next) {
 
 async function getAllPosts(_, res, next) {
   try {
-    const allPosts = await Post.find()
+    const allPosts = await Post.find({ isDeleted: false })
       .populate({
         path: "author",
         select: "username -_id",

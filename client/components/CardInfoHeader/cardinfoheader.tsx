@@ -43,7 +43,7 @@ export default function CardInfoHeader({
 
       {/* Shows the user name */}
       <div className="card__info__user">
-        {isComment ? authorName : `Posted by u/${authorName}`}
+        {isComment ? authorName : `Posted by u/${authorName || "[unknown]"}`}
       </div>
 
       {/* Shows the voting score */}

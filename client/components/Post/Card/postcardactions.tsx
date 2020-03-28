@@ -14,6 +14,7 @@ type Props = {
   postId: string;
   authorId: string;
   communityName: string;
+  isDeleted?: boolean;
 };
 
 export default function CardPostActions({
@@ -22,6 +23,7 @@ export default function CardPostActions({
   postId,
   authorId,
   communityName,
+  isDeleted,
 }: Props): JSX.Element {
   const { confirmBoxDispatch } = useConfirmBox();
   const { isAuthenticated, user, token, setUser } = useUser();
@@ -70,7 +72,7 @@ export default function CardPostActions({
         Report
       </button>
 
-      {isOwner && onPostPage && (
+      {isOwner && onPostPage && isDeleted !== true && (
         <>
           <Link
             href="/r/[communityName]/[postId]/edit"

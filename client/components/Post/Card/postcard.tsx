@@ -23,6 +23,7 @@ export default function PostCard({
   content,
   numOfComments,
   hideCommunityName,
+  isDeleted,
   onPostPage,
 }: Props): JSX.Element {
   const { push } = useRouter();
@@ -82,6 +83,7 @@ export default function PostCard({
             postId={_id}
             authorId={author._id}
             communityName={community.name}
+            isDeleted={isDeleted}
           />
         </div>
       </div>

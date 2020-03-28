@@ -42,7 +42,7 @@ export default function PostList({
     return (): void => {
       canSet = false;
     };
-  }, [endpoint, posts]);
+  }, [endpoint]);
 
   if (isLoading) return <div>Loading...</div>;
 

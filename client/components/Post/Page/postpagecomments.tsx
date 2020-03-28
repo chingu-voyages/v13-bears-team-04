@@ -4,6 +4,8 @@ import { CommentType } from "../../../types/comment";
 
 type Props = {
   comments: CommentType[];
+  handleDeletion: (commentId: string) => void;
+  handleAddition: (newComment: CommentType) => void;
 };
 
 function nestComments(comments: CommentType[]) {
@@ -32,14 +34,23 @@ function nestInOwner(acc: CommentType[], comment: CommentType) {
   return acc;
 }
 
-export default function PostPageComments({ comments }: Props): JSX.Element {
+export default function PostPageComments({
+  comments,
+  handleDeletion,
+  handleAddition,
+}: Props): JSX.Element {
   return (
     <div className="viewpost__comments">
       {!comments.length ? (
         <div className="viewpost__comments__none">No Comments Yet</div>
       ) : (
         nestComments(comments).map(comment => (
-          <Comment key={comment._id} comment={comment} />
+          <Comment
+            key={comment._id}
+            comment={comment}
+            handleDeletion={handleDeletion}
+            handleAddition={handleAddition}
+          />
         ))
       )}
     </div>

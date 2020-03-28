@@ -10,5 +10,7 @@ export type CommentType = {
   commentId: string;
   content: string;
   createdOn: string;
+  lastModified: string;
   comments: CommentType[];
+  isDeleted?: boolean;
 };

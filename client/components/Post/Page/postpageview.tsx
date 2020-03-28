@@ -18,6 +18,13 @@ export default function PostPageView({ post }: Props): JSX.Element {
     setState({ ...state, comments: [...state.comments, newComment] });
   };
 
+  const handleDeletion = (commentId: string) => {
+    setState({
+      ...state,
+      comments: state.comments.filter(comment => comment._id !== commentId),
+    });
+  };
+
   return (
     <ConfirmBoxProvider>
       <div className="viewpost__content">
@@ -33,7 +40,11 @@ export default function PostPageView({ post }: Props): JSX.Element {
         <PostPageComment postId={state._id} handleAddition={handleAddition} />
 
         {/* Show all the comments here */}
-        <PostPageComments comments={state.comments} />
+        <PostPageComments
+          comments={state.comments}
+          handleDeletion={handleDeletion}
+          handleAddition={handleAddition}
+        />
       </div>
     </ConfirmBoxProvider>
   );

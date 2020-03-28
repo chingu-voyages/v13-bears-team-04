@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { Render } from "../Slate";
 import Votes from "../Votes";
@@ -11,17 +11,28 @@ import useComment from "./useComment";
 
 import { useUser } from "../../contexts/user";
 import { CommentType } from "../../types/comment";
+import fetchIt from "../../utils/fetch";
 
 type Props = {
   comment: CommentType;
+  handleDeletion: (commentId: string) => void;
+  handleAddition: (newComment: CommentType) => void;
 };
 
-export default function Comment({ comment }: Props) {
-  const { isAuthenticated } = useUser();
+export default function Comment({
+  comment,
+  handleDeletion,
+  handleAddition,
+}: Props) {
+  const [isDeleted, setIsDeleted] = useState(false);
+  const { isAuthenticated, token } = useUser();
   const { state, dispatch } = useComment(comment);
   const { confirmBoxDispatch } = useConfirmBox();
 
-  const handleAddition = (newComment: CommentType) => {
+  if (isDeleted) return null;
+
+  const handleAdd = (newComment: CommentType) => {
+    handleAddition(newComment);
     dispatch({ type: "Add_Comment", newComment });
   };
 
@@ -29,7 +40,26 @@ export default function Comment({ comment }: Props) {
     dispatch({ type: "Update_Comment", content: updatedComment.content });
   };
 
-  const handleDelete = () => undefined;
+  const handleDelete = async () => {
+    try {
+      const data = await fetchIt(`/comment/${state._id}`, {
+        method: "DELETE",
+        token,
+      });
+      const { deletedComment, deletedWhole } = data;
+
+      if (deletedWhole) {
+        handleDeletion(deletedComment._id);
+        setIsDeleted(true);
+      } else {
+        const { content, lastModified, isDeleted } = deletedComment;
+        dispatch({ type: "Update_Comment", content, lastModified, isDeleted });
+      }
+    } catch (err) {
+      console.log(err);
+    }
+    confirmBoxDispatch({ type: "Close_Modal" });
+  };
 
   const openDelete = () =>
     confirmBoxDispatch({
@@ -96,7 +126,7 @@ export default function Comment({ comment }: Props) {
               isOnComment
               postId={comment.postId}
               commentId={comment._id}
-              handleSubmit={handleAddition}
+              handleSubmit={handleAdd}
             />
           )}
         </div>
@@ -108,7 +138,12 @@ export default function Comment({ comment }: Props) {
           <span className="cardcomment__connecter" />
           <div className="cardcomment__nested__cards">
             {state.comments.map(nestedComment => (
-              <Comment key={nestedComment._id} comment={nestedComment} />
+              <Comment
+                key={nestedComment._id}
+                comment={nestedComment}
+                handleDeletion={handleDeletion}
+                handleAddition={handleAddition}
+              />
             ))}
           </div>
         </div>

@@ -1,6 +1,6 @@
 const createError = require("http-errors");
 const router = require("express").Router();
-const { Comment, Post } = require("../models");
+const { Comment, Post, Community } = require("../models");
 const { verifyToken } = require("../middleware");
 
 // ===== ROUTES ===== //
@@ -87,7 +87,6 @@ async function createCommentOnPost(req, res, next) {
     });
     newComment.populate({ path: "author", select: "username" }).execPopulate();
     await newComment.save();
-    console.log(newComment);
 
     post.comments.push(newComment._id);
     await post.save();
@@ -135,20 +134,40 @@ async function deleteComment(req, res, next) {
     const { user } = res.locals;
     const { commentId } = req.params;
 
+    // get the target you want to delete
     const targetComment = await Comment.findById(commentId);
-    if (targetComment.comments.length === 0) {
+    // check if there are any replies based on that comment
+    const childComments = await Comment.findOne({ commentId }).lean();
+
+    // was the entire comment deleted or just updated to show it was deleted
+    let deletedWhole;
+
+    if (!childComments) {
+      // delete the comment
       await targetComment.remove();
-      user.comments.pull(commentId);
-      await user.save();
-      res.status(200);
+
+      // remove it's id from the post comments array
+      await Post.findByIdAndUpdate(targetComment.postId, {
+        $pull: { comments: commentId },
+      });
+
+      deletedWhole = true;
     } else {
+      // update the comment to show it's been deleted
       targetComment.content =
         '[{"type":"paragraph","children":[{"text":"Comment Deleted"}]}]';
       targetComment.isDeleted = true;
       targetComment.lastModified = Date.now();
       await targetComment.save();
-      res.status(200);
+
+      deletedWhole = false;
     }
+
+    // remove the comment from the users
+    user.comments.pull(commentId);
+    await user.save();
+
+    res.status(200).json({ deletedWhole, deletedComment: targetComment });
   } catch (err) {
     next(err);
   }

@@ -11,6 +11,8 @@ export type StateType = {
   content: string;
   comments: CommentType[];
   votes: string[];
+  isDeleted: boolean;
+  createdOn: string;
 };
 
 const init = (comment: CommentType) => ({
@@ -23,6 +25,9 @@ const init = (comment: CommentType) => ({
   ownerName: comment.author.username,
   content: comment.content,
   comments: comment.comments,
+  isDeleted: !!comment.isDeleted,
+  createdOn: comment.createdOn,
+  lastModified: comment.lastModified,
 });
 
 export type ActionType =
@@ -30,8 +35,12 @@ export type ActionType =
   | { type: "Toggle_Edit_Open" }
   | { type: "Toggle_Report" }
   | { type: "Add_Comment"; newComment: CommentType }
-  | { type: "Update_Comment"; content: string }
-  | { type: "Delete_Comment" };
+  | {
+      type: "Update_Comment";
+      content: string;
+      isDeleted?: boolean;
+      lastModified?: string;
+    };
 
 const reducer = (state: StateType, action: ActionType) => {
   switch (action.type) {
@@ -48,9 +57,13 @@ const reducer = (state: StateType, action: ActionType) => {
         comments: [...state.comments, action.newComment],
       };
     case "Update_Comment":
-      return { ...state, isEditOpen: false, content: action.content };
-    // case "Delete_Comment":
-    //   return { ...state,  };
+      return {
+        ...state,
+        isEditOpen: false,
+        content: action.content,
+        isDeleted: action.isDeleted || false,
+        lastModified: action.lastModified || state.createdOn,
+      };
     default:
       return state;
   }

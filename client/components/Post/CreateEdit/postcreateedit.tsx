@@ -1,6 +1,5 @@
 import React from "react";
 
-import PageHead from "../../PageHead";
 import FooterBox from "../../FooterBox";
 import Form from "./Form";
 import Info from "./Info";
@@ -23,11 +22,8 @@ type Props = {
 export default function PostCreateEdit(props: Props) {
   useForceSignIn();
 
-  const { communityName } = props;
-
   return (
     <PostProvider {...props}>
-      <PageHead title={`Submit to ${communityName || "community"}`} />
       <Layout cx="submit-container">
         <Layout.Column cx="submit__left">
           <Form />

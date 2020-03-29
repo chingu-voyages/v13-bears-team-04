@@ -6,6 +6,7 @@ import PostCreateEdit from "./CreateEdit";
 import { useForceSignIn } from "../../hooks";
 import fetchIt from "../../utils/fetch";
 import { PostType } from "../../types/post";
+import PageHead from "../PageHead";
 
 type Props = {
   error?: string;
@@ -18,12 +19,15 @@ function PostEdit({ post, error }: Props) {
   if (error || !post) return <Error title={error} statusCode={404} />;
 
   return (
-    <PostCreateEdit
-      isEdit
-      post={post}
-      communityId={post.community._id}
-      communityName={post.community.name}
-    />
+    <>
+      <PageHead title={`Editing ${post.title} | Reddit`} />
+      <PostCreateEdit
+        isEdit
+        post={post}
+        communityId={post.community._id}
+        communityName={post.community.name}
+      />
+    </>
   );
 }
 

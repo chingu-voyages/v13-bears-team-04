@@ -1,19 +1,44 @@
-const createError = require("http-errors");
 const router = require("express").Router();
-const { Vote, Post } = require("../models");
-const { checkSession } = require("../middleware");
+const { Vote } = require("../models");
+const { verifyToken } = require("../middleware");
 
 // ===== ROUTES ===== //
 
 router.get("/all", getAllVotes);
-router.post("/onPost/:postId", checkSession, voteOnPost);
-router.post("/onComment/:commentId", checkSession, voteOnComment);
+router.get("/post/:postId", getPostVotes);
+router.get("/comment/:commentId", getCommentVotes);
+router.post("/onPost/:postId", verifyToken, voteOnPost);
+router.post("/onComment/:commentId", verifyToken, voteOnComment);
 
 // ===== CONTROLLERS ===== //
 
-async function getAllVotes(req, res, next) {
+async function getAllVotes(_, res, next) {
   try {
     const votes = await Vote.find();
+    res.status(200).json(votes);
+  } catch (err) {
+    next(err);
+  }
+}
+
+async function getPostVotes(req, res, next) {
+  try {
+    const { postId } = req.params;
+
+    const votes = await Comment.find({ postId, isOnPost: true }).lean();
+
+    res.status(200).json(votes);
+  } catch (err) {
+    next(err);
+  }
+}
+
+async function getCommentVotes(req, res, next) {
+  try {
+    const { commentId } = req.params;
+
+    const votes = await Comment.find({ commentId, isOnComment: true }).lean();
+
     res.status(200).json(votes);
   } catch (err) {
     next(err);
@@ -26,23 +51,20 @@ async function voteOnPost(req, res, next) {
     const { postId } = req.params;
     const { isUpVote } = req.body;
 
-    const targetPost = await Post.findById(postId);
-    // check if the user previously voted on this post
-    const previousVoteId = targetPost.votes.find(postVoteId =>
-      user.votes.includes(postVoteId)
-    );
+    // check if user already voted on this post
+    const previousVote = await Vote.findOne({ postId, owner: user._id });
 
-    // update previous vote or create a new one
-    if (previousVoteId) {
-      const previousVote = await Vote.findById(previousVoteId);
-      // if the votes are the same, throw an error
-      if (previousVote.isUpVote === isUpVote) {
-        throw createError(400, "That vote has already been registered");
-      }
-      // otherwise update the vote document and save it
+    if (previousVote) {
+      // if it's the same vote, then skip updating the document
+      if (previousVote.isUpVote === isUpVote)
+        return res.status(200).json(previousVote);
+
+      // otherwise updated the vote and voteDate
       previousVote.isUpVote = isUpVote;
       previousVote.voteDate = Date.now();
       await previousVote.save();
+
+      return res.status(200).json(previousVote);
     } else {
       const newVote = await Vote.create({
         isUpVote,
@@ -50,11 +72,9 @@ async function voteOnPost(req, res, next) {
         isOnPost: true,
         owner: user._id,
       });
-      user.votes.push(newVote._id);
-      await user.save();
-    }
 
-    res.status(201).json(user);
+      return res.status(201).json(newVote);
+    }
   } catch (err) {
     next(err);
   }
@@ -64,38 +84,30 @@ async function voteOnComment(req, res, next) {
   try {
     const { user } = res.locals;
     const { commentId } = req.params;
-    const { isUpVote, postId } = req.body;
+    const { isUpVote } = req.body;
 
-    const targetComment = await Comment.findById(commentId);
-    // check if the user previously voted on this comment
-    const previousVoteId = targetComment.votes.find(commentVoteId =>
-      user.votes.includes(commentVoteId)
-    );
+    // check if user already voted on this post
+    const previousVote = await Vote.findOne({ commentId, owner: user._id });
 
-    // update previous vote or create a new one
-    if (previousVoteId) {
-      const previousVote = await Vote.findById(previousVoteId);
-      // if the votes are the same, throw an error
-      if (previousVote.isUpVote === isUpVote) {
-        throw createError(400, "That vote has already been registered");
-      }
-      // otherwise update the vote document and save it
+    if (previousVote) {
+      // if it's the same vote, then skip updating the document
+      if (previousVote.isUpVote === isUpVote)
+        return res.status(200).json(previousVote);
+
+      // otherwise updated the vote and voteDate
       previousVote.isUpVote = isUpVote;
       previousVote.voteDate = Date.now();
       await previousVote.save();
+      return res.status(200).json(previousVote);
     } else {
       const newVote = await Vote.create({
         isUpVote,
-        postId,
         commentId,
         isOnComment: true,
         owner: user._id,
       });
-      user.votes.push(newVote._id);
-      await user.save();
+      return res.status(201).json(newVote);
     }
-
-    res.status(201).json(user);
   } catch (err) {
     next(err);
   }

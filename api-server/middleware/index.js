@@ -1,9 +1,6 @@
 const createError = require("http-errors");
 const jwt = require("jsonwebtoken");
-const Session = require("../models/session");
 const User = require("../models/user");
-
-exports.checkSession = async function(req, res, next) {};
 
 exports.verifyToken = async (req, res, next) => {
   try {

@@ -13,6 +13,7 @@ import PostPageView from "./postpageview";
 import fetchIt from "../../../utils/fetch";
 import { PostType } from "../../../types/post";
 import { useCheckMembership } from "../../../hooks";
+import { VoteProvider } from "../../Votes";
 
 type Props = {
   error?: string;
@@ -31,34 +32,39 @@ const PostPage: NextPage<Props> = ({ post, error }) => {
       <PageHead title={`${post.title} | ${post.community.name}`} />
       <div className="viewpost__background">
         <div className="viewpost__container">
-          <PostPageBanner
-            vote=""
+          <VoteProvider
+            isOnPost
             votes={post.votes}
-            title={post.title}
-            communityName={post.community.name}
-          />
-          <Layout>
-            <Layout.Column>
-              <PostPageView post={post} />
-            </Layout.Column>
+            postId={post._id}
+            isDeleted={post.isDeleted}
+          >
+            <PostPageBanner
+              title={post.title}
+              communityName={post.community.name}
+            />
+            <Layout>
+              <Layout.Column>
+                <PostPageView post={post} />
+              </Layout.Column>
 
-            <Layout.Column>
-              <CommunityAbout
-                description={post.community.name}
-                createdOn={post.community.createdOn || ""}
-                memberCount={
-                  post.community.users
-                    ? post.community.users.members.length
-                    : 12345
-                }
-                userMemberLevel={userMemberLevel}
-              />
-              {/* if the user is logged in */}
-              {/* /ViewCommunity/communitymods.tsx  */}
-              <FooterBox />
-              <ToTopButton />
-            </Layout.Column>
-          </Layout>
+              <Layout.Column>
+                <CommunityAbout
+                  description={post.community.name}
+                  createdOn={post.community.createdOn || ""}
+                  memberCount={
+                    post.community.users
+                      ? post.community.users.members.length
+                      : 12345
+                  }
+                  userMemberLevel={userMemberLevel}
+                />
+                {/* if the user is logged in */}
+                {/* /ViewCommunity/communitymods.tsx  */}
+                <FooterBox />
+                <ToTopButton />
+              </Layout.Column>
+            </Layout>
+          </VoteProvider>
         </div>
       </div>
     </>

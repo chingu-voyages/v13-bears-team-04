@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 import { Render } from "../Slate";
-import Votes from "../Votes";
+import Votes, { VoteProvider } from "../Votes";
 import CardInfoHeader from "../CardInfoHeader";
 import { useConfirmBox } from "../ConfirmBox";
 
@@ -78,65 +78,64 @@ export default function Comment({
   return (
     <>
       <div className="cardcomment">
-        <div className="cardcomment__left">
-          {/* Voting arrows */}
-          <Votes
-            hideNum
-            vote=""
-            votes={state.votes}
-            cxContainer="cardcomment__votes"
-          />
+        <VoteProvider
+          votes={state.votes}
+          commentId={state._id}
+          isDeleted={!!comment.isDeleted}
+        >
+          <div className="cardcomment__left">
+            {/* Voting arrows */}
+            <Votes hideNum cxContainer="cardcomment__votes" />
 
-          {/* When hovering a post this will turn blue  */}
-          <span className="cardcomment__connecter" />
-        </div>
+            {/* When hovering a post this will turn blue  */}
+            <span className="cardcomment__connecter" />
+          </div>
 
-        <div className="cardcomment__right">
-          {/* Shows comment info like username, date and points */}
-          <CardInfoHeader
-            isComment
-            hideCommunityName
-            authorName={state.ownerName}
-            createdOn={comment.createdOn}
-            postOwnerName={postOwnerName}
-            lastModified={comment.lastModified}
-            isDeleted={state.isDeleted}
-
-            // points={}
-          />
-
-          {/* Shows the actual comment content or the ... */}
-          {/* ... put the content in an editable container */}
-          {state.isEditOpen ? (
-            <CommentCreateEdit
-              isEdit
-              initialContent={state.content}
-              commentId={state._id}
-              handleSubmit={handleUpdate}
+          <div className="cardcomment__right">
+            {/* Shows comment info like username, date and points */}
+            <CardInfoHeader
+              isComment
+              hideCommunityName
+              authorName={state.ownerName}
+              createdOn={comment.createdOn}
+              postOwnerName={postOwnerName}
+              lastModified={comment.lastModified}
+              isDeleted={state.isDeleted}
             />
-          ) : (
-            <Render content={state.content} isDeleted={state.isDeleted} />
-          )}
 
-          {/* Show the comment actions if the user is logged in */}
-          {isAuthenticated && (
-            <CommentActions
-              state={state}
-              dispatch={dispatch}
-              openDelete={openDelete}
-            />
-          )}
+            {/* Shows the actual comment content or the ... */}
+            {/* ... put the content in an editable container */}
+            {state.isEditOpen ? (
+              <CommentCreateEdit
+                isEdit
+                initialContent={state.content}
+                commentId={state._id}
+                handleSubmit={handleUpdate}
+              />
+            ) : (
+              <Render content={state.content} isDeleted={state.isDeleted} />
+            )}
 
-          {/* Shows a comment box if user clicked the reply action button */}
-          {state.isReplyOpen && (
-            <CommentCreateEdit
-              isOnComment
-              postId={comment.postId}
-              commentId={comment._id}
-              handleSubmit={handleAdd}
-            />
-          )}
-        </div>
+            {/* Show the comment actions if the user is logged in */}
+            {isAuthenticated && (
+              <CommentActions
+                state={state}
+                dispatch={dispatch}
+                openDelete={openDelete}
+              />
+            )}
+
+            {/* Shows a comment box if user clicked the reply action button */}
+            {state.isReplyOpen && (
+              <CommentCreateEdit
+                isOnComment
+                postId={comment.postId}
+                commentId={comment._id}
+                handleSubmit={handleAdd}
+              />
+            )}
+          </div>
+        </VoteProvider>
       </div>
 
       {/* If the comment has comments on it show them */}

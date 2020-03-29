@@ -51,7 +51,7 @@ export default function PostList({
   if (!posts.length) return <div>No posts found</div>;
 
   return (
-    <div>
+    <div className="viewpost__list">
       {posts.map(post => (
         <PostCard
           key={post._id}

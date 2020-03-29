@@ -15,7 +15,6 @@ const VoteSchema = new Schema({
   postId: {
     type: ObjectId,
     ref: "Post",
-    required: [true, "Post ID Required"],
   },
   isOnComment: {
     type: Boolean,
@@ -24,7 +23,7 @@ const VoteSchema = new Schema({
     type: ObjectId,
     ref: "Comment",
   },
-  isUpvote: {
+  isUpVote: {
     type: Boolean,
     required: true,
   },

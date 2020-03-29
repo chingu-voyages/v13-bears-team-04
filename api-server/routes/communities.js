@@ -1,7 +1,8 @@
 const createError = require("http-errors");
 const router = require("express").Router();
-const { Community, Topic, Post } = require("../models");
+const { Community, Topic, Vote } = require("../models");
 const { verifyToken } = require("../middleware");
+const { groupBy } = require("../utils/groupBy");
 
 // ===== ROUTES ===== //
 
@@ -84,9 +85,19 @@ async function getCommunity(req, res, next) {
       })
       .lean();
 
+    const postId = community.posts.map(({ _id }) => _id);
+
+    const allPostVotes = await Vote.find({
+      isOnPost: true,
+      postId: { $in: postId },
+    }).lean();
+
+    const votesByPosts = groupBy(allPostVotes, "postId");
+
     const posts = community.posts.map(({ comments, ...post }) => ({
       ...post,
       numOfComments: comments.length,
+      votes: votesByPosts[post._id] || [],
     }));
 
     res.status(200).json({ ...community, posts });

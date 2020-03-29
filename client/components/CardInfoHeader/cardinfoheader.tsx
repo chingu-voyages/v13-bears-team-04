@@ -7,6 +7,7 @@ import { LogoIcon } from "../../svgs";
 import makeDateAgo from "../../utils/date";
 import shrinkNum from "../../utils/shrinknum";
 import { useUser } from "../../contexts/user";
+import { useVotes } from "../Votes";
 
 type Props = {
   authorName: string;
@@ -16,7 +17,6 @@ type Props = {
   hideCommunityName: boolean;
   isDeleted: boolean;
   isComment?: boolean;
-  points?: number;
   theme?: { [key: string]: string };
   postOwnerName?: string;
 };
@@ -31,9 +31,9 @@ export default function CardInfoHeader({
   postOwnerName,
   lastModified,
   hideCommunityName = false,
-  points = Math.floor(Math.random() * 10000),
 }: Props): JSX.Element {
   const { user } = useUser();
+  const { points } = useVotes();
 
   const isOwnerOfComment = postOwnerName === user.username && isComment;
 

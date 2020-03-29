@@ -1,10 +1,9 @@
 const router = require("express").Router();
 const { Topic } = require("../models");
-const { checkSession } = require("../middleware");
 
 // ===== ROUTES ===== //
 router.get("/", getAllTopics);
-router.post("/", checkSession, createTopics);
+router.post("/", createTopics);
 
 // ===== CONTROLLERS ===== //
 

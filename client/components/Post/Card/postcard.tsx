@@ -5,7 +5,7 @@ import clsx from "clsx";
 import CardPostActions from "./postcardactions";
 import CardInfoHeader from "../../CardInfoHeader";
 import { Render } from "../../Slate";
-import Votes from "../../Votes";
+import Votes, { VoteProvider } from "../../Votes";
 import { PostType } from "../../../types/post";
 
 type Props = PostType & {
@@ -27,11 +27,12 @@ export default function PostCard({
   onPostPage,
   lastModified,
 }: Props): JSX.Element {
-  const { push } = useRouter();
+  const { push, query } = useRouter();
+  const name = community.name || String(query.communityName);
 
   const goToPost = () => {
     if (onPostPage) return;
-    push("/r/[communityName]/[postId]", `/r/${community.name}/${_id}`);
+    push("/r/[communityName]/[postId]", `/r/${name}/${_id}`);
   };
 
   const cardCX = clsx("cardpost", {
@@ -52,12 +53,18 @@ export default function PostCard({
 
   return (
     <div className={cardCX}>
-      <Votes votes={votes} cxContainer={voteCX} vote="" />
+      {!onPostPage ? (
+        <VoteProvider isOnPost postId={_id} votes={votes} isDeleted={isDeleted}>
+          <Votes cxContainer={voteCX} />
+        </VoteProvider>
+      ) : (
+        <Votes cxContainer={voteCX} />
+      )}
 
       <div className={detailsCX}>
         <CardInfoHeader
           hideCommunityName={hideCommunityName}
-          communityName={community.name}
+          communityName={name}
           authorName={author.username}
           createdOn={createdOn}
           lastModified={lastModified}

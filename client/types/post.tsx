@@ -1,9 +1,10 @@
 import { CommentType } from "./comment";
+import { VoteType } from "./vote";
 
 export type PostType = {
   numOfComments: number;
   comments: CommentType[];
-  votes: string[];
+  votes: VoteType[];
   isDeleted: boolean;
   isReported: boolean;
   isOver18: boolean;

@@ -36,12 +36,6 @@ const PostSchema = new Schema({
       ref: "Comment",
     },
   ],
-  votes: [
-    {
-      type: ObjectId,
-      ref: "Vote",
-    },
-  ],
   isDeleted: {
     type: Boolean,
     default: false,

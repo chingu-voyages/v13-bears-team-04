@@ -1,3 +1,5 @@
+import { VoteType } from "./vote";
+
 export type CommentType = {
   _id: string;
   author: {
@@ -13,4 +15,5 @@ export type CommentType = {
   lastModified: string;
   comments: CommentType[];
   isDeleted?: boolean;
+  votes: VoteType[];
 };

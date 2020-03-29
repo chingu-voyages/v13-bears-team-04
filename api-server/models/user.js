@@ -67,12 +67,6 @@ const UserSchema = new Schema({
     default: Date.now,
     required: [true, "Creation Date Required"],
   },
-  votes: [
-    {
-      type: ObjectId,
-      ref: "Vote",
-    },
-  ],
 });
 
 // returns the following error message, if the value isn't unique

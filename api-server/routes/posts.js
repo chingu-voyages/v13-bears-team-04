@@ -1,7 +1,8 @@
 const createError = require("http-errors");
 const router = require("express").Router();
-const { Post, Community, Comment, User } = require("../models");
+const { Post, Community, Comment, User, Vote } = require("../models");
 const { verifyToken } = require("../middleware");
+const { groupBy } = require("../utils/groupBy");
 
 // ===== ROUTES ===== //
 
@@ -33,14 +34,30 @@ async function getOnePost(req, res, next) {
       .lean();
     if (!post) throw createError(400, `Couldn't find post (${postId})`);
 
-    const comments = await Comment.find({ postId: post._id })
+    const postVotes = await Vote.find({ isOnPost: true, postId });
+
+    const allCommentsOnPost = await Comment.find({ postId: post._id })
       .populate({
         path: "author",
         select: "username",
       })
       .lean();
 
-    res.status(200).json({ ...post, comments });
+    const allCommentIds = allCommentsOnPost.map(({ _id }) => _id);
+
+    const allCommentVotes = await Vote.find({
+      isOnComment: true,
+      commentId: { $in: allCommentIds },
+    }).lean();
+
+    const votesByComment = groupBy(allCommentVotes, "commentId");
+
+    const comments = allCommentsOnPost.map(comment => ({
+      ...comment,
+      votes: votesByComment[comment._id] || [],
+    }));
+
+    res.status(200).json({ ...post, comments, votes: postVotes });
   } catch (err) {
     next(err);
   }
@@ -59,9 +76,14 @@ async function getAllPosts(_, res, next) {
       })
       .lean();
 
+    const allVotes = await Vote.find({ isOnPost: true }).lean();
+
+    const votesByPosts = groupBy(allVotes, "postId");
+
     const posts = allPosts.map(({ comments, ...post }) => ({
       ...post,
       numOfComments: comments.length,
+      votes: votesByPosts[post._id] || [],
     }));
 
     res.status(200).json(posts);
@@ -190,6 +212,8 @@ async function deletePost(req, res, next) {
       await user.save();
       isAdmin = true;
     }
+
+    await Vote.deleteMany({ postId });
 
     res.status(201).json({ postId, isAdmin, updatedUser: user });
   } catch (err) {

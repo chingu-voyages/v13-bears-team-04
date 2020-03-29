@@ -1,5 +1,6 @@
 import { useReducer } from "react";
 import { CommentType } from "../../types/comment";
+import { VoteType } from "../../types/vote";
 
 export type StateType = {
   _id: string;
@@ -10,7 +11,7 @@ export type StateType = {
   ownerName: string;
   content: string;
   comments: CommentType[];
-  votes: string[];
+  votes: VoteType[];
   isDeleted: boolean;
   createdOn: string;
 };
@@ -19,7 +20,6 @@ const init = (comment: CommentType) => ({
   isEditOpen: false,
   isReplyOpen: false,
   isReported: false,
-  votes: [],
   _id: comment._id,
   ownerId: comment.author._id,
   ownerName: comment.author.username,
@@ -28,6 +28,7 @@ const init = (comment: CommentType) => ({
   isDeleted: !!comment.isDeleted,
   createdOn: comment.createdOn,
   lastModified: comment.lastModified,
+  votes: comment.votes,
 });
 
 export type ActionType =

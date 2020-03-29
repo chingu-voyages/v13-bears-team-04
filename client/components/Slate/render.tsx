@@ -1,13 +1,15 @@
 import React, { useMemo } from "react";
+import clsx from "clsx";
 import { createEditor } from "slate";
 import { withReact, Slate } from "slate-react";
 import RichTextEditor from "./richtext";
 
 type Props = {
   content: string;
+  isDeleted?: boolean;
 };
 
-export default function Render({ content }: Props): JSX.Element {
+export default function Render({ content, isDeleted }: Props): JSX.Element {
   const state = useMemo(() => {
     const value = JSON.parse(content);
     const editor = withReact(createEditor());
@@ -17,7 +19,11 @@ export default function Render({ content }: Props): JSX.Element {
   const { value, editor, onChange } = state;
 
   return (
-    <div className="slate slate__render">
+    <div
+      className={clsx("slate slate__render", {
+        "slate__render--isDeleted": isDeleted,
+      })}
+    >
       <Slate editor={editor} value={value} onChange={onChange}>
         <RichTextEditor readOnly />
       </Slate>

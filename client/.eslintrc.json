@@ -18,12 +18,12 @@
       1,
       { "extensions": [".js", ".jsx", ".ts", ".tsx"] }
     ],
+    "no-shadow": "off",
     "react/jsx-props-no-spreading": "off",
     "react/prop-types": [0],
     "no-unused-vars": "warn",
     "no-console": "off",
     "func-names": "off",
-    "no-use-before-define": ["error", { "functions": false }],
     "no-underscore-dangle": ["error", { "allow": ["_id"] }],
     "jsx-a11y/anchor-is-valid": [
       "error",
@@ -34,7 +34,18 @@
       }
     ],
     "import/prefer-default-export": "off",
-    "@typescript-eslint/explicit-function-return-type": "off"
+    "@typescript-eslint/explicit-function-return-type": "off",
+    "@typescript-eslint/no-use-before-define": [2, { "functions": false }],
+    "import/extensions": [
+      "error",
+      "ignorePackages",
+      {
+        "js": "never",
+        "jsx": "never",
+        "ts": "never",
+        "tsx": "never"
+      }
+    ]
   },
   // "overrides": [
   //   {

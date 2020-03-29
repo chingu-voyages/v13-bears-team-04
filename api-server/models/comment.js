@@ -63,12 +63,6 @@ const CommentSchema = new Schema({
       ref: "User",
     },
   ],
-  votes: [
-    {
-      type: ObjectId,
-      ref: "Vote",
-    },
-  ],
 });
 
 module.exports = model("Comment", CommentSchema);

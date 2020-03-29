@@ -1,17 +1,17 @@
 const createError = require("http-errors");
 const router = require("express").Router();
-const { Comment } = require("../models");
-const { checkSession } = require("../middleware");
+const { Comment, Post, Community } = require("../models");
+const { verifyToken } = require("../middleware");
 
 // ===== ROUTES ===== //
 
+router.post("/", verifyToken, createCommentOnPost);
 router.get("/:commentId", getOneComment);
-router.post("/onComment/:commentId", createCommentOnComment);
-router.get("/:postId", getPostComments);
-router.post("/onPost/:postId", checkSession, createCommentOnPost);
-router.put("/:commentId", checkSession, editComment);
-router.delete("/:commentId", checkSession, deleteComment);
-router.post("/:commentId/report", checkSession, reportComment);
+router.post("/onComment/:commentId", verifyToken, createCommentOnComment);
+router.get("/post/:postId", getPostComments);
+router.put("/:commentId", verifyToken, editComment);
+router.delete("/:commentId", verifyToken, deleteComment);
+router.post("/:commentId/report", verifyToken, reportComment);
 
 // ===== CONTROLLERS ===== //
 
@@ -29,10 +29,10 @@ async function getOneComment(req, res, next) {
   try {
     const { commentId } = req.params;
     const comment = await Comment.findById(commentId)
-      .populate({ path: "owner", select: "username communities" })
+      .populate({ path: "author", select: "username communities" })
       .populate("comments");
     if (!comment) {
-      throw createError(400, `Couldn't find comment (${commentId})`);
+      throw createError(404, `Couldn't find comment (${commentId})`);
     }
     res.status(200).json(comment);
   } catch (err) {
@@ -46,6 +46,9 @@ async function createCommentOnComment(req, res, next) {
     const { commentId } = req.params;
     const { postId, content } = req.body;
 
+    const post = await Post.findById(postId);
+    if (!post) throw createError(404, `Couldn't find post (${postId})`);
+
     const newComment = await new Comment({
       content,
       postId,
@@ -53,7 +56,11 @@ async function createCommentOnComment(req, res, next) {
       author: user._id,
       isOnComment: true,
     });
+    newComment.populate({ path: "author", select: "username" }).execPopulate();
     await newComment.save();
+
+    post.comments.push(newComment._id);
+    await post.save();
 
     user.comments.push(newComment._id);
     await user.save();
@@ -67,8 +74,10 @@ async function createCommentOnComment(req, res, next) {
 async function createCommentOnPost(req, res, next) {
   try {
     const { user } = res.locals;
-    const { postId } = req.params;
-    const { content } = req.body;
+    const { postId, content } = req.body;
+
+    const post = await Post.findById(postId);
+    if (!post) throw createError(404, `Couldn't find post (${postId})`);
 
     const newComment = await new Comment({
       content,
@@ -76,7 +85,11 @@ async function createCommentOnPost(req, res, next) {
       author: user._id,
       isOnPost: true,
     });
+    newComment.populate({ path: "author", select: "username" }).execPopulate();
     await newComment.save();
+
+    post.comments.push(newComment._id);
+    await post.save();
 
     user.comments.push(newComment._id);
     await user.save();
@@ -103,7 +116,7 @@ async function editComment(req, res, next) {
     targetComment.lastModified = Date.now();
     await targetComment.save();
 
-    res.status(200).json(updatedComment);
+    res.status(200).json(targetComment);
   } catch (err) {
     next(err);
   }
@@ -121,20 +134,40 @@ async function deleteComment(req, res, next) {
     const { user } = res.locals;
     const { commentId } = req.params;
 
+    // get the target you want to delete
     const targetComment = await Comment.findById(commentId);
-    if (targetComment.comments.length === 0) {
+    // check if there are any replies based on that comment
+    const childComments = await Comment.findOne({ commentId }).lean();
+
+    // was the entire comment deleted or just updated to show it was deleted
+    let deletedWhole;
+
+    if (!childComments) {
+      // delete the comment
       await targetComment.remove();
-      user.comments.pull(commentId);
-      await user.save();
-      res.status(200);
+
+      // remove it's id from the post comments array
+      await Post.findByIdAndUpdate(targetComment.postId, {
+        $pull: { comments: commentId },
+      });
+
+      deletedWhole = true;
     } else {
+      // update the comment to show it's been deleted
       targetComment.content =
         '[{"type":"paragraph","children":[{"text":"Comment Deleted"}]}]';
       targetComment.isDeleted = true;
       targetComment.lastModified = Date.now();
       await targetComment.save();
-      res.status(200);
+
+      deletedWhole = false;
     }
+
+    // remove the comment from the users
+    user.comments.pull(commentId);
+    await user.save();
+
+    res.status(200).json({ deletedWhole, deletedComment: targetComment });
   } catch (err) {
     next(err);
   }

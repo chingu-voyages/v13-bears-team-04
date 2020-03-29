@@ -19,7 +19,7 @@ export default function CommunityInfo({
   userMemberLevel,
   setMessageBox,
 }: Props): JSX.Element {
-  const { isAuthenticated, user, setUser } = useUser();
+  const { isAuthenticated, user, setUser, token } = useUser();
   const { setAuthPopup } = useAuthPopup();
 
   async function handleMembership(): Promise<void> {
@@ -31,7 +31,7 @@ export default function CommunityInfo({
     // reusable values
     const baseURL = `/community/${communityId}/users`;
     const body = JSON.stringify({ userId: user._id });
-    const opts = { body, ctx: {} };
+    const opts = { body, token };
 
     try {
       // leave the community
@@ -41,7 +41,7 @@ export default function CommunityInfo({
           method: "DELETE",
           ...opts,
         });
-        setUser(updatedUser);
+        setUser({ type: "SET_USER", token, user: updatedUser });
         setMessageBox({
           msg: `You've successfully left your r/${title} family. Congrats.`,
           status: "success",
@@ -55,7 +55,7 @@ export default function CommunityInfo({
           method: "POST",
           ...opts,
         });
-        setUser(updatedUser);
+        setUser({ type: "SET_USER", token, user: updatedUser });
         setMessageBox({
           msg: `Thanks for joining, r/${title}!`,
           status: "success",

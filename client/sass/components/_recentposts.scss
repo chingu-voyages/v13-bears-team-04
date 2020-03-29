@@ -1,83 +1,77 @@
 .recent-posts {
   width: 100%;
-  display: inline-block;
-  border: 1px solid rgba($grey, 0.2);
+  box-sizing: border-box;
+  border: 1px solid #d7d7d7;
   border-radius: 0.5rem;
   background-color: $white;
+  padding: 1.2rem;
+  margin-bottom: 1.6rem;
 
-  // padding: 0.5rem;
+  &__headline {
+    color: #1a1a1a;
+    font-size: 1rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    padding-bottom: 0.4rem;
+    margin: 0;
+  }
 
   &__row {
     display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
+    align-items: center;
+    padding: 1.2rem 0;
 
-    flex-wrap: nowrap;
-
-    padding-right: 0.5rem;
-  }
-
-  &-right {
-    padding-left: 2rem;
-  }
-
-  &-left {
-  }
-
-  &__element {
-    &:not(:last-child) {
-      display: inline-block;
-      padding-bottom: 1rem;
-      border-bottom: 1px solid rgba($grey, 0.9);
+    &:nth-last-of-type(2) {
+      padding-bottom: 0;
     }
   }
 
-  &__title {
-    font-size: 1.3rem;
-    font-weight: bold;
-    margin-bottom: 1.5rem;
+  &__image {
+    height: 49px;
+    width: 65px;
+    border-radius: 0.4rem;
+    border: 1px solid $blue;
+    box-sizing: border-box;
+    margin-right: 8px;
+  }
 
-    &-sub {
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
+  &__details {
+    &__title {
+      font-size: 1.4rem;
+      color: #1a1a1a;
+      margin: 0 0 0.4rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      width: calc(310px - 65px - 8px - 12px - 12px);
     }
 
-    &:hover {
-      text-decoration: underline;
+    &__info {
+      font-size: 1.1rem;
+      color: #878a8c;
+
+      span {
+        &:not(:first-of-type) {
+          &:before {
+            content: "\B7";
+            font-weight: 700;
+            margin: 0 3px;
+          }
+        }
+      }
     }
   }
 
-  &__info {
-    font-size: 1.2rem;
-    color: $dark-grey;
-  }
+  &__clear {
+    width: 100%;
+    text-align: right;
 
-  &__image-wrapper {
-    &--icon {
-      transform: translate(11%, 25%);
-      height: 5.5rem;
-      width: 7rem;
-      border-radius: 10%;
-      vertical-align: middle;
+    button {
+      font-size: 1.2rem;
+      cursor: pointer;
+      background-color: $white;
+      color: #878a8c;
+      border: none;
     }
   }
-
-  &__headline {
-    font-size: 1.3rem;
-    text-transform: uppercase;
-    margin-left: 1rem;
-    font-weight: bold;
-  }
-}
-
-.clear {
-  text-align: right;
-  display: inline-block;
-  padding: 2rem 4rem 1rem 2rem;
-  // padding: 2rem;
-  margin-left: 24.5rem;
-  font-size: 1.3rem;
-  color: $grey;
-  cursor: pointer;
 }

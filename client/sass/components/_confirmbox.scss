@@ -1,0 +1,58 @@
+.confirmbox {
+  background-color: #fff;
+  padding: 15px;
+  border-radius: 10px;
+  width: 90%;
+  min-width: 310px;
+  max-width: 500px;
+  box-sizing: border-box;
+  text-align: center;
+
+  h1 {
+    margin: 5px 0 0;
+  }
+
+  h3 {
+    font-size: 1.6rem;
+    margin: 20px 0 15px;
+    color: #1a1a1a;
+  }
+
+  p {
+    font-size: 1.3rem;
+    width: 100%;
+    font-style: italic;
+
+    span {
+      font-weight: bold;
+    }
+  }
+
+  > div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__actions {
+    display: flex;
+    justify-content: flex-end;
+
+    > button:first-child {
+      margin-right: 15px;
+    }
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .confirmbox {
+    p {
+      margin: 0 0 10px;
+    }
+
+    > div {
+      flex-direction: column;
+      justify-content: center;
+    }
+  }
+}

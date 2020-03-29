@@ -1,0 +1,67 @@
+.cardpost {
+  width: 100%;
+  border-radius: 4px;
+  background-color: $white;
+  border: 1px solid white;
+  position: relative;
+  box-sizing: border-box;
+  line-height: 1.6rem;
+  font-size: 1.2rem;
+  text-decoration: none;
+
+  &-notOnPostPage {
+    margin-bottom: 10px;
+    border-color: $grey;
+  }
+
+  &__votes {
+    height: 100%;
+    width: 40px;
+    position: absolute;
+    top: 0;
+    border-radius: 0.5rem 0 0 0.5rem;
+    padding: 10px 5px;
+    box-sizing: border-box;
+
+    &-notOnPostPage {
+      background-color: #f7f7f7;
+    }
+  }
+
+  &__details {
+    padding-left: 45px;
+    margin: 8px 5px 5px 0;
+    height: 100%;
+
+    &-notOnPostPage > div:first-child {
+      height: 30px;
+      margin: 5px 0;
+      display: flex;
+      align-items: center;
+    }
+
+    &__title {
+      line-height: 2.4rem;
+      font-size: 2rem;
+      margin: 10px 10px 0;
+    }
+
+    &__content {
+      letter-spacing: 0.3px;
+
+      &-notOnPostPage {
+        -webkit-mask-image: linear-gradient(180deg, #000 60%, transparent);
+        mask-image: linear-gradient(180deg, #000 60%, transparent);
+        max-height: 150px;
+      }
+    }
+  }
+
+  &__link {
+    cursor: pointer;
+
+    &:focus {
+      outline: none;
+    }
+  }
+}

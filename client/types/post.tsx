@@ -1,6 +1,10 @@
+import { CommentType } from "./comment";
+import { VoteType } from "./vote";
+
 export type PostType = {
-  comments: string[];
-  votes: string[];
+  numOfComments: number;
+  comments: CommentType[];
+  votes: VoteType[];
   isDeleted: boolean;
   isReported: boolean;
   isOver18: boolean;
@@ -22,11 +26,12 @@ export type PostType = {
     createdOn?: string;
     _id?: string;
   };
-  postType: string;
+  postType: "link" | "text";
   title: string;
   content: string;
   author: {
     username: string;
+    _id: string;
   };
   createdOn: string;
   lastModified: string;

@@ -7,6 +7,7 @@ import CommunityBox from "./communitybox";
 
 import { useSetCSSVariable, useMessageBox } from "../../hooks";
 import fetchIt from "../../utils/fetch";
+import { useUser } from "../../contexts/user";
 
 type Props = {
   theme: {
@@ -22,6 +23,7 @@ export default function CommunityColors({
   userMemberLevel,
   communityId,
 }: Props) {
+  const { token } = useUser();
   const { msg, status, setMessageBox, resetMessageBox } = useMessageBox();
   const [bgColor, setBgColor] = useState(theme["--community-theme-main"]);
   const [textColor, setTextColor] = useState(theme["--community-theme-text"]);
@@ -39,7 +41,7 @@ export default function CommunityColors({
       await fetchIt(`/community/${communityId}/theme`, {
         method: "PUT",
         body: JSON.stringify({ theme: newTheme }),
-        ctx: {},
+        token,
       });
       setMessageBox({ msg: "Successfully Updated", status: "success" });
     } catch (err) {

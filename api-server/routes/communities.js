@@ -1,19 +1,20 @@
 const createError = require("http-errors");
 const router = require("express").Router();
-const { Community, Topic } = require("../models");
-const { checkSession } = require("../middleware");
+const { Community, Topic, Vote } = require("../models");
+const { verifyToken } = require("../middleware");
+const { groupBy } = require("../utils/groupBy");
 
 // ===== ROUTES ===== //
 
 router.get("/", getAllCommunities);
 router.post("/", createCommunity);
 router.get("/:communityName", getCommunity);
-router.delete("/:communityId", checkSession, deleteCommunity);
-router.put("/:communityId/theme", checkSession, updateCommunityTheme);
-router.put("/:communityId/edit/:key", checkSession, updateCommunityDetails);
-router.get("/:communityId/users/:key", checkSession, getCommunityUsers);
-router.post("/:communityId/users/:key", checkSession, addCommunityUser);
-router.delete("/:communityId/users/:key", checkSession, deleteCommunityUser);
+router.delete("/:communityId", verifyToken, deleteCommunity);
+router.put("/:communityId/theme", verifyToken, updateCommunityTheme);
+router.put("/:communityId/edit/:key", verifyToken, updateCommunityDetails);
+router.get("/:communityId/users/:key", verifyToken, getCommunityUsers);
+router.post("/:communityId/users/:key", verifyToken, addCommunityUser);
+router.delete("/:communityId/users/:key", verifyToken, deleteCommunityUser);
 
 // ===== CONTROLLERS ===== //
 
@@ -73,8 +74,33 @@ async function getCommunity(req, res, next) {
   try {
     const { communityName } = req.params;
     const lowerName = communityName.toLowerCase();
-    const community = await Community.findOne({ lowerName });
-    res.status(200).json(community);
+
+    const community = await Community.findOne({ lowerName })
+      .populate({
+        path: "posts",
+        populate: {
+          path: "author",
+          select: "username -_id",
+        },
+      })
+      .lean();
+
+    const postId = community.posts.map(({ _id }) => _id);
+
+    const allPostVotes = await Vote.find({
+      isOnPost: true,
+      postId: { $in: postId },
+    }).lean();
+
+    const votesByPosts = groupBy(allPostVotes, "postId");
+
+    const posts = community.posts.map(({ comments, ...post }) => ({
+      ...post,
+      numOfComments: comments.length,
+      votes: votesByPosts[post._id] || [],
+    }));
+
+    res.status(200).json({ ...community, posts });
   } catch (err) {
     next(err);
   }
@@ -150,17 +176,16 @@ async function getCommunityUsers(req, res, next) {
 async function addCommunityUser(req, res, next) {
   try {
     const { communityId, key } = req.params;
-    const { userId } = req.body;
+    const user = res.locals.user;
 
     const singularKey = checkKeyParam(key);
 
     // update community document
     const community = await Community.findById(communityId);
-    community.users[key].push(userId);
+    community.users[key].push(user._id);
     await community.save();
 
     // update user document
-    const user = res.locals.user;
     user.communities[singularKey].push(communityId);
     await user.save();
     const { password, lowerUsername, ...goodUser } = user._doc;
@@ -175,19 +200,18 @@ async function addCommunityUser(req, res, next) {
 async function deleteCommunityUser(req, res, next) {
   try {
     const { communityId, key } = req.params;
-    const { userId } = req.body;
+    const user = res.locals.user;
 
     const singularKey = checkKeyParam(key);
 
     // update community document
     const community = await Community.findById(communityId);
     community.users[key] = community.users[key].filter(
-      user => user.toString() !== userId
+      user => user.toString() !== user._id
     );
     await community.save();
 
     // update user document
-    const user = res.locals.user;
     user.communities[singularKey] = user.communities[singularKey].filter(
       community => community.toString() !== communityId
     );

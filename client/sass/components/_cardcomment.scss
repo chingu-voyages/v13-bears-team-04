@@ -1,0 +1,60 @@
+.cardcomment {
+  display: flex;
+  width: 100%;
+  margin: 10px 0;
+
+  &:hover {
+    .cardcomment__connecter,
+    + .cardcomment__nested > .cardcomment__connecter {
+      background-color: $blue;
+    }
+  }
+
+  &__connecter {
+    content: "";
+    height: 100%;
+    width: 2px;
+    background-color: #edeff1;
+    transition: all 0.15s;
+  }
+
+  &__left {
+    width: 40px;
+    min-width: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .cardcomment {
+      &__votes {
+        margin-bottom: 3px;
+      }
+    }
+  }
+
+  &__right {
+    width: 100%;
+
+    .slate.slate__render > .slate__body {
+      padding: 0 3px;
+    }
+  }
+
+  &__nested {
+    display: flex;
+    margin-left: 19px;
+    margin-top: -10px;
+
+    &__cards {
+      width: 100%;
+
+      .cardcomment:last-child {
+        margin-bottom: 0px;
+      }
+    }
+
+    > .cardcomment__connecter {
+      height: auto;
+    }
+  }
+}

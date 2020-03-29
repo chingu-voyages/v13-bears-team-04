@@ -29,6 +29,7 @@ import {
   faSearch,
   faPlus,
   faCaretDown,
+  faCaretUp,
   faKeyboard,
   faImage,
   faLink,
@@ -43,7 +44,12 @@ import {
   faListUl,
   faQuoteLeft,
   faSquare,
+  faAward,
+  faFlag,
+  faTrashAlt,
+  faPencilAlt,
   faTimes,
+  faMicrophone,
 } from "@fortawesome/free-solid-svg-icons";
 
 library.add(
@@ -72,6 +78,7 @@ library.add(
   faSearch,
   faPlus,
   faCaretDown,
+  faCaretUp,
   faKeyboard,
   faImage,
   faLink,
@@ -86,5 +93,10 @@ library.add(
   faListUl,
   faQuoteLeft,
   faSquare,
-  faTimes
+  faAward,
+  faFlag,
+  faTrashAlt,
+  faPencilAlt,
+  faTimes,
+  faMicrophone
 );

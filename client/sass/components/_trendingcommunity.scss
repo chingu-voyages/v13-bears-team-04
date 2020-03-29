@@ -1,42 +1,60 @@
 .trending-community {
   width: 100%;
-  // padding: 0.5rem;
-  font-size: 1.2rem;
-  display: inline-block;
-  border: 1px solid rgba($grey, 0.2);
+  box-sizing: border-box;
+  border: 1px solid #d7d7d7;
   border-radius: 0.5rem;
   background-color: $white;
+  font-size: 1.2rem;
+  margin-bottom: 1.6rem;
+
+  &__headline {
+    font-size: 1.4rem;
+    font-weight: bold;
+    padding: 0 1.2rem 1.2rem;
+    margin: 12px 0 0;
+  }
+
+  &__container {
+    padding: 0 1.2rem;
+  }
 
   &__row {
     display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin: 1.2rem 0;
+    text-decoration: none;
 
-    &__image {
-      align-self: center;
-      height: 4.5rem;
-      width: 4.5rem;
-      border-radius: 50%;
-    }
-  }
+    &__info {
+      display: flex;
+      align-items: center;
 
-  &__headline {
-    text-transform: uppercase;
-    margin-left: 1rem;
-    font-weight: bold;
-  }
+      &__image {
+        height: 3.2rem;
+        width: 3.2rem;
+        margin-right: 0.8rem;
+      }
 
-  &__subreddit-info {
-    align-self: flex-start;
-    &__sub-info-1 {
-      font-weight: bold;
+      &__text {
+        a {
+          text-decoration: none;
+          color: #1a1a1a;
+
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+
+        p {
+          margin: 0.4rem 0 0;
+        }
+      }
     }
   }
 
   &__join-btn {
-    width: 12rem;
-    height: 4rem;
-    margin-right: 0.5rem;
-    align-self: center;
+    width: 90px;
+    height: 30px;
   }
 }

@@ -1,3 +1,6 @@
+@import "abstracts/variables";
+@import "abstracts/mixins";
+
 @import "base/animation";
 @import "base/base";
 @import "base/typography";
@@ -5,32 +8,32 @@
 
 @import "components/authforms";
 @import "components/button";
+@import "components/card";
+@import "components/cardcomment";
+@import "components/cardpost";
 @import "components/checkbox";
+@import "components/confirmbox";
 @import "components/createpost";
-@import "components/faqdropdown";
-@import "components/footer";
+@import "components/footerbox";
 @import "components/grid";
 @import "components/growingcommunities";
-@import "components/header";
 @import "components/homebox";
 @import "components/label";
 @import "components/layout";
 @import "components/messagebox";
 @import "components/nav";
-@import "components/postcard";
-@import "components/premiumhero";
+@import "components/notification";
 @import "components/radio";
 @import "components/recentposts";
 @import "components/requireddot";
 @import "components/slate";
 @import "components/sortview";
-@import "components/staticfooter";
-@import "components/subredditinfo";
 @import "components/totopbutton";
 @import "components/trendingcommunity";
 @import "components/votes";
 
 @import "pages/home";
+@import "pages/premium";
 @import "pages/subredditcreate";
 @import "pages/viewcommunity";
 @import "pages/viewpost";

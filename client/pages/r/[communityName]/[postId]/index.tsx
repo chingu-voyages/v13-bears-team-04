@@ -1,1 +1,3 @@
-export { default } from "./post";
+import { PostPage } from "../../../../components/Post";
+
+export default PostPage;

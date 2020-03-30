@@ -20,7 +20,8 @@ export default function PostPageBanner({
         text="Close"
         icon="times"
         size="tight"
-        href={`/r/${communityName}`}
+        href="/r/[communityName]"
+        as={`/r/${communityName}`}
         cx="viewpost__banner__closebtn"
       />
     </div>

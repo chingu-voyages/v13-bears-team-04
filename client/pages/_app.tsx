@@ -1,13 +1,17 @@
 import React from "react";
 import { AppProps } from "next/app";
+import { config } from "@fortawesome/fontawesome-svg-core";
 
 import Nav from "../components/Nav";
 import Notification from "../components/Notification";
 import { AuthPopupProvider } from "../contexts/authpopup";
 import { UserProvider } from "../contexts/user";
 
+import "@fortawesome/fontawesome-svg-core/styles.css";
 import "../utils/icons";
 import "../sass/main.scss";
+
+config.autoAddCss = false;
 
 const App = ({ Component, pageProps }: AppProps): React.ReactNode => (
   <UserProvider>

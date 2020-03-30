@@ -1,6 +1,7 @@
 .sortview-container {
   display: flex;
   align-items: center;
+  justify-content: center;
   width: 100%;
   height: 4rem;
   background-color: white;
@@ -53,6 +54,10 @@
       &__select {
         background-color: transparent;
         cursor: pointer;
+
+        &:last-of-type {
+          display: none;
+        }
 
         &__value {
           display: flex;
@@ -109,8 +114,24 @@
   }
 }
 
+@media screen and (min-width: 475px) {
+  .sortview-container {
+    .sortview {
+      &__sort {
+        &__select {
+          &:last-of-type {
+            display: flex;
+          }
+        }
+      }
+    }
+  }
+}
+
 @media screen and (min-width: 640px) {
   .sortview-container {
+    justify-content: inherit;
+
     .sortview {
       &__view {
         margin-left: 75px;

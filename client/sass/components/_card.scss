@@ -2,7 +2,8 @@
   &__info {
     display: flex;
     align-items: center;
-    line-height: 1.6rem;
+    flex-wrap: wrap;
+    line-height: 2.2rem;
     font-size: 1.2rem;
 
     > div:first-child {
@@ -68,9 +69,9 @@
 
   &__actions {
     margin: 0px 0 5px;
-    height: 30px;
     color: #787c7e;
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
 
     &__option {

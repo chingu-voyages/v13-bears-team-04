@@ -14,7 +14,7 @@ export default function PostCreate(props: Props) {
   return (
     <>
       <PageHead title="Creating Post | Reddit" />
-      <PostCreateEdit {...props} />;
+      <PostCreateEdit {...props} />
     </>
   );
 }

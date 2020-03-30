@@ -120,10 +120,25 @@
       color: #1c1c1c;
     }
   }
+
+  &__list {
+    overflow: hidden;
+  }
 }
 
+@media screen and (max-width: 475px) {
+  .viewpost {
+    &__banner {
+      padding: 0 16px;
+    }
+  }
+}
 @media screen and (max-width: 768px) {
   .viewpost {
+    &__layout-column {
+      padding: 5px;
+    }
+
     &__comment {
       &__authneeded {
         flex-direction: column;

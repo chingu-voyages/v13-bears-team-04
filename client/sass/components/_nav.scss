@@ -33,6 +33,7 @@
 
     &__filter {
       width: 100px;
+      // width:
       font-size: 1.4rem;
 
       &__value {
@@ -42,6 +43,7 @@
 
         &__label {
           display: none;
+          // display: flex;
           @include navOptionLabels();
         }
       }
@@ -65,9 +67,13 @@
 
     &__search {
       position: relative;
-      margin: 0 16px;
+      margin: 0;
       width: auto;
       flex-grow: 1;
+
+      > * {
+        visibility: hidden;
+      }
 
       &__label__icon {
         position: absolute;
@@ -192,6 +198,20 @@
   }
 }
 
+@media screen and (min-width: 500px) {
+  .nav-container {
+    .nav__item {
+      &__search {
+        margin: 0 16px;
+
+        > * {
+          visibility: visible;
+        }
+      }
+    }
+  }
+}
+
 @media screen and (min-width: 616px) {
   .nav-container {
     .nav__item {
@@ -223,12 +243,6 @@
     .nav__item {
       &__filter {
         width: 270px;
-
-        &__value {
-          &__label {
-            display: flex;
-          }
-        }
       }
     }
   }

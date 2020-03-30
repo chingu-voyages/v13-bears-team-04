@@ -42,7 +42,7 @@ const PostPage: NextPage<Props> = ({ post, error }) => {
               title={post.title}
               communityName={post.community.name}
             />
-            <Layout>
+            <Layout cx="viewpost__layout-column">
               <Layout.Column>
                 <PostPageView post={post} />
               </Layout.Column>

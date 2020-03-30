@@ -47,6 +47,7 @@ const styles = {
       : {};
     return {
       ...provided,
+      flexWrap: "nowrap",
       borderColor: "transparent",
       ...openStyles,
       "&:hover": {

@@ -7,7 +7,7 @@ const { groupBy } = require("../utils/groupBy");
 // ===== ROUTES ===== //
 
 router.get("/", getAllCommunities);
-router.post("/", createCommunity);
+router.post("/", verifyToken, createCommunity);
 router.get("/:communityName", getCommunity);
 router.delete("/:communityId", verifyToken, deleteCommunity);
 router.put("/:communityId/theme", verifyToken, updateCommunityTheme);
@@ -39,15 +39,15 @@ async function createCommunity(req, res, next) {
     } = req.body;
 
     // create new community
-    const partialCommunity = await new Community({
+    const newCommunity = await new Community({
       name,
       topics,
       description,
       communityType,
       isOver18,
     });
-    partialCommunity.users.administrators.push(userId);
-    const newCommunity = await partialCommunity.save();
+    newCommunity.users.administrators.push(userId);
+    await newCommunity.save();
 
     // add community id to topics
     const topicUpdater = topics.map(topicId => ({
@@ -59,9 +59,10 @@ async function createCommunity(req, res, next) {
     await Topic.bulkWrite(topicUpdater);
 
     // add community to user document
-    const user = res.locals.user;
+    const { user } = res.locals;
     user.communities.administrator.push(newCommunity._id);
     await user.save();
+
     const { password, ...goodUser } = user._doc;
 
     res.status(201).json({ newCommunity, updatedUser: goodUser });

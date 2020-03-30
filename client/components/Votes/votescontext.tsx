@@ -23,7 +23,7 @@ type ProviderTypes = {
 
 export const VoteProvider = ({
   children,
-  votes,
+  votes = [],
   isOnPost,
   postId,
   commentId,

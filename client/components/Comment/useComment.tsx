@@ -14,6 +14,7 @@ export type StateType = {
   votes: VoteType[];
   isDeleted: boolean;
   createdOn: string;
+  lastModified: string;
 };
 
 const init = (comment: CommentType) => ({

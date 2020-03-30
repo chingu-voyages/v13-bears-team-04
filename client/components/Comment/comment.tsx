@@ -40,7 +40,8 @@ export default function Comment({
   };
 
   const handleUpdate = (updatedComment: CommentType) => {
-    dispatch({ type: "Update_Comment", content: updatedComment.content });
+    const { content, lastModified, isDeleted } = updatedComment;
+    dispatch({ type: "Update_Comment", content, lastModified, isDeleted });
   };
 
   const handleDelete = async () => {
@@ -99,7 +100,7 @@ export default function Comment({
               authorName={state.ownerName}
               createdOn={comment.createdOn}
               postOwnerName={postOwnerName}
-              lastModified={comment.lastModified}
+              lastModified={state.lastModified}
               isDeleted={state.isDeleted}
             />
 

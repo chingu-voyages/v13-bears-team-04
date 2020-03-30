@@ -51,7 +51,7 @@ export default function CommentCreateEdit({
 
       handleSubmit(comment);
 
-      if (!isEdit) {
+      if (!isEdit && !isOnComment) {
         setContent([{ type: "paragraph", children: [{ text: "" }] }]);
       }
     } catch (err) {

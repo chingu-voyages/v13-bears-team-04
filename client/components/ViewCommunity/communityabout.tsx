@@ -3,24 +3,28 @@ import dayjs from "dayjs";
 import CommunityBox from "./communitybox";
 import CommunityAboutUsers from "./communityaboutusers";
 import Button from "../Button";
+import { getMemberCount } from "../../utils/getMemberCount";
 
 type Props = {
   description: string;
   createdOn: string;
-  memberCount: number;
   userMemberLevel: string;
+  users: {
+    [key: string]: string[];
+  };
 };
 
 export default function CommunityAbout(props: Props) {
-  const { description, createdOn, memberCount, userMemberLevel } = props;
+  const { users, description, createdOn, userMemberLevel } = props;
 
   const viewerCount = getFakeViewership();
+  const numOfMembers = getMemberCount(users);
 
   return (
     <CommunityBox header="About Community" cx="community__about">
       <div>{description}</div>
       <div className="community__about__users">
-        <CommunityAboutUsers name="Members" count={memberCount} />
+        <CommunityAboutUsers name="Members" count={numOfMembers} />
         <CommunityAboutUsers name="Viewers" count={viewerCount} />
       </div>
       <hr />

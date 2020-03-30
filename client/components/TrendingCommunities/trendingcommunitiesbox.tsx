@@ -9,6 +9,7 @@ import { CommunityType } from "../../types/community";
 import fetchIt from "../../utils/fetch";
 import { LogoIcon } from "../../svgs";
 import { useCheckMembership } from "../../hooks";
+import { getMemberCount } from "../../utils/getMemberCount";
 import shrinkNum from "../../utils/shrinknum";
 
 type Community = {
@@ -22,9 +23,7 @@ export default function TrendingCommunitiesBox({ community }: Community) {
   const { setAuthPopup } = useAuthPopup();
   const memberLevel = useCheckMembership(_id);
 
-  const numOfMembers = Object.keys(users).reduce((memberCount, key) => {
-    return memberCount + users[key].length;
-  }, 0);
+  const numOfMembers = getMemberCount(users);
   const memberCount = shrinkNum(numOfMembers);
 
   function handleClick() {

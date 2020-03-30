@@ -51,11 +51,7 @@ const PostPage: NextPage<Props> = ({ post, error }) => {
                 <CommunityAbout
                   description={post.community.name}
                   createdOn={post.community.createdOn || ""}
-                  memberCount={
-                    post.community.users
-                      ? post.community.users.members.length
-                      : 12345
-                  }
+                  users={post.community.users || {}}
                   userMemberLevel={userMemberLevel}
                 />
                 {/* if the user is logged in */}

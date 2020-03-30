@@ -67,7 +67,7 @@ const Community: NextPage<Props> = ({ error, community }) => {
           <CommunityAbout
             description={community.description}
             createdOn={community.createdOn}
-            memberCount={community.users.members.length}
+            users={community.users}
             userMemberLevel={userMemberLevel}
           />
           <CommunityRules

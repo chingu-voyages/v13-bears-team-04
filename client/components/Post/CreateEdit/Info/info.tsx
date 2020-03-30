@@ -41,7 +41,7 @@ export default function Info() {
   return (
     <>
       <CommunityAbout
-        memberCount={communityInfo.users.members.length}
+        users={communityInfo.users}
         userMemberLevel=""
         description={communityInfo.description}
         createdOn={communityInfo.createdOn}

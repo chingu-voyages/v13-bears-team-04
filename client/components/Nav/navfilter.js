@@ -13,14 +13,14 @@ const options = [
     label: "Reddit Feeds",
     options: [
       { value: "/", label: "Popular", icon: "chart-line" },
-      { value: "/all", label: "All", icon: "poll" },
-      { value: "/topcommunities", label: "Top Communities", icon: "list-ol" },
+      { value: "/", label: "All", icon: "poll" },
+      { value: "/", label: "Top Communities", icon: "list-ol" },
     ],
   },
   {
     label: "Other",
     options: [
-      { value: "/coins", label: "Coins", icon: "donate" },
+      { value: "/", label: "Coins", icon: "donate" },
       { value: "/premium", label: "Premium", icon: "shield-alt" },
     ],
   },

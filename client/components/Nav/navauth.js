@@ -9,16 +9,12 @@ export default function NavAuth() {
   return isAuthenticated ? (
     <div className="nav__item__quicklinks">
       <NavQuickLinksLink
-        href="/chat"
+        href="/"
         title="Chat"
         icon="comment-dots"
         color="orange"
       />
-      <NavQuickLinksLink
-        href="/message/inbox"
-        title="Messages"
-        icon="envelope"
-      />
+      <NavQuickLinksLink href="/" title="Messages" icon="envelope" />
       <NavQuickLinksLink
         href="/submit"
         title="Create Post"

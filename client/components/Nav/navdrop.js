@@ -12,21 +12,21 @@ const options = {
     {
       label: "My Stuff",
       options: [
-        { value: "/profile", label: "My Profile", icon: "portrait" },
-        { value: "/usersettings", label: "User Settings", icon: "cog" },
+        { value: "/", label: "My Profile", icon: "portrait" },
+        { value: "/", label: "User Settings", icon: "cog" },
       ],
     },
     {
       label: "View Options",
-      options: [{ value: "/nightmode", label: "Night Mode", icon: "moon" }],
+      options: [{ value: "/", label: "Night Mode", icon: "moon" }],
     },
     {
       label: "More Stuff",
       options: [
-        { value: "/coins", label: "Reddit Coins", icon: "donate" },
+        { value: "/", label: "Reddit Coins", icon: "donate" },
         { value: "/premium", label: "Reddit Premium", icon: "shield-alt" },
-        { value: "/helpcenter", label: "Help Center", icon: "question-circle" },
-        { value: "/reddit", label: "Visit Real Reddit", icon: "sign-out-alt" },
+        { value: "/", label: "Help Center", icon: "question-circle" },
+        { value: "/", label: "Visit Real Reddit", icon: "sign-out-alt" },
         {
           value: "logout",
           label: "Log Out",
@@ -39,14 +39,14 @@ const options = {
   notLoggedIn: [
     {
       label: "View Options",
-      options: [{ value: "/nightmode", label: "Night Mode", icon: "moon" }],
+      options: [{ value: "/", label: "Night Mode", icon: "moon" }],
     },
     {
       label: "More Stuff",
       options: [
-        { value: "/coins", label: "Reddit Coins", icon: "donate" },
+        { value: "/", label: "Reddit Coins", icon: "donate" },
         { value: "/premium", label: "Reddit Premium", icon: "shield-alt" },
-        { value: "/helpcenter", label: "Help Center", icon: "question-circle" },
+        { value: "/", label: "Help Center", icon: "question-circle" },
         {
           value: "signup",
           label: "Log In / Sign Up",

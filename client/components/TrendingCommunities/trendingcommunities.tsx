@@ -29,12 +29,15 @@ export default function TrendingCommunities() {
       <div className="trending-community__container">
         {isLoading
           ? "Loading..."
-          : communities.map(community => (
-              <TrendingCommunitiesBox
-                key={community._id}
-                community={community}
-              />
-            ))}
+          : communities
+              .slice(0, 4)
+              .reverse()
+              .map(community => (
+                <TrendingCommunitiesBox
+                  key={community._id}
+                  community={community}
+                />
+              ))}
       </div>
     </div>
   );

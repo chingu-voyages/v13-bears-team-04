@@ -14,17 +14,14 @@ type Props = {
 export default function CommunityAbout(props: Props) {
   const { description, createdOn, memberCount, userMemberLevel } = props;
 
-  let randomViewerCount = 0;
-  if (typeof window !== "undefined") {
-    randomViewerCount = Math.floor(Math.random() * 1000000);
-  }
+  const viewerCount = getFakeViewership();
 
   return (
     <CommunityBox header="About Community" cx="community__about">
       <div>{description}</div>
       <div className="community__about__users">
         <CommunityAboutUsers name="Members" count={memberCount} />
-        <CommunityAboutUsers name="Viewers" count={randomViewerCount} />
+        <CommunityAboutUsers name="Viewers" count={viewerCount} />
       </div>
       <hr />
       <div>Created {dayjs(createdOn).format("MMMM D[,] YYYY")}</div>
@@ -39,4 +36,12 @@ export default function CommunityAbout(props: Props) {
       )}
     </CommunityBox>
   );
+}
+
+function getFakeViewership() {
+  const date = new Date();
+  const day = date.getDay() + 1;
+  const month = date.getMonth() + 1;
+  const year = date.getFullYear();
+  return day * month * year;
 }

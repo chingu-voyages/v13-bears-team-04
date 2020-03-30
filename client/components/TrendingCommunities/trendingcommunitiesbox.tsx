@@ -9,6 +9,7 @@ import { CommunityType } from "../../types/community";
 import fetchIt from "../../utils/fetch";
 import { LogoIcon } from "../../svgs";
 import { useCheckMembership } from "../../hooks";
+import shrinkNum from "../../utils/shrinknum";
 
 type Community = {
   community: CommunityType;
@@ -20,6 +21,11 @@ export default function TrendingCommunitiesBox({ community }: Community) {
   const { isAuthenticated, token, setUser } = useUser();
   const { setAuthPopup } = useAuthPopup();
   const memberLevel = useCheckMembership(_id);
+
+  const numOfMembers = Object.keys(users).reduce((memberCount, key) => {
+    return memberCount + users[key].length;
+  }, 0);
+  const memberCount = shrinkNum(numOfMembers);
 
   function handleClick() {
     if (!isAuthenticated) {
@@ -56,7 +62,7 @@ export default function TrendingCommunitiesBox({ community }: Community) {
           <Link href="/r/[communityName]" as={`/r/${name}`}>
             <a>r/{name}</a>
           </Link>
-          <p>{`${users.members.length}k members`}</p>
+          <p>{`${memberCount} member${numOfMembers === 1 ? "" : "s"}`}</p>
         </div>
       </div>
 

@@ -3,6 +3,7 @@ export type CommunityType = {
     members: string[];
     moderators: string[];
     administrators: string[];
+    [key: string]: string[];
   };
   rules: string[];
   posts: string[];
